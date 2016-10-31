@@ -147,6 +147,12 @@
 + (instancetype) xcf_buttonBackgroundImageWithName:(NSString *)name
 {
     NSBundle *bundle = [NSBundle bundleForClass:[XCFAppearanceButtonA class]];
+    
+    NSURL *imageBundleURL = [bundle URLForResource:@"buttonBackgroundImages" withExtension:@"bundle"];
+    if (imageBundleURL) {
+        bundle = [NSBundle bundleWithURL:imageBundleURL];
+    }
+    
     return [UIImage imageNamed:name inBundle:bundle compatibleWithTraitCollection:nil];
 }
 
