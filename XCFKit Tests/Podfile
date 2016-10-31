@@ -8,5 +8,6 @@ workspace '../XCFKit'
 target 'Tests' do
   platform :ios, '8.0'
   pod 'Kiwi'
+  pod 'XCFKit', :path => '../'
 
 end
