@@ -144,70 +144,58 @@
 
 @implementation UIImage (XCFAppearanceButton)
 
-+ (instancetype) xcf_buttonBackgroundImageWithName:(NSString *)name
-{
-    NSBundle *bundle = [NSBundle bundleForClass:[XCFAppearanceButtonA class]];
-    
-    NSURL *imageBundleURL = [bundle URLForResource:@"buttonBackgroundImages" withExtension:@"bundle"];
-    if (imageBundleURL) {
-        bundle = [NSBundle bundleWithURL:imageBundleURL];
-    }
-    
-    return [UIImage imageNamed:name inBundle:bundle compatibleWithTraitCollection:nil];
-}
-
 + (instancetype)xcf_mainButtonNormalBackgroundImage
 {
-    NSString *imageName = @"mainButtonNormalBackgroundImage";
-    return [self xcf_buttonBackgroundImageWithName:imageName];
+    UIColor *color = [UIColor xcf_linkColor];
+    return [UIImage xcf_imageWithColor:color];
 }
 
 + (instancetype)xcf_mainButtonSelectedBackgroundImage
 {
-    NSString *imageName = @"mainButtonSelectedBackgroundImage";
-    return [self xcf_buttonBackgroundImageWithName:imageName];
+    UIColor *color = [UIColor xcf_selectedButtonColor];
+    return [UIImage xcf_imageWithColor:color];
 }
 
 + (instancetype)xcf_buttonBHighlightedBackgroundImage
 {
-    NSString *imageName = @"buttonBHighlightedBackgroundImage";
-    return [self xcf_buttonBackgroundImageWithName:imageName];
+    UIColor *color = [[UIColor xcf_linkColor] colorWithAlphaComponent:0.5];
+    return [UIImage xcf_imageWithColor:color];
 }
 
 +(instancetype)xcf_buttonENormalBackgroundImage
 {
-    NSString *imageName = @"buttonENormalBackgroundImage";
-    return [self xcf_buttonBackgroundImageWithName:imageName];
+    UIColor *color = [UIColor xcf_yellowButtonAndLabelBGColor];
+    return [UIImage xcf_imageWithColor:color];
 }
 
 +(instancetype)xcf_buttonEHighlightedBackgroundImage
 {
-    NSString *imageName = @"buttonEHighlightedBackgroundImage";
-    return [self xcf_buttonBackgroundImageWithName:imageName];
+    UIColor *color = [[UIColor xcf_yellowButtonAndLabelBGColor] colorWithAlphaComponent:0.5];
+    return [UIImage xcf_imageWithColor:color];
 }
 
 +(instancetype)xcf_buttonHNormalBackgroundImage
 {
-    NSString *imageName = @"buttonHNormalBackgroundImage";
-    return [self xcf_buttonBackgroundImageWithName:imageName];
+    UIColor *color = [UIColor xcf_blueBackgroundColor];
+    return [UIImage xcf_imageWithColor:color];
 }
 
 +(instancetype)xcf_buttonHHighlightedBackgroundImage
 {
-    NSString *imageName = @"buttonHHighlightedBackgroundImage";
-    return [self xcf_buttonBackgroundImageWithName:imageName];
+    UIColor *color = [UIColor xcf_blueHighlightedBackgroundColor];
+    return [UIImage xcf_imageWithColor:color];
 }
 
 +(instancetype)xcf_buttonINormalBackgroundImage
 {
-    NSString *imageName = @"buttonINormalBackgroundImage";
-    return [self xcf_buttonBackgroundImageWithName:imageName];
+    UIColor *color = [UIColor xcf_grayColor];
+    return [UIImage xcf_imageWithColor:color];
 }
 
 +(instancetype)xcf_buttonIHighlightedBackgroundImage
 {
-    NSString *imageName = @"buttonIHighlightedBackgroundImage";
-    return [self xcf_buttonBackgroundImageWithName:imageName];
+    UIColor *color = [UIColor xcf_colorWithHexString:@"#A3A399"];
+    return [UIImage xcf_imageWithColor:color];
 }
 
 @end

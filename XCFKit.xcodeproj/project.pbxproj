@@ -20,7 +20,6 @@
 		E8003A651DC351EA00103028 /* XCFKitCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = E8003A621DC351EA00103028 /* XCFKitCompat.m */; };
 		E8003A691DC3562100103028 /* UIImage+PureColor.h in Headers */ = {isa = PBXBuildFile; fileRef = E8003A671DC3562100103028 /* UIImage+PureColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8003A6A1DC3562100103028 /* UIImage+PureColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E8003A681DC3562100103028 /* UIImage+PureColor.m */; };
-		E8AD734A1DC6F7AB00E63306 /* buttonBackgroundImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8AD73491DC6F7AB00E63306 /* buttonBackgroundImages.xcassets */; };
 		E8AD735B1DC72AE300E63306 /* UIView+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8AD735C1DC72AE300E63306 /* UIView+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */; };
 /* End PBXBuildFile section */
@@ -41,7 +40,6 @@
 		E8003A621DC351EA00103028 /* XCFKitCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFKitCompat.m; sourceTree = "<group>"; };
 		E8003A671DC3562100103028 /* UIImage+PureColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PureColor.h"; sourceTree = "<group>"; };
 		E8003A681DC3562100103028 /* UIImage+PureColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PureColor.m"; sourceTree = "<group>"; };
-		E8AD73491DC6F7AB00E63306 /* buttonBackgroundImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = buttonBackgroundImages.xcassets; sourceTree = "<group>"; };
 		E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFAppearance.h"; sourceTree = "<group>"; };
 		E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFAppearance.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,7 +106,6 @@
 				E8003A681DC3562100103028 /* UIImage+PureColor.m */,
 				E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */,
 				E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */,
-				E8AD73491DC6F7AB00E63306 /* buttonBackgroundImages.xcassets */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -190,7 +187,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8AD734A1DC6F7AB00E63306 /* buttonBackgroundImages.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

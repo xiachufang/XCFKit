@@ -17,7 +17,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "git@github.com:xiachufang/XCFKit.git", :tag => "#{s.version}" }
 
   s.source_files = "XCFKit" , "XCFKit/UI"
-  s.resource_bundle = { 'buttonBackgroundImages' => 'XCFKit/**/*.xcassets' }
 
   s.frameworks       = [ 'Foundation', 'UIKit' ]
 
