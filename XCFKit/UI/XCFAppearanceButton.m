@@ -219,8 +219,10 @@
 - (instancetype) initWithFrame:(CGRect)frame \
 { \
     self = [super initWithFrame:frame]; \
-    self.layer.cornerRadius = 3; \
-    self.layer.masksToBounds = YES; \
+    if(self) { \
+        self.layer.cornerRadius = 3; \
+        self.layer.masksToBounds = YES; \
+    } \
     return self; \
 } \
 @end
