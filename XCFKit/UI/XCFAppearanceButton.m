@@ -107,13 +107,13 @@
         case XCFAppearanceButtonStyleC: {
             [self setTitleColor:[UIColor xcf_linkColor] forState:UIControlStateNormal];
         } break;
-        case XCFAppearanceButtonStyleD: {
+        case XCFAppearanceButtonStyleF: {
             self.layer.borderColor = [UIColor xcf_supplementaryTextColor].CGColor;
             self.layer.borderWidth = 1;
-            [self setTitleColor:[UIColor xcf_supplementaryTextColor] forState:UIControlStateNormal];
         }
             // 这里没有漏掉 break ，F 是继承于 D 的。
-        case XCFAppearanceButtonStyleF: { // 从代码上看 F 和 D 没有区别
+        case XCFAppearanceButtonStyleD: { // 从代码上看 F 和 D 没有区别
+            [self setTitleColor:[UIColor xcf_supplementaryTextColor] forState:UIControlStateNormal];
         } break;
         case XCFAppearanceButtonStyleE: {
             [self setBackgroundImage:[UIImage xcf_buttonENormalBackgroundImage] forState:UIControlStateNormal];
@@ -234,4 +234,17 @@ XCFAppearanceButtonImplementation(F)
 XCFAppearanceButtonImplementation(G)
 XCFAppearanceButtonImplementation(H)
 XCFAppearanceButtonImplementation(I)
+
+#pragma mark - compatibility
+
+@implementation XcfAppearanceButtonA @end
+@implementation XcfAppearanceButtonB @end
+@implementation XcfAppearanceButtonC @end
+@implementation XcfAppearanceButtonD @end
+@implementation XcfAppearanceButtonE @end
+@implementation XcfAppearanceButtonF @end
+@implementation XcfAppearanceButtonG @end
+@implementation XcfAppearanceButtonH @end
+@implementation XcfAppearanceButtonI @end
+
 

@@ -79,14 +79,23 @@ IB_DESIGNABLE
 
 #pragma mark - compatibility
 
-@compatibility_alias XcfAppearanceButtonA XCFAppearanceButtonA;
-@compatibility_alias XcfAppearanceButtonB XCFAppearanceButtonB;
-@compatibility_alias XcfAppearanceButtonC XCFAppearanceButtonC;
-@compatibility_alias XcfAppearanceButtonD XCFAppearanceButtonD;
-@compatibility_alias XcfAppearanceButtonE XCFAppearanceButtonE;
-@compatibility_alias XcfAppearanceButtonF XCFAppearanceButtonF;
-@compatibility_alias XcfAppearanceButtonG XCFAppearanceButtonG;
-@compatibility_alias XcfAppearanceButtonH XCFAppearanceButtonH;
-@compatibility_alias XcfAppearanceButtonI XCFAppearanceButtonI;
+__attribute__ ((deprecated))
+@interface XcfAppearanceButtonA : XCFAppearanceButtonA{} @end
+__attribute__ ((deprecated))
+@interface XcfAppearanceButtonB : XCFAppearanceButtonB{} @end
+__attribute__ ((deprecated))
+@interface XcfAppearanceButtonC : XCFAppearanceButtonC{} @end
+__attribute__ ((deprecated))
+@interface XcfAppearanceButtonD : XCFAppearanceButtonD{} @end
+__attribute__ ((deprecated))
+@interface XcfAppearanceButtonE : XCFAppearanceButtonE{} @end
+__attribute__ ((deprecated))
+@interface XcfAppearanceButtonF : XCFAppearanceButtonF{} @end
+__attribute__ ((deprecated))
+@interface XcfAppearanceButtonG : XCFAppearanceButtonG{} @end
+__attribute__ ((deprecated))
+@interface XcfAppearanceButtonH : XCFAppearanceButtonH{} @end
+__attribute__ ((deprecated))
+@interface XcfAppearanceButtonI : XCFAppearanceButtonI{} @end
 
 
