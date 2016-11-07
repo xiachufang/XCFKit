@@ -20,6 +20,8 @@
 		E8003A651DC351EA00103028 /* XCFKitCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = E8003A621DC351EA00103028 /* XCFKitCompat.m */; };
 		E8003A691DC3562100103028 /* UIImage+PureColor.h in Headers */ = {isa = PBXBuildFile; fileRef = E8003A671DC3562100103028 /* UIImage+PureColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8003A6A1DC3562100103028 /* UIImage+PureColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E8003A681DC3562100103028 /* UIImage+PureColor.m */; };
+		E80166FD1DD07D0400383326 /* XCFWindowContextController.h in Headers */ = {isa = PBXBuildFile; fileRef = E80166FB1DD07D0400383326 /* XCFWindowContextController.h */; };
+		E80166FE1DD07D0400383326 /* XCFWindowContextController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80166FC1DD07D0400383326 /* XCFWindowContextController.m */; };
 		E8AD735B1DC72AE300E63306 /* UIView+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8AD735C1DC72AE300E63306 /* UIView+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */; };
 /* End PBXBuildFile section */
@@ -40,6 +42,8 @@
 		E8003A621DC351EA00103028 /* XCFKitCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFKitCompat.m; sourceTree = "<group>"; };
 		E8003A671DC3562100103028 /* UIImage+PureColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PureColor.h"; sourceTree = "<group>"; };
 		E8003A681DC3562100103028 /* UIImage+PureColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PureColor.m"; sourceTree = "<group>"; };
+		E80166FB1DD07D0400383326 /* XCFWindowContextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFWindowContextController.h; sourceTree = "<group>"; };
+		E80166FC1DD07D0400383326 /* XCFWindowContextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFWindowContextController.m; sourceTree = "<group>"; };
 		E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFAppearance.h"; sourceTree = "<group>"; };
 		E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFAppearance.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +110,8 @@
 				E8003A681DC3562100103028 /* UIImage+PureColor.m */,
 				E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */,
 				E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */,
+				E80166FB1DD07D0400383326 /* XCFWindowContextController.h */,
+				E80166FC1DD07D0400383326 /* XCFWindowContextController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -123,6 +129,7 @@
 				E8003A5C1DC34D6F00103028 /* UIColor+XCFAppearance.h in Headers */,
 				E8003A4E1DC33BAB00103028 /* XCFAppearanceButton.h in Headers */,
 				E80039D61DC325A200103028 /* XCFKit.h in Headers */,
+				E80166FD1DD07D0400383326 /* XCFWindowContextController.h in Headers */,
 				E8003A521DC347E600103028 /* UIFont+XCFAppearance.h in Headers */,
 				E8003A691DC3562100103028 /* UIImage+PureColor.h in Headers */,
 			);
@@ -198,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8003A531DC347E600103028 /* UIFont+XCFAppearance.m in Sources */,
+				E80166FE1DD07D0400383326 /* XCFWindowContextController.m in Sources */,
 				E8003A581DC34C2A00103028 /* UIColor+Hex.m in Sources */,
 				E8003A4F1DC33BAB00103028 /* XCFAppearanceButton.m in Sources */,
 				E8003A6A1DC3562100103028 /* UIImage+PureColor.m in Sources */,
