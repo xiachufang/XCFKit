@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+/*
+ *  这个类用来在一个新的 window 中 present 一个 controller
+ *  调用 - dismissViewControllerAnimated:completion: 方法来 dismiss
+ */
 @interface XCFWindowContextController : UIViewController
 
 @property (nonatomic, weak, readonly) UIWindow *window;
