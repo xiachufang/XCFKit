@@ -32,6 +32,8 @@ FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 #import <XCFKit/UIImage+PureColor.h>
 #import <XCFKit/UIView+XCFAppearance.h>
 
+#import <XCFKit/XCFWindowContextController.h>
+
 #endif
 
 #if XCF_WATCH

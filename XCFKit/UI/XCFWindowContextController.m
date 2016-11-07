@@ -16,20 +16,14 @@
 
 @implementation XCFWindowContextController
 
-- (void) dealloc
-{
-#if DEBUG
-    NSLog(@"Dealloc : %@",self);
-#endif
-}
-
 + (instancetype) presentController:(UIViewController *)controller windowLevel:(UIWindowLevel)level animated:(BOOL)animated
 {
     NSParameterAssert(controller);
     
-    XCFWindowContextController *root = [XCFWindowContextController new];
+    XCFWindowContextController *root = [self new];
     
     UIWindow *window = [UIWindow new];
+    window.backgroundColor = [UIColor clearColor];
     window.windowLevel = level;
     root.window = window;
     window.rootViewController = root;
