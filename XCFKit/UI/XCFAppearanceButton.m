@@ -48,8 +48,8 @@
     // XCFAppearanceButtonD
     [[XCFAppearanceButtonD appearance] setTitleColor:[UIColor xcf_supplementaryTextColor]
                                             forState:UIControlStateNormal];
-    [[XCFAppearanceButtonD appearance] setXcf_borderColor:[UIColor xcf_supplementaryTextColor]];
-    [[XCFAppearanceButtonD appearance] setXcf_borderWidth:1];
+    [[XCFAppearanceButtonF appearance] setXcf_borderColor:[UIColor xcf_supplementaryTextColor]];
+    [[XCFAppearanceButtonF appearance] setXcf_borderWidth:1];
     
     //XCFAppearanceButtonE
     [[XCFAppearanceButtonE appearance] setBackgroundImage:[UIImage xcf_buttonENormalBackgroundImage] forState:UIControlStateNormal];
