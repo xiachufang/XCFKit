@@ -90,6 +90,8 @@
 				E8003A621DC351EA00103028 /* XCFKitCompat.m */,
 				E80039D41DC325A200103028 /* XCFKit.h */,
 				E8003A3C1DC333CA00103028 /* UI */,
+				E84A19ED1DF5724200CA630E /* Foudation */,
+				E84A19EE1DF5724200CA630E /* XCFUI */,
 				E8003A231DC32F5A00103028 /* Supporting Files */,
 			);
 			path = XCFKit;
@@ -126,6 +128,20 @@
 				E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		E84A19ED1DF5724200CA630E /* Foudation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Foudation;
+			sourceTree = "<group>";
+		};
+		E84A19EE1DF5724200CA630E /* XCFUI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = XCFUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
