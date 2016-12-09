@@ -75,7 +75,6 @@
 
 - (void) xcf_applyStyle:(XCFAppearanceButtonStyle)style
 {
-    self.layer.cornerRadius = 3;
     self.layer.masksToBounds = YES;
     
     switch (style) {
@@ -212,7 +211,6 @@
 - (void) awakeFromNib \
 { \
     [super awakeFromNib]; \
-    self.layer.cornerRadius = 3; \
     self.layer.masksToBounds = YES; \
 } \
 \
@@ -220,7 +218,6 @@
 { \
     self = [super initWithFrame:frame]; \
     if(self) { \
-        self.layer.cornerRadius = 3; \
         self.layer.masksToBounds = YES; \
     } \
     return self; \
