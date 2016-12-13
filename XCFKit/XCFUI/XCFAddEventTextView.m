@@ -62,7 +62,7 @@
         NSInteger namesLength = 0;
         for (int i = 0; i < self.selectedEvents.count; i++) {
             id <XCFAddEventProtocol> obj = [self.selectedEvents objectAtIndex:i];
-            if (range.location > namesLength && range.location < namesLength + obj.eventName.length + 1) {
+            if (range.location > namesLength && range.location < namesLength + obj.eventName.length + (i + 1)) {
                 [self deleteSelectedEventWithIndex:i];
                 return NO;
             }
@@ -71,7 +71,18 @@
     }
     self.allowsEditingTextAttributes = YES;
     self.typingAttributes = self.inputTextAttributes;
-    return ![text isEqualToString:kSeparator];
+    
+    NSRange lastSeparatorRange = [self.text rangeOfString:kSeparator options:NSBackwardsSearch];
+    BOOL couldChange = NO;
+    if (text.length == 0 && range.length > 0) {
+        couldChange = YES;
+    }else if (lastSeparatorRange.location == NSNotFound) {
+        couldChange = YES;
+    }else{
+        couldChange = range.location >= (lastSeparatorRange.location + 1);
+    }
+    
+    return ![text isEqualToString:kSeparator] && couldChange;
 }
 
 - (void)deleteSelectedEventWithIndex:(NSInteger)index{
