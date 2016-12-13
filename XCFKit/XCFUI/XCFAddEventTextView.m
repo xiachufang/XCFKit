@@ -117,15 +117,35 @@
     }
 }
 
+- (void)cleanSearchKeyword{
+    NSRange lastSeparatorRange = [self.text rangeOfString:kSeparator options:NSBackwardsSearch];
+    if (lastSeparatorRange.location == NSNotFound) {
+        self.text = @"";
+    }else{
+        self.attributedText = [self.attributedText attributedSubstringFromRange:NSMakeRange(0, lastSeparatorRange.location + lastSeparatorRange.length)];
+    }
+    self.searchKeyWordChangedBlock(@"");
+}
+
+- (NSString *)searchKeyword{
+    NSRange lastSeparatorRange = [self.text rangeOfString:kSeparator options:NSBackwardsSearch];
+    if (lastSeparatorRange.location == NSNotFound) {
+        return self.text;
+    }else{
+        NSInteger keywordLocation = lastSeparatorRange.location + lastSeparatorRange.length;
+        return [self.text substringWithRange:NSMakeRange(keywordLocation ,self.text.length - keywordLocation)];
+    }
+}
+
+-(CGSize)measuredSize {
+    return self.contentSize;
+}
+
 - (NSDictionary *)selectedTextAttributes{
     if (!_selectedTextAttributes) {
         _selectedTextAttributes = [self.class defaultSelectedTextAttributes];
     }
     return _selectedTextAttributes;
-}
-
--(CGSize)measuredSize {
-    return self.contentSize;
 }
 
 + (NSDictionary *)defaultSelectedTextAttributes{
@@ -156,6 +176,7 @@
     });
     return attributes;
 }
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XCFAddEventProtocol.h"
+#import <XCFKit/XCFAddEventProtocol.h>
 
 @interface XCFAddEventTextView : UITextView
 
@@ -18,5 +18,8 @@
 @property (nonatomic, copy) void (^textViewHeightChangedBlock)(CGFloat height);
 @property (nonatomic, copy) void (^eventDeletedBlock)(NSInteger deleteEventIndex);
 @property (nonatomic, copy) void (^searchKeyWordChangedBlock)(NSString *searchKeyWord);
+
+- (void)cleanSearchKeyword;
+- (NSString *)searchKeyword;
 
 @end
