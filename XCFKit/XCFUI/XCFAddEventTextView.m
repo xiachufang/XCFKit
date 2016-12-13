@@ -125,11 +125,7 @@
 }
 
 -(CGSize)measuredSize {
-    CGSize size = [self systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    if (size.height < 50) {
-        size.height = 50;
-    }
-    return size;
+    return self.contentSize;
 }
 
 + (NSDictionary *)defaultSelectedTextAttributes{
