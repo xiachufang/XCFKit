@@ -26,6 +26,9 @@
 		E80B57541DD0CA0100A32F14 /* UIBarButtonItem+View.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B57521DD0CA0100A32F14 /* UIBarButtonItem+View.m */; };
 		E87EBD8A1DFF9CDF00027C05 /* UIFont+fontWeight.h in Headers */ = {isa = PBXBuildFile; fileRef = E87EBD881DFF9CDF00027C05 /* UIFont+fontWeight.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E87EBD8B1DFF9CDF00027C05 /* UIFont+fontWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = E87EBD891DFF9CDF00027C05 /* UIFont+fontWeight.m */; };
+		E87EBD951DFF9F3200027C05 /* XCFAddEventProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = E87EBD921DFF9F3200027C05 /* XCFAddEventProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E87EBD961DFF9F3200027C05 /* XCFAddEventTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = E87EBD931DFF9F3200027C05 /* XCFAddEventTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E87EBD971DFF9F3200027C05 /* XCFAddEventTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E87EBD941DFF9F3200027C05 /* XCFAddEventTextView.m */; };
 		E881B8901DE6A2240055A817 /* UISearchBar+textField.h in Headers */ = {isa = PBXBuildFile; fileRef = E881B88E1DE6A2240055A817 /* UISearchBar+textField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E881B8911DE6A2240055A817 /* UISearchBar+textField.m in Sources */ = {isa = PBXBuildFile; fileRef = E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */; };
 		E8AD735B1DC72AE300E63306 /* UIView+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,6 +57,9 @@
 		E80B57521DD0CA0100A32F14 /* UIBarButtonItem+View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+View.m"; sourceTree = "<group>"; };
 		E87EBD881DFF9CDF00027C05 /* UIFont+fontWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+fontWeight.h"; sourceTree = "<group>"; };
 		E87EBD891DFF9CDF00027C05 /* UIFont+fontWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+fontWeight.m"; sourceTree = "<group>"; };
+		E87EBD921DFF9F3200027C05 /* XCFAddEventProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAddEventProtocol.h; sourceTree = "<group>"; };
+		E87EBD931DFF9F3200027C05 /* XCFAddEventTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAddEventTextView.h; sourceTree = "<group>"; };
+		E87EBD941DFF9F3200027C05 /* XCFAddEventTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAddEventTextView.m; sourceTree = "<group>"; };
 		E881B88E1DE6A2240055A817 /* UISearchBar+textField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+textField.h"; sourceTree = "<group>"; };
 		E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+textField.m"; sourceTree = "<group>"; };
 		E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFAppearance.h"; sourceTree = "<group>"; };
@@ -146,6 +152,9 @@
 		E84A19EE1DF5724200CA630E /* XCFUI */ = {
 			isa = PBXGroup;
 			children = (
+				E87EBD921DFF9F3200027C05 /* XCFAddEventProtocol.h */,
+				E87EBD931DFF9F3200027C05 /* XCFAddEventTextView.h */,
+				E87EBD941DFF9F3200027C05 /* XCFAddEventTextView.m */,
 			);
 			path = XCFUI;
 			sourceTree = "<group>";
@@ -168,7 +177,9 @@
 				E87EBD8A1DFF9CDF00027C05 /* UIFont+fontWeight.h in Headers */,
 				E881B8901DE6A2240055A817 /* UISearchBar+textField.h in Headers */,
 				E80B57531DD0CA0100A32F14 /* UIBarButtonItem+View.h in Headers */,
+				E87EBD961DFF9F3200027C05 /* XCFAddEventTextView.h in Headers */,
 				E8003A691DC3562100103028 /* UIImage+PureColor.h in Headers */,
+				E87EBD951DFF9F3200027C05 /* XCFAddEventProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +260,7 @@
 				E87EBD8B1DFF9CDF00027C05 /* UIFont+fontWeight.m in Sources */,
 				E8003A4F1DC33BAB00103028 /* XCFAppearanceButton.m in Sources */,
 				E8003A6A1DC3562100103028 /* UIImage+PureColor.m in Sources */,
+				E87EBD971DFF9F3200027C05 /* XCFAddEventTextView.m in Sources */,
 				E8AD735C1DC72AE300E63306 /* UIView+XCFAppearance.m in Sources */,
 				E8003A5E1DC34D6F00103028 /* UIColor+XCFAppearance.m in Sources */,
 				E8003A651DC351EA00103028 /* XCFKitCompat.m in Sources */,
