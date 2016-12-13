@@ -37,6 +37,8 @@ FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 
 #import <XCFKit/XCFWindowContextController.h>
 
+#import <XCFKit/UIFont+fontWeight.h>
+
 #endif
 
 #if XCF_WATCH
