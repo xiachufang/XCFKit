@@ -1,35 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jme-Eh-Lsq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jme-Eh-Lsq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--小视频-->
+        <scene sceneID="LAq-MV-YPu">
+            <objects>
+                <viewController title="小视频" id="MSn-m7-MwH" customClass="XCFMicroVideoPlayerDemoController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OY1-0L-mb1"/>
+                        <viewControllerLayoutGuide type="bottom" id="BKl-5i-TRY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UUG-Se-ayo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4V-fa-Chf" customClass="XCFAppearanceButtonA">
+                                <rect key="frame" x="19.5" y="568" width="335" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="P0S-QZ-CGF"/>
+                                </constraints>
+                                <state key="normal" title="选择小视频"/>
+                                <connections>
+                                    <action selector="selectMicroVideo:" destination="MSn-m7-MwH" eventType="touchUpInside" id="hES-QF-Frf"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQH-BM-WLu">
+                                <rect key="frame" x="19.5" y="146" width="335" height="335"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="GQH-BM-WLu" secondAttribute="height" id="aeY-lI-mM9"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GQH-BM-WLu" firstAttribute="centerX" secondItem="UUG-Se-ayo" secondAttribute="centerX" id="1I8-me-mqt"/>
+                            <constraint firstItem="GQH-BM-WLu" firstAttribute="centerY" secondItem="UUG-Se-ayo" secondAttribute="centerY" constant="-20" id="2aW-73-4w7"/>
+                            <constraint firstItem="GQH-BM-WLu" firstAttribute="width" secondItem="UUG-Se-ayo" secondAttribute="width" constant="-40" id="QLS-Ug-55w"/>
+                            <constraint firstItem="Q4V-fa-Chf" firstAttribute="centerX" secondItem="UUG-Se-ayo" secondAttribute="centerX" id="QNU-Ty-40g"/>
+                            <constraint firstItem="Q4V-fa-Chf" firstAttribute="width" secondItem="UUG-Se-ayo" secondAttribute="width" constant="-40" id="U6w-z7-ukL"/>
+                            <constraint firstItem="BKl-5i-TRY" firstAttribute="top" secondItem="Q4V-fa-Chf" secondAttribute="bottom" constant="55" id="dEk-gW-b2I"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="小视频" id="5JH-Wo-Okf">
+                        <barButtonItem key="rightBarButtonItem" title="Toggle Debug" id="RT5-Jc-ZMX"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="videoPlayerContainerView" destination="GQH-BM-WLu" id="QU7-2z-qf6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sII-5L-xi4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="766" y="-218"/>
+        </scene>
         <!--XCFKit-->
         <scene sceneID="yKe-Zd-7fu">
             <objects>
                 <tableViewController title="XCFKit" id="dI7-gp-T4U" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qmb-4A-85g">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="qmb-4A-85g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection headerTitle="UI" id="DcS-9f-Vny">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Laa-CM-yHR" style="IBUITableViewCellStyleDefault" id="fsZ-On-122">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fsZ-On-122" id="TQV-sd-klW">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Appearance Colors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Laa-CM-yHR">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -42,14 +94,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="RNA-kR-gLQ" style="IBUITableViewCellStyleDefault" id="pS3-NB-szg">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pS3-NB-szg" id="ZEi-ap-U27">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Appearance Buttons" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RNA-kR-gLQ">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -59,6 +111,30 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="gFK-do-rAM" kind="show" id="zsm-K6-aOh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Video Player" id="0Mu-gU-iV7">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="9o0-Zc-TrC" style="IBUITableViewCellStyleDefault" id="0qF-fY-ZBy">
+                                        <rect key="frame" x="0.0" y="199.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0qF-fY-ZBy" id="cri-Zg-nIi">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Micro Video Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9o0-Zc-TrC">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="MSn-m7-MwH" kind="show" id="E8u-l0-KLv"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>

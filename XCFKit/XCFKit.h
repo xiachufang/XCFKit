@@ -41,6 +41,11 @@ FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 
 #import <XCFKit/UIView+XCFHeartbeat.h>
 
+// video
+#import <XCFKit/XCFVideoPlayerControlProtocol.h>
+#import <XCFKit/XCFMicroVideoDecoder.h>
+#import <XCFKit/XCFMicroVideoPlayerView.h>
+
 #endif
 
 #if XCF_WATCH
