@@ -34,6 +34,7 @@ UINavigationControllerDelegate
     _playerView = [[XCFMicroVideoPlayerView alloc] initWithFrame:self.videoPlayerContainerView.bounds
                                                        videoPath:nil
                                                     previewImage:previewImage];
+    _playerView.loopCount = 2;
     _playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.videoPlayerContainerView addSubview:_playerView];
 }
@@ -48,6 +49,7 @@ UINavigationControllerDelegate
     [self presentViewController:videoPicker
                        animated:YES
                      completion:nil];
+    [self.playerView pause];
 }
 
 - (void) didSelectVideoAtPath:(NSString *) path
@@ -63,7 +65,9 @@ UINavigationControllerDelegate
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [picker.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        [self.playerView play];
+    }];
 }
 
 - (void) imagePickerController:(UIImagePickerController *)picker

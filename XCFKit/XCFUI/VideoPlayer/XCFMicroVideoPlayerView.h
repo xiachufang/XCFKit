@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 - (void) microVideoPlayerStatusChanged:(XCFMicroVideoPlayerView *)playerView;
-- (CGImageRef) microVideoPlayer:(XCFMicroVideoPlayerView *)playerView willDisplaySampleBuffer:(nullable CMSampleBufferRef)sampleBuffer;
+- (CGImageRef) microVideoPlayer:(XCFMicroVideoPlayerView *)playerView
+        willDisplaySampleBuffer:(nullable CMSampleBufferRef)sampleBuffer;
 
 @end
 

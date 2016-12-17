@@ -29,6 +29,13 @@ enum {
 
 @end
 
+typedef enum : NSUInteger {
+    XCFVideoFrameOrientationUp,
+    XCFVideoFrameOrientationLeft,
+    XCFVideoFrameOrientationRight,
+    XCFVideoFrameOrientationDown
+} XCFVideoFrameOrientation;
+
 @interface XCFMicroVideoDecoder : NSObject
 
 - (instancetype) init NS_UNAVAILABLE;
@@ -49,6 +56,9 @@ enum {
  *   在 prepareToStartDecode 前设置生效
  */
 @property (nonatomic, assign) CGSize outputSize;
+
+@property (nonatomic, readonly) XCFVideoFrameOrientation frameOrientation;
+@property (nonatomic, readonly) CGAffineTransform preferredTransform;
 
 - (void) prepareToStartDecode;
 

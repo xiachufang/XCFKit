@@ -7,6 +7,7 @@
 //
 
 #import "XCFMicroVideoPlayerView.h"
+#import <Accelerate/Accelerate.h>
 
 @interface XCFMicroVideoPlayerView ()<XCFMicroVideoDecoderDelegate>
 
@@ -101,8 +102,69 @@
 #pragma mark - display
 
 + (CGImageRef) extractImageRefFromSampleBuffer:(CMSampleBufferRef)sampleBuffer
+                              frameOrientation:(XCFVideoFrameOrientation)orientation
 {
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    
+    CVPixelBufferRef rotatedBuffer = NULL;
+    if (orientation != XCFVideoFrameOrientationUp)
+    { // rotate image buffer
+        CVPixelBufferLockBaseAddress(imageBuffer, 0);
+        
+        OSType pixelFormatType              = CVPixelBufferGetPixelFormatType(imageBuffer);
+        
+        const size_t kAlignment_32ARGB      = 32;
+        const size_t kBytesPerPixel_32ARGB  = 4;
+        
+        size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
+        size_t width       = CVPixelBufferGetWidth(imageBuffer);
+        size_t height      = CVPixelBufferGetHeight(imageBuffer);
+        
+        BOOL rotatePerpendicular = (orientation == XCFVideoFrameOrientationLeft) || (orientation == XCFVideoFrameOrientationRight);
+        const size_t outWidth    = rotatePerpendicular ? height : width;
+        const size_t outHeight   = rotatePerpendicular ? width  : height;
+        
+        size_t bytesPerRowOut    = kBytesPerPixel_32ARGB * ceil(outWidth * 1.0 / kAlignment_32ARGB) * kAlignment_32ARGB;
+        const size_t dstSize     = bytesPerRowOut * outHeight * sizeof(unsigned char);
+        void *srcBuff            = CVPixelBufferGetBaseAddress(imageBuffer);
+        unsigned char *dstBuff   = (unsigned char *)malloc(dstSize);
+        vImage_Buffer inbuff     = {srcBuff, height, width, bytesPerRow};
+        vImage_Buffer outbuff    = {dstBuff, outHeight, outWidth, bytesPerRowOut};
+        uint8_t bgColor[4]       = {1, 1, 1, 1};
+        
+        uint8_t rotationConstant = 0;
+        switch (orientation) {
+            case XCFVideoFrameOrientationRight: rotationConstant = 1;break;
+            case XCFVideoFrameOrientationDown: rotationConstant = 2;break;
+            case XCFVideoFrameOrientationLeft: rotationConstant = 3;break;
+            default: rotationConstant = 0;break;
+        }
+        vImage_Error err = vImageRotate90_ARGB8888(&inbuff, &outbuff, rotationConstant, bgColor, 0);
+        CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+        
+        if (err != kvImageNoError)
+        {
+            NSLog(@"%ld", err);
+        } else {
+            NSDictionary *pixelBufferAttributes = @{ (NSString *)kCVPixelBufferIOSurfacePropertiesKey : @{} };
+            CVPixelBufferCreate(kCFAllocatorDefault,
+                                outWidth,
+                                outHeight,
+                                pixelFormatType,
+                                (__bridge CFDictionaryRef)(pixelBufferAttributes),
+                                &rotatedBuffer);
+            CVPixelBufferLockBaseAddress(rotatedBuffer, 0);
+            uint8_t *dest = CVPixelBufferGetBaseAddress(rotatedBuffer);
+            memcpy(dest, outbuff.data, bytesPerRowOut * outHeight);
+            CVPixelBufferUnlockBaseAddress(rotatedBuffer, 0);
+            
+            free(dstBuff);
+        }
+    }
+    
+    if (rotatedBuffer) {
+        imageBuffer = rotatedBuffer;
+    }
     
     CVPixelBufferLockBaseAddress(imageBuffer, 0);
     
@@ -117,16 +179,25 @@
     CGContextRef cgContext;
     colorSpace = CGColorSpaceCreateDeviceRGB();
     cgContext = CGBitmapContextCreate(base, width, height, 8, bytesPerRow, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
+    
     CGImageRef imageRef = CGBitmapContextCreateImage(cgContext);
     
     CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
     CGColorSpaceRelease(colorSpace);
     CGContextRelease(cgContext);
+    if (rotatedBuffer) {
+        CFRelease(rotatedBuffer);
+    }
     
     return imageRef;
 }
 
 - (void) displayImageRef:(CGImageRef)imageRef
+{
+    [self displayImageRef:imageRef transform:CGAffineTransformIdentity];
+}
+
+- (void) displayImageRef:(CGImageRef)imageRef transform:(CGAffineTransform)transform
 {
     if (imageRef) {
         if (_currentImageRef && _currentImageRef != _previewImageRef) {
@@ -135,6 +206,8 @@
         
         _currentImageRef = imageRef;
         [self.layer setContents:(__bridge id _Nullable)(imageRef)];
+        
+        self.layer.transform = CATransform3DMakeAffineTransform(transform);
     }
 }
 
@@ -157,13 +230,13 @@
 - (void) play
 {
     if (!_running && _decoder) {
+        _running = YES;
+        
         if ([_decoder nextSampleBufferAvaliable ]) {
             [_decoder requestNextSampleBuffer];
         } else {
             [_decoder prepareToStartDecode];
         }
-        
-        _running = YES;
         
         [self statusChanged];
     }
@@ -210,7 +283,7 @@
 
 - (void) microVideoDecoderBePrepared:(XCFMicroVideoDecoder *)decoder
 {
-    if (decoder == _decoder) {
+    if (decoder == _decoder && _running) {
         NSLog(@"%@ is prepared to play video",decoder);
         [decoder requestNextSampleBuffer];
     }
@@ -237,14 +310,18 @@
             ref = [self.delegate microVideoPlayer:self
                           willDisplaySampleBuffer:buffer];
         } else if (buffer) {
-            ref = [self.class extractImageRefFromSampleBuffer:buffer];
+            ref = [self.class extractImageRefFromSampleBuffer:buffer
+                                            frameOrientation:decoder.frameOrientation];
         }
         
         if (ref) {
             [self displayImageRef:ref];
+            [self statusChanged];
         }
         
-        [decoder requestNextSampleBuffer];
+        if (_running) {
+            [decoder requestNextSampleBuffer];
+        }
     }
 }
 

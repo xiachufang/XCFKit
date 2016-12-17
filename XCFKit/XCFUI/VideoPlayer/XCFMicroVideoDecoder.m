@@ -18,7 +18,7 @@
 @property (nonatomic, strong) AVURLAsset *videoAsset;
 
 @property (nonatomic, strong, readwrite) AVAssetReader *assetReader;
-@property (nonatomic, strong) AVAssetReaderOutput *assetOutput;
+@property (nonatomic, strong) AVAssetReaderTrackOutput *assetOutput;
 
 @end
 
@@ -186,6 +186,11 @@
     }
 }
 
+- (CGAffineTransform) preferredTransform
+{
+    return self.assetOutput.track ? self.assetOutput.track.preferredTransform : CGAffineTransformIdentity;
+}
+
 - (NSString *) description
 {
     return [NSString stringWithFormat:@"%@<%p> url:%@ progress:%.2f",self.class,self,self.videoURL.absoluteString,self.progress];
@@ -209,11 +214,30 @@
         return NO;
     }
     
-    CGSize outputSize = CGSizeZero;
-    if (self.outputSize.width > videoTrack.naturalSize.width) {
-        outputSize = videoTrack.naturalSize;
-    } else {
-        outputSize= self.outputSize;
+    CGAffineTransform t = videoTrack.preferredTransform;
+    if (t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0) {
+        _frameOrientation = XCFVideoFrameOrientationLeft;
+    } else if (t.a == 0 && t.b == -1.0 && t.c == 1.0 && t.d == 0) {
+        _frameOrientation = XCFVideoFrameOrientationRight;
+    } else if (t.a == 1.0 && t.b == 0 && t.c == 0 && t.d == 1.0) {
+        _frameOrientation = XCFVideoFrameOrientationUp;
+    } else if (t.a == -1.0 && t.b == 0 && t.c == 0 && t.d == -1.0) {
+        _frameOrientation = XCFVideoFrameOrientationDown;
+    }
+    
+    CGSize outputSize = videoTrack.naturalSize;
+    if (videoTrack.naturalSize.width > 0 && !CGSizeEqualToSize(self.outputSize, CGSizeZero)) {
+        CGFloat actualRatio = videoTrack.naturalSize.height / videoTrack.naturalSize.width;
+        
+        CGFloat outputWidth = self.outputSize.width;
+        if (_frameOrientation == XCFVideoFrameOrientationLeft ||
+            _frameOrientation == XCFVideoFrameOrientationRight) {
+            outputWidth = self.outputSize.height;
+        }
+        
+        if (outputWidth < videoTrack.naturalSize.width) {
+            outputSize = CGSizeMake(outputWidth, outputWidth * actualRatio);
+        }
     }
     
     NSDictionary *outputSettings =
@@ -282,6 +306,8 @@
     _decodingFrameTime = kCMTimeZero;
     _previousFrameTime = kCMTimeZero;
     _previousFrameActualTime = 0;
+    
+    _frameOrientation = XCFVideoFrameOrientationUp;
 }
 
 - (BOOL) nextSampleBufferAvaliable
