@@ -16,6 +16,8 @@
 @property (nonatomic, retain) AVPlayerItem *playerItem;
 @property (nonatomic, retain) AVPlayerLayer *playerLayer;
 
+@property (nonatomic, strong) AVURLAsset *videoAsset;
+
 @end
 
 @implementation XCFAVPlayerView
@@ -101,9 +103,9 @@
     
     self.videoPath = videoPath;
     
-    NSURL *url = [NSURL URLWithString:videoPath];
+    NSURL *url = [NSURL fileURLWithPath:videoPath];
     AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
-    
+    self.videoAsset = asset;
     NSArray *loadKeys = @[@"playable"];
     __weak AVURLAsset *weak_asset = asset;
     __weak typeof(self) weak_self = self;
@@ -185,6 +187,7 @@
 - (BOOL) seekToSecond:(NSTimeInterval)second
 {
     if (self.isPlayable && second >= 0 && second < [self duration]) {
+        [self.playerLayer.player pause];
         [self.playerLayer.player seekToTime:CMTimeMakeWithSeconds(second, NSEC_PER_SEC)];
         return YES;
     }

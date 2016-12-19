@@ -137,6 +137,26 @@
                                             <segue destination="MSn-m7-MwH" kind="show" id="E8u-l0-KLv"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="MeW-Dn-VRr" style="IBUITableViewCellStyleDefault" id="BrS-ra-Vgs">
+                                        <rect key="frame" x="0.0" y="243.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BrS-ra-Vgs" id="I4n-JH-LnU">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="AVPlayer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MeW-Dn-VRr">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="9OB-6y-QSs" kind="show" id="oUO-G5-cCW"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -150,6 +170,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fX0-Q1-q7x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="766" y="484"/>
+        </scene>
+        <!--AVPlayer-->
+        <scene sceneID="d7g-hs-rCM">
+            <objects>
+                <viewController id="9OB-6y-QSs" customClass="XCFAVPlayerDemoController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dh7-qI-wGK"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cei-LG-qIz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wI1-Ay-Aw9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWC-AE-Xbg" customClass="XCFAppearanceButtonA">
+                                <rect key="frame" x="19.5" y="568" width="335" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="sTg-0e-5NC"/>
+                                </constraints>
+                                <state key="normal" title="选择视频"/>
+                                <connections>
+                                    <action selector="selectMicroVideo:" destination="9OB-6y-QSs" eventType="touchUpInside" id="Jpj-nb-zRL"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Efg-pl-Lqk">
+                                <rect key="frame" x="19.5" y="146" width="335" height="335"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Efg-pl-Lqk" secondAttribute="height" id="T91-lJ-wrl"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Efg-pl-Lqk" firstAttribute="width" secondItem="wI1-Ay-Aw9" secondAttribute="width" constant="-40" id="D65-3u-itL"/>
+                            <constraint firstItem="Efg-pl-Lqk" firstAttribute="centerY" secondItem="wI1-Ay-Aw9" secondAttribute="centerY" constant="-20" id="Pra-je-5R0"/>
+                            <constraint firstItem="Efg-pl-Lqk" firstAttribute="centerX" secondItem="wI1-Ay-Aw9" secondAttribute="centerX" id="g2H-dH-W47"/>
+                            <constraint firstItem="DWC-AE-Xbg" firstAttribute="width" secondItem="wI1-Ay-Aw9" secondAttribute="width" constant="-40" id="jvg-zb-r8Y"/>
+                            <constraint firstItem="Cei-LG-qIz" firstAttribute="top" secondItem="DWC-AE-Xbg" secondAttribute="bottom" constant="55" id="oxf-tP-b9k"/>
+                            <constraint firstItem="DWC-AE-Xbg" firstAttribute="centerX" secondItem="wI1-Ay-Aw9" secondAttribute="centerX" id="zE3-wX-FBe"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="AVPlayer" id="p4j-R7-8eQ"/>
+                    <connections>
+                        <outlet property="playerContainerView" destination="Efg-pl-Lqk" id="cCJ-F5-TPi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dCT-Ie-Gv6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="766" y="1208"/>
         </scene>
         <!--Appearance Colors-->
         <scene sceneID="TLN-xU-ba5">
