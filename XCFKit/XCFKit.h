@@ -46,6 +46,7 @@ FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 #import <XCFKit/XCFMicroVideoDecoder.h>
 #import <XCFKit/XCFMicroVideoPlayerView.h>
 #import <XCFKit/XCFAVPlayerView.h>
+#import <XCFKit/XCFAVPlayerController.h>
 
 #endif
 
