@@ -90,7 +90,7 @@ UIViewControllerTransitioningDelegate
     if (self) {
         if (videoURL.isFileURL) {
             _isVideoAtLocal = YES;
-            _actualVideoPath = videoURL.absoluteString;
+            _actualVideoPath = videoURL.path;
         } else {
             _remoteVideoURL = [videoURL copy];
             _isVideoAtLocal = NO;
@@ -114,7 +114,7 @@ UIViewControllerTransitioningDelegate
     [self.view addSubview:_playerView];
     
     if (_previewImage) {
-        _previewImageView = [UIImageView new];
+        _previewImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
         _previewImageView.contentMode = UIViewContentModeScaleAspectFit;
         _previewImageView.image = _previewImage;
         _previewImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -153,6 +153,11 @@ UIViewControllerTransitioningDelegate
                                            }
                                        }];
     }
+}
+
+- (BOOL) prefersStatusBarHidden
+{
+    return YES;
 }
 
 #pragma mark - delegate
@@ -273,7 +278,7 @@ UIViewControllerTransitioningDelegate
         animateImageView.contentMode = self.sourceImageContentMode;
         
         animator.animateImageView = animateImageView;
-        animator.sourceFrame = self.view.bounds;
+        animator.sourceFrame = [self videoRect];
         animator.destinationFrame = [self.sourceController.view convertRect:self.sourceView.bounds
                                                               fromView:self.sourceView];
         animator.isPresenting = NO;

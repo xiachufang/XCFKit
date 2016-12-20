@@ -20,20 +20,29 @@
     NSParameterAssert(self.avPlayerController && self.animateImageView);
     
     UIView *containerView = [transitionContext containerView];
+    UIView *presentedView = self.avPlayerController.view;
     
     BOOL isDestinationFrameVisble = NO;
     
     if (self.isPresenting) {
-        self.avPlayerController.view.frame = containerView.bounds;
-        [containerView addSubview:self.avPlayerController.view];
+        presentedView.frame = containerView.bounds;
+        [containerView addSubview:presentedView];
         
         // 手动设置成全屏
         self.destinationFrame = containerView.bounds;
         isDestinationFrameVisble = YES;
+        
+        for (UIView *subview in presentedView.subviews) {
+            subview.alpha = 0;
+        }
     } else {
         isDestinationFrameVisble = CGRectIntersectsRect(containerView.bounds, self.destinationFrame);
+        
         if (isDestinationFrameVisble) {
-            self.avPlayerController.view.alpha = 0;
+            presentedView.alpha = 0;
+            for (UIView *subview in presentedView.subviews) {
+                subview.alpha = 0;
+            }
         }
     }
     
@@ -46,18 +55,21 @@
                      animations:^{
                          if (isDestinationFrameVisble) {
                              self.animateImageView.frame = self.destinationFrame;
-                         } else {
-                             self.avPlayerController.view.alpha = 0;
                          }
                      } completion:^(BOOL finished) {
-                         [transitionContext completeTransition:[transitionContext transitionWasCancelled]];
+                         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
                      }];
 }
 
 - (void) animationEnded:(BOOL)transitionCompleted
 {
+    if (self.isPresenting) {
+        for (UIView *subview in self.avPlayerController.view.subviews) {
+            subview.alpha = 1;
+        }
+    }
+    
     [self.animateImageView removeFromSuperview];
-    self.avPlayerController.view.alpha = 1;
 }
 
 @end

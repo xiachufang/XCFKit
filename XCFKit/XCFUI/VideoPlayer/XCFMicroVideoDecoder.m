@@ -368,7 +368,6 @@
             }
         });
     } else if (self.assetReader.status == AVAssetReaderStatusCompleted) {
-        [self cleanup];
         [self decodeComplete];
     } else if (self.assetReader.status == AVAssetReaderStatusFailed) {
         [self detectError:self.assetReader.error];

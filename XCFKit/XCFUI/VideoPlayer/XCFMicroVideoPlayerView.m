@@ -69,7 +69,7 @@
 
 - (NSString *) videoPath
 {
-    return _decoder.videoURL.absoluteString;
+    return _decoder.videoURL.path;
 }
 
 - (UIImage *) screenshot
@@ -266,7 +266,7 @@
 
 - (CGFloat) progress
 {
-    return [_decoder progress];
+    return _decoder ? [_decoder progress] : -1;
 }
 
 - (BOOL) isPlaying

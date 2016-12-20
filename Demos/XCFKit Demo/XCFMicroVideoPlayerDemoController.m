@@ -10,11 +10,13 @@
 #import <XCFKit/XCFMicroVideoPlayerView.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <Photos/Photos.h>
+#import <XCFKit/XCFAVPlayerController.h>
 
 @interface XCFMicroVideoPlayerDemoController ()
 <
 UIImagePickerControllerDelegate,
-UINavigationControllerDelegate
+UINavigationControllerDelegate,
+XCFAVPlayerControllerDelegate
 >
 
 @property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
@@ -37,6 +39,10 @@ UINavigationControllerDelegate
     _playerView.loopCount = 2;
     _playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.videoPlayerContainerView addSubview:_playerView];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(tapOnPlayerView:)];
+    [_playerView addGestureRecognizer:tap];
 }
 
 #pragma mark - actions
@@ -58,6 +64,26 @@ UINavigationControllerDelegate
         XCFMicroVideoDecoder *decoder = [[XCFMicroVideoDecoder alloc] initWithVideoFilePath:path];
         [self.playerView switchToVideoDecoder:decoder];
         [self.playerView play];
+    }
+}
+
+- (void) tapOnPlayerView:(id)sender
+{
+    if (self.playerView.progress >= 0) {
+        [self.playerView pause];
+        
+        UIImage *previewImage = [self.playerView screenshot];
+        XCFAVPlayerController *controller =
+        [[XCFAVPlayerController alloc] initWithVideoFilePath:self.playerView.videoPath
+                                                previewImage:previewImage
+                                       allowPlaybackControls:NO];
+        controller.delegate = self;
+        controller.sourceController = self;
+        controller.sourceView = self.playerView;
+        controller.sourceImage = previewImage;
+        [self presentViewController:controller
+                           animated:YES
+                         completion:nil];
     }
 }
 
@@ -95,6 +121,17 @@ UINavigationControllerDelegate
     }
     
     [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - XCFAVPlayerControllerDelegate
+
+- (void) avPlayerControllerDidCancel:(XCFAVPlayerController *)controller
+{
+    [controller dismissViewControllerAnimated:YES completion:^{
+        if (self.playerView.progress < 1) {
+            [self.playerView play];
+        }
+    }];
 }
 
 @end
