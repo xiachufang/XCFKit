@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL) seekToSecond:(NSTimeInterval)second;
 
+- (CGRect) videoRect;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -60,6 +60,11 @@
     _playerLayer.frame = self.layer.bounds;
 }
 
+- (CGRect) videoRect
+{
+    return self.playerLayer.videoRect;
+}
+
 #pragma mark - delegate
 
 - (void) setDelegate:(id<XCFAVPlayerViewDelegate>)delegate
