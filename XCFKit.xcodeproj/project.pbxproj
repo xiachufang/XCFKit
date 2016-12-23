@@ -28,6 +28,8 @@
 		E87EBD8B1DFF9CDF00027C05 /* UIFont+fontWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = E87EBD891DFF9CDF00027C05 /* UIFont+fontWeight.m */; };
 		E881B8901DE6A2240055A817 /* UISearchBar+textField.h in Headers */ = {isa = PBXBuildFile; fileRef = E881B88E1DE6A2240055A817 /* UISearchBar+textField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E881B8911DE6A2240055A817 /* UISearchBar+textField.m in Sources */ = {isa = PBXBuildFile; fileRef = E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */; };
+		E89E817F1E0D24F000865246 /* UIView+XCFHeartbeat.h in Headers */ = {isa = PBXBuildFile; fileRef = E89E817D1E0D24F000865246 /* UIView+XCFHeartbeat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E89E81801E0D24F000865246 /* UIView+XCFHeartbeat.m in Sources */ = {isa = PBXBuildFile; fileRef = E89E817E1E0D24F000865246 /* UIView+XCFHeartbeat.m */; };
 		E8AD735B1DC72AE300E63306 /* UIView+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8AD735C1DC72AE300E63306 /* UIView+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */; };
 /* End PBXBuildFile section */
@@ -56,6 +58,8 @@
 		E87EBD891DFF9CDF00027C05 /* UIFont+fontWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+fontWeight.m"; sourceTree = "<group>"; };
 		E881B88E1DE6A2240055A817 /* UISearchBar+textField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+textField.h"; sourceTree = "<group>"; };
 		E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+textField.m"; sourceTree = "<group>"; };
+		E89E817D1E0D24F000865246 /* UIView+XCFHeartbeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFHeartbeat.h"; sourceTree = "<group>"; };
+		E89E817E1E0D24F000865246 /* UIView+XCFHeartbeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFHeartbeat.m"; sourceTree = "<group>"; };
 		E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFAppearance.h"; sourceTree = "<group>"; };
 		E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFAppearance.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +150,8 @@
 		E84A19EE1DF5724200CA630E /* XCFUI */ = {
 			isa = PBXGroup;
 			children = (
+				E89E817D1E0D24F000865246 /* UIView+XCFHeartbeat.h */,
+				E89E817E1E0D24F000865246 /* UIView+XCFHeartbeat.m */,
 			);
 			path = XCFUI;
 			sourceTree = "<group>";
@@ -165,6 +171,7 @@
 				E80039D61DC325A200103028 /* XCFKit.h in Headers */,
 				E80166FD1DD07D0400383326 /* XCFWindowContextController.h in Headers */,
 				E8003A521DC347E600103028 /* UIFont+XCFAppearance.h in Headers */,
+				E89E817F1E0D24F000865246 /* UIView+XCFHeartbeat.h in Headers */,
 				E87EBD8A1DFF9CDF00027C05 /* UIFont+fontWeight.h in Headers */,
 				E881B8901DE6A2240055A817 /* UISearchBar+textField.h in Headers */,
 				E80B57531DD0CA0100A32F14 /* UIBarButtonItem+View.h in Headers */,
@@ -246,6 +253,7 @@
 				E80166FE1DD07D0400383326 /* XCFWindowContextController.m in Sources */,
 				E881B8911DE6A2240055A817 /* UISearchBar+textField.m in Sources */,
 				E8003A581DC34C2A00103028 /* UIColor+Hex.m in Sources */,
+				E89E81801E0D24F000865246 /* UIView+XCFHeartbeat.m in Sources */,
 				E87EBD8B1DFF9CDF00027C05 /* UIFont+fontWeight.m in Sources */,
 				E8003A4F1DC33BAB00103028 /* XCFAppearanceButton.m in Sources */,
 				E8003A6A1DC3562100103028 /* UIImage+PureColor.m in Sources */,

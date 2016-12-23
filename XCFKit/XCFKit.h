@@ -39,6 +39,8 @@ FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 
 #import <XCFKit/UIFont+fontWeight.h>
 
+#import <XCFKit/UIView+XCFHeartbeat.h>
+
 #endif
 
 #if XCF_WATCH
