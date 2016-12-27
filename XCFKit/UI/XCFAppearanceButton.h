@@ -17,7 +17,8 @@ typedef enum : NSUInteger {
     XCFAppearanceButtonStyleF,
     XCFAppearanceButtonStyleG,
     XCFAppearanceButtonStyleH,
-    XCFAppearanceButtonStyleI
+    XCFAppearanceButtonStyleI,
+    XCFAppearanceButtonStyleJ,
 } XCFAppearanceButtonStyle;
 
 @interface UIButton (XCFAppearance)
@@ -37,6 +38,8 @@ typedef enum : NSUInteger {
 + (instancetype)xcf_buttonHHighlightedBackgroundImage;
 + (instancetype)xcf_buttonINormalBackgroundImage;
 + (instancetype)xcf_buttonIHighlightedBackgroundImage;
++ (instancetype)xcf_buttonJNormalBackgroundImage;
++ (instancetype)xcf_buttonJHighlightedBackgroundImage;
 
 @end
 
@@ -75,6 +78,10 @@ IB_DESIGNABLE
 
 IB_DESIGNABLE
 @interface XCFAppearanceButtonI : UIButton
+@end
+
+IB_DESIGNABLE
+@interface XCFAppearanceButtonJ : UIButton
 @end
 
 #pragma mark - compatibility

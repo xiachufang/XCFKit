@@ -71,6 +71,14 @@
     [[XCFAppearanceButtonI appearance] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [[XCFAppearanceButtonI appearance] setBackgroundImage:[UIImage xcf_buttonINormalBackgroundImage] forState:UIControlStateNormal];
     [[XCFAppearanceButtonI appearance] setBackgroundImage:[UIImage xcf_buttonIHighlightedBackgroundImage] forState:UIControlStateHighlighted];
+    
+    // XCFAppearanceButtonA
+    [[XCFAppearanceButtonJ appearance] setTitleColor:[UIColor whiteColor]
+                                            forState:UIControlStateNormal];
+    [[XCFAppearanceButtonJ appearance] setBackgroundImage:[UIImage xcf_buttonJNormalBackgroundImage]
+                                                 forState:UIControlStateNormal];
+    [[XCFAppearanceButtonA appearance] setBackgroundImage:[UIImage xcf_buttonJHighlightedBackgroundImage]
+                                                 forState:UIControlStateSelected];
 }
 
 - (void) xcf_applyStyle:(XCFAppearanceButtonStyle)style
@@ -133,6 +141,11 @@
             [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [self setBackgroundImage:[UIImage xcf_buttonINormalBackgroundImage] forState:UIControlStateNormal];
             [self setBackgroundImage:[UIImage xcf_buttonIHighlightedBackgroundImage] forState:UIControlStateHighlighted];
+        } break;
+        case XCFAppearanceButtonStyleJ: {
+            [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self setBackgroundImage:[UIImage xcf_buttonJNormalBackgroundImage] forState:UIControlStateNormal];
+            [self setBackgroundImage:[UIImage xcf_buttonJHighlightedBackgroundImage] forState:UIControlStateHighlighted];
         } break;
         default:
             break;
@@ -197,6 +210,18 @@
     return [UIImage xcf_imageWithColor:color];
 }
 
++ (instancetype)xcf_buttonJNormalBackgroundImage
+{
+    UIColor *color = [UIColor xcf_wechatGreenColor];
+    return [UIImage xcf_imageWithColor:color];
+}
+
++ (instancetype)xcf_buttonJHighlightedBackgroundImage
+{
+    UIColor *color = [[UIColor xcf_wechatGreenColor] colorWithAlphaComponent:0.5];
+    return [UIImage xcf_imageWithColor:color];
+}
+
 @end
 
 #define XCFAppearanceButtonImplementation(type)          \
@@ -233,6 +258,7 @@ XCFAppearanceButtonImplementation(F)
 XCFAppearanceButtonImplementation(G)
 XCFAppearanceButtonImplementation(H)
 XCFAppearanceButtonImplementation(I)
+XCFAppearanceButtonImplementation(J)
 
 #pragma mark - compatibility
 
