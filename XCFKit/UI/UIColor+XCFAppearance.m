@@ -113,4 +113,9 @@
     return [UIColor xcf_colorWithHexString:@"#C6C6BD"];
 }
 
++ (instancetype)xcf_wechatGreenColor
+{
+    return [UIColor xcf_colorWithHexString:@"#6fbd53"];
+}
+
 @end

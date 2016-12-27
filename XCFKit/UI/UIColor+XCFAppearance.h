@@ -31,5 +31,6 @@
 + (instancetype)xcf_searchBarTextFieldBackgroundColor;
 + (instancetype)xcf_yellowBackgroundColor;
 + (instancetype)xcf_selectedButtonColor;
++ (instancetype)xcf_wechatGreenColor;
 
 @end
