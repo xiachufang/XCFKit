@@ -87,9 +87,6 @@
     
     switch (style) {
         case XCFAppearanceButtonStyleA: {
-#if !TARGET_INTERFACE_BUILDER
-            self.titleLabel.font = [UIFont xcf_buttonFont];
-#endif
             [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [self setBackgroundImage:[UIImage xcf_mainButtonNormalBackgroundImage]
                             forState:UIControlStateNormal];
@@ -97,9 +94,6 @@
                             forState:UIControlStateSelected];
         } break;
         case XCFAppearanceButtonStyleB: {
-#if !TARGET_INTERFACE_BUILDER
-            self.titleLabel.font = [UIFont xcf_buttonFont];
-#endif
             [self setTitleColor:[UIColor xcf_linkColor]
                        forState:UIControlStateNormal];
             [self setBackgroundImage:[UIImage xcf_buttonBHighlightedBackgroundImage]
