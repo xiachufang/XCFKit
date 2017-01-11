@@ -24,6 +24,8 @@
 		E80166FE1DD07D0400383326 /* XCFWindowContextController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80166FC1DD07D0400383326 /* XCFWindowContextController.m */; };
 		E80B1DD61E1CCE3A00CFA27E /* XCFVideoEditorController.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B1DD41E1CCE3A00CFA27E /* XCFVideoEditorController.h */; };
 		E80B1DD71E1CCE3A00CFA27E /* XCFVideoEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B1DD51E1CCE3A00CFA27E /* XCFVideoEditorController.m */; };
+		E80B1DDA1E1CFFB400CFA27E /* XCFVideoRangeSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B1DD81E1CFFB400CFA27E /* XCFVideoRangeSlider.h */; };
+		E80B1DDB1E1CFFB400CFA27E /* XCFVideoRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B1DD91E1CFFB400CFA27E /* XCFVideoRangeSlider.m */; };
 		E80B57531DD0CA0100A32F14 /* UIBarButtonItem+View.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B57511DD0CA0100A32F14 /* UIBarButtonItem+View.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E80B57541DD0CA0100A32F14 /* UIBarButtonItem+View.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B57521DD0CA0100A32F14 /* UIBarButtonItem+View.m */; };
 		E8769A931E08D83100378EFF /* XCFAVPlayerController.h in Headers */ = {isa = PBXBuildFile; fileRef = E8769A8A1E08D83100378EFF /* XCFAVPlayerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -67,6 +69,8 @@
 		E80166FC1DD07D0400383326 /* XCFWindowContextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFWindowContextController.m; sourceTree = "<group>"; };
 		E80B1DD41E1CCE3A00CFA27E /* XCFVideoEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoEditorController.h; sourceTree = "<group>"; };
 		E80B1DD51E1CCE3A00CFA27E /* XCFVideoEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoEditorController.m; sourceTree = "<group>"; };
+		E80B1DD81E1CFFB400CFA27E /* XCFVideoRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoRangeSlider.h; sourceTree = "<group>"; };
+		E80B1DD91E1CFFB400CFA27E /* XCFVideoRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoRangeSlider.m; sourceTree = "<group>"; };
 		E80B57511DD0CA0100A32F14 /* UIBarButtonItem+View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+View.h"; sourceTree = "<group>"; };
 		E80B57521DD0CA0100A32F14 /* UIBarButtonItem+View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+View.m"; sourceTree = "<group>"; };
 		E8769A8A1E08D83100378EFF /* XCFAVPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAVPlayerController.h; sourceTree = "<group>"; };
@@ -199,6 +203,8 @@
 				E8769A921E08D83100378EFF /* XCFVideoPlayerControlProtocol.h */,
 				E80B1DD41E1CCE3A00CFA27E /* XCFVideoEditorController.h */,
 				E80B1DD51E1CCE3A00CFA27E /* XCFVideoEditorController.m */,
+				E80B1DD81E1CFFB400CFA27E /* XCFVideoRangeSlider.h */,
+				E80B1DD91E1CFFB400CFA27E /* XCFVideoRangeSlider.m */,
 			);
 			path = VideoPlayer;
 			sourceTree = "<group>";
@@ -221,6 +227,7 @@
 				E80039D61DC325A200103028 /* XCFKit.h in Headers */,
 				E80166FD1DD07D0400383326 /* XCFWindowContextController.h in Headers */,
 				E8769A991E08D83100378EFF /* XCFMicroVideoPlayerView.h in Headers */,
+				E80B1DDA1E1CFFB400CFA27E /* XCFVideoRangeSlider.h in Headers */,
 				E8769A9B1E08D83100378EFF /* XCFVideoPlayerControlProtocol.h in Headers */,
 				E8003A521DC347E600103028 /* UIFont+XCFAppearance.h in Headers */,
 				E89E817F1E0D24F000865246 /* UIView+XCFHeartbeat.h in Headers */,
@@ -313,6 +320,7 @@
 				E87EBD8B1DFF9CDF00027C05 /* UIFont+fontWeight.m in Sources */,
 				E8003A4F1DC33BAB00103028 /* XCFAppearanceButton.m in Sources */,
 				E8003A6A1DC3562100103028 /* UIImage+PureColor.m in Sources */,
+				E80B1DDB1E1CFFB400CFA27E /* XCFVideoRangeSlider.m in Sources */,
 				E8769A9A1E08D83100378EFF /* XCFMicroVideoPlayerView.m in Sources */,
 				E8769A961E08D83100378EFF /* XCFAVPlayerView.m in Sources */,
 				E8AD735C1DC72AE300E63306 /* UIView+XCFAppearance.m in Sources */,
