@@ -27,12 +27,19 @@
         _imageView = [[UIImageView alloc] initWithFrame:self.contentView.bounds];
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
         _imageView.clipsToBounds = YES;
-        _imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _imageView.userInteractionEnabled = NO;
         [self.contentView addSubview:_imageView];
     }
     
     return self;
+}
+
+- (void) layoutSubviews
+{
+    [super layoutSubviews];
+    
+    // 为了弥补两个 cell 之间可能的黑线
+    _imageView.frame = CGRectInset(self.contentView.bounds, -1, 0);
 }
 
 - (void) prepareForReuse
@@ -124,6 +131,7 @@ UIGestureRecognizerDelegate
 - (void) dealloc
 {
     [_imageGenerator cancelAllCGImageGeneration];
+    _cachedFrames = nil;
 }
 
 - (void) awakeFromNib
@@ -379,6 +387,7 @@ UIGestureRecognizerDelegate
     return nil;
 }
 
+// 已知问题，在视频比较长的时候，获取靠后位置的截图会比较慢
 - (void) asycGenerateThumbnailImageAtIndex:(NSInteger)index
                                     result:(void (^)(NSInteger idx,UIImage *image))result
 {
@@ -396,15 +405,10 @@ UIGestureRecognizerDelegate
         targetSecond = self.videoLength;
     }
     
-//    NSLog(@"start generate image at index : %zd",index);
-    CMTime targetTime = CMTimeMakeWithSeconds(targetSecond, 600);
+    CMTime targetTime = CMTimeMakeWithSeconds(targetSecond, (int32_t)(index + ceil(targetSecond) + 1) * 100);
     NSValue *targetTimeValue = [NSValue valueWithCMTime:targetTime];
     [self.imageGenerator generateCGImagesAsynchronouslyForTimes:@[targetTimeValue] completionHandler:^(CMTime requestedTime, CGImageRef  _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult r, NSError * _Nullable error) {
         if (r == AVAssetImageGeneratorSucceeded && image) {
-//            NSLog(@"success generate image at index : %zd requestTime : %.1f actualTime : %.1lf",index,CMTimeGetSeconds(requestedTime),CMTimeGetSeconds(actualTime));
-//            if ([NSThread isMainThread]) {
-//                NSLog(@"at main thread");
-//            }
             UIImage *finalImage = [UIImage imageWithCGImage:image];
             if (finalImage) {
                 if (result) {
