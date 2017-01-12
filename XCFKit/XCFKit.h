@@ -48,6 +48,10 @@ FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 #import <XCFKit/XCFAVPlayerView.h>
 #import <XCFKit/XCFAVPlayerController.h>
 
+// video editor
+#import <XCFKit/XCFVideoEditorController.h>
+#import <XCFKit/XCFVideoRangeSlider.h>
+
 #endif
 
 #if XCF_WATCH

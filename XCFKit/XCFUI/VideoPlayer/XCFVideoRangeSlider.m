@@ -9,6 +9,9 @@
 #import "XCFVideoRangeSlider.h"
 #import <AVFoundation/AVFoundation.h>
 
+#define ADJUST_FRAME_SIZE_BY_TRACK 0
+#define ASYNC_GENERATE_IMAGE 1
+
 @interface _XCFVideoRangerSliderCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -32,9 +35,60 @@
     return self;
 }
 
+- (void) prepareForReuse
+{
+    [super prepareForReuse];
+    
+    self.imageView.image = nil;
+}
+
 @end
 
-static const CGFloat XCFVideoRangeSliderFrameWidth = 30.0f;
+@interface _XCFVideoRangerSliderHandler : UIView
+
+@property (nonatomic, strong) UIView *indicator;
+
+@end
+
+@implementation _XCFVideoRangerSliderHandler
+
+- (instancetype) initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        
+        _indicator = [UIView new];
+        _indicator.backgroundColor = self.tintColor;
+        [self addSubview:_indicator];
+        
+        self.layer.masksToBounds = YES;
+    }
+    
+    return self;
+}
+
+- (void) tintColorDidChange
+{
+    _indicator.backgroundColor = self.tintColor;
+}
+
+- (void) layoutSubviews
+{
+    [super layoutSubviews];
+    
+    CGFloat width = self.bounds.size.width;
+    CGFloat height = self.bounds.size.height;
+    
+    self.indicator.center = CGPointMake(width / 2, height / 2);
+    self.indicator.bounds = CGRectMake(0, 0, width / 3, height / 4);
+    self.indicator.layer.cornerRadius = width / 6;
+    self.indicator.layer.masksToBounds = YES;
+}
+
+@end
+
+static const CGFloat XCFVideoRangeSliderFrameMaxWidth = 40.0f;
 
 @interface XCFVideoRangeSlider ()
 <
@@ -48,9 +102,9 @@ UIGestureRecognizerDelegate
 
 @property (nonatomic, strong) UICollectionView *frameCollectionView;
 //@property (nonatomic, assign) NSTimeInterval frameInterval;
-@property (nonatomic, strong) NSMutableArray *cachedFrames;
+@property (nonatomic, strong) NSMutableDictionary *cachedFrames;
 
-@property (nonatomic, strong) UIView *slider;
+@property (nonatomic, strong) _XCFVideoRangerSliderHandler *slider;
 
 @end
 
@@ -63,6 +117,8 @@ UIGestureRecognizerDelegate
     
     CGPoint _trackInitPoint;
     XCFVideoRange _trackInitRange;
+    
+    CGFloat _videoRangeSliderFrameWidth;
 }
 
 - (void) dealloc
@@ -104,13 +160,15 @@ UIGestureRecognizerDelegate
     _frameCollectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _frameCollectionView.delegate         = self;
     _frameCollectionView.dataSource       = self;
+    _frameCollectionView.showsHorizontalScrollIndicator = NO;
+    _frameCollectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     [self addSubview:_frameCollectionView];
     
     [_frameCollectionView registerClass:[_XCFVideoRangerSliderCell class]
              forCellWithReuseIdentifier:@"frameCell"];
     
     _outsideOverlayView = [UIView new];
-    _outsideOverlayView.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.4];
+    _outsideOverlayView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
     [self addSubview:_outsideOverlayView];
     
     // inside bounds
@@ -134,10 +192,13 @@ UIGestureRecognizerDelegate
     }
     
     // slider
-    _slider = [UIView new];
-    _slider.tintColor = self.tintColor;
+    _slider = [_XCFVideoRangerSliderHandler new];
+    _slider.tintColor = [UIColor lightGrayColor];
+    _slider.backgroundColor = [UIColor whiteColor];
     _slider.userInteractionEnabled = NO;
     [self addSubview:_slider];
+    
+    _slider.hidden = YES;
 }
 
 #pragma mark - configure
@@ -151,7 +212,6 @@ UIGestureRecognizerDelegate
 {
     [super tintColorDidChange];
     
-    self.slider.tintColor                  = self.tintColor;
     _insideBoundTopView.backgroundColor    = self.tintColor;
     _insideBoundLeftView.backgroundColor   = self.tintColor;
     _insideBoundBottomView.backgroundColor = self.tintColor;
@@ -163,7 +223,7 @@ UIGestureRecognizerDelegate
     
     CGFloat height = CGRectGetHeight(self.bounds);
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout*)self.frameCollectionView.collectionViewLayout;
-    CGSize itemSize = CGSizeMake(XCFVideoRangeSliderFrameWidth, height);
+    CGSize itemSize = CGSizeMake(_videoRangeSliderFrameWidth, height);
     if (!CGSizeEqualToSize(itemSize, layout.itemSize)) {
         layout.itemSize = itemSize;
         [self.frameCollectionView reloadData];
@@ -198,12 +258,19 @@ UIGestureRecognizerDelegate
     CGRectDivide(layoutFrame, &boundFrame, &layoutFrame, insideBoundWidth, CGRectMaxYEdge);
     _insideBoundBottomView.frame = boundFrame;
     
-    CGFloat sliderWidth = 15;
-    self.slider.frame = CGRectMake(progress - sliderWidth, -5, sliderWidth, height + 10);
+    CGFloat sliderWidth = 8;
+    self.slider.layer.cornerRadius = 2;
+    self.slider.layer.masksToBounds = YES;
+    self.slider.frame = CGRectMake(progress - sliderWidth, -2, sliderWidth, height + 4);
     
     CGFloat frameOffset = self.frameCollectionView.contentOffset.x;
-    if (self.frameCollectionView.contentSize.width + frameOffset < progress) {
-        CGFloat adjustOffset = progress - self.frameCollectionView.contentSize.width;
+    CGFloat contentWidth = self.frameCollectionView.contentSize.width;
+    if (contentWidth == 0) {
+        contentWidth = width / self.maximumTrimLength * self.videoLength;
+    }
+    
+    if (contentWidth - frameOffset < progress) {
+        CGFloat adjustOffset = - progress + contentWidth;
         self.frameCollectionView.contentOffset = CGPointMake(adjustOffset, 0);
     }
     UIEdgeInsets insets = self.frameCollectionView.contentInset;
@@ -221,39 +288,75 @@ UIGestureRecognizerDelegate
     _videoLength = CMTimeGetSeconds(asset.duration);
     NSLog(@"video length is %.2lf",_videoLength);
     
+    CGFloat contentWidth = self.videoLength / self.maximumTrimLength * self.frameCollectionView.bounds.size.width;
+    CGFloat numberOfFrames = contentWidth / XCFVideoRangeSliderFrameMaxWidth;
+    numberOfFrames = ceil(numberOfFrames);
+    NSLog(@"preferrd frames : %lf",numberOfFrames);
+    _videoRangeSliderFrameWidth = contentWidth / numberOfFrames;
+    
     _imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:self.asset];
     _imageGenerator.appliesPreferredTrackTransform = YES;
     _imageGenerator.requestedTimeToleranceBefore = kCMTimeZero;
     _imageGenerator.requestedTimeToleranceAfter  = kCMTimeZero;
     
-    _cachedFrames = [NSMutableArray arrayWithCapacity:MIN(15, _videoLength)];
+    _cachedFrames = [NSMutableDictionary dictionaryWithCapacity:MIN(15, _videoLength)];
     
+#if ADJUST_FRAME_SIZE_BY_TRACK
     NSString *loadKey = @"tracks";
-    NSError *error = nil;
-    AVKeyValueStatus loadStatus = [self.asset statusOfValueForKey:loadKey
-                                                             error:&error];
-    if (loadStatus == AVKeyValueStatusLoaded) {
-        AVAssetTrack *track = [self.asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
-        if (track) {
-            CGSize trackSize = track.naturalSize;
-            if (trackSize.width > 0) {
-                CGFloat thumbnailHeight = trackSize.height / trackSize.width * XCFVideoRangeSliderFrameWidth;
-                _imageGenerator.maximumSize = CGSizeMake(XCFVideoRangeSliderFrameWidth, thumbnailHeight);
+    __weak typeof(self) weak_self = self;
+    [self.asset loadValuesAsynchronouslyForKeys:@[loadKey] completionHandler:^{
+        __strong typeof(weak_self) strong_self = weak_self;
+        
+        NSError *error = nil;
+        AVKeyValueStatus status = [strong_self.asset statusOfValueForKey:loadKey
+                                                                   error:&error];
+        if (status == AVKeyValueStatusLoaded) {
+            AVAssetTrack *track = [strong_self.asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+            if (track) {
+                CGSize trackSize = track.naturalSize;
+                CGFloat heightRatio = trackSize.height / trackSize.width;
+                if (!CGAffineTransformIsIdentity(track.preferredTransform)) {
+                    heightRatio = trackSize.width / trackSize.height;
+                }
+                if (trackSize.width > 0) {
+                    CGFloat thumbnailHeight = heightRatio * _videoRangeSliderFrameWidth;
+                    CGFloat scale = [UIScreen mainScreen].scale;
+                    strong_self.imageGenerator.maximumSize =
+                    CGSizeMake(_videoRangeSliderFrameWidth * scale, thumbnailHeight * scale);
+                }
             }
         }
-    }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+           [strong_self didVideoAssetLoaded]; 
+        });
+    }];
+#else
+    [self didVideoAssetLoaded];
+#endif
+    
+}
+
+- (void) didVideoAssetLoaded
+{
+    XCFVideoRange newRange;
+    newRange.location = 0;
+    newRange.length = [self _actualMaximumTrimLength];
+    _currentRange = newRange;
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
+    [self updateOverlayViewLayout];
+    [self.frameCollectionView reloadData];
+    
+    self.slider.hidden = NO;
 }
 
 - (UIImage *) generateThumbnailImageAtIndex:(NSInteger)index
 {
-    NSLog(@"get image at index : %zd",index);
-    
-    if (index < self.cachedFrames.count) {
-        return self.cachedFrames[index];
-    }
+    UIImage *cachedImage = self.cachedFrames[@(index)];
+    if (cachedImage) return cachedImage;
     
     CGFloat width = self.bounds.size.width;
-    NSTimeInterval targetSecond = (index + 0.5) * XCFVideoRangeSliderFrameWidth / width * self.maximumTrimLength;
+    NSTimeInterval targetSecond = (index + 0.5) * _videoRangeSliderFrameWidth / width * self.maximumTrimLength;
     if (targetSecond > self.videoLength) {
         targetSecond = self.videoLength;
     }
@@ -265,15 +368,54 @@ UIGestureRecognizerDelegate
                                                             error:&error];
     if (imageRef) {
         UIImage *image = [UIImage imageWithCGImage:imageRef];
-        if (index == self.cachedFrames.count) {
-            [self.cachedFrames insertObject:image atIndex:index];
-            NSLog(@"insert new image at index : %zd",index);
+        CGImageRelease(imageRef);
+        if (image) {
+            self.cachedFrames[@(index)] = image;
         }
         
         return image;
     }
     
     return nil;
+}
+
+- (void) asycGenerateThumbnailImageAtIndex:(NSInteger)index
+                                    result:(void (^)(NSInteger idx,UIImage *image))result
+{
+    if (!result) return;
+    
+    UIImage *cachedImage = self.cachedFrames[@(index)];
+    if (cachedImage) {
+        result(index,cachedImage);
+        return;
+    }
+    
+    CGFloat width = self.bounds.size.width;
+    NSTimeInterval targetSecond = (index + 0.5) * _videoRangeSliderFrameWidth / width * self.maximumTrimLength;
+    if (targetSecond > self.videoLength) {
+        targetSecond = self.videoLength;
+    }
+    
+//    NSLog(@"start generate image at index : %zd",index);
+    CMTime targetTime = CMTimeMakeWithSeconds(targetSecond, 600);
+    NSValue *targetTimeValue = [NSValue valueWithCMTime:targetTime];
+    [self.imageGenerator generateCGImagesAsynchronouslyForTimes:@[targetTimeValue] completionHandler:^(CMTime requestedTime, CGImageRef  _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult r, NSError * _Nullable error) {
+        if (r == AVAssetImageGeneratorSucceeded && image) {
+//            NSLog(@"success generate image at index : %zd requestTime : %.1f actualTime : %.1lf",index,CMTimeGetSeconds(requestedTime),CMTimeGetSeconds(actualTime));
+//            if ([NSThread isMainThread]) {
+//                NSLog(@"at main thread");
+//            }
+            UIImage *finalImage = [UIImage imageWithCGImage:image];
+            if (finalImage) {
+                if (result) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                       self.cachedFrames[@(index)] = finalImage;
+                       result(index,finalImage);
+                    });
+                }
+            }
+        }
+    }];
 }
 
 - (NSTimeInterval) _actualMaximumTrimLength
@@ -290,21 +432,33 @@ UIGestureRecognizerDelegate
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return ceil(self.videoLength / self.maximumTrimLength * collectionView.bounds.size.width / XCFVideoRangeSliderFrameWidth);
+    NSInteger count = floor(self.videoLength / self.maximumTrimLength * collectionView.bounds.size.width / _videoRangeSliderFrameWidth);
+    NSLog(@"actual frames %zd",count);
+    return count;
 }
 
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     _XCFVideoRangerSliderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"frameCell"
                                                                                 forIndexPath:indexPath];
-    cell.imageView.image = [self generateThumbnailImageAtIndex:indexPath.item];
+    NSInteger item = indexPath.item;
+    cell.tag = item;
+#if ASYNC_GENERATE_IMAGE
+    [self asycGenerateThumbnailImageAtIndex:item result:^(NSInteger idx, UIImage *image) {
+        if (cell.tag == idx) {
+            cell.imageView.image = image;
+        }
+    }];
+#else
+    cell.imageView.image = [self generateThumbnailImageAtIndex:item];
+#endif
     return cell;
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView == self.frameCollectionView) {
-        CGFloat offset = -self.frameCollectionView.contentOffset.x;
+    if (scrollView == self.frameCollectionView && !self.isTracking) {
+        CGFloat offset = self.frameCollectionView.contentOffset.x;
         NSTimeInterval time = offset / scrollView.bounds.size.width * self.maximumTrimLength;
         time = MAX(MIN(time, self.videoLength - self.currentRange.length),0);
         if (time != self.currentRange.location) {
@@ -316,12 +470,25 @@ UIGestureRecognizerDelegate
     }
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(_videoRangeSliderFrameWidth, collectionView.bounds.size.height);
+}
+
 #pragma mark - touch event
 
 - (void) sendActionsForControlEvents:(UIControlEvents)controlEvents
 {
     if (controlEvents & UIControlEventValueChanged) {
-        [super sendActionsForControlEvents:controlEvents];
+        if ([NSThread isMainThread]) {
+            [super sendActionsForControlEvents:controlEvents];
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [super sendActionsForControlEvents:controlEvents];
+            });
+        }
     }
 }
 
@@ -329,7 +496,7 @@ UIGestureRecognizerDelegate
 {
     CGRect sliderTouchRect = CGRectInset(self.slider.frame, -20, 0);
     if (CGRectContainsPoint(sliderTouchRect, point)) {
-        return self.slider;
+        return self;
     } else if (CGRectContainsPoint(self.frameCollectionView.frame, point)) {
         return self.frameCollectionView;
     } else {
@@ -339,11 +506,13 @@ UIGestureRecognizerDelegate
 
 - (BOOL) beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    if (self.videoLength < self.minimumTrimLength) return NO;
+    
     CGPoint point = [touch locationInView:self];
     _trackInitPoint = point;
     _trackInitRange = self.currentRange;
     UIView *hit = [self hitTest:point withEvent:event];
-    return hit && hit == self.slider;
+    return hit && hit == self;
 }
 
 - (BOOL) continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
@@ -351,12 +520,16 @@ UIGestureRecognizerDelegate
     CGPoint point = [touch locationInView:self];
     CGFloat distance = point.x - _trackInitPoint.x;
     NSTimeInterval interval = distance / self.bounds.size.width * self.maximumTrimLength;
-    NSTimeInterval newLength = self.currentRange.length + interval;
+    NSTimeInterval newLength = _trackInitRange.length + interval;
     newLength = MIN(MAX(newLength, self.minimumTrimLength),[self _actualMaximumTrimLength]);
     
     if (newLength != self.currentRange.length) {
         XCFVideoRange newRange = self.currentRange;
         newRange.length = newLength;
+        if (newRange.location + newRange.length > self.videoLength) {
+            newRange.location = self.videoLength - newRange.length;
+        }
+        
         _currentRange = newRange;
         [self updateOverlayViewLayout];
         [self sendActionsForControlEvents:UIControlEventValueChanged];

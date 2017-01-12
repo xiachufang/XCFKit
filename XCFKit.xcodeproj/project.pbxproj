@@ -22,9 +22,9 @@
 		E8003A6A1DC3562100103028 /* UIImage+PureColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E8003A681DC3562100103028 /* UIImage+PureColor.m */; };
 		E80166FD1DD07D0400383326 /* XCFWindowContextController.h in Headers */ = {isa = PBXBuildFile; fileRef = E80166FB1DD07D0400383326 /* XCFWindowContextController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E80166FE1DD07D0400383326 /* XCFWindowContextController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80166FC1DD07D0400383326 /* XCFWindowContextController.m */; };
-		E80B1DD61E1CCE3A00CFA27E /* XCFVideoEditorController.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B1DD41E1CCE3A00CFA27E /* XCFVideoEditorController.h */; };
+		E80B1DD61E1CCE3A00CFA27E /* XCFVideoEditorController.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B1DD41E1CCE3A00CFA27E /* XCFVideoEditorController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E80B1DD71E1CCE3A00CFA27E /* XCFVideoEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B1DD51E1CCE3A00CFA27E /* XCFVideoEditorController.m */; };
-		E80B1DDA1E1CFFB400CFA27E /* XCFVideoRangeSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B1DD81E1CFFB400CFA27E /* XCFVideoRangeSlider.h */; };
+		E80B1DDA1E1CFFB400CFA27E /* XCFVideoRangeSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B1DD81E1CFFB400CFA27E /* XCFVideoRangeSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E80B1DDB1E1CFFB400CFA27E /* XCFVideoRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B1DD91E1CFFB400CFA27E /* XCFVideoRangeSlider.m */; };
 		E80B57531DD0CA0100A32F14 /* UIBarButtonItem+View.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B57511DD0CA0100A32F14 /* UIBarButtonItem+View.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E80B57541DD0CA0100A32F14 /* UIBarButtonItem+View.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B57521DD0CA0100A32F14 /* UIBarButtonItem+View.m */; };
