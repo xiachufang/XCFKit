@@ -20,6 +20,11 @@ typedef struct XCFVideoRange XCFVideoRange;
 
 @class AVAsset;
 
+/*
+ *  用来选择视频片段的选择器，通过 UIControlEventValueChanged 事件向订阅者发送消息
+ *
+ */
+
 @interface XCFVideoRangeSlider : UIControl
 
 @property (nonatomic, assign) XCFVideoRange currentRange; // default is XCFVideoRangeEmpty , set 方法暂不可用

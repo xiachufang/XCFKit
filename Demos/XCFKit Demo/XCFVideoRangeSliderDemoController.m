@@ -42,7 +42,8 @@ UIImagePickerControllerDelegate
     _currentRange = (XCFVideoRange){0,0};
     
     _slider = [[XCFVideoRangeSlider alloc] initWithFrame:self.rangeSliderContainerView.bounds];
-    _slider.maximumTrimLength = 6;
+    _slider.maximumTrimLength = 10;
+    _slider.minimumTrimLength = 1;
     _slider.tintColor = [UIColor orangeColor];
     _slider.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.rangeSliderContainerView addSubview:_slider];
@@ -67,7 +68,7 @@ UIImagePickerControllerDelegate
     NSTimeInterval start = self.currentRange.location;
     NSTimeInterval end   = start + self.currentRange.length;
     
-    self.rangeIndicatorLabel.text = [NSString stringWithFormat:@"%.1lf - %.1lf",start,end];
+    self.rangeIndicatorLabel.text = [NSString stringWithFormat:@"%.1lf : %.1lf",start,end];
     
     CGFloat startRatio = 0;
     CGFloat endRatio   = 0;

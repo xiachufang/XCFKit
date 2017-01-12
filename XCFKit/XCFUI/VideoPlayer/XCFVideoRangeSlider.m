@@ -388,6 +388,7 @@ UIGestureRecognizerDelegate
 }
 
 // 已知问题，在视频比较长的时候，获取靠后位置的截图会比较慢
+// 打算采取预处理的方式解决，以后再弄
 - (void) asycGenerateThumbnailImageAtIndex:(NSInteger)index
                                     result:(void (^)(NSInteger idx,UIImage *image))result
 {
@@ -405,7 +406,7 @@ UIGestureRecognizerDelegate
         targetSecond = self.videoLength;
     }
     
-    CMTime targetTime = CMTimeMakeWithSeconds(targetSecond, (int32_t)(index + ceil(targetSecond) + 1) * 100);
+    CMTime targetTime = CMTimeMakeWithSeconds(targetSecond, (int32_t)(index + 1) * 100);
     NSValue *targetTimeValue = [NSValue valueWithCMTime:targetTime];
     [self.imageGenerator generateCGImagesAsynchronouslyForTimes:@[targetTimeValue] completionHandler:^(CMTime requestedTime, CGImageRef  _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult r, NSError * _Nullable error) {
         if (r == AVAssetImageGeneratorSucceeded && image) {
