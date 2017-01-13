@@ -163,7 +163,7 @@
         _actualLoopCount ++;
         
         if (self.loopCount <= 0 || _actualLoopCount < self.loopCount) {
-            [self.playerLayer.player seekToTime:kCMTimeZero];
+            [self.playerLayer.player seekToTime:CMTimeMakeWithSeconds(0, NSEC_PER_SEC)];
             [self.playerLayer.player play];
         }
         
@@ -192,12 +192,23 @@
 - (BOOL) seekToSecond:(NSTimeInterval)second
 {
     if (self.isPlayable && second >= 0 && second < [self duration]) {
-        [self.playerLayer.player pause];
         [self.playerLayer.player seekToTime:CMTimeMakeWithSeconds(second, NSEC_PER_SEC)];
         return YES;
     }
     
     return NO;
+}
+
+- (void) asyncSeekToSecond:(NSTimeInterval)second completion:(void (^)(BOOL))completion
+{
+    if (self.isPlayable && second >= 0 && second < [self duration]) {
+        [self.playerLayer.player seekToTime:CMTimeMakeWithSeconds(second, NSEC_PER_SEC)
+                          completionHandler:completion];
+    } else {
+        if (completion) {
+            completion(NO);
+        }
+    }
 }
 
 #pragma mark - XCFVideoPlayerControlProtocol

@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSTimeInterval) currentTime;
 
 - (BOOL) seekToSecond:(NSTimeInterval)second;
+- (void) asyncSeekToSecond:(NSTimeInterval)second completion:(void (^)(BOOL finish))completion;
 
 - (CGRect) videoRect;
 
