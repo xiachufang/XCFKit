@@ -28,6 +28,7 @@
 		E80B1DDB1E1CFFB400CFA27E /* XCFVideoRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B1DD91E1CFFB400CFA27E /* XCFVideoRangeSlider.m */; };
 		E80B57531DD0CA0100A32F14 /* UIBarButtonItem+View.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B57511DD0CA0100A32F14 /* UIBarButtonItem+View.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E80B57541DD0CA0100A32F14 /* UIBarButtonItem+View.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B57521DD0CA0100A32F14 /* UIBarButtonItem+View.m */; };
+		E82ADC931E28A48100599884 /* XCFVideoRange.h in Headers */ = {isa = PBXBuildFile; fileRef = E82ADC921E28A48100599884 /* XCFVideoRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8769A931E08D83100378EFF /* XCFAVPlayerController.h in Headers */ = {isa = PBXBuildFile; fileRef = E8769A8A1E08D83100378EFF /* XCFAVPlayerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8769A941E08D83100378EFF /* XCFAVPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8769A8B1E08D83100378EFF /* XCFAVPlayerController.m */; };
 		E8769A951E08D83100378EFF /* XCFAVPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = E8769A8C1E08D83100378EFF /* XCFAVPlayerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -73,6 +74,7 @@
 		E80B1DD91E1CFFB400CFA27E /* XCFVideoRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoRangeSlider.m; sourceTree = "<group>"; };
 		E80B57511DD0CA0100A32F14 /* UIBarButtonItem+View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+View.h"; sourceTree = "<group>"; };
 		E80B57521DD0CA0100A32F14 /* UIBarButtonItem+View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+View.m"; sourceTree = "<group>"; };
+		E82ADC921E28A48100599884 /* XCFVideoRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoRange.h; sourceTree = "<group>"; };
 		E8769A8A1E08D83100378EFF /* XCFAVPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAVPlayerController.h; sourceTree = "<group>"; };
 		E8769A8B1E08D83100378EFF /* XCFAVPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAVPlayerController.m; sourceTree = "<group>"; };
 		E8769A8C1E08D83100378EFF /* XCFAVPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAVPlayerView.h; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 		E8769A891E08D83100378EFF /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				E82ADC921E28A48100599884 /* XCFVideoRange.h */,
 				E8769A8A1E08D83100378EFF /* XCFAVPlayerController.h */,
 				E8769A8B1E08D83100378EFF /* XCFAVPlayerController.m */,
 				E890CC541E09370500F4F803 /* XCFAVPlayerControllerAnimator.h */,
@@ -234,6 +237,7 @@
 				E87EBD8A1DFF9CDF00027C05 /* UIFont+fontWeight.h in Headers */,
 				E881B8901DE6A2240055A817 /* UISearchBar+textField.h in Headers */,
 				E8769A971E08D83100378EFF /* XCFMicroVideoDecoder.h in Headers */,
+				E82ADC931E28A48100599884 /* XCFVideoRange.h in Headers */,
 				E80B57531DD0CA0100A32F14 /* UIBarButtonItem+View.h in Headers */,
 				E8003A691DC3562100103028 /* UIImage+PureColor.h in Headers */,
 				E80B1DD61E1CCE3A00CFA27E /* XCFVideoEditorController.h in Headers */,
