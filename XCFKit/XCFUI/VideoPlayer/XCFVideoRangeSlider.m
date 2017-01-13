@@ -462,16 +462,30 @@ UIGestureRecognizerDelegate
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView == self.frameCollectionView && !self.isTracking) {
+    if (scrollView == self.frameCollectionView && !super.isTracking) {
         CGFloat offset = self.frameCollectionView.contentOffset.x;
         NSTimeInterval time = offset / scrollView.bounds.size.width * self.maximumTrimLength;
         time = MAX(MIN(time, self.videoLength - self.currentRange.length),0);
-        if (time != self.currentRange.location) {
+//        if (time != self.currentRange.location) {
             XCFVideoRange newRange = self.currentRange;
             newRange.location = time;
             _currentRange = newRange;
             [self sendActionsForControlEvents:UIControlEventValueChanged];
-        }
+//        }
+    }
+}
+
+- (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (scrollView == self.frameCollectionView && !super.isTracking && !decelerate) {
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
+    }
+}
+
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (scrollView == self.frameCollectionView && !super.isTracking) {
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
 }
 
@@ -495,6 +509,14 @@ UIGestureRecognizerDelegate
             });
         }
     }
+}
+
+- (BOOL) isTracking
+{
+    return
+    ([super isTracking] && CGRectContainsPoint(self.bounds, _trackInitPoint)) ||
+    self.frameCollectionView.isDragging ||
+    self.frameCollectionView.isDecelerating;
 }
 
 - (UIView *) hitTest:(CGPoint)point withEvent:(UIEvent *)event
@@ -528,7 +550,7 @@ UIGestureRecognizerDelegate
     NSTimeInterval newLength = _trackInitRange.length + interval;
     newLength = MIN(MAX(newLength, self.minimumTrimLength),[self _actualMaximumTrimLength]);
     
-    if (newLength != self.currentRange.length) {
+//    if (newLength != self.currentRange.length) {
         XCFVideoRange newRange = self.currentRange;
         newRange.length = newLength;
         if (newRange.location + newRange.length > self.videoLength) {
@@ -538,9 +560,21 @@ UIGestureRecognizerDelegate
         _currentRange = newRange;
         [self updateOverlayViewLayout];
         [self sendActionsForControlEvents:UIControlEventValueChanged];
-    }
+//    }
     
     return YES;
+}
+
+- (void) cancelTrackingWithEvent:(UIEvent *)event
+{
+    _trackInitPoint.x = self.bounds.origin.x - 1;
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
+}
+
+- (void) endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    _trackInitPoint.x = self.bounds.origin.x - 1;
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 @end

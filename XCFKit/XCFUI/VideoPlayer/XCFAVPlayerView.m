@@ -110,12 +110,18 @@
     
     NSURL *url = [NSURL fileURLWithPath:videoPath];
     AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
-    self.videoAsset = asset;
+    [self prepareToPlayVideoAtAsset:asset completion:completion];
+}
+
+- (void) prepareToPlayVideoAtAsset:(AVAsset *)asset completion:(void (^)(BOOL, NSError * _Nullable))completion
+{
+    self.videoAsset = (AVURLAsset*)asset;
+    
     NSArray *loadKeys = @[@"playable"];
-    __weak AVURLAsset *weak_asset = asset;
+    __weak AVAsset *weak_asset = asset;
     __weak typeof(self) weak_self = self;
     [asset loadValuesAsynchronouslyForKeys:loadKeys completionHandler:^{
-        __strong AVURLAsset *strong_asset = weak_asset;
+        __strong AVAsset *strong_asset = weak_asset;
         NSString *loadKey = loadKeys.firstObject;
         NSError *error = nil;
         AVKeyValueStatus status = [strong_asset statusOfValueForKey:loadKey error:&error];
@@ -203,6 +209,8 @@
 {
     if (self.isPlayable && second >= 0 && second < [self duration]) {
         [self.playerLayer.player seekToTime:CMTimeMakeWithSeconds(second, NSEC_PER_SEC)
+                            toleranceBefore:kCMTimeZero
+                             toleranceAfter:kCMTimeZero
                           completionHandler:completion];
     } else {
         if (completion) {
@@ -226,7 +234,7 @@
         if (!_playerTimeObserver) {
             __weak typeof(self) weak_self = self;
             
-            CMTime interval = CMTimeMakeWithSeconds(12.0 / 60.0, NSEC_PER_SEC);
+            CMTime interval = CMTimeMakeWithSeconds(6.0 / 60.0, NSEC_PER_SEC);
             _playerTimeObserver =
             [self.playerLayer.player addPeriodicTimeObserverForInterval:interval
                                                                   queue:dispatch_get_main_queue()

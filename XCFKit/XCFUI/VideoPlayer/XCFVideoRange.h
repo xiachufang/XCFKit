@@ -18,15 +18,21 @@ typedef struct XCFVideoRange XCFVideoRange;
 
 #define XCFVideoRangeEmpty ((XCFVideoRange){0,0})
 
-inline NSTimeInterval XCFVideoRangeGetEnd(XCFVideoRange range) {
+static inline NSTimeInterval
+XCFVideoRangeGetEnd(XCFVideoRange range)
+{
     return range.location + range.length;
 }
 
-inline BOOL XCFVideoRangeEqualToRange(XCFVideoRange range1,XCFVideoRange range2) {
+static inline BOOL
+XCFVideoRangeEqualToRange(XCFVideoRange range1,XCFVideoRange range2)
+{
     return range1.location == range2.location && range1.length == range2.length;
 }
 
-inline XCFVideoRange XCFVideoRangeMake(NSTimeInterval start,NSTimeInterval end) {
+static inline XCFVideoRange
+XCFVideoRangeMake(NSTimeInterval start,NSTimeInterval end)
+{
     return (XCFVideoRange){start,MAX(0, end - start)};
 }
 

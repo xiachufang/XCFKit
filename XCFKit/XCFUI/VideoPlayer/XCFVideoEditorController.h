@@ -10,19 +10,33 @@
 
 @protocol XCFVideoEditorControllerDelegate;
 
+@class AVAsset;
+
+typedef NS_ENUM(NSInteger, XCFVideoEditorVideoQualityType) {
+    XCFVideoEditorVideoQualityTypeLow    = 1 << 0,
+    XCFVideoEditorVideoQualityTypeMedium = 1 << 1,
+    XCFVideoEditorVideoQualityTypeHigh   = 1 << 2,
+    
+    XCFVideoEditorVideoQualityType1x1    = 0 << 4,
+    XCFVideoEditorVideoQualityType4x3    = 1 << 4,
+};
+
 @interface XCFVideoEditorController : UIViewController
 
-+ (BOOL)canEditVideoAtPath:(NSString *)videoPath;
++ (BOOL) canEditVideoAtPath:(NSString *)videoPath;
++ (void) loadVideoAssetAtPath:(NSString *)videoPath
+                   completion:(void (^)(AVAsset *asset,NSError *error))completion;
 
 - (instancetype) initWithVideoPath:(NSString *)videoPath;
+- (instancetype) initWithVideoAsset:(AVAsset *)asset;
 
 @property (nonatomic, weak) id<XCFVideoEditorControllerDelegate> delegate;
 
-@property (nonatomic, assign) NSTimeInterval videoMaximumDuration; // default is 15 s
+@property (nonatomic, assign) NSTimeInterval videoMaximumDuration; // default is 10 s
 @property (nonatomic, assign) NSTimeInterval videoMinimumDuration; // default is 3 s
 
-// video quality
-// xxxxx
+// video quality , default is XCFVideoEditorVideoQualityTypeMedium | XCFVideoEditorVideoQualityType1x1
+@property (nonatomic, assign) XCFVideoEditorVideoQualityType videoQuality;
 
 @end
 

@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -179,6 +180,26 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="cdt-R7-g2A" kind="show" id="fgZ-kc-QA3"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="KLa-v5-rrg" style="IBUITableViewCellStyleDefault" id="0E7-hW-We4">
+                                        <rect key="frame" x="0.0" y="390" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0E7-hW-We4" id="Szz-6S-mgg">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Video Editor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KLa-v5-rrg">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="gyJ-F9-ZDm" kind="show" id="YXS-go-NAJ"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -383,6 +404,51 @@
             </objects>
             <point key="canvasLocation" x="1962" y="785"/>
         </scene>
+        <!--Video Editor-->
+        <scene sceneID="Yjz-2v-Prk">
+            <objects>
+                <viewController id="gyJ-F9-ZDm" customClass="XCFVideoEditorDemoController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="j19-sd-el4"/>
+                        <viewControllerLayoutGuide type="bottom" id="nmE-Kn-G9i"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VPP-Rp-5Jl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4w-TT-GDT" customClass="XCFAppearanceButtonA">
+                                <rect key="frame" x="37.5" y="378" width="300" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="71X-ki-kts"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="选择视频"/>
+                                <connections>
+                                    <action selector="selectVideo:" destination="gyJ-F9-ZDm" eventType="touchUpInside" id="5pE-Pj-98g"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择视频长度不低于三秒的视频" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPW-g0-xeE">
+                                <rect key="frame" x="57" y="257" width="260" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.2198290527" green="0.2191363871" blue="0.19081941250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="O4w-TT-GDT" firstAttribute="top" secondItem="qPW-g0-xeE" secondAttribute="bottom" constant="100" id="3pn-DF-eXu"/>
+                            <constraint firstItem="O4w-TT-GDT" firstAttribute="width" secondItem="VPP-Rp-5Jl" secondAttribute="width" multiplier="0.8" id="6Ed-7U-ObE"/>
+                            <constraint firstItem="qPW-g0-xeE" firstAttribute="centerX" secondItem="VPP-Rp-5Jl" secondAttribute="centerX" id="8Ae-WC-VdE"/>
+                            <constraint firstItem="O4w-TT-GDT" firstAttribute="centerY" secondItem="VPP-Rp-5Jl" secondAttribute="centerY" multiplier="1.2" id="9ds-2Z-IMd"/>
+                            <constraint firstItem="O4w-TT-GDT" firstAttribute="centerX" secondItem="VPP-Rp-5Jl" secondAttribute="centerX" id="EEf-go-lYo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Video Editor" id="XgU-3i-Fjw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8a1-on-Zgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2665" y="785"/>
+        </scene>
         <!--视频片段选择器-->
         <scene sceneID="HBC-cl-SDZ">
             <objects>
@@ -456,7 +522,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WV6-eR-88g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2681" y="405"/>
+            <point key="canvasLocation" x="2665" y="92"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6GZ-It-V4y">
