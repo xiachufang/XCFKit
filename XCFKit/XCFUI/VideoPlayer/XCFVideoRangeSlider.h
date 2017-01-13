@@ -8,15 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-
-struct XCFVideoRange {
-    NSTimeInterval location;
-    NSTimeInterval length;
-};
-
-typedef struct XCFVideoRange XCFVideoRange;
-
-#define XCFVideoRangeEmpty ((XCFVideoRange){0,0})
+#import "XCFVideoRange.h"
 
 @class AVAsset;
 
