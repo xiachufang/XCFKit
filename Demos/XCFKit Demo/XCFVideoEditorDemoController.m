@@ -20,6 +20,8 @@ XCFVideoEditorControllerDelegate,
 XCFAVPlayerControllerDelegate
 >
 
+@property (strong, nonatomic) IBOutlet UISegmentedControl *aspectSegmentControl;
+
 @end
 
 @implementation XCFVideoEditorDemoController
@@ -44,6 +46,11 @@ XCFAVPlayerControllerDelegate
 {
     XCFVideoEditorController *editor = [[XCFVideoEditorController alloc] initWithVideoAsset:asset];
     editor.delegate = self;
+    XCFVideoEditorVideoQualityType aspect = XCFVideoEditorVideoQualityType1x1;
+    if (self.aspectSegmentControl.selectedSegmentIndex == 1) {
+        aspect = XCFVideoEditorVideoQualityType4x3;
+    }
+    editor.videoQuality = XCFVideoEditorVideoQualityTypeMedium | aspect;
     [self.navigationController pushViewController:editor animated:YES];
 }
 
