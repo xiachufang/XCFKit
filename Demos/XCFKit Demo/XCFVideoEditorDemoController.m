@@ -10,11 +10,14 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <Photos/Photos.h>
 #import <XCFKit/XCFVideoEditorController.h>
+#import <XCFKit/XCFAVPlayerController.h>
 
 @interface XCFVideoEditorDemoController ()
 <
 UINavigationControllerDelegate,
-UIImagePickerControllerDelegate
+UIImagePickerControllerDelegate,
+XCFVideoEditorControllerDelegate,
+XCFAVPlayerControllerDelegate
 >
 
 @end
@@ -40,6 +43,7 @@ UIImagePickerControllerDelegate
 - (void) didSelectVideo:(AVAsset *)asset
 {
     XCFVideoEditorController *editor = [[XCFVideoEditorController alloc] initWithVideoAsset:asset];
+    editor.delegate = self;
     [self.navigationController pushViewController:editor animated:YES];
 }
 
@@ -70,5 +74,35 @@ UIImagePickerControllerDelegate
     [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - XCFVideoEditorControllerDelegate
+
+- (void) videoEditorController:(XCFVideoEditorController *)editor didFailWithError:(NSError *)error
+{
+    UIAlertController *alert =
+    [UIAlertController alertControllerWithTitle:@"Error"
+                                        message:error.localizedDescription
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+                                                     style:UIAlertActionStyleCancel
+                                                   handler:nil];
+    [alert addAction:action];
+    [editor presentViewController:alert animated:YES completion:nil];
+}
+
+- (void) videoEditorController:(XCFVideoEditorController *)editor didSaveEditedVideoToPath:(NSString *)editedVideoPath
+{
+    XCFAVPlayerController *player = [[XCFAVPlayerController alloc] initWithVideoFilePath:editedVideoPath
+                                                                            previewImage:nil
+                                                                   allowPlaybackControls:NO];
+    player.delegate = self;
+    [editor presentViewController:player animated:YES completion:nil];
+}
+
+#pragma mark - XCFAVPlayerControllerDelegate
+
+- (void) avPlayerControllerDidCancel:(XCFAVPlayerController *)controller
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

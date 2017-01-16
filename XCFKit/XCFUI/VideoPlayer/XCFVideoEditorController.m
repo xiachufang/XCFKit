@@ -137,6 +137,13 @@
                                                                     target:self
                                                                     action:@selector(expertVideo:)];
     self.navigationItem.rightBarButtonItem = expertButton;
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(_pauseVideo:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    tapGesture.cancelsTouchesInView = NO;
+    [self.playerScrollView addGestureRecognizer:tapGesture];
 }
 
 - (void) setDelegate:(id<XCFVideoEditorControllerDelegate>)delegate
@@ -245,6 +252,19 @@
 
 #pragma mark - action
 
+- (void) _pauseVideo:(id)sender
+{
+    if (self.videoRangeSlider.isTracking) return;
+    
+    if (_pause) {
+        _pause = NO;
+        [self.playerView play];
+    } else {
+        _pause = YES;
+        [self.playerView pause];
+    }
+}
+
 - (void) videoRangeDidChanged:(XCFVideoRangeSlider *)slider
 {
     if (slider.isTracking) {
@@ -253,7 +273,7 @@
     
     XCFVideoRange range = slider.currentRange;
     NSTimeInterval targetSecond = -1;
-    if (XCFVideoRangeGetEnd(range) != XCFVideoRangeGetEnd(self.currentRange)) {
+    if (range.length != self.currentRange.length) {
         targetSecond = XCFVideoRangeGetEnd(range);
     } else if (range.location != self.currentRange.location) {
         targetSecond = range.location;
@@ -274,16 +294,37 @@
     self.currentRange = range;
 }
 
+- (NSString *) _videoExpertPresentName
+{
+    if (self.videoQuality & XCFVideoEditorVideoQualityTypeLow) {
+        return AVAssetExportPresetLowQuality;
+    } else if (self.videoQuality & XCFVideoEditorVideoQualityTypeMedium) {
+        return AVAssetExportPresetMediumQuality;
+    } else {
+        return AVAssetExportPresetHighestQuality;
+    }
+}
+
 - (void) expertVideo:(id)sender
 {
-    AVAssetTrack *track = [self.videoAsset tracksWithMediaType:AVMediaTypeVideo].firstObject;
-    CGSize videoSize = track.naturalSize;
-    CGAffineTransform transform = track.preferredTransform;
+    [self _pauseVideo:sender];
+    
+    AVAssetTrack *sourceVideoTrack = [self.videoAsset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+    AVAssetTrack *sourceAudioTrack = [self.videoAsset tracksWithMediaType:AVMediaTypeAudio].firstObject;
+    CGSize videoSize = sourceVideoTrack.naturalSize;
+    CGAffineTransform transform = sourceVideoTrack.preferredTransform;
     if (transform.d == 0) {
         videoSize = CGSizeMake(videoSize.height, videoSize.width);
     }
     
     int32_t framePerSecond = 30;
+    
+    AVMutableComposition *composeAsset = [AVMutableComposition composition];
+    AVMutableCompositionTrack *videoTrack = [composeAsset addMutableTrackWithMediaType:AVMediaTypeVideo
+                                                         preferredTrackID:kCMPersistentTrackID_Invalid];
+//    videoTrack.preferredTransform = transform;
+    AVMutableCompositionTrack *audioTrack = [composeAsset addMutableTrackWithMediaType:AVMediaTypeAudio
+                                                         preferredTrackID:kCMPersistentTrackID_Invalid];
     
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
     videoComposition.frameDuration = CMTimeMake(1, framePerSecond);
@@ -296,22 +337,100 @@
         videoComposition.renderSize = CGSizeMake(videoSize.height / expertRatio, videoSize.height);
     }
     
+    CGPoint contentOffset = self.playerScrollView.contentOffset;
+    CGPoint cropVideoOrigin;CGSize continerSize = self.playerScrollView.contentSize;
+    contentOffset.x = MAX(MIN(contentOffset.x, continerSize.width), 0);
+    contentOffset.y = MAX(MIN(contentOffset.y, continerSize.height), 0);
+    cropVideoOrigin.x = (contentOffset.x / continerSize.width) * videoSize.width;
+    cropVideoOrigin.y = (contentOffset.y / continerSize.height) * videoSize.height;
+#if DEBUG
+    CGRect cropVideoRect = (CGRect){cropVideoOrigin,videoComposition.renderSize};
+    NSLog(@"natural size : %@ crop rect : %@",NSStringFromCGSize(videoSize),NSStringFromCGRect(cropVideoRect));
+#endif
+    
     AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-    CMTime start = CMTimeMakeWithSeconds(self.currentRange.location, framePerSecond);
-    CMTime duration = CMTimeMakeWithSeconds(self.currentRange.length, framePerSecond);
-    instruction.timeRange = CMTimeRangeMake(start, duration);
+    CMTime start = CMTimeMakeWithSeconds(self.currentRange.location, framePerSecond * 100);
+    CMTime duration = CMTimeMakeWithSeconds(self.currentRange.length, framePerSecond * 100);
+    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, duration);
     
-    AVMutableVideoCompositionLayerInstruction* transformer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:track];
+    [videoTrack insertTimeRange:CMTimeRangeMake(start, duration)
+                        ofTrack:sourceVideoTrack
+                         atTime:kCMTimeZero
+                          error:nil];
+    [audioTrack insertTimeRange:CMTimeRangeMake(start, duration)
+                        ofTrack:sourceAudioTrack
+                         atTime:kCMTimeZero
+                          error:nil];
     
-    UIImageOrientation videoOrientation = UIImageOrientationUp;
-    if (videoSize.width == transform.tx && videoSize.height == transform.ty)
-        videoOrientation = UIImageOrientationLeft;
-    else if (transform.tx == 0 && transform.ty == 0)
-        videoOrientation = UIImageOrientationRight;
-    else if (transform.tx == 0 && transform.ty == videoSize.width)
-        videoOrientation = UIImageOrientationDown;
+    AVMutableVideoCompositionLayerInstruction* transformer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
     
+    CGAffineTransform t = transform;
+    if (t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0) {
+//  UIImageOrientationLeft;
+        t = CGAffineTransformMakeTranslation(videoSize.width - cropVideoOrigin.x, -cropVideoOrigin.y );
+        t = CGAffineTransformRotate(t, M_PI_2 );
+    } else if (t.a == 0 && t.b == -1.0 && t.c == 1.0 && t.d == 0) {
+// UIImageOrientationRight;
+        t = CGAffineTransformMakeTranslation(cropVideoOrigin.x,videoSize.height - cropVideoOrigin.y);
+        t = CGAffineTransformRotate(t, -M_PI_2);
+    } else if (t.a == -1.0 && t.b == 0 && t.c == 0 && t.d == -1.0) {
+// UIImageOrientationDown;
+        t = CGAffineTransformMakeTranslation(videoSize.width -cropVideoOrigin.x,videoSize.height - cropVideoOrigin.y);
+        t = CGAffineTransformRotate(t, M_PI);
+    } else {
+        // up
+        t = CGAffineTransformMakeTranslation(-cropVideoOrigin.x,cropVideoOrigin.y);
+        t = CGAffineTransformRotate(t, 0);
+    }
+    [transformer setTransform:t atTime:kCMTimeZero];
     
+    instruction.layerInstructions = @[transformer];
+    videoComposition.instructions = @[instruction];
+    
+    _exportSession = [[AVAssetExportSession alloc] initWithAsset:composeAsset
+                                                      presetName:[self _videoExpertPresentName]];
+    _exportSession.videoComposition = videoComposition;
+    
+    NSString *tempDictionary = NSTemporaryDirectory();
+    NSString *fileName = [NSString stringWithFormat:@"%@.mp4",[[NSUUID UUID] UUIDString]];
+    NSString *filePath = [tempDictionary stringByAppendingPathComponent:fileName];
+    NSURL *expertURL = [NSURL fileURLWithPath:filePath];
+    
+    __weak typeof(self) weak_self = self;
+    _exportSession.outputURL = expertURL;
+    _exportSession.outputFileType = AVFileTypeMPEG4;
+    [_exportSession exportAsynchronouslyWithCompletionHandler:^{
+        __strong typeof(weak_self) strong_self = weak_self;
+        AVAssetExportSession *exporter = strong_self.exportSession;
+        AVAssetExportSessionStatus status = [exporter status];
+        if (status == AVAssetExportSessionStatusCompleted) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strong_self _expertDone:exporter.outputURL];
+            });
+        } else if (status == AVAssetExportSessionStatusFailed) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strong_self _expertFailed:exporter.error];
+            });
+        }
+    }];
+}
+
+- (void) _expertDone:(NSURL *)tempURL
+{
+    [self.exportSession cancelExport];
+    if (_delegateFlag.didSave) {
+        [self.delegate videoEditorController:self
+                    didSaveEditedVideoToPath:tempURL.path];
+    }
+}
+
+- (void) _expertFailed:(NSError *)error
+{
+    [self.exportSession cancelExport];
+    if (_delegateFlag.didFail) {
+        [self.delegate videoEditorController:self
+                            didFailWithError:error];
+    }
 }
 
 #pragma mark - XCFAVPlayerViewDelegate
