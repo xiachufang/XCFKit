@@ -98,11 +98,28 @@ XCFAVPlayerControllerDelegate
 
 - (void) videoEditorController:(XCFVideoEditorController *)editor didSaveEditedVideoToPath:(NSString *)editedVideoPath
 {
-    XCFAVPlayerController *player = [[XCFAVPlayerController alloc] initWithVideoFilePath:editedVideoPath
-                                                                            previewImage:nil
-                                                                   allowPlaybackControls:NO];
-    player.delegate = self;
-    [editor presentViewController:player animated:YES completion:nil];
+    NSData *videoData = [NSData dataWithContentsOfFile:editedVideoPath];
+    NSString *byteLength = [NSByteCountFormatter stringFromByteCount:videoData.length
+                                                          countStyle:NSByteCountFormatterCountStyleFile];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"导出成功"
+                                                                   message:byteLength
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"好的"
+                                                     style:UIAlertActionStyleCancel
+                                                   handler:nil];
+    UIAlertAction *play = [UIAlertAction actionWithTitle:@"播放" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+         XCFAVPlayerController *player = [[XCFAVPlayerController alloc] initWithVideoFilePath:editedVideoPath
+                                                                                 previewImage:nil
+                                                                        allowPlaybackControls:NO];
+         player.delegate = self;
+         [editor presentViewController:player animated:YES completion:nil];
+     }];
+    
+    [alert addAction:cancel];
+    [alert addAction:play];
+    [editor presentViewController:alert animated:YES completion:nil];
+    
 }
 
 #pragma mark - XCFAVPlayerControllerDelegate

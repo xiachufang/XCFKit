@@ -307,7 +307,9 @@
 
 - (void) expertVideo:(id)sender
 {
-    [self _pauseVideo:sender];
+    if (!_pause) {
+        [self _pauseVideo:sender];
+    }
     
     AVAssetTrack *sourceVideoTrack = [self.videoAsset tracksWithMediaType:AVMediaTypeVideo].firstObject;
     AVAssetTrack *sourceAudioTrack = [self.videoAsset tracksWithMediaType:AVMediaTypeAudio].firstObject;
@@ -343,10 +345,10 @@
     contentOffset.y = MAX(MIN(contentOffset.y, continerSize.height), 0);
     cropVideoOrigin.x = (contentOffset.x / continerSize.width) * videoSize.width;
     cropVideoOrigin.y = (contentOffset.y / continerSize.height) * videoSize.height;
-#if DEBUG
-    CGRect cropVideoRect = (CGRect){cropVideoOrigin,videoComposition.renderSize};
-    NSLog(@"natural size : %@ crop rect : %@",NSStringFromCGSize(videoSize),NSStringFromCGRect(cropVideoRect));
-#endif
+//#if DEBUG
+//    CGRect cropVideoRect = (CGRect){cropVideoOrigin,videoComposition.renderSize};
+//    NSLog(@"natural size : %@ crop rect : %@",NSStringFromCGSize(videoSize),NSStringFromCGRect(cropVideoRect));
+//#endif
     
     AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     CMTime start = CMTimeMakeWithSeconds(self.currentRange.location, framePerSecond * 100);
