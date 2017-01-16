@@ -264,7 +264,8 @@
 
 - (BOOL) isPlaying
 {
-    return self.playerLayer.player.timeControlStatus == AVPlayerTimeControlStatusPlaying;
+    AVPlayer *player = self.playerLayer.player;
+    return player && (!player.error) && player.rate != 0;
 }
 
 - (CGFloat) progress
