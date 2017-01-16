@@ -28,6 +28,11 @@
 @implementation XCFVideoEditorController
 {
     BOOL _pause;
+    
+    struct {
+        unsigned int didSave : 1;
+        unsigned int didFail : 1;
+    } _delegateFlag;
 }
 
 + (BOOL) canEditVideoAtPath:(NSString *)videoPath
@@ -57,6 +62,11 @@
             });
         }];
     }
+}
+
+- (void) dealloc
+{
+    [_exportSession cancelExport];
 }
 
 - (instancetype) initWithVideoPath:(NSString *)videoPath
@@ -121,6 +131,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *expertButton = [[UIBarButtonItem alloc] initWithTitle:@"完成"
+                                                                     style:UIBarButtonItemStyleDone
+                                                                    target:self
+                                                                    action:@selector(expertVideo:)];
+    self.navigationItem.rightBarButtonItem = expertButton;
+}
+
+- (void) setDelegate:(id<XCFVideoEditorControllerDelegate>)delegate
+{
+    _delegate = delegate;
+    
+    _delegateFlag.didSave = [delegate respondsToSelector:@selector(videoEditorController:didSaveEditedVideoToPath:)];
+    _delegateFlag.didFail = [delegate respondsToSelector:@selector(videoEditorController:didFailWithError:)];
 }
 
 #pragma mark - layout
@@ -248,6 +272,46 @@
     }
     
     self.currentRange = range;
+}
+
+- (void) expertVideo:(id)sender
+{
+    AVAssetTrack *track = [self.videoAsset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+    CGSize videoSize = track.naturalSize;
+    CGAffineTransform transform = track.preferredTransform;
+    if (transform.d == 0) {
+        videoSize = CGSizeMake(videoSize.height, videoSize.width);
+    }
+    
+    int32_t framePerSecond = 30;
+    
+    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
+    videoComposition.frameDuration = CMTimeMake(1, framePerSecond);
+    
+    CGFloat ratio = videoSize.height / videoSize.width;
+    CGFloat expertRatio = [self _playerContainerHeightWidthRatio];
+    if (ratio >= expertRatio) {
+        videoComposition.renderSize = CGSizeMake(videoSize.width, videoSize.width * expertRatio);
+    } else {
+        videoComposition.renderSize = CGSizeMake(videoSize.height / expertRatio, videoSize.height);
+    }
+    
+    AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+    CMTime start = CMTimeMakeWithSeconds(self.currentRange.location, framePerSecond);
+    CMTime duration = CMTimeMakeWithSeconds(self.currentRange.length, framePerSecond);
+    instruction.timeRange = CMTimeRangeMake(start, duration);
+    
+    AVMutableVideoCompositionLayerInstruction* transformer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:track];
+    
+    UIImageOrientation videoOrientation = UIImageOrientationUp;
+    if (videoSize.width == transform.tx && videoSize.height == transform.ty)
+        videoOrientation = UIImageOrientationLeft;
+    else if (transform.tx == 0 && transform.ty == 0)
+        videoOrientation = UIImageOrientationRight;
+    else if (transform.tx == 0 && transform.ty == videoSize.width)
+        videoOrientation = UIImageOrientationDown;
+    
+    
 }
 
 #pragma mark - XCFAVPlayerViewDelegate

@@ -44,6 +44,10 @@ typedef NS_ENUM(NSInteger, XCFVideoEditorVideoQualityType) {
 
 @optional
 
+- (void)videoEditorController:(XCFVideoEditorController *)editor
+     didSaveEditedVideoToPath:(NSString *)editedVideoPath;
 
+- (void)videoEditorController:(XCFVideoEditorController *)editor
+             didFailWithError:(NSError *)error;
 
 @end
