@@ -95,6 +95,8 @@
 
 @end
 
+typedef void (^XCFVideoRangeSliderThumbnailBlock)(NSInteger,UIImage*);
+
 static const CGFloat XCFVideoRangeSliderFrameMaxWidth = 40.0f;
 
 @interface XCFVideoRangeSlider ()
@@ -108,10 +110,10 @@ UIGestureRecognizerDelegate
 @property (nonatomic, strong) AVAssetImageGenerator *imageGenerator;
 
 @property (nonatomic, strong) UICollectionView *frameCollectionView;
-//@property (nonatomic, assign) NSTimeInterval frameInterval;
-@property (nonatomic, strong) NSMutableDictionary *cachedFrames;
+@property (nonatomic, strong) NSMutableDictionary<NSNumber*,UIImage*> *cachedFrames;
 
 @property (nonatomic, strong) _XCFVideoRangerSliderHandler *slider;
+@property (nonatomic, strong) NSMutableDictionary<NSNumber*,id> *runningTasks;
 
 @end
 
@@ -304,10 +306,14 @@ UIGestureRecognizerDelegate
     
     _imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:self.asset];
     _imageGenerator.appliesPreferredTrackTransform = YES;
-    _imageGenerator.requestedTimeToleranceBefore = kCMTimeZero;
-    _imageGenerator.requestedTimeToleranceAfter  = kCMTimeZero;
+    if (_videoLength <= 20) {
+    _imageGenerator.requestedTimeToleranceBefore = CMTimeMake(10, 30);
+    _imageGenerator.requestedTimeToleranceAfter  = CMTimeMake(10, 30);
+    }
     
-    _cachedFrames = [NSMutableDictionary dictionaryWithCapacity:MIN(15, _videoLength)];
+    NSUInteger cacheCapacity = MIN(15, _videoLength);
+    _cachedFrames = [NSMutableDictionary dictionaryWithCapacity:cacheCapacity];
+    _runningTasks = [NSMutableDictionary dictionaryWithCapacity:cacheCapacity];
     
 #if ADJUST_FRAME_SIZE_BY_TRACK
     NSString *loadKey = @"tracks";
@@ -327,10 +333,10 @@ UIGestureRecognizerDelegate
                     heightRatio = trackSize.width / trackSize.height;
                 }
                 if (trackSize.width > 0) {
-                    CGFloat thumbnailHeight = heightRatio * _videoRangeSliderFrameWidth;
+                    CGFloat thumbnailHeight = ceil(heightRatio * _videoRangeSliderFrameWidth);
                     CGFloat scale = [UIScreen mainScreen].scale;
                     strong_self.imageGenerator.maximumSize =
-                    CGSizeMake(_videoRangeSliderFrameWidth * scale, thumbnailHeight * scale);
+                    CGSizeMake(ceil(_videoRangeSliderFrameWidth * scale), thumbnailHeight * scale);
                 }
             }
         }
@@ -340,6 +346,7 @@ UIGestureRecognizerDelegate
         });
     }];
 #else
+    self.imageGenerator.maximumSize = CGSizeMake(200, 200);
     [self didVideoAssetLoaded];
 #endif
     
@@ -389,35 +396,75 @@ UIGestureRecognizerDelegate
 
 // 已知问题，在视频比较长的时候，获取靠后位置的截图会比较慢
 // 打算采取预处理的方式解决，以后再弄
-- (void) asycGenerateThumbnailImageAtIndex:(NSInteger)index
-                                    result:(void (^)(NSInteger idx,UIImage *image))result
+- (void) asycGenerateThumbnailImageAtIndex:(NSInteger)requestIndex
+                                    result:(XCFVideoRangeSliderThumbnailBlock)result
 {
-    if (!result) return;
-    
-    UIImage *cachedImage = self.cachedFrames[@(index)];
-    if (cachedImage) {
-        result(index,cachedImage);
+    NSUInteger totalFrames = [self collectionView:self.frameCollectionView
+                           numberOfItemsInSection:0];
+    if (requestIndex >= totalFrames || requestIndex < 0) {
+        if (result) result(requestIndex,nil);
         return;
     }
     
-    CGFloat width = self.bounds.size.width;
-    NSTimeInterval targetSecond = (index + 0.5) * _videoRangeSliderFrameWidth / width * self.maximumTrimLength;
-    if (targetSecond > self.videoLength) {
-        targetSecond = self.videoLength;
+    // 查询图片缓存
+    NSNumber *initKey = @(requestIndex);
+    UIImage *resultImage = [self.cachedFrames objectForKey:initKey];
+    if (resultImage) {
+        if (result) result(requestIndex,resultImage);
+        return;
     }
     
-    CMTime targetTime = CMTimeMakeWithSeconds(targetSecond, (int32_t)(index + 1) * 100);
-    NSValue *targetTimeValue = [NSValue valueWithCMTime:targetTime];
-    [self.imageGenerator generateCGImagesAsynchronouslyForTimes:@[targetTimeValue] completionHandler:^(CMTime requestedTime, CGImageRef  _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult r, NSError * _Nullable error) {
-        if (r == AVAssetImageGeneratorSucceeded && image) {
-            UIImage *finalImage = [UIImage imageWithCGImage:image];
-            if (finalImage) {
-                if (result) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                       self.cachedFrames[@(index)] = finalImage;
-                       result(index,finalImage);
-                    });
-                }
+    // 查询正在跑的缓存
+    id runningTask = [self.runningTasks objectForKey:initKey];
+    if (runningTask) {
+        if (result) {
+            [self.runningTasks setObject:result forKey:initKey];
+        }
+        
+        return;
+    }
+    
+    // 开启新的查询
+    NSMutableArray<NSValue*> *requestTimeValues = [NSMutableArray arrayWithCapacity:20];
+    for (NSInteger idx = requestIndex;idx < MIN(totalFrames, requestIndex + 20);idx += 1) {
+        NSNumber *key = @(idx);
+        if ([self.cachedFrames objectForKey:key] || [self.runningTasks objectForKey:key]) continue;
+        
+        CGFloat width = self.bounds.size.width;
+        NSTimeInterval targetSecond = (idx + 0.5) * _videoRangeSliderFrameWidth / width * self.maximumTrimLength;
+        targetSecond = MIN(targetSecond, self.videoLength);
+        CMTime targetTime = CMTimeMakeWithSeconds(targetSecond, (int32_t)(idx + 1) * 100);
+        NSValue *targetTimeValue = [NSValue valueWithCMTime:targetTime];
+        
+        [requestTimeValues addObject:targetTimeValue];
+        
+        if (idx == requestIndex) {
+            if (result) {
+                [self.runningTasks setObject:result forKey:key];
+            }
+        } else {
+            [self.runningTasks setObject:[NSNull null] forKey:key];
+        }
+    }
+    
+    __weak typeof(self) weak_self = self;
+    [self.imageGenerator generateCGImagesAsynchronouslyForTimes:requestTimeValues completionHandler:^(CMTime requestedTime, CGImageRef  _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult r, NSError * _Nullable error) {
+        __strong typeof(weak_self) strong_self = weak_self;
+        if (r == AVAssetImageGeneratorSucceeded && image && strong_self) {
+            NSInteger index = requestedTime.timescale / 100 - 1;
+            NSInteger scale = [UIScreen mainScreen].scale;
+            UIImage *newImage = [UIImage imageWithCGImage:image scale:scale orientation:UIImageOrientationUp];
+            if (newImage) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSNumber *key = @(index);
+                    [strong_self.cachedFrames setObject:newImage forKey:key];
+                    id task = [strong_self.runningTasks objectForKey:key];
+                    if (task && task != [NSNull null]) {
+                        XCFVideoRangeSliderThumbnailBlock block = (XCFVideoRangeSliderThumbnailBlock)task;
+                        block(index,newImage);
+                    }
+                    [strong_self.runningTasks removeObjectForKey:key];
+                });
             }
         }
     }];
@@ -438,7 +485,6 @@ UIGestureRecognizerDelegate
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     NSInteger count = floor(self.videoLength / self.maximumTrimLength * collectionView.bounds.size.width / _videoRangeSliderFrameWidth);
-    NSLog(@"actual frames %zd",count);
     return count;
 }
 

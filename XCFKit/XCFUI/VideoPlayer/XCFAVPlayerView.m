@@ -131,7 +131,8 @@
                 __strong typeof(weak_self) strong_self = weak_self;
                 if (!strong_self) return;
                 
-                strong_self.playerItem = [AVPlayerItem playerItemWithAsset:strong_asset];
+                strong_self.playerItem = [AVPlayerItem playerItemWithAsset:strong_asset
+                                              automaticallyLoadedAssetKeys:@[@"duration"]];
                 [[NSNotificationCenter defaultCenter] addObserver:strong_self
                                                          selector:@selector(didPlayToEndNotification:)
                                                              name:AVPlayerItemDidPlayToEndTimeNotification
@@ -234,7 +235,7 @@
         if (!_playerTimeObserver) {
             __weak typeof(self) weak_self = self;
             
-            CMTime interval = CMTimeMakeWithSeconds(6.0 / 60.0, NSEC_PER_SEC);
+            CMTime interval = CMTimeMake(1,30);
             _playerTimeObserver =
             [self.playerLayer.player addPeriodicTimeObserverForInterval:interval
                                                                   queue:dispatch_get_main_queue()
@@ -272,7 +273,7 @@
 {
     NSTimeInterval duration = [self duration];
     if (duration > 0) {
-        return [self currentTime] / [self duration];
+        return [self currentTime] / duration;
     } else {
         return -1;
     }

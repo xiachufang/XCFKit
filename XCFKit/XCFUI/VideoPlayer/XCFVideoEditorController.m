@@ -172,7 +172,7 @@
     CGFloat height = width * ratio;
     
     CGFloat toplayoutHeight = [self.topLayoutGuide length];
-    return CGRectMake(0, toplayoutHeight, width, height);
+    return CGRectMake(0, toplayoutHeight + 12, width, height);
 }
 
 - (CGRect) _videoRangeSliderFrame
@@ -437,15 +437,16 @@
 
 - (void) avPlayerViewDidPlayToEnd:(XCFAVPlayerView *)playerView
 {
-    if ([playerView seekToSecond:self.currentRange.location]) {
+    [playerView pause];
+    [playerView asyncSeekToSecond:self.currentRange.location completion:^(BOOL finish) {
         [playerView play];
-    }
+    }];
 }
 
 - (void) avPlayerViewDidUpgradeProgress:(XCFAVPlayerView *)playerView
 {
     NSTimeInterval end = XCFVideoRangeGetEnd(self.currentRange);
-    if (playerView.progress < 1 && playerView.isPlaying && end > 0 && playerView.duration * playerView.progress >= end) {
+    if (playerView.progress < 1 && playerView.isPlaying && end > 0 && [playerView currentTime] >= end) {
         [self avPlayerViewDidPlayToEnd:playerView];
     }
 }
