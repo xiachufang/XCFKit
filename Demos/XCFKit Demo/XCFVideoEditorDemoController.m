@@ -96,15 +96,22 @@ XCFAVPlayerControllerDelegate
     [editor presentViewController:alert animated:YES completion:nil];
 }
 
-- (void) videoEditorController:(XCFVideoEditorController *)editor didSaveEditedVideoToPath:(NSString *)editedVideoPath
+- (void) videoEditorController:(XCFVideoEditorController *)editor didSaveEditedVideoToPath:(NSString *)editedVideoPath videoInfo:(NSDictionary *)videoInfo
 {
     NSData *videoData = [NSData dataWithContentsOfFile:editedVideoPath];
     NSString *byteLength = [NSByteCountFormatter stringFromByteCount:videoData.length
                                                           countStyle:NSByteCountFormatterCountStyleFile];
     
+    NSNumber *width = [videoInfo valueForKey:XCFVideoEditorVideoInfoWidth];
+    NSNumber *height = [videoInfo valueForKey:XCFVideoEditorVideoInfoHeight];
+    NSNumber *duration = [videoInfo valueForKey:XCFVideoEditorVideoInfoDuration];
+    
+    NSString *message = [NSString stringWithFormat:@"size : {%@,%@}\nduration : %@s\nstorage : %@",width,height,duration,byteLength];
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"导出成功"
-                                                                   message:byteLength
+                                                                   message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
+    
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"好的"
                                                      style:UIAlertActionStyleCancel
                                                    handler:nil];
@@ -118,8 +125,8 @@ XCFAVPlayerControllerDelegate
     
     [alert addAction:cancel];
     [alert addAction:play];
-    [editor presentViewController:alert animated:YES completion:nil];
     
+    [editor presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - XCFAVPlayerControllerDelegate

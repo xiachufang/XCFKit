@@ -406,8 +406,20 @@
         AVAssetExportSession *exporter = strong_self.exportSession;
         AVAssetExportSessionStatus status = [exporter status];
         if (status == AVAssetExportSessionStatusCompleted) {
+            AVAsset *outputAsset = [AVAsset assetWithURL:expertURL];
+            AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:outputAsset];
+            imageGenerator.appliesPreferredTrackTransform = YES;
+            CGImageRef imageRef = [imageGenerator copyCGImageAtTime:kCMTimeZero
+                                                        actualTime:nil
+                                                             error:nil];
+            UIImage *thumbnailImage = nil;
+            if (imageRef) {
+                thumbnailImage = [UIImage imageWithCGImage:imageRef];
+                CGImageRelease(imageRef);
+            }
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-                [strong_self _expertDone:exporter.outputURL videoSize:videoComposition.renderSize];
+                [strong_self _expertDone:exporter.outputURL thumbnailImage:thumbnailImage videoSize:videoComposition.renderSize];
             });
         } else if (status == AVAssetExportSessionStatusFailed) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -417,17 +429,24 @@
     }];
 }
 
-- (void) _expertDone:(NSURL *)tempURL videoSize:(CGSize)size
+- (void) _expertDone:(NSURL *)tempURL thumbnailImage:(UIImage *)image videoSize:(CGSize)size
 {
     [self.exportSession cancelExport];
     if (_delegateFlag.didSave) {
+        NSMutableDictionary *mutableVideoInfo = [NSMutableDictionary dictionaryWithCapacity:4];
+        
         NSDictionary *videoInfo = @{XCFVideoEditorVideoInfoWidth : @(size.width),
                                     XCFVideoEditorVideoInfoHeight : @(size.height),
                                     XCFVideoEditorVideoInfoDuration : @(self.currentRange.length)};
+        [mutableVideoInfo addEntriesFromDictionary:videoInfo];
+        
+        if (image) {
+            [mutableVideoInfo setObject:image forKey:XCFVideoEditorVideoInfoThumbnail];
+        }
+        
         [self.delegate videoEditorController:self
                     didSaveEditedVideoToPath:tempURL.path
-                                   videoInfo:videoInfo];
-        [[NSFileManager defaultManager] removeItemAtURL:tempURL error:NULL];
+                                   videoInfo:mutableVideoInfo.copy];
     }
 }
 
@@ -463,3 +482,6 @@
 NSString *const XCFVideoEditorVideoInfoWidth = @"XCFVideoEditorVideoInfoWidth";
 NSString *const XCFVideoEditorVideoInfoHeight = @"XCFVideoEditorVideoInfoHeight";
 NSString *const XCFVideoEditorVideoInfoDuration = @"XCFVideoEditorVideoInfoDuration";
+NSString *const XCFVideoEditorVideoInfoThumbnail = @"XCFVideoEditorVideoInfoThumbnail";
+
+

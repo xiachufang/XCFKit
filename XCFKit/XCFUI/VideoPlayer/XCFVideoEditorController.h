@@ -38,12 +38,16 @@ typedef NS_ENUM(NSInteger, XCFVideoEditorVideoQualityType) {
 // video quality , default is XCFVideoEditorVideoQualityTypeMedium | XCFVideoEditorVideoQualityType1x1
 @property (nonatomic, assign) XCFVideoEditorVideoQualityType videoQuality;
 
+
+
 @end
 
 @protocol XCFVideoEditorControllerDelegate <NSObject>
 
 @optional
 
+// videoInfo 包含的值有 XCFVideoEditorVideoInfoWidth XCFVideoEditorVideoInfoHeight
+// XCFVideoEditorVideoInfoDuration ， 正常情况下有 XCFVideoEditorVideoInfoThumbnail 但不保证
 - (void)videoEditorController:(XCFVideoEditorController *)editor
      didSaveEditedVideoToPath:(NSString *)editedVideoPath
                     videoInfo:(NSDictionary *)videoInfo;
@@ -56,3 +60,4 @@ typedef NS_ENUM(NSInteger, XCFVideoEditorVideoQualityType) {
 extern NSString *const XCFVideoEditorVideoInfoWidth;
 extern NSString *const XCFVideoEditorVideoInfoHeight;
 extern NSString *const XCFVideoEditorVideoInfoDuration;
+extern NSString *const XCFVideoEditorVideoInfoThumbnail;
