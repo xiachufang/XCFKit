@@ -150,7 +150,7 @@
 {
     _delegate = delegate;
     
-    _delegateFlag.didSave = [delegate respondsToSelector:@selector(videoEditorController:didSaveEditedVideoToPath:)];
+    _delegateFlag.didSave = [delegate respondsToSelector:@selector(videoEditorController:didSaveEditedVideoToPath:videoInfo:)];
     _delegateFlag.didFail = [delegate respondsToSelector:@selector(videoEditorController:didFailWithError:)];
 }
 
@@ -407,7 +407,7 @@
         AVAssetExportSessionStatus status = [exporter status];
         if (status == AVAssetExportSessionStatusCompleted) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [strong_self _expertDone:exporter.outputURL];
+                [strong_self _expertDone:exporter.outputURL videoSize:videoComposition.renderSize];
             });
         } else if (status == AVAssetExportSessionStatusFailed) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -417,12 +417,17 @@
     }];
 }
 
-- (void) _expertDone:(NSURL *)tempURL
+- (void) _expertDone:(NSURL *)tempURL videoSize:(CGSize)size
 {
     [self.exportSession cancelExport];
     if (_delegateFlag.didSave) {
+        NSDictionary *videoInfo = @{XCFVideoEditorVideoInfoWidth : @(size.width),
+                                    XCFVideoEditorVideoInfoHeight : @(size.height),
+                                    XCFVideoEditorVideoInfoDuration : @(self.currentRange.length)};
         [self.delegate videoEditorController:self
-                    didSaveEditedVideoToPath:tempURL.path];
+                    didSaveEditedVideoToPath:tempURL.path
+                                   videoInfo:videoInfo];
+        [[NSFileManager defaultManager] removeItemAtURL:tempURL error:NULL];
     }
 }
 
@@ -454,3 +459,7 @@
 }
 
 @end
+
+NSString *const XCFVideoEditorVideoInfoWidth = @"XCFVideoEditorVideoInfoWidth";
+NSString *const XCFVideoEditorVideoInfoHeight = @"XCFVideoEditorVideoInfoHeight";
+NSString *const XCFVideoEditorVideoInfoDuration = @"XCFVideoEditorVideoInfoDuration";
