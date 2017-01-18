@@ -42,6 +42,8 @@
 		E87EBD8B1DFF9CDF00027C05 /* UIFont+fontWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = E87EBD891DFF9CDF00027C05 /* UIFont+fontWeight.m */; };
 		E881B8901DE6A2240055A817 /* UISearchBar+textField.h in Headers */ = {isa = PBXBuildFile; fileRef = E881B88E1DE6A2240055A817 /* UISearchBar+textField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E881B8911DE6A2240055A817 /* UISearchBar+textField.m in Sources */ = {isa = PBXBuildFile; fileRef = E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */; };
+		E882296A1E2F0EE6007BA838 /* XCFVideoLoadProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = E88229681E2F0EE6007BA838 /* XCFVideoLoadProgressView.h */; };
+		E882296B1E2F0EE6007BA838 /* XCFVideoLoadProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E88229691E2F0EE6007BA838 /* XCFVideoLoadProgressView.m */; };
 		E890CC561E09370500F4F803 /* XCFAVPlayerControllerAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = E890CC541E09370500F4F803 /* XCFAVPlayerControllerAnimator.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		E890CC571E09370500F4F803 /* XCFAVPlayerControllerAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E890CC551E09370500F4F803 /* XCFAVPlayerControllerAnimator.m */; };
 		E89E817F1E0D24F000865246 /* UIView+XCFHeartbeat.h in Headers */ = {isa = PBXBuildFile; fileRef = E89E817D1E0D24F000865246 /* UIView+XCFHeartbeat.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -88,6 +90,8 @@
 		E87EBD891DFF9CDF00027C05 /* UIFont+fontWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+fontWeight.m"; sourceTree = "<group>"; };
 		E881B88E1DE6A2240055A817 /* UISearchBar+textField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+textField.h"; sourceTree = "<group>"; };
 		E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+textField.m"; sourceTree = "<group>"; };
+		E88229681E2F0EE6007BA838 /* XCFVideoLoadProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoLoadProgressView.h; sourceTree = "<group>"; };
+		E88229691E2F0EE6007BA838 /* XCFVideoLoadProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoLoadProgressView.m; sourceTree = "<group>"; };
 		E890CC541E09370500F4F803 /* XCFAVPlayerControllerAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAVPlayerControllerAnimator.h; sourceTree = "<group>"; };
 		E890CC551E09370500F4F803 /* XCFAVPlayerControllerAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAVPlayerControllerAnimator.m; sourceTree = "<group>"; };
 		E89E817D1E0D24F000865246 /* UIView+XCFHeartbeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFHeartbeat.h"; sourceTree = "<group>"; };
@@ -208,6 +212,8 @@
 				E80B1DD51E1CCE3A00CFA27E /* XCFVideoEditorController.m */,
 				E80B1DD81E1CFFB400CFA27E /* XCFVideoRangeSlider.h */,
 				E80B1DD91E1CFFB400CFA27E /* XCFVideoRangeSlider.m */,
+				E88229681E2F0EE6007BA838 /* XCFVideoLoadProgressView.h */,
+				E88229691E2F0EE6007BA838 /* XCFVideoLoadProgressView.m */,
 			);
 			path = VideoPlayer;
 			sourceTree = "<group>";
@@ -219,6 +225,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E882296A1E2F0EE6007BA838 /* XCFVideoLoadProgressView.h in Headers */,
 				E8769A931E08D83100378EFF /* XCFAVPlayerController.h in Headers */,
 				E8769A951E08D83100378EFF /* XCFAVPlayerView.h in Headers */,
 				E8003A561DC34C2A00103028 /* UIColor+Hex.h in Headers */,
@@ -318,6 +325,7 @@
 				E80166FE1DD07D0400383326 /* XCFWindowContextController.m in Sources */,
 				E8769A941E08D83100378EFF /* XCFAVPlayerController.m in Sources */,
 				E80B1DD71E1CCE3A00CFA27E /* XCFVideoEditorController.m in Sources */,
+				E882296B1E2F0EE6007BA838 /* XCFVideoLoadProgressView.m in Sources */,
 				E881B8911DE6A2240055A817 /* UISearchBar+textField.m in Sources */,
 				E8003A581DC34C2A00103028 /* UIColor+Hex.m in Sources */,
 				E89E81801E0D24F000865246 /* UIView+XCFHeartbeat.m in Sources */,
