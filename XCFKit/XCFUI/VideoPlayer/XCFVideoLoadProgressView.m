@@ -10,6 +10,16 @@
 
 @implementation XCFVideoLoadProgressView
 
+- (instancetype) initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.opaque = NO;
+    }
+    
+    return self;
+}
+
 - (void)drawRect:(CGRect)rect {
     CGFloat diameter = MIN(rect.size.width, rect.size.height);
     CGRect displayRect = (CGRect){rect.origin,CGSizeMake(diameter, diameter)};
@@ -17,26 +27,30 @@
     
     // fill background
     CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextClearRect(ctx, rect);
     CGContextAddEllipseInRect(ctx, displayRect);
-    CGContextSetFillColor(ctx, CGColorGetComponents([self.tintColor CGColor]));
+    CGContextSetRGBFillColor(ctx, 1, 1, 1, 0.8);
     CGContextFillPath(ctx);
-    
+
     CGPoint center = CGPointMake(displayRect.origin.x + diameter/2, displayRect.origin.y + diameter/2);
     if (self.status == XCFVideoLoadStatusPlay) {
         // drwa play button
         CGContextBeginPath(ctx);
-        CGContextMoveToPoint(ctx, center.x - diameter / 6, center.y - diameter / 6 * 1.732);
-        CGContextAddLineToPoint(ctx, center.x - diameter / 6, center.y + diameter / 6 * 1.732);
-        CGContextAddLineToPoint(ctx, center.x + diameter / 3, 0);
+        CGContextMoveToPoint(ctx, center.x - diameter / 8, center.y - diameter / 8 * 1.732);
+        CGContextAddLineToPoint(ctx, center.x - diameter / 8, center.y + diameter / 8 * 1.732);
+        CGContextAddLineToPoint(ctx, center.x + diameter / 4, center.y);
         CGContextClosePath(ctx);
-        CGContextSetFillColor(ctx, CGColorGetComponents([UIColor.blackColor CGColor]));
-        CGContextFillPath(ctx);
     } else {
         CGFloat lineWidth = 2;
-        CGContextAddArc(ctx, center.x, center.y, (diameter / 2) - lineWidth, self.progress * 2 * M_PI, 2 * M_PI, 1);
-        CGContextSetFillColor(ctx, CGColorGetComponents([UIColor.blackColor CGColor]));
-        CGContextFillPath(ctx);
+        CGContextMoveToPoint(ctx, center.x, center.y);
+        CGFloat start = (self.progress - 0.25) * 2 * M_PI;
+        CGFloat end = 0.75 * 2 * M_PI;
+        CGContextAddArc(ctx, center.x, center.y, (diameter / 2) - lineWidth, start, end, 0);
+        CGContextClosePath(ctx);
     }
+    
+    CGContextSetRGBFillColor(ctx, 0, 0, 0, 0.8);
+    CGContextFillPath(ctx);
 }
 
 - (void) setProgress:(CGFloat)progress
@@ -48,6 +62,14 @@
         if (self.status == XCFVideoLoadStatusLoading) {
             [self setNeedsDisplay];
         }
+    }
+}
+
+- (void) setStatus:(XCFVideoLoadStatus)status
+{
+    if (_status != status) {
+        _status = status;
+        [self setNeedsDisplay];
     }
 }
 

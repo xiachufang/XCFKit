@@ -158,12 +158,32 @@
                                             <segue destination="9OB-6y-QSs" kind="show" id="oUO-G5-cCW"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="cKd-Lx-shg" style="IBUITableViewCellStyleDefault" id="boV-pa-Fus">
+                                        <rect key="frame" x="0.0" y="287.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="boV-pa-Fus" id="622-UK-zmC">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="XCFVideoLoadProgressView" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cKd-Lx-shg">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="d4L-tW-PNM" kind="show" id="t2N-iV-ttp"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Video Editor" id="LeZ-VU-2qx" userLabel="Video Editor">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="5R4-iG-Gdx" style="IBUITableViewCellStyleDefault" id="4ap-il-8Em">
-                                        <rect key="frame" x="0.0" y="343.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="387.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4ap-il-8Em" id="FKa-Ob-IUN">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
@@ -183,7 +203,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="KLa-v5-rrg" style="IBUITableViewCellStyleDefault" id="0E7-hW-We4">
-                                        <rect key="frame" x="0.0" y="387.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="431.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0E7-hW-We4" id="Szz-6S-mgg">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
@@ -263,7 +283,59 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCT-Ie-Gv6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="766" y="1208"/>
+            <point key="canvasLocation" x="254" y="1285"/>
+        </scene>
+        <!--XCFVideoLoadProgressView-->
+        <scene sceneID="hfV-Fd-Klz">
+            <objects>
+                <viewController id="d4L-tW-PNM" customClass="XCFVideoLoadProgressViewDemoController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3nZ-Bj-BJz"/>
+                        <viewControllerLayoutGuide type="bottom" id="fPO-9u-bEN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iH7-pY-Rby">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="microVideoPlayerPreviewImage.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0lh-4S-6Nb">
+                                <rect key="frame" x="37" y="164" width="300" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="0lh-4S-6Nb" secondAttribute="height" multiplier="620:413" id="pJG-eY-MVZ"/>
+                                </constraints>
+                            </imageView>
+                            <view opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hDX-Nc-FQE" userLabel="overlay view">
+                                <rect key="frame" x="37" y="164" width="300" height="200"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dJK-cp-sgc">
+                                <rect key="frame" x="35" y="464" width="304" height="31"/>
+                                <connections>
+                                    <action selector="progressChanged:" destination="d4L-tW-PNM" eventType="valueChanged" id="cVa-za-UUC"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hDX-Nc-FQE" firstAttribute="trailing" secondItem="0lh-4S-6Nb" secondAttribute="trailing" id="5es-qU-leE"/>
+                            <constraint firstItem="dJK-cp-sgc" firstAttribute="centerX" secondItem="iH7-pY-Rby" secondAttribute="centerX" id="AV5-t8-RnC"/>
+                            <constraint firstItem="dJK-cp-sgc" firstAttribute="top" secondItem="hDX-Nc-FQE" secondAttribute="bottom" constant="100" id="CEh-q1-VIY"/>
+                            <constraint firstItem="0lh-4S-6Nb" firstAttribute="width" secondItem="iH7-pY-Rby" secondAttribute="width" multiplier="0.8" id="IFw-pY-Fqj"/>
+                            <constraint firstItem="dJK-cp-sgc" firstAttribute="width" secondItem="iH7-pY-Rby" secondAttribute="width" multiplier="0.8" id="Jur-Ow-5fC"/>
+                            <constraint firstItem="0lh-4S-6Nb" firstAttribute="top" secondItem="3nZ-Bj-BJz" secondAttribute="bottom" constant="100" id="Muc-Oo-IZ4"/>
+                            <constraint firstItem="hDX-Nc-FQE" firstAttribute="top" secondItem="0lh-4S-6Nb" secondAttribute="top" id="Ne9-2E-aq1"/>
+                            <constraint firstItem="0lh-4S-6Nb" firstAttribute="centerX" secondItem="iH7-pY-Rby" secondAttribute="centerX" id="Pkj-ep-Dio"/>
+                            <constraint firstItem="hDX-Nc-FQE" firstAttribute="leading" secondItem="0lh-4S-6Nb" secondAttribute="leading" id="V5D-7j-vjQ"/>
+                            <constraint firstItem="hDX-Nc-FQE" firstAttribute="bottom" secondItem="0lh-4S-6Nb" secondAttribute="bottom" id="WoR-14-LJS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="XCFVideoLoadProgressView" id="2Xt-K0-8CX"/>
+                    <connections>
+                        <outlet property="imageView" destination="0lh-4S-6Nb" id="RAl-u9-BYv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6LD-IW-poR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1226" y="1280"/>
         </scene>
         <!--Appearance Colors-->
         <scene sceneID="TLN-xU-ba5">
@@ -555,4 +627,7 @@
             <point key="canvasLocation" x="-188" y="484"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="microVideoPlayerPreviewImage.jpg" width="620" height="413"/>
+    </resources>
 </document>

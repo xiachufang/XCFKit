@@ -42,7 +42,7 @@
 		E87EBD8B1DFF9CDF00027C05 /* UIFont+fontWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = E87EBD891DFF9CDF00027C05 /* UIFont+fontWeight.m */; };
 		E881B8901DE6A2240055A817 /* UISearchBar+textField.h in Headers */ = {isa = PBXBuildFile; fileRef = E881B88E1DE6A2240055A817 /* UISearchBar+textField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E881B8911DE6A2240055A817 /* UISearchBar+textField.m in Sources */ = {isa = PBXBuildFile; fileRef = E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */; };
-		E882296A1E2F0EE6007BA838 /* XCFVideoLoadProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = E88229681E2F0EE6007BA838 /* XCFVideoLoadProgressView.h */; };
+		E882296A1E2F0EE6007BA838 /* XCFVideoLoadProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = E88229681E2F0EE6007BA838 /* XCFVideoLoadProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E882296B1E2F0EE6007BA838 /* XCFVideoLoadProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E88229691E2F0EE6007BA838 /* XCFVideoLoadProgressView.m */; };
 		E890CC561E09370500F4F803 /* XCFAVPlayerControllerAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = E890CC541E09370500F4F803 /* XCFAVPlayerControllerAnimator.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		E890CC571E09370500F4F803 /* XCFAVPlayerControllerAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E890CC551E09370500F4F803 /* XCFAVPlayerControllerAnimator.m */; };

@@ -20,6 +20,7 @@
 		E83521451E07D6E500C921A1 /* XCFAVPlayerDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E83521441E07D6E500C921A1 /* XCFAVPlayerDemoController.m */; };
 		E839BB931E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E839BB921E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.m */; };
 		E84FD29C1E03BB19007A09C4 /* microVideoPlayerPreviewImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E84FD29B1E03BB19007A09C4 /* microVideoPlayerPreviewImage.jpg */; };
+		E882296E1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E882296D1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,8 @@
 		E839BB911E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFMicroVideoPlayerDemoController.h; sourceTree = "<group>"; };
 		E839BB921E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFMicroVideoPlayerDemoController.m; sourceTree = "<group>"; };
 		E84FD29B1E03BB19007A09C4 /* microVideoPlayerPreviewImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = microVideoPlayerPreviewImage.jpg; sourceTree = "<group>"; };
+		E882296C1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoLoadProgressViewDemoController.h; sourceTree = "<group>"; };
+		E882296D1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoLoadProgressViewDemoController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 				E82ADC8B1E26475800599884 /* XCFVideoRangeSliderDemoController.m */,
 				E82ADC941E28D0C000599884 /* XCFVideoEditorDemoController.h */,
 				E82ADC951E28D0C000599884 /* XCFVideoEditorDemoController.m */,
+				E882296C1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.h */,
+				E882296D1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.m */,
 				E80039F11DC325D100103028 /* Main.storyboard */,
 				E80039F41DC325D100103028 /* Assets.xcassets */,
 				E80039F61DC325D100103028 /* LaunchScreen.storyboard */,
@@ -257,6 +262,7 @@
 				E80039F01DC325D100103028 /* ViewController.m in Sources */,
 				E80039ED1DC325D100103028 /* AppDelegate.m in Sources */,
 				E82ADC8C1E26475800599884 /* XCFVideoRangeSliderDemoController.m in Sources */,
+				E882296E1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.m in Sources */,
 				E839BB931E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.m in Sources */,
 				E80039EA1DC325D100103028 /* main.m in Sources */,
 				E82ADC961E28D0C000599884 /* XCFVideoEditorDemoController.m in Sources */,
