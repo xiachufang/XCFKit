@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 // decoder
 @property (nonatomic, strong, readonly, nullable) XCFMicroVideoDecoder *decoder;
 
-- (void) switchToVideoDecoder:(XCFMicroVideoDecoder *)decoder;
+- (void) switchToVideoDecoder:(nullable XCFMicroVideoDecoder *)decoder;
 
 @end
 

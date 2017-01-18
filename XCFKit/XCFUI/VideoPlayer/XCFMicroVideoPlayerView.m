@@ -275,6 +275,7 @@
         [self displayImageRef:_previewImageRef];
     } else {
         _currentImageRef = NULL;
+        self.layer.contents = nil;
     }
     
     [self statusChanged];
