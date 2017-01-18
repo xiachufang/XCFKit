@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIImage *) screenshot;
 
+- (void) setPreviewImage:(UIImage *)previewImage;
+
 // decoder
 @property (nonatomic, strong, readonly, nullable) XCFMicroVideoDecoder *decoder;
 

@@ -49,6 +49,7 @@
             _decoder.delegate = self;
         }
         
+        _currentImageRef = NULL;
         _previewImageRef = image.CGImage;
         [self displayImageRef:_previewImageRef];
         self.backgroundColor = [UIColor blackColor];
@@ -211,6 +212,19 @@
     }
 }
 
+- (void) setPreviewImage:(UIImage *)previewImage
+{
+    if (_previewImageRef) {
+        CGImageRelease(_previewImageRef);
+    }
+    
+    _previewImageRef = [previewImage CGImage];
+    
+    if (!_currentImageRef) {
+        [self displayImageRef:_previewImageRef];
+    }
+}
+
 #pragma mark - decoder
 
 - (void) switchToVideoDecoder:(XCFMicroVideoDecoder *)decoder
@@ -259,6 +273,8 @@
     
     if (_previewImageRef) {
         [self displayImageRef:_previewImageRef];
+    } else {
+        _currentImageRef = NULL;
     }
     
     [self statusChanged];
