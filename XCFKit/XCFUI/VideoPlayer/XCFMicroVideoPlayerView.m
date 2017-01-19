@@ -300,7 +300,7 @@
 
 - (void) microVideoDecoder:(XCFMicroVideoDecoder *)decoder decodeFailed:(NSError *)error
 {
-    NSLog(@"%@ failed with error message : %@",decoder,error.localizedDescription);
+//    NSLog(@"%@ failed with error message : %@",decoder,error);
 }
 
 - (void) microVideoDecoderBePrepared:(XCFMicroVideoDecoder *)decoder
