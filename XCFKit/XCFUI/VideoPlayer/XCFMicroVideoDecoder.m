@@ -20,6 +20,8 @@
 @property (nonatomic, strong, readwrite) AVAssetReader *assetReader;
 @property (nonatomic, strong) AVAssetReaderTrackOutput *assetOutput;
 
+@property (nonatomic, strong) AVAssetImageGenerator *imageGenerator;
+
 @end
 
 @implementation XCFMicroVideoDecoder
@@ -372,6 +374,21 @@
     } else if (self.assetReader.status == AVAssetReaderStatusFailed) {
         [self detectError:self.assetReader.error];
     }
+}
+
+- (CGImageRef) extractThumbnailImage
+{
+    if (!_videoAsset) return NULL;
+    
+    if (!_imageGenerator) {
+        _imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:_videoAsset];
+        _imageGenerator.appliesPreferredTrackTransform = self;
+    }
+    
+    CGImageRef imageRef = [_imageGenerator copyCGImageAtTime:kCMTimeZero
+                                                  actualTime:NULL
+                                                       error:NULL];
+    return imageRef;
 }
 
 @end

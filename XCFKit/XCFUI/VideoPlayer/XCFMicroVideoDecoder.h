@@ -67,6 +67,8 @@ typedef enum : NSUInteger {
 
 - (void) cleanup;
 
+- (nullable CGImageRef) extractThumbnailImage;
+
 @end
 
 NS_ASSUME_NONNULL_END

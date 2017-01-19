@@ -236,6 +236,11 @@
         _decoder = decoder;
         _decoder.outputSize = self.bounds.size;
         _decoder.delegate = self;
+        
+        if (_decoder) {
+            _previewImageRef = [_decoder extractThumbnailImage];
+            [self displayImageRef:_previewImageRef];
+        }
     }
 }
 
@@ -301,7 +306,6 @@
 - (void) microVideoDecoderBePrepared:(XCFMicroVideoDecoder *)decoder
 {
     if (decoder == _decoder && _running) {
-        NSLog(@"%@ is prepared to play video",decoder);
         [decoder requestNextSampleBuffer];
     }
 }
@@ -310,8 +314,6 @@
 {
     if (decoder == _decoder) {
         _actualLoopCount += 1;
-        
-        NSLog(@"%@ finish decode with loop count : %zd",decoder,_actualLoopCount);
         
         if (self.loopCount <= 0 || _actualLoopCount < self.loopCount) {
             [decoder prepareToStartDecode];
