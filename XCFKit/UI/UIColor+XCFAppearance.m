@@ -28,7 +28,7 @@
 
 + (instancetype)xcf_searchBarTextFieldBackgroundColor
 {
-    return [UIColor xcf_colorWithHexString:@"#F2F2EF"];
+    return [UIColor xcf_colorWithHexString:@"#F0F0EF"];
 }
 
 + (instancetype)xcf_mainTextColor
