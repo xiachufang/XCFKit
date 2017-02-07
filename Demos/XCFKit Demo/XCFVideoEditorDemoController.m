@@ -49,6 +49,8 @@ XCFAVPlayerControllerDelegate
     XCFVideoEditorVideoQualityType aspect = XCFVideoEditorVideoQualityType1x1;
     if (self.aspectSegmentControl.selectedSegmentIndex == 1) {
         aspect = XCFVideoEditorVideoQualityType4x3;
+    } else if (self.aspectSegmentControl.selectedSegmentIndex == 2) {
+        aspect = XCFVideoEditorVideoQualityType5x4;
     }
     editor.videoQuality = XCFVideoEditorVideoQualityTypeMedium | aspect;
     [self.navigationController pushViewController:editor animated:YES];
