@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, XCFVideoEditorVideoQualityType) {
     
     XCFVideoEditorVideoQualityType1x1    = 0 << 4,
     XCFVideoEditorVideoQualityType4x3    = 1 << 4,
+    XCFVideoEditorVideoQualityType5x4    = 2 << 5,
 };
 
 @interface XCFVideoEditorController : UIViewController

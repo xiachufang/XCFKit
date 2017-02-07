@@ -160,6 +160,8 @@
 {
     if (self.videoQuality & XCFVideoEditorVideoQualityType4x3) {
         return 3.0 / 4.0;
+    } else if (self.videoQuality & XCFVideoEditorVideoQualityType5x4) {
+        return 4.0 / 5.0;
     }
     
     return 1;
