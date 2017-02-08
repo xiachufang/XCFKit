@@ -486,4 +486,61 @@ NSString *const XCFVideoEditorVideoInfoHeight = @"XCFVideoEditorVideoInfoHeight"
 NSString *const XCFVideoEditorVideoInfoDuration = @"XCFVideoEditorVideoInfoDuration";
 NSString *const XCFVideoEditorVideoInfoThumbnail = @"XCFVideoEditorVideoInfoThumbnail";
 
+@interface XCFVideoEditorControllerDelegate : NSObject<XCFVideoEditorControllerDelegate>
+
+@property (nonatomic, copy) void (^callback)(XCFVideoEditorController*,NSString*,NSDictionary*,NSError*);
+
+@end
+
+@implementation XCFVideoEditorControllerDelegate
+
+- (void) videoEditorController:(XCFVideoEditorController *)editor didSaveEditedVideoToPath:(NSString *)editedVideoPath videoInfo:(NSDictionary *)videoInfo
+{
+    if (self.callback) {
+        self.callback(editor,editedVideoPath,videoInfo,nil);
+    }
+}
+
+- (void) videoEditorController:(XCFVideoEditorController *)editor didFailWithError:(NSError *)error
+{
+    if (self.callback) {
+        self.callback(editor,nil,nil,error);
+    }
+}
+
+@end
+
+#import <objc/runtime.h>
+
+@implementation XCFVideoEditorController (block)
+
+- (XCFVideoEditorControllerDelegate *) _callbackHandler
+{
+    void *const key = _cmd;
+    XCFVideoEditorControllerDelegate *delegate = objc_getAssociatedObject(self, key);
+    if (!delegate) {
+        delegate = [XCFVideoEditorControllerDelegate new];
+        objc_setAssociatedObject(self, key, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    
+    return delegate;
+}
+
++ (instancetype) videoEditorWithVideoFilePath:(NSString *)filePath
+                                       output:(void (^)(XCFVideoEditorController *, NSString *, NSDictionary *, NSError *))outputBlock
+{
+    NSParameterAssert(filePath);
+    XCFVideoEditorController *videoEditor = [[XCFVideoEditorController alloc] initWithVideoPath:filePath];
+    
+    if (outputBlock) {
+        XCFVideoEditorControllerDelegate *delegate = [videoEditor _callbackHandler];
+        delegate.callback = outputBlock;
+        videoEditor.delegate = delegate;
+    }
+    
+    return videoEditor;
+}
+
+@end
+
 

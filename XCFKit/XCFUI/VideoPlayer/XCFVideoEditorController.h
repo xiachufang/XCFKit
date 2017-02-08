@@ -39,8 +39,6 @@ typedef NS_ENUM(NSInteger, XCFVideoEditorVideoQualityType) {
 // video quality , default is XCFVideoEditorVideoQualityTypeMedium | XCFVideoEditorVideoQualityType1x1
 @property (nonatomic, assign) XCFVideoEditorVideoQualityType videoQuality;
 
-
-
 @end
 
 @protocol XCFVideoEditorControllerDelegate <NSObject>
@@ -62,3 +60,11 @@ extern NSString *const XCFVideoEditorVideoInfoWidth;
 extern NSString *const XCFVideoEditorVideoInfoHeight;
 extern NSString *const XCFVideoEditorVideoInfoDuration;
 extern NSString *const XCFVideoEditorVideoInfoThumbnail;
+
+@interface XCFVideoEditorController (block)
+
+// 注意，采用 block 回调的形式就不要再设置 delegate
++ (instancetype) videoEditorWithVideoFilePath:(NSString *)filePath
+                                       output:(void (^)(XCFVideoEditorController *editor, NSString *editedFilePath, NSDictionary *info,NSError *error))outputBlock;
+
+@end
