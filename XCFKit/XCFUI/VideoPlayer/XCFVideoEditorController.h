@@ -67,4 +67,7 @@ extern NSString *const XCFVideoEditorVideoInfoThumbnail;
 + (instancetype) videoEditorWithVideoFilePath:(NSString *)filePath
                                        output:(void (^)(XCFVideoEditorController *editor, NSString *editedFilePath, NSDictionary *info,NSError *error))outputBlock;
 
++ (instancetype) videoEditorWithVideoAsset:(AVAsset *)asset
+                                    output:(void (^)(XCFVideoEditorController *editor, NSString *editedFilePath, NSDictionary *info,NSError *error))outputBlock;
+
 @end

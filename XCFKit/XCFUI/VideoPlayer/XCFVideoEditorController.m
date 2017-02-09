@@ -383,7 +383,7 @@
         t = CGAffineTransformRotate(t, M_PI);
     } else {
         // up
-        t = CGAffineTransformMakeTranslation(-cropVideoOrigin.x,cropVideoOrigin.y);
+        t = CGAffineTransformMakeTranslation(-cropVideoOrigin.x,-cropVideoOrigin.y);
         t = CGAffineTransformRotate(t, 0);
     }
     [transformer setTransform:t atTime:kCMTimeZero];
@@ -449,6 +449,9 @@
         [self.delegate videoEditorController:self
                     didSaveEditedVideoToPath:tempURL.path
                                    videoInfo:mutableVideoInfo.copy];
+        
+        // delete temp file
+//        [[NSFileManager defaultManager] removeItemAtURL:tempURL error:nil];
     }
 }
 
@@ -531,6 +534,21 @@ NSString *const XCFVideoEditorVideoInfoThumbnail = @"XCFVideoEditorVideoInfoThum
 {
     NSParameterAssert(filePath);
     XCFVideoEditorController *videoEditor = [[XCFVideoEditorController alloc] initWithVideoPath:filePath];
+    
+    if (outputBlock) {
+        XCFVideoEditorControllerDelegate *delegate = [videoEditor _callbackHandler];
+        delegate.callback = outputBlock;
+        videoEditor.delegate = delegate;
+    }
+    
+    return videoEditor;
+}
+
++ (instancetype) videoEditorWithVideoAsset:(AVAsset *)asset
+                                    output:(void (^)(XCFVideoEditorController *editor, NSString *editedFilePath, NSDictionary *info,NSError *error))outputBlock
+{
+    NSParameterAssert(asset);
+    XCFVideoEditorController *videoEditor = [[XCFVideoEditorController alloc] initWithVideoAsset:asset];
     
     if (outputBlock) {
         XCFVideoEditorControllerDelegate *delegate = [videoEditor _callbackHandler];

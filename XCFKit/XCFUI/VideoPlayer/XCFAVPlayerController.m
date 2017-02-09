@@ -106,7 +106,7 @@ UIViewControllerTransitioningDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     _playerView = [[XCFAVPlayerView alloc] initWithFrame:self.view.bounds];
     _playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
