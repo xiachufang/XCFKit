@@ -20,6 +20,12 @@
     return self;
 }
 
+- (void) awakeFromNib
+{
+    [super awakeFromNib];
+    self.opaque = NO;
+}
+
 - (void)drawRect:(CGRect)rect {
     CGFloat diameter = MIN(rect.size.width, rect.size.height);
     CGRect displayRect = (CGRect){rect.origin,CGSizeMake(diameter, diameter)};
