@@ -33,6 +33,8 @@
         unsigned int didSave : 1;
         unsigned int didFail : 1;
     } _delegateFlag;
+    
+    BOOL _isExperting;
 }
 
 + (BOOL) canEditVideoAtPath:(NSString *)videoPath
@@ -89,7 +91,7 @@
         
         _videoAsset = asset;
         
-        self.title = @"Trim & Crop";
+        self.title = [self _internalTitle];
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
@@ -195,6 +197,13 @@
     
     self.playerScrollView.frame = [self _playerContainerFrame];
     self.videoRangeSlider.frame = [self _videoRangeSliderFrame];
+}
+
+#pragma mark - data
+
+- (NSString *) _internalTitle
+{
+    return @"剪辑视频";
 }
 
 #pragma mark - video 
@@ -403,11 +412,19 @@
     __weak typeof(self) weak_self = self;
     _exportSession.outputURL = expertURL;
     _exportSession.outputFileType = AVFileTypeMPEG4;
+    
+    [self enterExportingStatus];
+    
     [_exportSession exportAsynchronouslyWithCompletionHandler:^{
         __strong typeof(weak_self) strong_self = weak_self;
         AVAssetExportSession *exporter = strong_self.exportSession;
         AVAssetExportSessionStatus status = [exporter status];
-        if (status == AVAssetExportSessionStatusCompleted) {
+        if (status == AVAssetExportSessionStatusExporting) {
+            double progress = exporter.progress;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strong_self updateExpertProgress:progress];
+            });
+        } else if (status == AVAssetExportSessionStatusCompleted) {
             AVAsset *outputAsset = [AVAsset assetWithURL:expertURL];
             AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:outputAsset];
             imageGenerator.appliesPreferredTrackTransform = YES;
@@ -427,6 +444,10 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [strong_self _expertFailed:exporter.error];
             });
+        } else if (status > AVAssetExportSessionStatusExporting) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strong_self finishExportStatus];
+            });
         }
     }];
 }
@@ -434,6 +455,8 @@
 - (void) _expertDone:(NSURL *)tempURL thumbnailImage:(UIImage *)image videoSize:(CGSize)size
 {
     [self.exportSession cancelExport];
+    [self finishExportStatus];
+    
     if (_delegateFlag.didSave) {
         NSMutableDictionary *mutableVideoInfo = [NSMutableDictionary dictionaryWithCapacity:4];
         
@@ -458,9 +481,40 @@
 - (void) _expertFailed:(NSError *)error
 {
     [self.exportSession cancelExport];
+    [self finishExportStatus];
+    
     if (_delegateFlag.didFail) {
         [self.delegate videoEditorController:self
                             didFailWithError:error];
+    }
+}
+
+#pragma mark - status
+
+- (void) enterExportingStatus
+{
+    _isExperting = YES;
+    
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.videoRangeSlider.enabled = NO;
+    
+    self.title = [self _internalTitle];
+}
+
+- (void) finishExportStatus
+{
+    _isExperting = NO;
+    
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    self.videoRangeSlider.enabled = YES;
+    
+    self.title = [self _internalTitle];
+}
+
+- (void) updateExpertProgress:(double)progress
+{
+    if (_isExperting) {
+        self.title = [NSString stringWithFormat:@"%@ %.0f",[self _internalTitle],progress];
     }
 }
 
