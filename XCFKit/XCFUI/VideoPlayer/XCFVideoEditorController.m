@@ -180,13 +180,13 @@
     CGFloat height = width * ratio;
     
     CGFloat toplayoutHeight = [self.topLayoutGuide length];
-    return CGRectMake(0, toplayoutHeight + 12, width, height);
+    return CGRectMake(0, toplayoutHeight + 20, width, height);
 }
 
 - (CGRect) _videoRangeSliderFrame
 {
     CGFloat sliderHeight = 78;
-    CGFloat topSpaceBetweenPlayer = 12;
+    CGFloat topSpaceBetweenPlayer = 40;
     
     CGRect frame = [self _playerContainerFrame];
     frame.origin.y += frame.size.height + topSpaceBetweenPlayer;
