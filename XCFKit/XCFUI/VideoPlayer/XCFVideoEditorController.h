@@ -45,6 +45,8 @@ typedef NS_ENUM(NSInteger, XCFVideoEditorVideoQualityType) {
 
 @optional
 
+- (void) videoEditorDidStartExport:(XCFVideoEditorController *)editor;
+
 // videoInfo 包含的值有 XCFVideoEditorVideoInfoWidth XCFVideoEditorVideoInfoHeight
 // XCFVideoEditorVideoInfoDuration ， 正常情况下有 XCFVideoEditorVideoInfoThumbnail 但不保证
 - (void)videoEditorController:(XCFVideoEditorController *)editor
@@ -65,9 +67,11 @@ extern NSString *const XCFVideoEditorVideoInfoThumbnail;
 
 // 注意，采用 block 回调的形式就不要再设置 delegate
 + (instancetype) videoEditorWithVideoFilePath:(NSString *)filePath
+                                  startExport:(void (^)(XCFVideoEditorController *editor))startExportBlock
                                        output:(void (^)(XCFVideoEditorController *editor, NSString *editedFilePath, NSDictionary *info,NSError *error))outputBlock;
 
 + (instancetype) videoEditorWithVideoAsset:(AVAsset *)asset
+                               startExport:(void (^)(XCFVideoEditorController *editor))startExportBlock
                                     output:(void (^)(XCFVideoEditorController *editor, NSString *editedFilePath, NSDictionary *info,NSError *error))outputBlock;
 
 @end

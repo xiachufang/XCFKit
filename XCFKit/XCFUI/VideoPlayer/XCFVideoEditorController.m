@@ -30,6 +30,7 @@
     BOOL _pause;
     
     struct {
+        unsigned int didStart: 1;
         unsigned int didSave : 1;
         unsigned int didFail : 1;
     } _delegateFlag;
@@ -152,6 +153,7 @@
 {
     _delegate = delegate;
     
+    _delegateFlag.didStart = [delegate respondsToSelector:@selector(videoEditorDidStartExport:)];
     _delegateFlag.didSave = [delegate respondsToSelector:@selector(videoEditorController:didSaveEditedVideoToPath:videoInfo:)];
     _delegateFlag.didFail = [delegate respondsToSelector:@selector(videoEditorController:didFailWithError:)];
 }
@@ -415,6 +417,10 @@
     
     [self enterExportingStatus];
     
+    if (_delegateFlag.didStart) {
+        [self.delegate videoEditorDidStartExport:self];
+    }
+    
     [_exportSession exportAsynchronouslyWithCompletionHandler:^{
         __strong typeof(weak_self) strong_self = weak_self;
         AVAssetExportSession *exporter = strong_self.exportSession;
@@ -546,10 +552,18 @@ NSString *const XCFVideoEditorVideoInfoThumbnail = @"XCFVideoEditorVideoInfoThum
 @interface XCFVideoEditorControllerDelegate : NSObject<XCFVideoEditorControllerDelegate>
 
 @property (nonatomic, copy) void (^callback)(XCFVideoEditorController*,NSString*,NSDictionary*,NSError*);
+@property (nonatomic, copy) void (^startExport)(XCFVideoEditorController *);
 
 @end
 
 @implementation XCFVideoEditorControllerDelegate
+
+- (void) videoEditorDidStartExport:(XCFVideoEditorController *)editor
+{
+    if (self.startExport) {
+        self.startExport(editor);
+    }
+}
 
 - (void) videoEditorController:(XCFVideoEditorController *)editor didSaveEditedVideoToPath:(NSString *)editedVideoPath videoInfo:(NSDictionary *)videoInfo
 {
@@ -584,6 +598,7 @@ NSString *const XCFVideoEditorVideoInfoThumbnail = @"XCFVideoEditorVideoInfoThum
 }
 
 + (instancetype) videoEditorWithVideoFilePath:(NSString *)filePath
+                                  startExport:(void (^)(XCFVideoEditorController *editor))startExportBlock
                                        output:(void (^)(XCFVideoEditorController *, NSString *, NSDictionary *, NSError *))outputBlock
 {
     NSParameterAssert(filePath);
@@ -592,6 +607,7 @@ NSString *const XCFVideoEditorVideoInfoThumbnail = @"XCFVideoEditorVideoInfoThum
     if (outputBlock) {
         XCFVideoEditorControllerDelegate *delegate = [videoEditor _callbackHandler];
         delegate.callback = outputBlock;
+        delegate.startExport = startExportBlock;
         videoEditor.delegate = delegate;
     }
     
@@ -599,6 +615,7 @@ NSString *const XCFVideoEditorVideoInfoThumbnail = @"XCFVideoEditorVideoInfoThum
 }
 
 + (instancetype) videoEditorWithVideoAsset:(AVAsset *)asset
+                               startExport:(void (^)(XCFVideoEditorController *editor))startExportBlock
                                     output:(void (^)(XCFVideoEditorController *editor, NSString *editedFilePath, NSDictionary *info,NSError *error))outputBlock
 {
     NSParameterAssert(asset);
@@ -607,6 +624,7 @@ NSString *const XCFVideoEditorVideoInfoThumbnail = @"XCFVideoEditorVideoInfoThum
     if (outputBlock) {
         XCFVideoEditorControllerDelegate *delegate = [videoEditor _callbackHandler];
         delegate.callback = outputBlock;
+        delegate.startExport = startExportBlock;
         videoEditor.delegate = delegate;
     }
     
