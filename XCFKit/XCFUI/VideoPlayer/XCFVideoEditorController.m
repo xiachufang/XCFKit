@@ -12,6 +12,8 @@
 #import "XCFVideoRangeSlider.h"
 #import "XCFAVPlayerView.h"
 
+#import "UIColor+XCFAppearance.h"
+
 @interface XCFVideoEditorController ()<XCFAVPlayerViewDelegate>
 
 @property (nonatomic, strong) AVAsset *videoAsset;
@@ -252,9 +254,9 @@
     }];
     
     _videoRangeSlider = [[XCFVideoRangeSlider alloc] initWithFrame:[self _videoRangeSliderFrame]];
+    _videoRangeSlider.tintColor = [UIColor xcf_linkColor];
     _videoRangeSlider.minimumTrimLength = self.videoMinimumDuration;
     _videoRangeSlider.maximumTrimLength = self.videoMaximumDuration;
-    _videoRangeSlider.tintColor = [UIColor orangeColor];
     [self.view addSubview:_videoRangeSlider];
     
     [_videoRangeSlider addTarget:self
