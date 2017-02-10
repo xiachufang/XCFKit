@@ -296,12 +296,12 @@ UIGestureRecognizerDelegate
     
     self.asset = asset;
     _videoLength = CMTimeGetSeconds(asset.duration);
-    NSLog(@"video length is %.2lf",_videoLength);
+//    NSLog(@"video length is %.2lf",_videoLength);
     
     CGFloat contentWidth = self.videoLength / self.maximumTrimLength * self.frameCollectionView.bounds.size.width;
     CGFloat numberOfFrames = contentWidth / XCFVideoRangeSliderFrameMaxWidth;
     numberOfFrames = ceil(numberOfFrames);
-    NSLog(@"preferrd frames : %lf",numberOfFrames);
+//    NSLog(@"preferrd frames : %lf",numberOfFrames);
     _videoRangeSliderFrameWidth = contentWidth / numberOfFrames;
     
     _imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:self.asset];
