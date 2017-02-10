@@ -33,6 +33,7 @@
     
     struct {
         unsigned int didStart: 1;
+        unsigned int didCancel : 1;
         unsigned int didSave : 1;
         unsigned int didFail : 1;
     } _delegateFlag;
@@ -143,6 +144,12 @@
                                                                     action:@selector(expertVideo:)];
     self.navigationItem.rightBarButtonItem = expertButton;
     
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"取消"
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(cancelEdit:)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(_pauseVideo:)];
     tapGesture.numberOfTapsRequired = 1;
@@ -155,6 +162,7 @@
 {
     _delegate = delegate;
     
+    _delegateFlag.didCancel = [delegate respondsToSelector:@selector(videoEditorDidCancelEdit:)];
     _delegateFlag.didStart = [delegate respondsToSelector:@selector(videoEditorDidStartExport:)];
     _delegateFlag.didSave = [delegate respondsToSelector:@selector(videoEditorController:didSaveEditedVideoToPath:videoInfo:)];
     _delegateFlag.didFail = [delegate respondsToSelector:@selector(videoEditorController:didFailWithError:)];
@@ -267,6 +275,11 @@
 
 #pragma mark - action
 
+- (void) _swipeAction:(id)sender
+{
+    NSLog(@"swipe");
+}
+
 - (void) _pauseVideo:(id)sender
 {
     if (self.videoRangeSlider.isTracking) return;
@@ -317,6 +330,13 @@
         return AVAssetExportPresetMediumQuality;
     } else {
         return AVAssetExportPresetHighestQuality;
+    }
+}
+
+- (void) cancelEdit:(id)sender
+{
+    if (_delegateFlag.didCancel) {
+        [self.delegate videoEditorDidCancelEdit:self];
     }
 }
 
@@ -504,6 +524,7 @@
     _isExperting = YES;
     
     self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.navigationItem.leftBarButtonItem.enabled = NO;
     self.videoRangeSlider.enabled = NO;
     
     self.title = [self _internalTitle];
@@ -514,6 +535,7 @@
     _isExperting = NO;
     
     self.navigationItem.rightBarButtonItem.enabled = YES;
+    self.navigationItem.leftBarButtonItem.enabled = YES;
     self.videoRangeSlider.enabled = YES;
     
     self.title = [self _internalTitle];
@@ -564,6 +586,15 @@ NSString *const XCFVideoEditorVideoInfoThumbnail = @"XCFVideoEditorVideoInfoThum
 {
     if (self.startExport) {
         self.startExport(editor);
+    }
+}
+
+- (void) videoEditorDidCancelEdit:(XCFVideoEditorController *)editor
+{
+    if (editor.navigationController.viewControllers.firstObject == editor) {
+        [editor.navigationController dismissViewControllerAnimated:NO completion:nil];
+    } else {
+        [editor.navigationController popViewControllerAnimated:YES];
     }
 }
 

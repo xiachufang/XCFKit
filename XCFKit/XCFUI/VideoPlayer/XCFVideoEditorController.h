@@ -46,6 +46,7 @@ typedef NS_ENUM(NSInteger, XCFVideoEditorVideoQualityType) {
 @optional
 
 - (void) videoEditorDidStartExport:(XCFVideoEditorController *)editor;
+- (void) videoEditorDidCancelEdit:(XCFVideoEditorController *)editor;
 
 // videoInfo 包含的值有 XCFVideoEditorVideoInfoWidth XCFVideoEditorVideoInfoHeight
 // XCFVideoEditorVideoInfoDuration ， 正常情况下有 XCFVideoEditorVideoInfoThumbnail 但不保证
