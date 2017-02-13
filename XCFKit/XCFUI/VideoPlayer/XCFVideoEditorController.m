@@ -73,6 +73,7 @@
 - (void) dealloc
 {
     [_exportSession cancelExport];
+    [self cancelObserveNotifications];
 }
 
 - (instancetype) initWithVideoPath:(NSString *)videoPath
@@ -156,6 +157,8 @@
     tapGesture.numberOfTouchesRequired = 1;
     tapGesture.cancelsTouchesInView = NO;
     [self.playerScrollView addGestureRecognizer:tapGesture];
+    
+    [self observeNotifications];
 }
 
 - (void) setDelegate:(id<XCFVideoEditorControllerDelegate>)delegate
@@ -510,6 +513,31 @@
         [self.delegate videoEditorController:self
                             didFailWithError:error];
     }
+}
+
+#pragma mark - notification
+
+- (void) observeNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_pauseVideo:)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_pauseVideo:)
+                                                 name:UIApplicationWillTerminateNotification
+                                               object:nil];
+}
+
+- (void) cancelObserveNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidEnterBackgroundNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationWillTerminateNotification
+                                                  object:nil];
 }
 
 #pragma mark - status
