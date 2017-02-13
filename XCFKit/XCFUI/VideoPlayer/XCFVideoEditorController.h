@@ -76,3 +76,11 @@ extern NSString *const XCFVideoEditorVideoInfoThumbnail;
                                     output:(void (^)(XCFVideoEditorController *editor, NSString *editedFilePath, NSDictionary *info,NSError *error))outputBlock;
 
 @end
+
+// 暂时为了满足下厨房那边的业务逻辑而添加的方法
+@interface XCFVideoEditorController (XCF)
+
+- (void) lockBarButtonItems;
+- (void) unlockBarButtonItems;
+
+@end

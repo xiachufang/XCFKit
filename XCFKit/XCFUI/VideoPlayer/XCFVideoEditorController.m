@@ -275,11 +275,6 @@
 
 #pragma mark - action
 
-- (void) _swipeAction:(id)sender
-{
-    NSLog(@"swipe");
-}
-
 - (void) _pauseVideo:(id)sender
 {
     if (self.videoRangeSlider.isTracking) return;
@@ -582,6 +577,11 @@ NSString *const XCFVideoEditorVideoInfoThumbnail = @"XCFVideoEditorVideoInfoThum
 
 @implementation XCFVideoEditorControllerDelegate
 
+- (void) dealloc
+{
+    NSLog(@"dealloc %@",self.class);
+}
+
 - (void) videoEditorDidStartExport:(XCFVideoEditorController *)editor
 {
     if (self.startExport) {
@@ -654,14 +654,28 @@ NSString *const XCFVideoEditorVideoInfoThumbnail = @"XCFVideoEditorVideoInfoThum
     NSParameterAssert(asset);
     XCFVideoEditorController *videoEditor = [[XCFVideoEditorController alloc] initWithVideoAsset:asset];
     
-    if (outputBlock) {
-        XCFVideoEditorControllerDelegate *delegate = [videoEditor _callbackHandler];
-        delegate.callback = outputBlock;
-        delegate.startExport = startExportBlock;
-        videoEditor.delegate = delegate;
-    }
+    XCFVideoEditorControllerDelegate *delegate = [videoEditor _callbackHandler];
+    delegate.callback = outputBlock;
+    delegate.startExport = startExportBlock;
+    videoEditor.delegate = delegate;
     
     return videoEditor;
+}
+
+@end
+
+@implementation XCFVideoEditorController (XCF)
+
+- (void) lockBarButtonItems
+{
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.navigationItem.leftBarButtonItem.enabled  = NO;
+}
+
+- (void) unlockBarButtonItems
+{
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    self.navigationItem.leftBarButtonItem.enabled  = YES;
 }
 
 @end
