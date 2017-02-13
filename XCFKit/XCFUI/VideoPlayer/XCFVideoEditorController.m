@@ -577,11 +577,6 @@ NSString *const XCFVideoEditorVideoInfoThumbnail = @"XCFVideoEditorVideoInfoThum
 
 @implementation XCFVideoEditorControllerDelegate
 
-- (void) dealloc
-{
-    NSLog(@"dealloc %@",self.class);
-}
-
 - (void) videoEditorDidStartExport:(XCFVideoEditorController *)editor
 {
     if (self.startExport) {
