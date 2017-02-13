@@ -45,7 +45,7 @@
     if (self) {
         if (path) {
             _decoder = [[XCFMicroVideoDecoder alloc] initWithVideoFilePath:path];
-            _decoder.outputSize = frame.size;
+//            _decoder.outputSize = frame.size;
             _decoder.delegate = self;
         }
         
@@ -54,7 +54,7 @@
         [self displayImageRef:_previewImageRef];
         self.backgroundColor = [UIColor blackColor];
         
-        self.layer.contentsGravity = kCAGravityResizeAspect;
+        self.layer.contentsGravity = kCAGravityResizeAspectFill;
         self.layer.masksToBounds = YES;
     }
     
@@ -234,7 +234,7 @@
         _decoder.delegate = nil;
         
         _decoder = decoder;
-        _decoder.outputSize = self.bounds.size;
+//        _decoder.outputSize = self.bounds.size;
         _decoder.delegate = self;
         
         if (_decoder) {
