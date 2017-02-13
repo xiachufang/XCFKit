@@ -9,6 +9,8 @@
 #import "XCFVideoRangeSlider.h"
 #import <AVFoundation/AVFoundation.h>
 
+#import "UIColor+XCFAppearance.h"
+
 #define ADJUST_FRAME_SIZE_BY_TRACK 0
 #define ASYNC_GENERATE_IMAGE 1
 
@@ -203,8 +205,8 @@ UIGestureRecognizerDelegate
     
     // slider
     _slider = [_XCFVideoRangerSliderHandler new];
-    _slider.tintColor = [UIColor lightGrayColor];
-    _slider.backgroundColor = [UIColor whiteColor];
+    _slider.tintColor = [UIColor whiteColor];
+    _slider.backgroundColor = [UIColor xcf_linkColor];
     _slider.userInteractionEnabled = NO;
     [self addSubview:_slider];
     
@@ -271,7 +273,7 @@ UIGestureRecognizerDelegate
     CGFloat sliderWidth = 8;
     self.slider.layer.cornerRadius = 2;
     self.slider.layer.masksToBounds = YES;
-    self.slider.frame = CGRectMake(progress - sliderWidth, -2, sliderWidth, height + 4);
+    self.slider.frame = CGRectMake(progress - sliderWidth + 1, -2, sliderWidth, height + 4);
     
     CGFloat frameOffset = self.frameCollectionView.contentOffset.x;
     CGFloat contentWidth = self.frameCollectionView.contentSize.width;

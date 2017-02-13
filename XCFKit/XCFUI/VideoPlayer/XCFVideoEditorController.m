@@ -13,6 +13,7 @@
 #import "XCFAVPlayerView.h"
 
 #import "UIColor+XCFAppearance.h"
+#import "UIColor+Hex.h"
 
 @interface XCFVideoEditorController ()<XCFAVPlayerViewDelegate>
 
@@ -24,6 +25,8 @@
 
 @property (nonatomic, strong) XCFVideoRangeSlider *videoRangeSlider;
 @property (nonatomic, assign) XCFVideoRange currentRange;
+
+@property (nonatomic, strong) UIView *playerContainerBackgroundView;
 
 @end
 
@@ -108,7 +111,12 @@
     [super loadView];
     
     // bg
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    // player background view
+    _playerContainerBackgroundView = [[UIView alloc] initWithFrame:[self _playerBackgroundViewFrame]];
+    _playerContainerBackgroundView.backgroundColor = [UIColor xcf_colorWithHexString:@"4A4A4A"];
+    [self.view addSubview:_playerContainerBackgroundView];
     
     // player
     _playerScrollView = [[UIScrollView alloc] initWithFrame:[self _playerContainerFrame]];
@@ -191,13 +199,18 @@
     CGFloat height = width * ratio;
     
     CGFloat toplayoutHeight = [self.topLayoutGuide length];
-    return CGRectMake(0, toplayoutHeight + 20, width, height);
+    return CGRectMake(0, toplayoutHeight + 30, width, height);
+}
+
+- (CGRect) _playerBackgroundViewFrame
+{
+    return CGRectInset([self _playerContainerFrame], 0, -30);
 }
 
 - (CGRect) _videoRangeSliderFrame
 {
     CGFloat sliderHeight = 78;
-    CGFloat topSpaceBetweenPlayer = 40;
+    CGFloat topSpaceBetweenPlayer = 30 + 15;
     
     CGRect frame = [self _playerContainerFrame];
     frame.origin.y += frame.size.height + topSpaceBetweenPlayer;
@@ -211,6 +224,7 @@
     [super viewDidLayoutSubviews];
     
     self.playerScrollView.frame = [self _playerContainerFrame];
+    self.playerContainerBackgroundView.frame = [self _playerBackgroundViewFrame];
     self.videoRangeSlider.frame = [self _videoRangeSliderFrame];
 }
 
@@ -265,6 +279,7 @@
     }];
     
     _videoRangeSlider = [[XCFVideoRangeSlider alloc] initWithFrame:[self _videoRangeSliderFrame]];
+    _videoRangeSlider.backgroundColor = [UIColor blackColor];
     _videoRangeSlider.tintColor = [UIColor xcf_linkColor];
     _videoRangeSlider.minimumTrimLength = self.videoMinimumDuration;
     _videoRangeSlider.maximumTrimLength = self.videoMaximumDuration;
