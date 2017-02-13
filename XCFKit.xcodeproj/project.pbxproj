@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B7501351E51675100D7D537 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7501341E51675100D7D537 /* IJKMediaFramework.framework */; };
 		E80039D61DC325A200103028 /* XCFKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E80039D41DC325A200103028 /* XCFKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8003A4E1DC33BAB00103028 /* XCFAppearanceButton.h in Headers */ = {isa = PBXBuildFile; fileRef = E8003A4C1DC33BAB00103028 /* XCFAppearanceButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8003A4F1DC33BAB00103028 /* XCFAppearanceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E8003A4D1DC33BAB00103028 /* XCFAppearanceButton.m */; };
@@ -53,6 +54,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B7501341E51675100D7D537 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IJKMediaFramework.framework; path = ijk/IJKMediaFramework.framework; sourceTree = "<group>"; };
 		E80039D11DC325A200103028 /* XCFKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCFKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80039D41DC325A200103028 /* XCFKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCFKit.h; sourceTree = "<group>"; };
 		E80039D51DC325A200103028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,12 +107,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B7501351E51675100D7D537 /* IJKMediaFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B7501331E51674300D7D537 /* ijk */ = {
+			isa = PBXGroup;
+			children = (
+				0B7501341E51675100D7D537 /* IJKMediaFramework.framework */,
+			);
+			name = ijk;
+			sourceTree = "<group>";
+		};
 		E80039C71DC325A200103028 = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +197,7 @@
 		E84A19EE1DF5724200CA630E /* XCFUI */ = {
 			isa = PBXGroup;
 			children = (
+				0B7501331E51674300D7D537 /* ijk */,
 				E89E817D1E0D24F000865246 /* UIView+XCFHeartbeat.h */,
 				E89E817E1E0D24F000865246 /* UIView+XCFHeartbeat.m */,
 				E8769A891E08D83100378EFF /* VideoPlayer */,
@@ -453,6 +465,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XCFKit/XCFUI/ijk",
+				);
 				INFOPLIST_FILE = XCFKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -472,6 +488,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XCFKit/XCFUI/ijk",
+				);
 				INFOPLIST_FILE = XCFKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
