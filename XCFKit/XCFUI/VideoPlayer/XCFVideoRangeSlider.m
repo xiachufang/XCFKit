@@ -541,7 +541,6 @@ UIGestureRecognizerDelegate
         }
         overlayFrame.size.width = MIN(MAX(0,contentWidth - offset - progress + 1),width - overlayFrame.origin.x);
         _outsideOverlayView.frame = overlayFrame;
-        NSLog(@"overlay frame : %@",NSStringFromCGRect(overlayFrame));
     }
 }
 

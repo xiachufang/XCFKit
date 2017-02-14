@@ -44,7 +44,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         _loopCount = 1;
-        
+        _volume = 1;
         _playerLayer = [AVPlayerLayer playerLayerWithPlayer:nil];
         [self.layer addSublayer:_playerLayer];
     }
@@ -79,6 +79,14 @@
     if (_delegateFlag.progress && self.isPlaying) {
         [self.delegate avPlayerViewDidUpgradeProgress:self];
     }
+}
+
+#pragma mark - volume
+
+- (void) setVolume:(float)volume
+{
+    _volume = volume;
+    self.playerLayer.player.volume = volume;
 }
 
 #pragma mark - play
@@ -140,6 +148,7 @@
                 
                 if (!strong_self.playerLayer.player) {
                     AVPlayer *player = [AVPlayer playerWithPlayerItem:strong_self.playerItem];
+                    player.volume = strong_self.volume;
                     strong_self.playerLayer.player = player;
                 } else {
                     [strong_self.playerLayer.player replaceCurrentItemWithPlayerItem:strong_self.playerItem];

@@ -269,6 +269,7 @@
     
     _playerView.delegate = self;
     _playerView.loopCount = 0;
+    _playerView.volume = 0;
     
     __weak typeof(self) weak_self = self;
     [_playerView prepareToPlayVideoAtAsset:self.videoAsset completion:^(BOOL finish, NSError * _Nullable error) {
