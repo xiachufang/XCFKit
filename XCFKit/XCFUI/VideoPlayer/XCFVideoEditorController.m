@@ -535,11 +535,11 @@
 - (void) observeNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(_pauseVideo:)
+                                             selector:@selector(applecationEnterBackground:)
                                                  name:UIApplicationDidEnterBackgroundNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(_pauseVideo:)
+                                             selector:@selector(applecationEnterBackground:)
                                                  name:UIApplicationWillTerminateNotification
                                                object:nil];
 }
@@ -553,6 +553,13 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationWillTerminateNotification
                                                   object:nil];
+}
+
+- (void) applecationEnterBackground:(NSNotification *) notification
+{
+    if (!_pause) {
+        [self _pauseVideo:nil];
+    }
 }
 
 #pragma mark - status
