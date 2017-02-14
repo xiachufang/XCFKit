@@ -169,6 +169,7 @@ UIGestureRecognizerDelegate
     layout.sectionInset = UIEdgeInsetsZero;
     _frameCollectionView = [[UICollectionView alloc] initWithFrame:self.bounds
                                               collectionViewLayout:layout];
+    _frameCollectionView.backgroundColor = [UIColor xcf_subBackgroundColor];
     _frameCollectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _frameCollectionView.delegate         = self;
     _frameCollectionView.dataSource       = self;
@@ -257,7 +258,6 @@ UIGestureRecognizerDelegate
     CGRect layoutFrame = bounds;
     CGRect overlayFrame;
     CGRectDivide(layoutFrame, &layoutFrame, &overlayFrame, progress, CGRectMinXEdge);
-    _outsideOverlayView.frame = overlayFrame;
     
     CGFloat insideBoundWidth = 2;
     CGRect boundFrame;
@@ -288,6 +288,9 @@ UIGestureRecognizerDelegate
     UIEdgeInsets insets = self.frameCollectionView.contentInset;
     insets.right = width - progress;
     self.frameCollectionView.contentInset = insets;
+    
+    overlayFrame.size.width = MAX(0,contentWidth - self.frameCollectionView.contentOffset.x - progress + 1);
+    _outsideOverlayView.frame = overlayFrame;
 }
 
 #pragma mark - load asset
@@ -510,16 +513,26 @@ UIGestureRecognizerDelegate
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView == self.frameCollectionView && !super.isTracking) {
+    if (scrollView == self.frameCollectionView) {
         CGFloat offset = self.frameCollectionView.contentOffset.x;
-        NSTimeInterval time = offset / scrollView.bounds.size.width * self.maximumTrimLength;
-        time = MAX(MIN(time, self.videoLength - self.currentRange.length),0);
-//        if (time != self.currentRange.location) {
+        if (!super.isTracking) {
+            NSTimeInterval time = offset / scrollView.bounds.size.width * self.maximumTrimLength;
+            time = MAX(MIN(time, self.videoLength - self.currentRange.length),0);
             XCFVideoRange newRange = self.currentRange;
             newRange.location = time;
             _currentRange = newRange;
             [self sendActionsForControlEvents:UIControlEventValueChanged];
-//        }
+        }
+        
+        CGRect overlayFrame = _outsideOverlayView.frame;
+        CGFloat width = self.bounds.size.width;
+        CGFloat progress = MIN(1,self.currentRange.length / self.maximumTrimLength) * width;
+        CGFloat contentWidth = self.frameCollectionView.contentSize.width;
+        if (contentWidth == 0) {
+            contentWidth = width / self.maximumTrimLength * self.videoLength;
+        }
+        overlayFrame.size.width = MAX(0,contentWidth - self.frameCollectionView.contentOffset.x - progress + 1);
+        _outsideOverlayView.frame = overlayFrame;
     }
 }
 

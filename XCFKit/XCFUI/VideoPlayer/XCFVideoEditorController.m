@@ -279,7 +279,6 @@
     }];
     
     _videoRangeSlider = [[XCFVideoRangeSlider alloc] initWithFrame:[self _videoRangeSliderFrame]];
-    _videoRangeSlider.backgroundColor = [UIColor blackColor];
     _videoRangeSlider.tintColor = [UIColor xcf_linkColor];
     _videoRangeSlider.minimumTrimLength = self.videoMinimumDuration;
     _videoRangeSlider.maximumTrimLength = self.videoMaximumDuration;
