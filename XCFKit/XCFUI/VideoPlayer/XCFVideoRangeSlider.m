@@ -31,6 +31,8 @@
         _imageView.clipsToBounds = YES;
         _imageView.userInteractionEnabled = NO;
         [self.contentView addSubview:_imageView];
+        
+        self.contentView.backgroundColor = [UIColor blackColor];
     }
     
     return self;
@@ -289,7 +291,7 @@ UIGestureRecognizerDelegate
     insets.right = width - progress;
     self.frameCollectionView.contentInset = insets;
     
-    overlayFrame.size.width = MAX(0,contentWidth - self.frameCollectionView.contentOffset.x - progress + 1);
+    overlayFrame.size.width = MIN(MAX(0,contentWidth - frameOffset - progress + 1),insets.right);
     _outsideOverlayView.frame = overlayFrame;
 }
 
@@ -489,7 +491,13 @@ UIGestureRecognizerDelegate
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSInteger count = floor(self.videoLength / self.maximumTrimLength * collectionView.bounds.size.width / _videoRangeSliderFrameWidth);
+    CGFloat countf = self.videoLength / self.maximumTrimLength * collectionView.bounds.size.width / _videoRangeSliderFrameWidth;
+    NSInteger count = floorl(countf);
+    
+    // 极小概率下会出现 countf 近似 count+1 但是偏小一点，下面将其修正
+    if (countf - count > 0.5) {
+        count += 1;
+    }
     return count;
 }
 
@@ -531,8 +539,9 @@ UIGestureRecognizerDelegate
         if (contentWidth == 0) {
             contentWidth = width / self.maximumTrimLength * self.videoLength;
         }
-        overlayFrame.size.width = MAX(0,contentWidth - self.frameCollectionView.contentOffset.x - progress + 1);
+        overlayFrame.size.width = MIN(MAX(0,contentWidth - offset - progress + 1),width - overlayFrame.origin.x);
         _outsideOverlayView.frame = overlayFrame;
+        NSLog(@"overlay frame : %@",NSStringFromCGRect(overlayFrame));
     }
 }
 
