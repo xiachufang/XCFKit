@@ -382,7 +382,7 @@
     
     if (!_imageGenerator) {
         _imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:_videoAsset];
-        _imageGenerator.appliesPreferredTrackTransform = self;
+        _imageGenerator.appliesPreferredTrackTransform = YES;
     }
     
     CGImageRef imageRef = [_imageGenerator copyCGImageAtTime:kCMTimeZero
