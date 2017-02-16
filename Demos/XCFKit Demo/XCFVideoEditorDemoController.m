@@ -85,6 +85,11 @@ XCFAVPlayerControllerDelegate
 
 #pragma mark - XCFVideoEditorControllerDelegate
 
+- (void) videoEditorDidCancelEdit:(XCFVideoEditorController *)editor
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void) videoEditorController:(XCFVideoEditorController *)editor didFailWithError:(NSError *)error
 {
     UIAlertController *alert =
