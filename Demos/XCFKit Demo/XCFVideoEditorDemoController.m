@@ -22,13 +22,21 @@ XCFAVPlayerControllerDelegate
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *aspectSegmentControl;
 
+@property (strong, nonatomic) IBOutlet UILabel *maxLengthLabel;
+@property (strong, nonatomic) IBOutlet UISlider *maxLengthSlider;
+
 @end
 
 @implementation XCFVideoEditorDemoController
+{
+    NSDate *_startExportDate;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self maxLengthChanged:self.maxLengthSlider];
 }
 
 - (IBAction)selectVideo:(id)sender {
@@ -42,6 +50,12 @@ XCFAVPlayerControllerDelegate
                      completion:nil];
 }
 
+- (IBAction)maxLengthChanged:(UISlider *)sender
+{
+    NSString *indicatorText = [NSString stringWithFormat:@"max length : %.1fs",sender.value];
+    self.maxLengthLabel.text = indicatorText;
+}
+
 - (void) didSelectVideo:(AVAsset *)asset
 {
     XCFVideoEditorController *editor = [[XCFVideoEditorController alloc] initWithVideoAsset:asset];
@@ -53,6 +67,7 @@ XCFAVPlayerControllerDelegate
         aspect = XCFVideoEditorVideoQualityType5x4;
     }
     editor.videoQuality = XCFVideoEditorVideoQualityTypeMedium | aspect;
+    editor.videoMaximumDuration = floorl(self.maxLengthSlider.value);
     [self.navigationController pushViewController:editor animated:YES];
 }
 
@@ -90,6 +105,11 @@ XCFAVPlayerControllerDelegate
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void) videoEditorDidStartExport:(XCFVideoEditorController *)editor
+{
+    _startExportDate = [NSDate date];
+}
+
 - (void) videoEditorController:(XCFVideoEditorController *)editor didFailWithError:(NSError *)error
 {
     UIAlertController *alert =
@@ -115,7 +135,14 @@ XCFAVPlayerControllerDelegate
     
     NSString *message = [NSString stringWithFormat:@"size : {%@,%@}\nduration : %@s\nstorage : %@",width,height,duration,byteLength];
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"导出成功"
+    NSString *alertTitle = @"导出成功";
+    if (_startExportDate) {
+        NSDate *now = [NSDate date];
+        NSTimeInterval timeInterval = [now timeIntervalSinceDate:_startExportDate];
+        NSString *formattedTime = [NSString stringWithFormat:@"%.1f",timeInterval];
+        alertTitle = [alertTitle stringByAppendingFormat:@"（%@s）",formattedTime];
+    }
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
                                                                    message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     

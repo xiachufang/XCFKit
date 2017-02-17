@@ -514,22 +514,42 @@
                                 </segments>
                                 <color key="tintColor" red="0.97799330949999996" green="0.40080571170000001" blue="0.31164056060000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </segmentedControl>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="10" maxValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="Yjg-cq-s7z">
+                                <rect key="frame" x="35" y="486" width="304" height="31"/>
+                                <color key="tintColor" red="0.97799330949999996" green="0.40080571170000001" blue="0.31164056060000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="maxLengthChanged:" destination="gyJ-F9-ZDm" eventType="valueChanged" id="j8x-ZS-7h0"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Length : 10s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDp-ex-Gmq">
+                                <rect key="frame" x="37" y="454.5" width="123" height="19.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="O4w-TT-GDT" firstAttribute="top" secondItem="qPW-g0-xeE" secondAttribute="bottom" constant="100" id="3pn-DF-eXu"/>
+                            <constraint firstItem="Yjg-cq-s7z" firstAttribute="width" secondItem="O4w-TT-GDT" secondAttribute="width" id="5t0-LS-xcW"/>
                             <constraint firstItem="O4w-TT-GDT" firstAttribute="width" secondItem="VPP-Rp-5Jl" secondAttribute="width" multiplier="0.8" id="6Ed-7U-ObE"/>
                             <constraint firstItem="qPW-g0-xeE" firstAttribute="centerX" secondItem="VPP-Rp-5Jl" secondAttribute="centerX" id="8Ae-WC-VdE"/>
                             <constraint firstItem="O4w-TT-GDT" firstAttribute="centerY" secondItem="VPP-Rp-5Jl" secondAttribute="centerY" multiplier="1.2" id="9ds-2Z-IMd"/>
+                            <constraint firstItem="vDp-ex-Gmq" firstAttribute="leading" secondItem="Yjg-cq-s7z" secondAttribute="leading" id="CRb-9U-qDj"/>
                             <constraint firstItem="O4w-TT-GDT" firstAttribute="centerX" secondItem="VPP-Rp-5Jl" secondAttribute="centerX" id="EEf-go-lYo"/>
                             <constraint firstItem="O4w-TT-GDT" firstAttribute="top" secondItem="w0l-a9-LXV" secondAttribute="bottom" constant="32" id="Mk3-kx-Ttj"/>
                             <constraint firstItem="w0l-a9-LXV" firstAttribute="centerX" secondItem="O4w-TT-GDT" secondAttribute="centerX" id="Mxp-Dv-vL5"/>
                             <constraint firstItem="w0l-a9-LXV" firstAttribute="width" secondItem="O4w-TT-GDT" secondAttribute="width" multiplier="0.68" id="Pj7-85-Ajs"/>
+                            <constraint firstItem="Yjg-cq-s7z" firstAttribute="top" secondItem="O4w-TT-GDT" secondAttribute="bottom" constant="64" id="QVK-jC-Umn"/>
+                            <constraint firstItem="Yjg-cq-s7z" firstAttribute="centerX" secondItem="VPP-Rp-5Jl" secondAttribute="centerX" id="if5-Qr-fpX"/>
+                            <constraint firstItem="Yjg-cq-s7z" firstAttribute="top" secondItem="vDp-ex-Gmq" secondAttribute="bottom" constant="12" id="oy5-ui-4SY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Video Editor" id="XgU-3i-Fjw"/>
                     <connections>
                         <outlet property="aspectSegmentControl" destination="w0l-a9-LXV" id="Aef-Co-1qH"/>
+                        <outlet property="maxLengthLabel" destination="vDp-ex-Gmq" id="hLa-jI-1HS"/>
+                        <outlet property="maxLengthSlider" destination="Yjg-cq-s7z" id="dkQ-g6-fkH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8a1-on-Zgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
