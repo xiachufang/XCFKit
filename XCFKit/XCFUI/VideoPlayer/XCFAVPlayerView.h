@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<XCFAVPlayerViewDelegate> delegate;
 
-@property (nonatomic, assign) float volume;
+@property (nonatomic, assign) float volume; // 音量
 
 - (NSTimeInterval) duration;
 - (NSTimeInterval) currentTime;

@@ -46,6 +46,7 @@
         _loopCount = 1;
         _volume = 1;
         _playerLayer = [AVPlayerLayer playerLayerWithPlayer:nil];
+        _playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         [self.layer addSublayer:_playerLayer];
     }
     
@@ -95,7 +96,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:AVPlayerItemDidPlayToEndTimeNotification
-                                                  object:self.playerItem];
+                                                  object:nil];
     
     if (_playerTimeObserver) {
         [self.playerLayer.player removeTimeObserver:_playerTimeObserver];
@@ -112,10 +113,6 @@
 {
     NSParameterAssert(videoPath);
     
-    [self stop];
-    
-    self.videoPath = videoPath;
-    
     NSURL *url = [NSURL fileURLWithPath:videoPath];
     AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
     [self prepareToPlayVideoAtAsset:asset completion:completion];
@@ -123,7 +120,10 @@
 
 - (void) prepareToPlayVideoAtAsset:(AVAsset *)asset completion:(void (^)(BOOL, NSError * _Nullable))completion
 {
+    [self stop];
+    
     self.videoAsset = (AVURLAsset*)asset;
+    self.videoPath = self.videoAsset.URL.path;
     
     NSArray *loadKeys = @[@"playable"];
     __weak AVAsset *weak_asset = asset;
