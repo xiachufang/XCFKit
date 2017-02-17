@@ -235,6 +235,16 @@
     return @"剪辑视频";
 }
 
+- (BOOL) isMuted
+{
+    return self.playerView.volume == 0;
+}
+
+- (void) setMute:(BOOL)mute
+{
+    self.playerView.volume = 0;
+}
+
 #pragma mark - video 
 
 - (void) didVideoAssetLoaded

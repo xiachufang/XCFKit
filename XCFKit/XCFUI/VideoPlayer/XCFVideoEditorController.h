@@ -39,6 +39,9 @@ typedef NS_ENUM(NSInteger, XCFVideoEditorVideoQualityType) {
 // video quality , default is XCFVideoEditorVideoQualityTypeMedium | XCFVideoEditorVideoQualityType1x1
 @property (nonatomic, assign) XCFVideoEditorVideoQualityType videoQuality;
 
+// 视频预览播放器是否静音，不影响导出的视频的声音，默认是 NO
+@property (nonatomic, assign, getter=isMuted) BOOL mute;
+
 @end
 
 @protocol XCFVideoEditorControllerDelegate <NSObject>
