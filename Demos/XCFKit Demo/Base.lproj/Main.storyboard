@@ -178,12 +178,32 @@
                                             <segue destination="d4L-tW-PNM" kind="show" id="t2N-iV-ttp"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="pTd-Rq-d2B" style="IBUITableViewCellStyleDefault" id="xGR-Mz-kQG">
+                                        <rect key="frame" x="0.0" y="333" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xGR-Mz-kQG" id="NVx-EM-2G6">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="AVPlayerViewController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pTd-Rq-d2B">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="QRa-wh-K1g" kind="show" id="I0B-sf-mec"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Video Editor" id="LeZ-VU-2qx" userLabel="Video Editor">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="5R4-iG-Gdx" style="IBUITableViewCellStyleDefault" id="4ap-il-8Em">
-                                        <rect key="frame" x="0.0" y="390" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="434" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4ap-il-8Em" id="FKa-Ob-IUN">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
@@ -203,7 +223,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="KLa-v5-rrg" style="IBUITableViewCellStyleDefault" id="0E7-hW-We4">
-                                        <rect key="frame" x="0.0" y="434" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="478" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0E7-hW-We4" id="Szz-6S-mgg">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
@@ -335,7 +355,54 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6LD-IW-poR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1226" y="1280"/>
+            <point key="canvasLocation" x="870" y="1284"/>
+        </scene>
+        <!--Stream Player-->
+        <scene sceneID="JyL-rT-8MR">
+            <objects>
+                <viewController id="QRa-wh-K1g" customClass="XCFAVPlayerViewControllerDemoController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vXE-Gb-Ykt"/>
+                        <viewControllerLayoutGuide type="bottom" id="O89-65-h84"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wrx-x4-mDD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6hW-4e-bUV" customClass="XCFAppearanceButtonA">
+                                <rect key="frame" x="37" y="516" width="300" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="guR-UI-PY1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="播放视频"/>
+                                <connections>
+                                    <action selector="playVideo:" destination="QRa-wh-K1g" eventType="touchUpInside" id="mqw-Fg-fHB"/>
+                                    <action selector="selectVideo:" destination="gyJ-F9-ZDm" eventType="touchUpInside" id="Y2g-l1-VzE"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="http://i3.chuimg.com/fa852117b59c49b296f00d84e6b4714d.mp4" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5V-wI-MaK">
+                                <rect key="frame" x="37" y="303" width="300" height="61"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6hW-4e-bUV" firstAttribute="centerX" secondItem="wrx-x4-mDD" secondAttribute="centerX" id="6W0-Vs-IUb"/>
+                            <constraint firstItem="6hW-4e-bUV" firstAttribute="width" secondItem="wrx-x4-mDD" secondAttribute="width" multiplier="0.8" id="9XE-Lk-o16"/>
+                            <constraint firstItem="O5V-wI-MaK" firstAttribute="width" secondItem="wrx-x4-mDD" secondAttribute="width" multiplier="0.8" id="AHe-Tg-NMq"/>
+                            <constraint firstItem="O5V-wI-MaK" firstAttribute="centerX" secondItem="wrx-x4-mDD" secondAttribute="centerX" id="AJc-jW-PLY"/>
+                            <constraint firstItem="O89-65-h84" firstAttribute="top" secondItem="6hW-4e-bUV" secondAttribute="bottom" constant="107" id="cKi-Jr-rGX"/>
+                            <constraint firstItem="O5V-wI-MaK" firstAttribute="centerY" secondItem="wrx-x4-mDD" secondAttribute="centerY" id="dox-dC-lAB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Stream Player" id="XWa-5q-axt"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6dc-Bv-Ro5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1485.5999999999999" y="1282.3088455772115"/>
         </scene>
         <!--Appearance Colors-->
         <scene sceneID="TLN-xU-ba5">

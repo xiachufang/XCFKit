@@ -17,6 +17,7 @@
 		E8003A451DC3358B00103028 /* XCFKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E8003A131DC326FC00103028 /* XCFKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E82ADC8C1E26475800599884 /* XCFVideoRangeSliderDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E82ADC8B1E26475800599884 /* XCFVideoRangeSliderDemoController.m */; };
 		E82ADC961E28D0C000599884 /* XCFVideoEditorDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E82ADC951E28D0C000599884 /* XCFVideoEditorDemoController.m */; };
+		E832F3751E5AC3B1006D8960 /* XCFAVPlayerViewControllerDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E832F3741E5AC3B1006D8960 /* XCFAVPlayerViewControllerDemoController.m */; };
 		E83521451E07D6E500C921A1 /* XCFAVPlayerDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E83521441E07D6E500C921A1 /* XCFAVPlayerDemoController.m */; };
 		E839BB931E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E839BB921E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.m */; };
 		E84FD29C1E03BB19007A09C4 /* microVideoPlayerPreviewImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E84FD29B1E03BB19007A09C4 /* microVideoPlayerPreviewImage.jpg */; };
@@ -77,6 +78,8 @@
 		E82ADC8B1E26475800599884 /* XCFVideoRangeSliderDemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoRangeSliderDemoController.m; sourceTree = "<group>"; };
 		E82ADC941E28D0C000599884 /* XCFVideoEditorDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoEditorDemoController.h; sourceTree = "<group>"; };
 		E82ADC951E28D0C000599884 /* XCFVideoEditorDemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoEditorDemoController.m; sourceTree = "<group>"; };
+		E832F3731E5AC3B1006D8960 /* XCFAVPlayerViewControllerDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAVPlayerViewControllerDemoController.h; sourceTree = "<group>"; };
+		E832F3741E5AC3B1006D8960 /* XCFAVPlayerViewControllerDemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAVPlayerViewControllerDemoController.m; sourceTree = "<group>"; };
 		E83521431E07D6E500C921A1 /* XCFAVPlayerDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAVPlayerDemoController.h; sourceTree = "<group>"; };
 		E83521441E07D6E500C921A1 /* XCFAVPlayerDemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAVPlayerDemoController.m; sourceTree = "<group>"; };
 		E839BB911E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFMicroVideoPlayerDemoController.h; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 				E82ADC951E28D0C000599884 /* XCFVideoEditorDemoController.m */,
 				E882296C1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.h */,
 				E882296D1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.m */,
+				E832F3731E5AC3B1006D8960 /* XCFAVPlayerViewControllerDemoController.h */,
+				E832F3741E5AC3B1006D8960 /* XCFAVPlayerViewControllerDemoController.m */,
 				E80039F11DC325D100103028 /* Main.storyboard */,
 				E80039F41DC325D100103028 /* Assets.xcassets */,
 				E80039F61DC325D100103028 /* LaunchScreen.storyboard */,
@@ -262,6 +267,7 @@
 				E80039F01DC325D100103028 /* ViewController.m in Sources */,
 				E80039ED1DC325D100103028 /* AppDelegate.m in Sources */,
 				E82ADC8C1E26475800599884 /* XCFVideoRangeSliderDemoController.m in Sources */,
+				E832F3751E5AC3B1006D8960 /* XCFAVPlayerViewControllerDemoController.m in Sources */,
 				E882296E1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.m in Sources */,
 				E839BB931E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.m in Sources */,
 				E80039EA1DC325D100103028 /* main.m in Sources */,
