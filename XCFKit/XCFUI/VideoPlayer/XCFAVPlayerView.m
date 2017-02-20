@@ -23,6 +23,8 @@
 @implementation XCFAVPlayerView
 {
     struct {
+        unsigned int readyPlay : 1;
+        unsigned int failed    : 1;
         unsigned int playToEnd : 1;
         unsigned int progress  : 1;
     } _delegateFlag;
@@ -71,14 +73,33 @@
 - (void) setDelegate:(id<XCFAVPlayerViewDelegate>)delegate
 {
     _delegate = delegate;
+    
+    _delegateFlag.readyPlay = [delegate respondsToSelector:@selector(avPlayerViewDidReadyToPlay:)];
+    _delegateFlag.failed    = [delegate respondsToSelector:@selector(avPlayerView:failedToPlayWithError:)];
     _delegateFlag.playToEnd = [delegate respondsToSelector:@selector(avPlayerViewDidPlayToEnd:)];
     _delegateFlag.progress = [delegate respondsToSelector:@selector(avPlayerViewDidUpgradeProgress:)];
 }
+
+#pragma mark - logic
 
 - (void) upgradeProgress
 {
     if (_delegateFlag.progress && self.isPlaying) {
         [self.delegate avPlayerViewDidUpgradeProgress:self];
+    }
+}
+
+- (void) readyToPlay
+{
+    if (_delegateFlag.readyPlay) {
+        [self.delegate avPlayerViewDidReadyToPlay:self];
+    }
+}
+
+- (void) preparedFailed:(NSError *)error
+{
+    if (_delegateFlag.failed) {
+        [self.delegate avPlayerView:self failedToPlayWithError:error];
     }
 }
 
@@ -105,20 +126,21 @@
     
     [self.playerItem cancelPendingSeeks];
     [self.playerLayer.player replaceCurrentItemWithPlayerItem:nil];
+    [self removeObserverOnPlayerItem];
     self.playerItem = nil;
     self.playerLayer.player = nil;
 }
 
-- (void) prepareToPlayVideoAtPath:(NSString *)videoPath completion:(void (^)(BOOL, NSError * _Nullable))completion
+- (void) prepareToPlayVideoAtPath:(NSString *)videoPath
 {
     NSParameterAssert(videoPath);
     
     NSURL *url = [NSURL fileURLWithPath:videoPath];
     AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
-    [self prepareToPlayVideoAtAsset:asset completion:completion];
+    [self prepareToPlayVideoAtAsset:asset];
 }
 
-- (void) prepareToPlayVideoAtAsset:(AVAsset *)asset completion:(void (^)(BOOL, NSError * _Nullable))completion
+- (void) prepareToPlayVideoAtAsset:(AVAsset *)asset
 {
     [self stop];
     
@@ -154,18 +176,14 @@
                     [strong_self.playerLayer.player replaceCurrentItemWithPlayerItem:strong_self.playerItem];
                 }
                 
-                if (completion) {
-                    completion(YES,nil);
-                }
+                [strong_self observePlayerItemStatus];
             });
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 __strong typeof(weak_self) strong_self = weak_self;
                 if (!strong_self) return;
                 
-                if (completion) {
-                    completion(NO,error);
-                }
+                [strong_self preparedFailed:error];
             });
         }
     }];
@@ -178,7 +196,7 @@
     if (!videoURL) return;
     
     if ([videoURL isFileURL]) {
-        [self prepareToPlayVideoAtPath:videoURL.path completion:nil];
+        [self prepareToPlayVideoAtPath:videoURL.path];
     } else {
         self.videoPath = videoURL.absoluteString;
         self.videoAsset = nil;
@@ -196,6 +214,41 @@
             AVPlayer *player = [AVPlayer playerWithPlayerItem:self.playerItem];
             player.volume = self.volume;
             self.playerLayer.player = player;
+        }
+        
+        [self observePlayerItemStatus];
+    }
+}
+
+#pragma mark - observe status
+
+static void const *_observeStatusContext;
+
+- (void) observePlayerItemStatus
+{
+    [self.playerItem addObserver:self
+                       forKeyPath:NSStringFromSelector(@selector(status))
+                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                          context:&_observeStatusContext];
+}
+
+- (void) removeObserverOnPlayerItem
+{
+    [self.playerItem removeObserver:self
+                         forKeyPath:NSStringFromSelector(@selector(status))
+                            context:&_observeStatusContext];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    // 通过 context 可以判定 keypath 一定是 status 所以不再在这里判断
+    if (object == self.playerItem && context == _observeStatusContext) {
+        AVPlayerItemStatus status = self.playerItem.status;
+        
+        if (status == AVPlayerItemStatusReadyToPlay) {
+            [self readyToPlay];
+        } else if (status == AVPlayerItemStatusFailed) {
+            [self preparedFailed:self.playerItem.error];
         }
     }
 }
