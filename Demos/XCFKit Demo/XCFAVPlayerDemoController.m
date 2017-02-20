@@ -72,9 +72,7 @@ XCFAVPlayerViewDelegate
 
 - (void) imagePickerController:(UIImagePickerController *)picker
  didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
-{
-    NSLog(@"%@",info);
-    
+{   
     NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
     if (CFStringCompare ((__bridge CFStringRef) mediaType, kUTTypeMovie, 0) == kCFCompareEqualTo) {
         NSURL *videoURL = [info objectForKey:UIImagePickerControllerReferenceURL];
