@@ -161,6 +161,9 @@
                 __strong typeof(weak_self) strong_self = weak_self;
                 if (!strong_self) return;
                 
+                if (strong_self.playerItem) {
+                    [strong_self removeObserverOnPlayerItem];
+                }
                 strong_self.playerItem = [AVPlayerItem playerItemWithAsset:strong_asset
                                               automaticallyLoadedAssetKeys:@[@"duration"]];
                 [[NSNotificationCenter defaultCenter] addObserver:strong_self
@@ -201,6 +204,9 @@
         self.videoPath = videoURL.absoluteString;
         self.videoAsset = nil;
         
+        if (self.playerItem) {
+            [self removeObserverOnPlayerItem];
+        }
         self.playerItem = [[AVPlayerItem alloc] initWithURL:videoURL];
         
         [[NSNotificationCenter defaultCenter] addObserver:self

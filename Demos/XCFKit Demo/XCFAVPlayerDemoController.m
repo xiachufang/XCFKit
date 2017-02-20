@@ -21,6 +21,10 @@ XCFAVPlayerViewDelegate
 @property (strong, nonatomic) IBOutlet UIView *playerContainerView;
 @property (strong, nonatomic) XCFAVPlayerView *playerView;
 
+@property (nonatomic, assign) BOOL playOnlineVideo;
+
+@property (strong, nonatomic) IBOutlet UIButton *playButton;
+
 @end
 
 @implementation XCFAVPlayerDemoController
@@ -37,16 +41,29 @@ XCFAVPlayerViewDelegate
 
 #pragma mark - actions
 
-- (IBAction)selectMicroVideo:(id)sender {
-    UIImagePickerController *videoPicker = [UIImagePickerController new];
-    videoPicker.delegate = self;
-    videoPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    videoPicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,nil];
-    [self presentViewController:videoPicker
-                       animated:YES
-                     completion:nil];
+- (IBAction)switchVideoMode:(id)sender
+{
+    self.playOnlineVideo = !self.playOnlineVideo;
     
+    NSString *buttonTitle = self.playOnlineVideo ? @"播放在线视频" : @"选择视频";
+    [self.playButton setTitle:buttonTitle forState:UIControlStateNormal];
+}
+
+- (IBAction)selectMicroVideo:(id)sender {
     [self.playerView pause];
+    
+    if (self.playOnlineVideo) {
+        NSString *videoURLString = @"http://i3.chuimg.com/3c7251a29b5c11e6ac0302e9fe59cadf_0w_0h.mp4";
+        [self.playerView prepareToPlayVideoWithURL:[NSURL URLWithString:videoURLString]];
+    } else {
+        UIImagePickerController *videoPicker = [UIImagePickerController new];
+        videoPicker.delegate = self;
+        videoPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        videoPicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,nil];
+        [self presentViewController:videoPicker
+                           animated:YES
+                         completion:nil];
+    }
 }
 
 - (void) didSelectVideoAtPath:(NSString *) path

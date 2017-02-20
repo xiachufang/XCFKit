@@ -296,8 +296,15 @@
                             <constraint firstItem="DWC-AE-Xbg" firstAttribute="centerX" secondItem="wI1-Ay-Aw9" secondAttribute="centerX" id="zE3-wX-FBe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="AVPlayer" id="p4j-R7-8eQ"/>
+                    <navigationItem key="navigationItem" title="AVPlayer" id="p4j-R7-8eQ">
+                        <barButtonItem key="rightBarButtonItem" title="切换" id="WiC-9x-CA3">
+                            <connections>
+                                <action selector="switchVideoMode:" destination="9OB-6y-QSs" id="e36-mM-Xyf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="playButton" destination="DWC-AE-Xbg" id="WTJ-Kp-NFa"/>
                         <outlet property="playerContainerView" destination="Efg-pl-Lqk" id="cCJ-F5-TPi"/>
                     </connections>
                 </viewController>
