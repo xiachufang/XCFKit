@@ -222,7 +222,7 @@
 
 #pragma mark - observe status
 
-static void const *_observeStatusContext;
+static void const *_observeStatusContext = (void*)&_observeStatusContext;
 
 - (void) observePlayerItemStatus
 {
