@@ -53,7 +53,7 @@ XCFAVPlayerViewDelegate
     [self.playerView pause];
     
     if (self.playOnlineVideo) {
-        NSString *videoURLString = @"http://i3.chuimg.com/3c7251a29b5c11e6ac0302e9fe59cadf_0w_0h.mp4";
+        NSString *videoURLString = @"http://i3.chuimg.com/25301409804f492a8f04a09df30c1db9_1280w_720h.mp4";
         [self.playerView prepareToPlayVideoWithURL:[NSURL URLWithString:videoURLString]];
     } else {
         UIImagePickerController *videoPicker = [UIImagePickerController new];
