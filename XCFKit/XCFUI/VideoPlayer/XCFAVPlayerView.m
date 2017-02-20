@@ -171,6 +171,35 @@
     }];
 }
 
+- (void) prepareToPlayVideoWithURL:(NSURL *)videoURL
+{
+    NSParameterAssert(videoURL);
+    
+    if (!videoURL) return;
+    
+    if ([videoURL isFileURL]) {
+        [self prepareToPlayVideoAtPath:videoURL.path completion:nil];
+    } else {
+        self.videoPath = videoURL.absoluteString;
+        self.videoAsset = nil;
+        
+        self.playerItem = [[AVPlayerItem alloc] initWithURL:videoURL];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didPlayToEndNotification:)
+                                                     name:AVPlayerItemDidPlayToEndTimeNotification
+                                                   object:self.playerItem];
+        
+        if (self.playerLayer.player) {
+            [self.playerLayer.player replaceCurrentItemWithPlayerItem:self.playerItem];
+        } else {
+            AVPlayer *player = [AVPlayer playerWithPlayerItem:self.playerItem];
+            player.volume = self.volume;
+            self.playerLayer.player = player;
+        }
+    }
+}
+
 #pragma mark - notification
 
 - (void) didPlayToEndNotification:(NSNotification *)notification

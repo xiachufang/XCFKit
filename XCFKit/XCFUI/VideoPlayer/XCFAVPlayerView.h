@@ -25,8 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface XCFAVPlayerView : UIView<XCFVideoPlayerControlProtocol>
 
 - (void) prepareToPlayVideoAtPath:(NSString *)videoPath
-                       completion:(void (^)(BOOL completion,NSError *_Nullable error))completion;
-- (void) prepareToPlayVideoAtAsset:(AVAsset *)asset completion:(void (^)(BOOL completion, NSError * _Nullable error))completion;
+                       completion:(nullable void (^)(BOOL completion,NSError *_Nullable error))completion;
+- (void) prepareToPlayVideoAtAsset:(AVAsset *)asset completion:(nullable void (^)(BOOL completion, NSError * _Nullable error))completion;
+
+- (void) prepareToPlayVideoWithURL:(NSURL *)videoURL;
 
 @property (nonatomic, assign) NSInteger loopCount; // loopCount <= 0 表示无限循环播放，默认是 1
 
