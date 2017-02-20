@@ -141,17 +141,7 @@ UIViewControllerTransitioningDelegate
     [super viewDidAppear:animated];
     
     if (!_isVideoLoaded && _actualVideoPath) {
-        __weak typeof(self) weak_self = self;
-        [self.playerView prepareToPlayVideoAtPath:_actualVideoPath
-                                       completion:^(BOOL completion, NSError * _Nullable error) {
-                                           __strong typeof(weak_self) strong_self = weak_self;
-                                           if (!strong_self) return;
-                                           if (completion) {
-                                               [strong_self _videoDidLoaded];
-                                           } else if (error) {
-                                               [strong_self _presentError:error];
-                                           }
-                                       }];
+        [self.playerView prepareToPlayVideoAtPath:_actualVideoPath];
     }
 }
 
@@ -241,6 +231,16 @@ UIViewControllerTransitioningDelegate
     if (playerView == self.playerView && _delegateFlag.playToEnd) {
         [self.delegate avPlayerControllerDidPlayToEnd:self];
     }
+}
+
+- (void) avPlayerViewDidReadyToPlay:(XCFAVPlayerView *)playerView
+{
+    [self _videoDidLoaded];
+}
+
+- (void) avPlayerView:(XCFAVPlayerView *)playerView failedToPlayWithError:(NSError *)error
+{
+    [self _presentError:error];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate

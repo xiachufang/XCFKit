@@ -281,13 +281,7 @@
     _playerView.loopCount = 0;
     _playerView.volume = 0;
     
-    __weak typeof(self) weak_self = self;
-    [_playerView prepareToPlayVideoAtAsset:self.videoAsset completion:^(BOOL finish, NSError * _Nullable error) {
-        if (finish) {
-            __strong typeof(weak_self) strong_self = weak_self;
-            [strong_self.playerView play];
-        }
-    }];
+    [_playerView prepareToPlayVideoAtAsset:self.videoAsset];
     
     _videoRangeSlider = [[XCFVideoRangeSlider alloc] initWithFrame:[self _videoRangeSliderFrame]];
     _videoRangeSlider.tintColor = [UIColor xcf_linkColor];
@@ -619,6 +613,11 @@
     if (playerView.progress < 1 && playerView.isPlaying && end > 0 && [playerView currentTime] >= end) {
         [self avPlayerViewDidPlayToEnd:playerView];
     }
+}
+
+- (void) avPlayerViewDidReadyToPlay:(XCFAVPlayerView *)playerView
+{
+    [playerView play];
 }
 
 @end

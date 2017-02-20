@@ -51,12 +51,14 @@ XCFAVPlayerViewDelegate
 
 - (void) didSelectVideoAtPath:(NSString *) path
 {
-    [self.playerView prepareToPlayVideoAtPath:path
-                                   completion:^(BOOL completion, NSError * _Nullable error) {
-                                       if (completion) {
-                                           [self.playerView play];
-                                       }
-                                   }];
+    [self.playerView prepareToPlayVideoAtPath:path];
+}
+
+#pragma mark - XCFAVPlayerViewDelegate
+
+- (void) avPlayerViewDidReadyToPlay:(XCFAVPlayerView *)playerView
+{
+    [playerView play];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
