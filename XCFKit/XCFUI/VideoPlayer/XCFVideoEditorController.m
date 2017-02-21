@@ -242,7 +242,7 @@
 
 - (void) setMute:(BOOL)mute
 {
-    self.playerView.volume = 0;
+    self.playerView.volume = mute ? 0 : 1;
 }
 
 #pragma mark - video 
@@ -279,7 +279,6 @@
     
     _playerView.delegate = self;
     _playerView.loopCount = 0;
-    _playerView.volume = 0;
     
     [_playerView prepareToPlayVideoAtAsset:self.videoAsset];
     
