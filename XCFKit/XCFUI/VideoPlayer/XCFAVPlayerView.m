@@ -111,6 +111,17 @@
     self.playerLayer.player.volume = volume;
 }
 
+#pragma mark - fill mode
+
+- (void) setFillPlayerWindow:(BOOL)fillPlayerWindow
+{
+    if (_fillPlayerWindow != fillPlayerWindow) {
+        _fillPlayerWindow = fillPlayerWindow;
+        
+        self.playerLayer.videoGravity = _fillPlayerWindow ? AVLayerVideoGravityResizeAspectFill : AVLayerVideoGravityResizeAspect;
+    }
+}
+
 #pragma mark - play
 
 - (void) cleanup

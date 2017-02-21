@@ -30,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) prepareToPlayVideoAtAsset:(AVAsset *)asset;
 - (void) prepareToPlayVideoWithURL:(NSURL *)videoURL;
 
+@property (nonatomic, assign) BOOL fillPlayerWindow; // default is YES
+
 @property (nonatomic, assign) NSInteger loopCount; // loopCount <= 0 表示无限循环播放，默认是 1
 
 @property (nonatomic, weak) id<XCFAVPlayerViewDelegate> delegate;
