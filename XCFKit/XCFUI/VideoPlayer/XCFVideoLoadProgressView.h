@@ -11,6 +11,7 @@
 typedef enum : NSUInteger {
     XCFVideoLoadStatusPlay,
     XCFVideoLoadStatusLoading,
+    XCFVideoLoadStatusProgress,
 } XCFVideoLoadStatus;
 
 @interface XCFVideoLoadProgressView : UIView

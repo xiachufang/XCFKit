@@ -65,7 +65,7 @@
     if (p != _progress) {
         _progress = p;
         
-        if (self.status == XCFVideoLoadStatusLoading) {
+        if (self.status == XCFVideoLoadStatusProgress) {
             [self setNeedsDisplay];
         }
     }
