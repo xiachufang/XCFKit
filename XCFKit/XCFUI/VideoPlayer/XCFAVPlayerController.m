@@ -44,7 +44,6 @@ UIViewControllerTransitioningDelegate
     struct {
         unsigned int didCancel   : 1;
         unsigned int playToEnd   : 1;
-        unsigned int didDownload : 1;
     } _delegateFlag;
 }
 
@@ -111,6 +110,8 @@ UIViewControllerTransitioningDelegate
     _playerView = [[XCFAVPlayerView alloc] initWithFrame:self.view.bounds];
     _playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _playerView.delegate = self;
+    _playerView.fillPlayerWindow = NO;
+    _playerView.volume = 1;
     [self.view addSubview:_playerView];
     
     if (_previewImage) {
@@ -160,7 +161,6 @@ UIViewControllerTransitioningDelegate
     
     _delegateFlag.didCancel = [delegate respondsToSelector:@selector(avPlayerControllerDidCancel:)];
     _delegateFlag.playToEnd = [delegate respondsToSelector:@selector(avPlayerControllerDidPlayToEnd:)];
-    _delegateFlag.didDownload = [delegate respondsToSelector:@selector(avPlayerController:didDownloadVideoWithURL:temporaryLocalURL:)];
 }
 
 #pragma mark - layout

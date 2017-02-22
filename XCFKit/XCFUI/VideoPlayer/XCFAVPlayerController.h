@@ -18,11 +18,6 @@
 - (void) avPlayerControllerDidCancel:(XCFAVPlayerController *)controller;
 - (void) avPlayerControllerDidPlayToEnd:(XCFAVPlayerController *)controller;
 
-// 如果没有实现这个方法或者返回的 URL 是 nil playerController 就会把视频放到一个临时的位置，播放结束之后再删掉
-- (NSURL *) avPlayerController:(XCFAVPlayerController *)controller
-       didDownloadVideoWithURL:(NSURL *)videoURL
-             temporaryLocalURL:(NSURL *)tempURL;
-
 @end
 
 @interface XCFAVPlayerController : UIViewController<XCFVideoPlayerControlProtocol>
