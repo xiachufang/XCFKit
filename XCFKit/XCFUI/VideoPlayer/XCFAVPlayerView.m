@@ -41,27 +41,37 @@
     [self cleanup];
 }
 
++ (Class) layerClass
+{
+    return [AVPlayerLayer class];
+}
+
 - (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         _loopCount = 1;
         _volume = 1;
-        _playerLayer = [AVPlayerLayer playerLayerWithPlayer:nil];
-        _playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        [self.layer addSublayer:_playerLayer];
+        _fillPlayerWindow = YES;
+        self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        self.backgroundColor = [UIColor blackColor];
     }
     
     return self;
 }
 
+- (AVPlayerLayer *) playerLayer
+{
+    return (AVPlayerLayer*)self.layer;
+}
+
 #pragma mark - layout
 
-- (void) layoutSubviews
-{
-    [super layoutSubviews];
-    _playerLayer.frame = self.layer.bounds;
-}
+//- (void) layoutSubviews
+//{
+//    [super layoutSubviews];
+//    _playerLayer.frame = self.layer.bounds;
+//}
 
 - (CGRect) videoRect
 {
