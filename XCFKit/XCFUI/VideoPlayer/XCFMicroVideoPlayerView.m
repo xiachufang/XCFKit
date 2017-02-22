@@ -45,13 +45,12 @@
     if (self) {
         if (path) {
             _decoder = [[XCFMicroVideoDecoder alloc] initWithVideoFilePath:path];
-//            _decoder.outputSize = frame.size;
             _decoder.delegate = self;
         }
         
         _currentImageRef = NULL;
         _previewImageRef = image.CGImage;
-        [self displayImageRef:_previewImageRef];
+//        [self displayImageRef:_previewImageRef];
         self.backgroundColor = [UIColor blackColor];
         
         self.layer.contentsGravity = kCAGravityResizeAspectFill;
@@ -206,7 +205,7 @@
         }
         
         _currentImageRef = imageRef;
-        [self.layer setContents:(__bridge id _Nullable)(imageRef)];
+        [self.layer setContents:(__bridge id)(imageRef)];
         
         self.layer.transform = CATransform3DMakeAffineTransform(transform);
     }
