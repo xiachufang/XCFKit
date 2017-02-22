@@ -13,9 +13,9 @@
 
 @property (nonatomic, copy) NSString *videoPath;
 
-@property (nonatomic, retain) AVPlayerItem *playerItem;
-@property (nonatomic, retain) AVPlayerLayer *playerLayer;
-
+@property (nonatomic, strong) AVPlayerItem *playerItem;
+@property (nonatomic, strong) AVPlayerLayer *playerLayer;
+@property (nonatomic, strong) AVPlayerItemVideoOutput *playerItemOutput;
 @property (nonatomic, strong) AVURLAsset *videoAsset;
 
 @end
@@ -103,6 +103,30 @@
     }
 }
 
+#pragma mark - util
+
+- (UIImage *) snapshotOfCurrentFrame
+{
+    if (self.playerItemOutput) {
+        CVPixelBufferRef buffer = [self.playerItemOutput copyPixelBufferForItemTime:[self.playerItem currentTime]
+                                                                 itemTimeForDisplay:nil];
+        if (buffer) {
+            CIImage *ciImage = [CIImage imageWithCVPixelBuffer:buffer];
+            CIContext *context = [CIContext contextWithOptions:NULL];
+            CGRect rect = CGRectMake(0,
+                                     0,
+                                     CVPixelBufferGetWidth(buffer),
+                                     CVPixelBufferGetHeight(buffer));
+            CGImageRef cgImage = [context createCGImage:ciImage fromRect:rect];
+            CVBufferRelease(buffer);
+            
+            return [UIImage imageWithCGImage:cgImage];
+        }
+    }
+    
+    return nil;
+}
+
 #pragma mark - volume
 
 - (void) setVolume:(float)volume
@@ -177,6 +201,9 @@
                 }
                 strong_self.playerItem = [AVPlayerItem playerItemWithAsset:strong_asset
                                               automaticallyLoadedAssetKeys:@[@"duration"]];
+                NSDictionary* settings = @{ (id)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
+                strong_self.playerItemOutput = [[AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:settings];
+                [strong_self.playerItem addOutput:strong_self.playerItemOutput];
                 [[NSNotificationCenter defaultCenter] addObserver:strong_self
                                                          selector:@selector(didPlayToEndNotification:)
                                                              name:AVPlayerItemDidPlayToEndTimeNotification
@@ -219,6 +246,9 @@
             [self removeObserverOnPlayerItem];
         }
         self.playerItem = [[AVPlayerItem alloc] initWithURL:videoURL];
+        NSDictionary* settings = @{ (id)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
+        self.playerItemOutput = [[AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:settings];
+        [self.playerItem addOutput:self.playerItemOutput];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didPlayToEndNotification:)
