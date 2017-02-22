@@ -142,6 +142,8 @@ UIViewControllerTransitioningDelegate
     
     if (!_isVideoLoaded && _actualVideoPath) {
         [self.playerView prepareToPlayVideoAtPath:_actualVideoPath];
+    } else if (_remoteVideoURL) {
+        [self.playerView prepareToPlayVideoWithURL:_remoteVideoURL];
     }
 }
 
