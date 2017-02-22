@@ -41,4 +41,10 @@
 @property (nonatomic, strong) UIImage *sourceImage;
 @property (nonatomic, assign) UIViewContentMode sourceImageContentMode; // default is UIViewContentModeScaleAspectFit
 
+- (void) beginPresentAnimation;
+- (void) endPresentAnimation;
+
+- (void) beginDismissAnimation;
+- (void) endDismissAnimation;
+
 @end

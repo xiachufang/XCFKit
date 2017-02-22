@@ -12,6 +12,7 @@
 @interface XCFAVPlayerControllerAnimator : NSObject<UIViewControllerAnimatedTransitioning>
 
 @property (nonatomic, weak) XCFAVPlayerController *avPlayerController;
+@property (nonatomic, weak) UIViewController *presentingController;
 @property (nonatomic, assign) BOOL isPresenting;
 
 @property (nonatomic, strong) UIImageView *animateImageView;

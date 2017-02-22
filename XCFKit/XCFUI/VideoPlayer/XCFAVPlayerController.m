@@ -98,6 +98,9 @@ UIViewControllerTransitioningDelegate
         _allowPlaybackControls = allowPlaybackControls;
         _previewImage = previewImage;
         _sourceImageContentMode = UIViewContentModeScaleAspectFit;
+        
+        self.modalPresentationStyle = UIModalPresentationCustom;
+        self.transitioningDelegate = self;
     }
     
     return self;
@@ -105,7 +108,7 @@ UIViewControllerTransitioningDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor blackColor];
     
     _playerView = [[XCFAVPlayerView alloc] initWithFrame:self.view.bounds];
     _playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -123,29 +126,47 @@ UIViewControllerTransitioningDelegate
         [self.view insertSubview:_previewImageView aboveSubview:_playerView];
     }
     
-    // presention animation
-    if (self.sourceController && self.sourceView && self.sourceImage) {
-        self.modalPresentationStyle = UIModalPresentationCustom;
-        self.transitioningDelegate = self;
-    }
-    
     // add touch action
     UITapGestureRecognizer *tap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(tapOnVideoPlayer:)];
     self.playerView.userInteractionEnabled = YES;
     [self.playerView addGestureRecognizer:tap];
+    
+    // prepareToPlay
+    if (!_isVideoLoaded && _actualVideoPath) {
+        [self.playerView prepareToPlayVideoAtPath:_actualVideoPath];
+    } else if (_remoteVideoURL) {
+        [self.playerView prepareToPlayVideoWithURL:_remoteVideoURL];
+    }
+    
+    // notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pause)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pause)
+                                                 name:UIApplicationWillTerminateNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(play)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    if (!_isVideoLoaded && _actualVideoPath) {
-        [self.playerView prepareToPlayVideoAtPath:_actualVideoPath];
-    } else if (_remoteVideoURL) {
-        [self.playerView prepareToPlayVideoWithURL:_remoteVideoURL];
-    }
+    [self.playerView play];
+}
+
+- (void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [self.playerView pause];
 }
 
 - (BOOL) prefersStatusBarHidden
@@ -173,8 +194,6 @@ UIViewControllerTransitioningDelegate
 - (void) viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    
-    
 }
 
 - (CGRect) videoRect
@@ -202,7 +221,9 @@ UIViewControllerTransitioningDelegate
     [_previewImageView removeFromSuperview];
     _previewImageView = nil;
     
-    [self play];
+    if (!self.isBeingPresented && [UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+        [self play];
+    }
 }
 
 - (void) _togglePlaybackControlsVisibility
@@ -247,13 +268,38 @@ UIViewControllerTransitioningDelegate
 
 #pragma mark - UIViewControllerTransitioningDelegate
 
+- (void) beginPresentAnimation
+{
+    self.playerView.hidden = YES;
+    self.previewImageView.hidden = YES;
+}
+
+- (void) endPresentAnimation
+{
+    self.playerView.hidden = NO;
+    self.previewImageView.hidden = NO;
+}
+
+- (void) beginDismissAnimation
+{
+    self.playerView.hidden = YES;
+    self.previewImageView.hidden = YES;
+}
+
+- (void) endDismissAnimation
+{
+    // do nothing
+}
+
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
 {
     if (self.sourceController && self.sourceView && self.sourceImage) {
         XCFAVPlayerControllerAnimator *animator = [XCFAVPlayerControllerAnimator new];
         animator.avPlayerController = self;
+        animator.presentingController = self.sourceController;
         
         UIImageView *animateImageView = [UIImageView new];
+        animateImageView.clipsToBounds = YES;
         animateImageView.backgroundColor = [UIColor blackColor];
         animateImageView.image = self.sourceImage;
         animateImageView.contentMode = self.sourceImageContentMode;
@@ -273,8 +319,10 @@ UIViewControllerTransitioningDelegate
     if (self.sourceController && self.sourceView && self.sourceImage) {
         XCFAVPlayerControllerAnimator *animator = [XCFAVPlayerControllerAnimator new];
         animator.avPlayerController = self;
+        animator.presentingController = self.sourceController;
         
         UIImageView *animateImageView = [UIImageView new];
+        animateImageView.clipsToBounds = YES;
         animateImageView.backgroundColor = [UIColor blackColor];
         animateImageView.image = self.sourceImage;
         animateImageView.contentMode = self.sourceImageContentMode;
