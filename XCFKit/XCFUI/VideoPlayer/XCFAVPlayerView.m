@@ -39,6 +39,7 @@
 - (void) dealloc
 {
     [self cleanup];
+    [self removeObservePlayerLayerReadyToDisplay];
 }
 
 + (Class) layerClass
@@ -55,6 +56,8 @@
         _fillPlayerWindow = YES;
         self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         self.backgroundColor = [UIColor blackColor];
+        
+        [self observePlayerLayerReadyToDisplay];
     }
     
     return self;
@@ -66,12 +69,6 @@
 }
 
 #pragma mark - layout
-
-//- (void) layoutSubviews
-//{
-//    [super layoutSubviews];
-//    _playerLayer.frame = self.layer.bounds;
-//}
 
 - (CGRect) videoRect
 {
@@ -296,6 +293,21 @@ static void const *_observeStatusContext = (void*)&_observeStatusContext;
                             context:&_observeStatusContext];
 }
 
+- (void) observePlayerLayerReadyToDisplay
+{
+    [self.playerLayer addObserver:self
+                       forKeyPath:@"readyForDisplay"
+                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                          context:&_observeStatusContext];
+}
+
+- (void) removeObservePlayerLayerReadyToDisplay
+{
+    [self.playerLayer removeObserver:self
+                          forKeyPath:@"readyForDisplay"
+                             context:&_observeStatusContext];
+}
+
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
     // 通过 context 可以判定 keypath 一定是 status 所以不再在这里判断
@@ -303,9 +315,13 @@ static void const *_observeStatusContext = (void*)&_observeStatusContext;
         AVPlayerItemStatus status = self.playerItem.status;
         
         if (status == AVPlayerItemStatusReadyToPlay) {
-            [self readyToPlay];
+            // do nothing
         } else if (status == AVPlayerItemStatusFailed) {
             [self preparedFailed:self.playerItem.error];
+        }
+    } else if (object == self.playerLayer && context == _observeStatusContext) {
+        if (self.playerLayer.isReadyForDisplay) {
+            [self readyToPlay];
         }
     }
 }
