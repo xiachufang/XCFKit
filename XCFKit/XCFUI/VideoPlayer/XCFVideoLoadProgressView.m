@@ -85,4 +85,17 @@
     [self setNeedsDisplay];
 }
 
+#pragma mark - size
+
+- (CGSize) sizeThatFits:(CGSize)size
+{
+    CGFloat width = MIN(size.width, size.height);
+    return CGSizeMake(width, width);
+}
+
+- (CGSize) intrinsicContentSize
+{
+    return CGSizeMake(40, 40);
+}
+
 @end
