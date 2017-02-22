@@ -36,7 +36,7 @@
 
 - (IBAction)progressChanged:(UISlider *)sender {
     CGFloat progress = sender.value / sender.maximumValue;
-    self.progressView.status = progress > 0 ? XCFVideoLoadStatusLoading : XCFVideoLoadStatusPlay;
+    self.progressView.status = progress > 0 ? XCFVideoLoadStatusProgress : XCFVideoLoadStatusPlay;
     self.progressView.progress = progress;
 }
 

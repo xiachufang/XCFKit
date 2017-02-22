@@ -36,7 +36,7 @@ XCFAVPlayerControllerDelegate
     _playerView = [[XCFMicroVideoPlayerView alloc] initWithFrame:self.videoPlayerContainerView.bounds
                                                        videoPath:nil
                                                     previewImage:previewImage];
-    _playerView.loopCount = 2;
+    _playerView.loopCount = 0;
     _playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.videoPlayerContainerView addSubview:_playerView];
     
@@ -114,7 +114,9 @@ XCFAVPlayerControllerDelegate
                 NSData *data = [NSData dataWithContentsOfURL:urlAsset.URL];
                 NSString *targetPath = [NSTemporaryDirectory() stringByAppendingPathComponent:urlAsset.URL.lastPathComponent];
                 if ([data writeToFile:targetPath atomically:YES]) {
-                    [weak_self didSelectVideoAtPath:targetPath];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weak_self didSelectVideoAtPath:targetPath];
+                    });   
                 }
             }];
         }
