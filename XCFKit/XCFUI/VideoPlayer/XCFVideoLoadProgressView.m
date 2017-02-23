@@ -186,6 +186,7 @@
     rotationAnimation.cumulative = YES;
     rotationAnimation.repeatCount = CGFLOAT_MAX;
     
+    [self endAnimateLoadingLayer];
     [self.loadingAnimationLayer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
 
