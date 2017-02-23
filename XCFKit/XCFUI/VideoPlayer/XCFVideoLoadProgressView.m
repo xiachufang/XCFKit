@@ -8,13 +8,22 @@
 
 #import "XCFVideoLoadProgressView.h"
 
+@interface XCFVideoLoadProgressView ()
+
+@property (nonatomic, strong) CAShapeLayer *loadingAnimationLayer;
+
+@end
+
 @implementation XCFVideoLoadProgressView
+{
+    CGFloat _animationLayerLineWidth;
+}
 
 - (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.opaque = NO;
+        [self initialization];
     }
     
     return self;
@@ -23,7 +32,13 @@
 - (void) awakeFromNib
 {
     [super awakeFromNib];
+    [self initialization];
+}
+
+- (void) initialization
+{
     self.opaque = NO;
+    _animationLayerLineWidth = 6;
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -32,10 +47,11 @@
     displayRect = CGRectOffset(displayRect, (rect.size.width - diameter) / 2, (rect.size.height - diameter)/2);
     
     // fill background
+    CGFloat backgroundAlpha = self.status == XCFVideoLoadStatusPlay ? 0.8 : 0;
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextClearRect(ctx, rect);
     CGContextAddEllipseInRect(ctx, displayRect);
-    CGContextSetRGBFillColor(ctx, 1, 1, 1, 0.8);
+    CGContextSetRGBFillColor(ctx, 1, 1, 1, backgroundAlpha);
     CGContextFillPath(ctx);
 
     CGPoint center = CGPointMake(displayRect.origin.x + diameter/2, displayRect.origin.y + diameter/2);
@@ -46,17 +62,23 @@
         CGContextAddLineToPoint(ctx, center.x - diameter / 8, center.y + diameter / 8 * 1.732);
         CGContextAddLineToPoint(ctx, center.x + diameter / 4, center.y);
         CGContextClosePath(ctx);
+        
+        CGContextSetRGBFillColor(ctx, 0, 0, 0, 0.8);
+        CGContextFillPath(ctx);
     } else {
-        CGFloat lineWidth = 2;
-        CGContextMoveToPoint(ctx, center.x, center.y);
-        CGFloat start = (self.progress - 0.25) * 2 * M_PI;
-        CGFloat end = 0.75 * 2 * M_PI;
-        CGContextAddArc(ctx, center.x, center.y, (diameter / 2) - lineWidth, start, end, 0);
-        CGContextClosePath(ctx);
+        CGFloat borderWidth = _animationLayerLineWidth;
+        CGContextAddEllipseInRect(ctx, CGRectInset(displayRect, borderWidth / 2, borderWidth / 2));
+        CGContextSetLineWidth(ctx, borderWidth);
+        CGContextSetRGBStrokeColor(ctx, 0, 0, 0, 0.2);
+        CGContextStrokePath(ctx);
     }
+}
+
+- (void) layoutSubviews
+{
+    [super layoutSubviews];
     
-    CGContextSetRGBFillColor(ctx, 0, 0, 0, 0.8);
-    CGContextFillPath(ctx);
+    _loadingAnimationLayer.frame = self.bounds;
 }
 
 - (void) setProgress:(CGFloat)progress
@@ -66,7 +88,7 @@
         _progress = p;
         
         if (self.status == XCFVideoLoadStatusProgress) {
-            [self setNeedsDisplay];
+            [self updateLoadingLayer];
         }
     }
 }
@@ -76,6 +98,14 @@
     if (_status != status) {
         _status = status;
         [self setNeedsDisplay];
+        
+        [self updateLoadingLayer];
+        
+        if (_status == XCFVideoLoadStatusLoading) {
+            [self animateLoadingLayer];
+        } else {
+            [self endAnimateLoadingLayer];
+        }
     }
 }
 
@@ -83,6 +113,85 @@
 {
     [super tintColorDidChange];
     [self setNeedsDisplay];
+}
+
+#pragma mark - loading && progress
+
+- (CAShapeLayer *) loadingAnimationLayer
+{
+    if (!_loadingAnimationLayer) {
+        _loadingAnimationLayer = [CAShapeLayer layer];
+        _loadingAnimationLayer.frame = self.bounds;
+        
+        _loadingAnimationLayer.fillColor = [UIColor clearColor].CGColor;
+        
+        _loadingAnimationLayer.lineWidth = _animationLayerLineWidth;
+        _loadingAnimationLayer.strokeColor = [UIColor whiteColor].CGColor;
+        
+        _loadingAnimationLayer.lineCap = kCALineCapRound;
+        
+        // path
+        CGRect rect = self.bounds;
+        CGFloat diameter = MIN(rect.size.width, rect.size.height);
+        CGRect displayRect = (CGRect){rect.origin,CGSizeMake(diameter, diameter)};
+        displayRect = CGRectOffset(displayRect, (rect.size.width - diameter) / 2, (rect.size.height - diameter)/2);
+        CGPoint displayCenter = CGPointMake(displayRect.origin.x + diameter / 2, displayRect.origin.y + diameter / 2);
+        UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:displayCenter
+                                                            radius:diameter / 2 - _animationLayerLineWidth / 2
+                                                        startAngle:M_PI_2 * 3
+                                                          endAngle:M_PI_2 * 3 + M_PI * 2
+                                                         clockwise:YES];
+        _loadingAnimationLayer.path = path.CGPath;
+        
+        [self.layer addSublayer:_loadingAnimationLayer];
+    }
+    
+    return _loadingAnimationLayer;
+}
+
+- (void) updateLoadingLayer
+{
+    switch (self.status) {
+        case XCFVideoLoadStatusPlay:
+            _loadingAnimationLayer.hidden = YES;
+            break;
+        case XCFVideoLoadStatusProgress:
+            [CATransaction begin];
+            [CATransaction setDisableActions:YES];
+            self.loadingAnimationLayer.strokeStart = 0;
+            self.loadingAnimationLayer.strokeEnd = self.progress;
+            [CATransaction commit];
+            self.loadingAnimationLayer.hidden = NO;
+            break;
+        case XCFVideoLoadStatusLoading:
+            [CATransaction begin];
+            [CATransaction setDisableActions:YES];
+            self.loadingAnimationLayer.strokeStart = 0;
+            self.loadingAnimationLayer.strokeEnd = 1 / 4.0;
+            [CATransaction commit];
+            self.loadingAnimationLayer.hidden = NO;
+            break;
+        default:
+            break;
+    }
+}
+
+- (void) animateLoadingLayer
+{
+    CABasicAnimation* rotationAnimation;
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.fromValue = [NSNumber numberWithFloat:0];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0];
+    rotationAnimation.duration = 0.68;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = CGFLOAT_MAX;
+    
+    [self.loadingAnimationLayer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+}
+
+- (void) endAnimateLoadingLayer
+{
+    [_loadingAnimationLayer removeAnimationForKey:@"rotationAnimation"];
 }
 
 #pragma mark - size
