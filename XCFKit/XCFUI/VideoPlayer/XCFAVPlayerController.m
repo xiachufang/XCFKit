@@ -9,6 +9,7 @@
 #import "XCFAVPlayerController.h"
 #import "XCFAVPlayerView.h"
 #import "XCFAVPlayerControllerAnimator.h"
+#import "XCFVideoLoadProgressView.h"
 
 @interface XCFAVPlayerController ()
 <
@@ -20,8 +21,8 @@ UIViewControllerTransitioningDelegate
 @property (nonatomic, strong) NSURL *remoteVideoURL;
 
 @property (nonatomic, strong) XCFAVPlayerView *playerView;
-
 @property (nonatomic, strong) UIImageView *previewImageView;
+@property (nonatomic, strong) XCFVideoLoadProgressView *loadingView;
 
 // control interface
 @property (nonatomic, strong) UIButton *closeButton;
@@ -45,6 +46,8 @@ UIViewControllerTransitioningDelegate
         unsigned int didCancel   : 1;
         unsigned int playToEnd   : 1;
     } _delegateFlag;
+    
+    BOOL _isLoading;
 }
 
 #pragma mark - life cycle
@@ -117,6 +120,10 @@ UIViewControllerTransitioningDelegate
     _playerView.volume = 1;
     [self.view addSubview:_playerView];
     
+    _loadingView = [[XCFVideoLoadProgressView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    _loadingView.hidden = YES;
+    [self.view addSubview:_loadingView];
+    
     if (_previewImage) {
         _previewImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
         _previewImageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -136,8 +143,10 @@ UIViewControllerTransitioningDelegate
     // prepareToPlay
     if (!_isVideoLoaded && _actualVideoPath) {
         [self.playerView prepareToPlayVideoAtPath:_actualVideoPath];
+        _isLoading = YES;
     } else if (_remoteVideoURL) {
         [self.playerView prepareToPlayVideoWithURL:_remoteVideoURL];
+        _isLoading = YES;
     }
     
     // notifications
@@ -160,6 +169,11 @@ UIViewControllerTransitioningDelegate
     [super viewDidAppear:animated];
     
     [self.playerView play];
+    
+    if (_isLoading) {
+        _loadingView.hidden = NO;
+        _loadingView.status = XCFVideoLoadStatusLoading;
+    }
 }
 
 - (void) viewDidDisappear:(BOOL)animated
@@ -194,6 +208,8 @@ UIViewControllerTransitioningDelegate
 - (void) viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    
+    _loadingView.center = _playerView.center;
 }
 
 - (CGRect) videoRect
@@ -213,6 +229,11 @@ UIViewControllerTransitioningDelegate
                                                    handler:nil];
     [alertController addAction:action];
     [self presentViewController:alertController animated:YES completion:nil];
+    
+    _isLoading = NO;
+    [_loadingView removeFromSuperview];
+    _loadingView.status = XCFVideoLoadStatusPlay;
+    _loadingView = nil;
 }
 
 - (void) _videoDidLoaded
@@ -220,6 +241,12 @@ UIViewControllerTransitioningDelegate
     self->_isVideoLoaded = YES;
     [_previewImageView removeFromSuperview];
     _previewImageView = nil;
+    
+    _isLoading = NO;
+    
+    [_loadingView removeFromSuperview];
+    _loadingView.status = XCFVideoLoadStatusPlay;
+    _loadingView = nil;
     
     if (!self.isBeingPresented && [UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
         [self play];
@@ -272,18 +299,21 @@ UIViewControllerTransitioningDelegate
 {
     self.playerView.hidden = YES;
     self.previewImageView.hidden = YES;
+    self.loadingView.hidden = YES;
 }
 
 - (void) endPresentAnimation
 {
     self.playerView.hidden = NO;
     self.previewImageView.hidden = NO;
+    self.loadingView.hidden = NO;
 }
 
 - (void) beginDismissAnimation
 {
     self.playerView.hidden = YES;
     self.previewImageView.hidden = YES;
+    self.loadingView.hidden = YES;
 }
 
 - (void) endDismissAnimation
