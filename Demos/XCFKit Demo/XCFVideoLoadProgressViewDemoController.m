@@ -21,9 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CGRect progressViewFrame = CGRectMake(0, 0, 44, 44);
+    CGRect progressViewFrame = CGRectMake(0, 0, 40, 40);
     self.progressView = [[XCFVideoLoadProgressView alloc] initWithFrame:progressViewFrame];
-//    self.progressView.tintColor = [UIColor whiteColor];
     [self.view addSubview:self.progressView];
 }
 
@@ -36,8 +35,15 @@
 
 - (IBAction)progressChanged:(UISlider *)sender {
     CGFloat progress = sender.value / sender.maximumValue;
-    self.progressView.status = progress > 0 ? XCFVideoLoadStatusProgress : XCFVideoLoadStatusPlay;
-    self.progressView.progress = progress;
+    if (progress == 0) {
+        self.progressView.status = XCFVideoLoadStatusPlay;
+    } else if (progress < 0.5) {
+        self.progressView.status = XCFVideoLoadStatusLoading;
+    } else {
+        self.progressView.status = XCFVideoLoadStatusProgress;
+    }
+    
+    self.progressView.progress = progress - 0.5;
 }
 
 @end
