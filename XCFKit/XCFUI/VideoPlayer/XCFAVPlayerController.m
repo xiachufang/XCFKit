@@ -117,6 +117,7 @@ UIViewControllerTransitioningDelegate
     _playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _playerView.delegate = self;
     _playerView.fillPlayerWindow = NO;
+    _playerView.loopCount = 0;
     _playerView.volume = 1;
     [self.view addSubview:_playerView];
     
