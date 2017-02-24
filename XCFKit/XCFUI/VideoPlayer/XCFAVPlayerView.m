@@ -16,7 +16,7 @@
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
 @property (nonatomic, strong) AVPlayerItemVideoOutput *playerItemOutput;
-@property (nonatomic, strong) AVURLAsset *videoAsset;
+@property (nonatomic, strong) AVAsset *videoAsset;
 
 @end
 
@@ -186,8 +186,8 @@
 {
     [self stop];
     
-    self.videoAsset = (AVURLAsset*)asset;
-    self.videoPath = self.videoAsset.URL.path;
+    self.videoAsset = asset;
+    self.videoPath = nil;
     
     NSArray *loadKeys = @[@"playable"];
     __weak AVAsset *weak_asset = asset;
