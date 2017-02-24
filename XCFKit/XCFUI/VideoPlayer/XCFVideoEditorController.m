@@ -410,10 +410,14 @@
                         ofTrack:sourceVideoTrack
                          atTime:kCMTimeZero
                           error:nil];
-    [audioTrack insertTimeRange:CMTimeRangeMake(start, duration)
-                        ofTrack:sourceAudioTrack
-                         atTime:kCMTimeZero
-                          error:nil];
+    if (sourceAudioTrack) {
+        [audioTrack insertTimeRange:CMTimeRangeMake(start, duration)
+                            ofTrack:sourceAudioTrack
+                             atTime:kCMTimeZero
+                              error:nil];
+    } else {
+        [composeAsset removeTrack:audioTrack];
+    }
     
     AVMutableVideoCompositionLayerInstruction* transformer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
     
