@@ -235,14 +235,10 @@
     return @"剪辑视频";
 }
 
-- (BOOL) isMuted
-{
-    return self.playerView.volume == 0;
-}
-
 - (void) setMute:(BOOL)mute
 {
-    self.playerView.volume = mute ? 0 : 1;
+    _mute = mute;
+    _playerView.volume = mute ? 0 : 1;
 }
 
 #pragma mark - video 
@@ -278,6 +274,7 @@
                 (videoPlayerContentSize.height - playerContainerSize.height)/2);
     
     _playerView.delegate = self;
+    _playerView.volume = self.isMuted ? 0 : 1;
     _playerView.loopCount = 0;
     
     [_playerView prepareToPlayVideoAtAsset:self.videoAsset];
