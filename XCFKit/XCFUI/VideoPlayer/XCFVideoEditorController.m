@@ -375,7 +375,6 @@
     AVMutableComposition *composeAsset = [AVMutableComposition composition];
     AVMutableCompositionTrack *videoTrack = [composeAsset addMutableTrackWithMediaType:AVMediaTypeVideo
                                                          preferredTrackID:kCMPersistentTrackID_Invalid];
-//    videoTrack.preferredTransform = transform;
     AVMutableCompositionTrack *audioTrack = [composeAsset addMutableTrackWithMediaType:AVMediaTypeAudio
                                                          preferredTrackID:kCMPersistentTrackID_Invalid];
     
@@ -392,14 +391,11 @@
     
     CGPoint contentOffset = self.playerScrollView.contentOffset;
     CGPoint cropVideoOrigin;CGSize continerSize = self.playerScrollView.contentSize;
-    contentOffset.x = MAX(MIN(contentOffset.x, continerSize.width), 0);
-    contentOffset.y = MAX(MIN(contentOffset.y, continerSize.height), 0);
+    CGSize playerContainerSize = [self _playerContainerFrame].size;
+    contentOffset.x = MAX(MIN(contentOffset.x, continerSize.width - playerContainerSize.width), 0);
+    contentOffset.y = MAX(MIN(contentOffset.y, continerSize.height - playerContainerSize.height), 0);
     cropVideoOrigin.x = (contentOffset.x / continerSize.width) * videoSize.width;
     cropVideoOrigin.y = (contentOffset.y / continerSize.height) * videoSize.height;
-//#if DEBUG
-//    CGRect cropVideoRect = (CGRect){cropVideoOrigin,videoComposition.renderSize};
-//    NSLog(@"natural size : %@ crop rect : %@",NSStringFromCGSize(videoSize),NSStringFromCGRect(cropVideoRect));
-//#endif
     
     AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     CMTime start = CMTimeMakeWithSeconds(self.currentRange.location, framePerSecond * 100);
