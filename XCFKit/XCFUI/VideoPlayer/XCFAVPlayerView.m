@@ -262,13 +262,9 @@
                                                      name:AVPlayerItemDidPlayToEndTimeNotification
                                                    object:self.playerItem];
         
-        if (self.playerLayer.player) {
-            [self.playerLayer.player replaceCurrentItemWithPlayerItem:self.playerItem];
-        } else {
-            AVPlayer *player = [AVPlayer playerWithPlayerItem:self.playerItem];
-            player.volume = self.volume;
-            self.playerLayer.player = player;
-        }
+        AVPlayer *player = [AVPlayer playerWithPlayerItem:self.playerItem];
+        player.volume = self.volume;
+        self.playerLayer.player = player;
         
         [self observePlayerItemStatus];
     }
