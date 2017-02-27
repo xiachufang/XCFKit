@@ -546,12 +546,7 @@
         __strong typeof(weak_self) strong_self = weak_self;
         AVAssetExportSession *exporter = strong_self.exportSession;
         AVAssetExportSessionStatus status = [exporter status];
-        if (status == AVAssetExportSessionStatusExporting) {
-            double progress = exporter.progress;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [strong_self updateExpertProgress:progress];
-            });
-        } else if (status == AVAssetExportSessionStatusCompleted) {
+        if (status == AVAssetExportSessionStatusCompleted) {
             AVAsset *outputAsset = [AVAsset assetWithURL:expertURL];
             AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:outputAsset];
             imageGenerator.appliesPreferredTrackTransform = YES;
@@ -571,7 +566,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [strong_self _expertFailed:exporter.error];
             });
-        } else if (status > AVAssetExportSessionStatusExporting) {
+        } else if (status == AVAssetExportSessionStatusCancelled) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [strong_self finishExportStatus];
             });
