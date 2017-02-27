@@ -43,7 +43,7 @@
     [super layoutSubviews];
     
     // 为了弥补两个 cell 之间可能的黑线
-    _imageView.frame = CGRectInset(self.contentView.bounds, -1, 0);
+    _imageView.frame = CGRectInset(self.contentView.bounds, -1.0/2, 0);
 }
 
 - (void) prepareForReuse
