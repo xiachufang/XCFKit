@@ -358,7 +358,7 @@ static void const *_observeStatusContext = (void*)&_observeStatusContext;
 
 - (BOOL) seekToSecond:(NSTimeInterval)second
 {
-    if (self.isPlayable && second >= 0 && second < [self duration]) {
+    if (self.isPlayable && second >= 0 && second <= [self duration]) {
         [self.playerLayer.player seekToTime:CMTimeMakeWithSeconds(second, NSEC_PER_SEC)];
         return YES;
     }
@@ -368,10 +368,10 @@ static void const *_observeStatusContext = (void*)&_observeStatusContext;
 
 - (void) asyncSeekToSecond:(NSTimeInterval)second completion:(void (^)(BOOL))completion
 {
-    if (self.isPlayable && second >= 0 && second < [self duration]) {
+    if (self.isPlayable && second >= 0 && second <= [self duration]) {
         [self.playerLayer.player seekToTime:CMTimeMakeWithSeconds(second, NSEC_PER_SEC)
-                            toleranceBefore:kCMTimeZero
-                             toleranceAfter:kCMTimeZero
+//                            toleranceBefore:kCMTimeZero
+//                             toleranceAfter:kCMTimeZero
                           completionHandler:completion];
     } else {
         if (completion) {
