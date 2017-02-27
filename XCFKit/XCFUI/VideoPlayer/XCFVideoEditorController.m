@@ -15,6 +15,12 @@
 #import "UIColor+XCFAppearance.h"
 #import "UIColor+Hex.h"
 
+#if DEBUG
+#define SHOW_DEBUG_INFO 1
+#else
+#define SHOW_DEBUG_INFO 0
+#endif
+
 @interface XCFVideoEditorController ()<XCFAVPlayerViewDelegate>
 
 @property (nonatomic, strong) AVAsset *videoAsset;
@@ -42,6 +48,12 @@
     } _delegateFlag;
     
     BOOL _isExperting;
+    
+#if SHOW_DEBUG_INFO
+    UILabel *_currentRangeLabel;
+    UILabel *_currentProgressLabel;
+    NSTimeInterval _currentProgress;
+#endif
 }
 
 + (BOOL) canEditVideoAtPath:(NSString *)videoPath
@@ -289,6 +301,62 @@
                           action:@selector(videoRangeDidChanged:)
                 forControlEvents:UIControlEventValueChanged];
     [_videoRangeSlider loadVideoFramesWithVideoAsset:self.videoAsset];
+    
+#if SHOW_DEBUG_INFO
+    {
+        _currentRangeLabel = [UILabel new];
+        _currentRangeLabel.textAlignment = NSTextAlignmentLeft;
+        _currentRangeLabel.numberOfLines = 1;
+        _currentRangeLabel.font = [UIFont fontWithName:@"Menlo-Regular" size:16];
+        _currentRangeLabel.textColor = [UIColor xcf_yellowTextColor];
+        [self.view addSubview:_currentRangeLabel];
+        
+        _currentRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:_currentRangeLabel
+                                                                attribute:NSLayoutAttributeLeft
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self.view
+                                                                attribute:NSLayoutAttributeLeft
+                                                               multiplier:1
+                                                                 constant:20];
+        NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:_currentRangeLabel
+                                                                attribute:NSLayoutAttributeBottom
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self.view
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1
+                                                                 constant:-20];
+        [NSLayoutConstraint activateConstraints:@[left,bottom]];
+    }
+    
+    {
+        _currentProgressLabel = [UILabel new];
+        _currentProgressLabel.textAlignment = NSTextAlignmentLeft;
+        _currentProgressLabel.numberOfLines = 1;
+        _currentProgressLabel.font = [UIFont fontWithName:@"Menlo-Regular" size:16];
+        _currentProgressLabel.textColor = [UIColor xcf_yellowTextColor];
+        [self.view addSubview:_currentProgressLabel];
+        
+        _currentProgressLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:_currentProgressLabel
+                                                                attribute:NSLayoutAttributeRight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self.view
+                                                                attribute:NSLayoutAttributeRight
+                                                               multiplier:1
+                                                                 constant:-20];
+        NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:_currentProgressLabel
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.view
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                 multiplier:1
+                                                                   constant:-20];
+        [NSLayoutConstraint activateConstraints:@[right,bottom]];
+    }
+#endif
 }
 
 #pragma mark - action
@@ -324,6 +392,10 @@
     
     if (targetSecond > 0) {
         __weak typeof(self) weak_self = self;
+#if SHOW_DEBUG_INFO
+        _currentProgress = targetSecond;
+        [self refreshDebugLabel];
+#endif
         [self.playerView asyncSeekToSecond:targetSecond completion:^(BOOL finish) {
             __strong typeof(weak_self) strong_self = weak_self;
             if (finish && strong_self && !strong_self.videoRangeSlider.isTracking && !strong_self->_pause) {
@@ -333,7 +405,21 @@
     }
     
     self.currentRange = range;
+    
+#if SHOW_DEBUG_INFO
+    [self refreshDebugLabel];
+#endif
 }
+
+#if SHOW_DEBUG_INFO
+
+- (void) refreshDebugLabel
+{
+    _currentRangeLabel.text = [NSString stringWithFormat:@"%.1f - %.1f",self.currentRange.location,XCFVideoRangeGetEnd(self.currentRange)];
+    _currentProgressLabel.text = [NSString stringWithFormat:@"current time : %.1f",_currentProgress];
+}
+
+#endif
 
 - (NSString *) _videoExpertPresentName
 {
@@ -609,6 +695,11 @@
     if (playerView.progress < 1 && playerView.isPlaying && end > 0 && [playerView currentTime] >= end) {
         [self avPlayerViewDidPlayToEnd:playerView];
     }
+    
+#if SHOW_DEBUG_INFO
+    _currentProgress = MAX(playerView.currentTime,0);
+    [self refreshDebugLabel];
+#endif
 }
 
 - (void) avPlayerViewDidReadyToPlay:(XCFAVPlayerView *)playerView
