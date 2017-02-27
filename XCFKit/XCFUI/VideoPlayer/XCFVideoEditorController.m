@@ -390,7 +390,7 @@
         [self.playerView play];
     }
     
-    if (targetSecond > 0) {
+    if (targetSecond >= 0) {
         __weak typeof(self) weak_self = self;
 #if SHOW_DEBUG_INFO
         _currentProgress = targetSecond;
