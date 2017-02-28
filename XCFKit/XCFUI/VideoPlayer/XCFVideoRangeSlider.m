@@ -132,6 +132,9 @@ UIGestureRecognizerDelegate
     XCFVideoRange _trackInitRange;
     
     CGFloat _videoRangeSliderFrameWidth;
+    
+    // 在极小情况下，scrollViewDidEndDragging:willDecelerate:回调里面 scrollview.isDragging 还是 YES
+    BOOL _isOnDragging;
 }
 
 - (void) dealloc
@@ -519,6 +522,13 @@ UIGestureRecognizerDelegate
     return cell;
 }
 
+- (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (scrollView == self.frameCollectionView) {
+        _isOnDragging = YES;
+    }
+}
+
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView == self.frameCollectionView) {
@@ -547,6 +557,7 @@ UIGestureRecognizerDelegate
 - (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if (scrollView == self.frameCollectionView && !super.isTracking && !decelerate) {
+        _isOnDragging = NO;
         [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
 }
@@ -584,7 +595,7 @@ UIGestureRecognizerDelegate
 {
     return
     ([super isTracking] && CGRectContainsPoint(self.bounds, _trackInitPoint)) ||
-    self.frameCollectionView.isDragging ||
+    (self.frameCollectionView.isDragging && _isOnDragging) ||
     self.frameCollectionView.isDecelerating;
 }
 
