@@ -7,11 +7,18 @@
 //
 
 #import "XCFMicroVideoPlayerView.h"
-#import <Accelerate/Accelerate.h>
+#import <ImageIO/CGImageProperties.h>
+#import <CoreImage/CoreImage.h>
+#import <GLKit/GLKView.h>
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES2/glext.h>
 
-@interface XCFMicroVideoPlayerView ()<XCFMicroVideoDecoderDelegate>
+@interface XCFMicroVideoPlayerView ()<XCFMicroVideoDecoderDelegate,GLKViewDelegate>
 
-@property (nonatomic, assign) CGImageRef previewImageRef;
+@property (nonatomic, strong) GLKView *glView;
+@property (nonatomic, strong) CIContext *ciContext;
+@property (nonatomic, strong) EAGLContext *eaglContext;
+@property (nonatomic, strong) CIImage *previewCIImage;
 
 @end
 
@@ -20,7 +27,7 @@
     NSInteger _actualLoopCount;
     BOOL _running;
     
-    CGImageRef _currentImageRef;
+    CIImage *_currentImage;
     
     struct {
         unsigned int statusChanged : 1;
@@ -34,26 +41,45 @@
         _decoder.delegate = nil;
     }
     
-    _previewImageRef = nil;
-    _currentImageRef = nil;
-    self.layer.contents = nil;
+    _previewCIImage = nil;
+    _currentImage = nil;
+    _ciContext = nil;
+    
+    if ([EAGLContext currentContext] == _eaglContext) {
+        [EAGLContext setCurrentContext:nil];
+        _eaglContext = nil;
+    }
 }
 
-- (instancetype) initWithFrame:(CGRect)frame videoPath:(NSString *)path previewImage:(UIImage *)image
+- (instancetype) initWithFrame:(CGRect)frame videoPath:(NSString *)path previewImage:(UIImage *)previewImage
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        _eaglContext.multiThreaded = YES;
+        
+        _ciContext = [CIContext
+                      contextWithEAGLContext:_eaglContext
+                      options: @{kCIContextUseSoftwareRenderer: @NO}];
+        
+        _glView = [[GLKView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) context:_eaglContext];
+        _glView.enableSetNeedsDisplay = NO;
+        _glView.delegate = self;
+        _glView.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+        _glView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self addSubview:_glView];
+        
         if (path) {
             _decoder = [[XCFMicroVideoDecoder alloc] initWithVideoFilePath:path];
             _decoder.delegate = self;
         }
         
-        _currentImageRef = NULL;
-        _previewImageRef = image.CGImage;
-//        [self displayImageRef:_previewImageRef];
-        self.backgroundColor = [UIColor blackColor];
+        if (previewImage) {
+            _previewCIImage = [[CIImage alloc] initWithImage:previewImage];
+            [self displayImage:_previewCIImage];
+        }
         
-        self.layer.contentsGravity = kCAGravityResizeAspectFill;
+        self.backgroundColor = [UIColor blackColor];
         self.layer.masksToBounds = YES;
     }
     
@@ -74,9 +100,9 @@
 
 - (UIImage *) screenshot
 {
-    CGImageRef ref = _currentImageRef ?: _previewImageRef;
-    if (ref) {
-        return [[UIImage alloc] initWithCGImage:ref];
+    CIImage *image = _currentImage ?: _previewCIImage;
+    if (image) {
+        return [[UIImage alloc] initWithCIImage:image];
     } else {
         return nil;
     }
@@ -101,126 +127,100 @@
 
 #pragma mark - display
 
-+ (CGImageRef) extractImageRefFromSampleBuffer:(CMSampleBufferRef)sampleBuffer
++ (CIImage *) extractImageRefFromSampleBuffer:(CMSampleBufferRef)sampleBuffer
                               frameOrientation:(XCFVideoFrameOrientation)orientation
 {
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    CVPixelBufferRef pixelBuffer = imageBuffer;
     
-    CVPixelBufferRef rotatedBuffer = NULL;
-    if (orientation != XCFVideoFrameOrientationUp)
-    { // rotate image buffer
-        CVPixelBufferLockBaseAddress(imageBuffer, 0);
-        
-        OSType pixelFormatType              = CVPixelBufferGetPixelFormatType(imageBuffer);
-        
-        const size_t kAlignment_32ARGB      = 32;
-        const size_t kBytesPerPixel_32ARGB  = 4;
-        
-        size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
-        size_t width       = CVPixelBufferGetWidth(imageBuffer);
-        size_t height      = CVPixelBufferGetHeight(imageBuffer);
-        
-        BOOL rotatePerpendicular = (orientation == XCFVideoFrameOrientationLeft) || (orientation == XCFVideoFrameOrientationRight);
-        const size_t outWidth    = rotatePerpendicular ? height : width;
-        const size_t outHeight   = rotatePerpendicular ? width  : height;
-        
-        size_t bytesPerRowOut    = kBytesPerPixel_32ARGB * ceil(outWidth * 1.0 / kAlignment_32ARGB) * kAlignment_32ARGB;
-        const size_t dstSize     = bytesPerRowOut * outHeight * sizeof(unsigned char);
-        void *srcBuff            = CVPixelBufferGetBaseAddress(imageBuffer);
-        unsigned char *dstBuff   = (unsigned char *)malloc(dstSize);
-        vImage_Buffer inbuff     = {srcBuff, height, width, bytesPerRow};
-        vImage_Buffer outbuff    = {dstBuff, outHeight, outWidth, bytesPerRowOut};
-        uint8_t bgColor[4]       = {1, 1, 1, 1};
-        
-        uint8_t rotationConstant = 0;
+    if (pixelBuffer) {
+        CIImage *image = [CIImage imageWithCVPixelBuffer:pixelBuffer];
+        //CVPixelBufferRelease(pixelBuffer);
+        uint32_t orientation = kCGImagePropertyOrientationUp;
         switch (orientation) {
-            case XCFVideoFrameOrientationRight: rotationConstant = 1;break;
-            case XCFVideoFrameOrientationDown: rotationConstant = 2;break;
-            case XCFVideoFrameOrientationLeft: rotationConstant = 3;break;
-            default: rotationConstant = 0;break;
+            case XCFVideoFrameOrientationDown:
+                orientation = kCGImagePropertyOrientationUp;
+                break;
+            case XCFVideoFrameOrientationLeft:
+                orientation = kCGImagePropertyOrientationRight;
+                break;
+            case XCFVideoFrameOrientationRight:
+                orientation = kCGImagePropertyOrientationLeft;
+                break;
+            default:
+                break;
         }
-        vImage_Error err = vImageRotate90_ARGB8888(&inbuff, &outbuff, rotationConstant, bgColor, 0);
-        CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+        image = [image imageByApplyingOrientation:orientation];
         
-        if (err != kvImageNoError)
+        return image;
+    } else {
+        return nil;
+    }
+}
+
+- (void) displayImage:(CIImage *)image
+{
+    [self displayImage:image transform:CGAffineTransformIdentity];
+}
+
+- (void) displayImage:(CIImage *)image transform:(CGAffineTransform)transform
+{
+    if (image) {
+        _currentImage = image;
+        
+        // filters
+        for (CIFilter *filter in self.filters) {
+            [filter setValue:_currentImage forKey:kCIInputImageKey];
+            _currentImage = filter.outputImage;
+        }
+        
+        [_glView bindDrawable];
+        
+        if (_eaglContext != [EAGLContext currentContext]) {
+            [EAGLContext setCurrentContext:_eaglContext];
+        }
+        
+        glClearColor(0, 0, 0, 1);
+        glClear(GL_COLOR_BUFFER_BIT);
+        
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        
+        CGSize imageSize = _currentImage.extent.size;
+        CGFloat drawableWidth = _glView.drawableWidth;
+        CGFloat drawableHeight = _glView.drawableHeight;
+        
+        CGRect drawFrame = CGRectMake(0, 0, drawableWidth, drawableHeight);
+        
+        CGFloat imageAR = imageSize.width / imageSize.height;
+        CGFloat viewAR = drawFrame.size.width / drawFrame.size.height;
+        if (imageAR > viewAR)
         {
-            NSLog(@"%ld", err);
-        } else {
-            NSDictionary *pixelBufferAttributes = @{ (NSString *)kCVPixelBufferIOSurfacePropertiesKey : @{} };
-            CVPixelBufferCreate(kCFAllocatorDefault,
-                                outWidth,
-                                outHeight,
-                                pixelFormatType,
-                                (__bridge CFDictionaryRef)(pixelBufferAttributes),
-                                &rotatedBuffer);
-            CVPixelBufferLockBaseAddress(rotatedBuffer, 0);
-            uint8_t *dest = CVPixelBufferGetBaseAddress(rotatedBuffer);
-            memcpy(dest, outbuff.data, bytesPerRowOut * outHeight);
-            CVPixelBufferUnlockBaseAddress(rotatedBuffer, 0);
-            
-            free(dstBuff);
+            drawFrame.origin.y += (drawFrame.size.height - drawFrame.size.width / imageAR) / 2.0;
+            drawFrame.size.height = drawFrame.size.width / imageAR;
         }
-    }
-    
-    if (rotatedBuffer) {
-        imageBuffer = rotatedBuffer;
-    }
-    
-    CVPixelBufferLockBaseAddress(imageBuffer, 0);
-    
-    uint8_t *base;
-    size_t width, height, bytesPerRow;
-    base = CVPixelBufferGetBaseAddress(imageBuffer);
-    width = CVPixelBufferGetWidth(imageBuffer);
-    height = CVPixelBufferGetHeight(imageBuffer);
-    bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
-    
-    CGColorSpaceRef colorSpace;
-    CGContextRef cgContext;
-    colorSpace = CGColorSpaceCreateDeviceRGB();
-    cgContext = CGBitmapContextCreate(base, width, height, 8, bytesPerRow, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
-    
-    CGImageRef imageRef = CGBitmapContextCreateImage(cgContext);
-    
-    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
-    CGColorSpaceRelease(colorSpace);
-    CGContextRelease(cgContext);
-    if (rotatedBuffer) {
-        CFRelease(rotatedBuffer);
-    }
-    
-    return imageRef;
-}
-
-- (void) displayImageRef:(CGImageRef)imageRef
-{
-    [self displayImageRef:imageRef transform:CGAffineTransformIdentity];
-}
-
-- (void) displayImageRef:(CGImageRef)imageRef transform:(CGAffineTransform)transform
-{
-    if (imageRef) {
-        if (_currentImageRef && _currentImageRef != _previewImageRef) {
-            CFRelease(_currentImageRef);
+        else
+        {
+            drawFrame.origin.x += (drawFrame.size.width - drawFrame.size.height * imageAR) / 2.0;
+            drawFrame.size.width = drawFrame.size.height * imageAR;
         }
         
-        _currentImageRef = imageRef;
-        [self.layer setContents:(__bridge id)(imageRef)];
+        [_ciContext drawImage:_currentImage inRect:drawFrame fromRect:[_currentImage extent]];
         
-        self.layer.transform = CATransform3DMakeAffineTransform(transform);
+        [_glView display];
     }
 }
 
 - (void) setPreviewImage:(UIImage *)previewImage
 {
-    if (_previewImageRef) {
-        CGImageRelease(_previewImageRef);
+    _previewCIImage = nil;
+    
+    if (previewImage) {
+        _previewCIImage = [[CIImage alloc] initWithImage:previewImage];
     }
     
-    _previewImageRef = [previewImage CGImage];
-    
-    if (!_currentImageRef) {
-        [self displayImageRef:_previewImageRef];
+    if (!_currentImage) {
+        [self displayImage:_previewCIImage];
     }
 }
 
@@ -233,12 +233,17 @@
         _decoder.delegate = nil;
         
         _decoder = decoder;
-//        _decoder.outputSize = self.bounds.size;
         _decoder.delegate = self;
         
         if (_decoder) {
-            _previewImageRef = [_decoder extractThumbnailImage];
-            [self displayImageRef:_previewImageRef];
+            CGImageRef previewImageRef = [_decoder extractThumbnailImage];
+            
+            if (previewImageRef) {
+                CIImage *previewImage = [[CIImage alloc] initWithCGImage:previewImageRef];
+                [self displayImage:previewImage];
+                
+                CGImageRelease(previewImageRef);
+            }
         }
     }
 }
@@ -275,11 +280,10 @@
     _running = NO;
     _actualLoopCount = 0;
     
-    if (_previewImageRef) {
-        [self displayImageRef:_previewImageRef];
+    if (_previewCIImage) {
+        [self displayImage:_previewCIImage];
     } else {
-        _currentImageRef = NULL;
-        self.layer.contents = nil;
+        _currentImage = nil;
     }
     
     [self statusChanged];
@@ -323,17 +327,17 @@
 - (void) microVideoDecoder:(XCFMicroVideoDecoder *)decoder decodeNewSampleBuffer:(CMSampleBufferRef)buffer
 {
     if (decoder == _decoder) {
-        CGImageRef ref = NULL;
+        CIImage *image = nil;
         if (_delegateFlag.displayBuffer) {
-            ref = [self.delegate microVideoPlayer:self
-                          willDisplaySampleBuffer:buffer];
+            image = [self.delegate microVideoPlayer:self
+                            willDisplaySampleBuffer:buffer];
         } else if (buffer) {
-            ref = [self.class extractImageRefFromSampleBuffer:buffer
+            image = [self.class extractImageRefFromSampleBuffer:buffer
                                             frameOrientation:decoder.frameOrientation];
         }
         
-        if (ref) {
-            [self displayImageRef:ref];
+        if (image) {
+            [self displayImage:image];
             [self statusChanged];
         }
         
@@ -341,6 +345,13 @@
             [decoder requestNextSampleBuffer];
         }
     }
+}
+
+#pragma mark - GLKViewDelegate
+
+- (void) glkView:(GLKView *)view drawInRect:(CGRect)rect
+{
+    // do nothing
 }
 
 @end

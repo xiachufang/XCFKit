@@ -12,14 +12,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class XCFMicroVideoPlayerView;
+@class XCFMicroVideoPlayerView,CIImage,CIFilter;
 
 @protocol XCFMicroVideoPlayerViewDelegate <NSObject>
 
 @optional
 
 - (void) microVideoPlayerStatusChanged:(XCFMicroVideoPlayerView *)playerView;
-- (CGImageRef) microVideoPlayer:(XCFMicroVideoPlayerView *)playerView
+- (CIImage *) microVideoPlayer:(XCFMicroVideoPlayerView *)playerView
         willDisplaySampleBuffer:(nullable CMSampleBufferRef)sampleBuffer;
 
 @end
@@ -37,9 +37,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<XCFMicroVideoPlayerViewDelegate> delegate;
 
+@property (nonatomic, assign) BOOL fillWindow; // default is NO, fit mode;
+
 - (UIImage *) screenshot;
 
 - (void) setPreviewImage:(UIImage *)previewImage;
+
+@property (nonatomic, strong) NSArray<CIFilter *> *filters;
 
 // decoder
 @property (nonatomic, strong, readonly, nullable) XCFMicroVideoDecoder *decoder;
