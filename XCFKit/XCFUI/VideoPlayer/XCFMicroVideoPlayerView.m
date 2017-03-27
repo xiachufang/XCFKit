@@ -136,21 +136,21 @@
     if (pixelBuffer) {
         CIImage *image = [CIImage imageWithCVPixelBuffer:pixelBuffer];
         //CVPixelBufferRelease(pixelBuffer);
-        uint32_t orientation = kCGImagePropertyOrientationUp;
+        uint32_t t = kCGImagePropertyOrientationUp;
         switch (orientation) {
             case XCFVideoFrameOrientationDown:
-                orientation = kCGImagePropertyOrientationUp;
+                t = kCGImagePropertyOrientationUp;
                 break;
             case XCFVideoFrameOrientationLeft:
-                orientation = kCGImagePropertyOrientationRight;
+                t = kCGImagePropertyOrientationRight;
                 break;
             case XCFVideoFrameOrientationRight:
-                orientation = kCGImagePropertyOrientationLeft;
+                t = kCGImagePropertyOrientationLeft;
                 break;
             default:
                 break;
         }
-        image = [image imageByApplyingOrientation:orientation];
+        image = [image imageByApplyingOrientation:t];
         
         return image;
     } else {
