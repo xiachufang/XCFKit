@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "XCFMicroVideoDecoder.h"
 #import "XCFVideoPlayerControlProtocol.h"
+#import <GLKit/GLKView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -44,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) setPreviewImage:(UIImage *)previewImage;
 
 @property (nonatomic, strong) NSArray<CIFilter *> *filters;
+@property (nonatomic, assign) BOOL standardizationDrawRect; // default is YES
 
 // decoder
 @property (nonatomic, strong, readonly, nullable) XCFMicroVideoDecoder *decoder;

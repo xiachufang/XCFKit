@@ -9,7 +9,6 @@
 #import "XCFMicroVideoPlayerView.h"
 #import <ImageIO/CGImageProperties.h>
 #import <CoreImage/CoreImage.h>
-#import <GLKit/GLKView.h>
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 
@@ -44,17 +43,15 @@
     _previewCIImage = nil;
     _currentImage = nil;
     _ciContext = nil;
-    
-    if ([EAGLContext currentContext] == _eaglContext) {
-        [EAGLContext setCurrentContext:nil];
-        _eaglContext = nil;
-    }
+    _eaglContext = nil;
 }
 
 - (instancetype) initWithFrame:(CGRect)frame videoPath:(NSString *)path previewImage:(UIImage *)previewImage
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _standardizationDrawRect = YES;
+        
         _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
         _eaglContext.multiThreaded = YES;
         
@@ -81,6 +78,8 @@
         
         self.backgroundColor = [UIColor blackColor];
         self.layer.masksToBounds = YES;
+        
+        [EAGLContext setCurrentContext:_eaglContext];
     }
     
     return self;
@@ -177,10 +176,16 @@
     if (image) {
         _currentImage = image;
         
+        CIImage *renderImage = _currentImage;
+        
         // filters
         for (CIFilter *filter in self.filters) {
-            [filter setValue:_currentImage forKey:kCIInputImageKey];
-            _currentImage = filter.outputImage;
+            [filter setValue:renderImage forKey:kCIInputImageKey];
+            renderImage = filter.outputImage;
+        }
+        
+        if (self.standardizationDrawRect) {
+            renderImage = [renderImage imageByCroppingToRect:_currentImage.extent];
         }
         
         [_glView bindDrawable];
@@ -195,9 +200,9 @@
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         
-        CGSize imageSize = _currentImage.extent.size;
+        CGSize imageSize = renderImage.extent.size;
         CGRect drawFrame = [self drawFrameWithImageSize:imageSize];
-        [_ciContext drawImage:_currentImage inRect:drawFrame fromRect:[_currentImage extent]];
+        [_ciContext drawImage:renderImage inRect:drawFrame fromRect:[renderImage extent]];
         
         [_glView display];
         
@@ -212,7 +217,7 @@
     CGRect drawFrame = CGRectMake(0, 0, drawableWidth, drawableHeight);
     
     CGFloat imageRatio = imageSize.width / imageSize.height;
-    CGFloat drawRatio = drawableWidth / drawableHeight;
+    CGFloat drawRatio = (CGFloat)drawableWidth / drawableHeight;
     
     CGFloat x_padding = 0;
     CGFloat y_padding = 0;
