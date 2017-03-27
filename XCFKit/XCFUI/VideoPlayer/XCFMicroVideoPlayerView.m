@@ -187,28 +187,41 @@
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         
         CGSize imageSize = _currentImage.extent.size;
-        CGFloat drawableWidth = _glView.drawableWidth;
-        CGFloat drawableHeight = _glView.drawableHeight;
-        
-        CGRect drawFrame = CGRectMake(0, 0, drawableWidth, drawableHeight);
-        
-        CGFloat imageAR = imageSize.width / imageSize.height;
-        CGFloat viewAR = drawFrame.size.width / drawFrame.size.height;
-        if (imageAR > viewAR)
-        {
-            drawFrame.origin.y += (drawFrame.size.height - drawFrame.size.width / imageAR) / 2.0;
-            drawFrame.size.height = drawFrame.size.width / imageAR;
-        }
-        else
-        {
-            drawFrame.origin.x += (drawFrame.size.width - drawFrame.size.height * imageAR) / 2.0;
-            drawFrame.size.width = drawFrame.size.height * imageAR;
-        }
-        
+        CGRect drawFrame = [self drawFrameWithImageSize:imageSize];
         [_ciContext drawImage:_currentImage inRect:drawFrame fromRect:[_currentImage extent]];
         
         [_glView display];
+        
+        _glView.layer.transform = CATransform3DMakeAffineTransform(transform);
     }
+}
+
+- (CGRect) drawFrameWithImageSize:(CGSize)imageSize
+{
+    CGFloat drawableWidth = _glView.drawableWidth;
+    CGFloat drawableHeight = _glView.drawableHeight;
+    CGRect drawFrame = CGRectMake(0, 0, drawableWidth, drawableHeight);
+    
+    CGFloat imageRatio = imageSize.width / imageSize.height;
+    CGFloat drawRatio = drawableWidth / drawableHeight;
+    
+    CGFloat x_padding = 0;
+    CGFloat y_padding = 0;
+    if (imageRatio > drawRatio) {
+        if (self.fillWindow) {
+            x_padding = (drawableWidth - (drawableHeight * imageRatio)) / 2;
+        } else {
+            y_padding = (drawableHeight - (drawableWidth / imageRatio)) / 2;
+        }
+    } else if (imageRatio < drawRatio) {
+        if (self.fillWindow) {
+            y_padding = (drawableHeight - (drawableWidth / imageRatio)) / 2;
+        } else {
+            x_padding = (drawableWidth - (drawableHeight * imageRatio)) / 2;
+        }
+    }
+    
+    return CGRectInset(drawFrame, x_padding, y_padding);
 }
 
 - (void) setPreviewImage:(UIImage *)previewImage
@@ -221,6 +234,17 @@
     
     if (!_currentImage) {
         [self displayImage:_previewCIImage];
+    }
+}
+
+- (void) setFillWindow:(BOOL)fillWindow
+{
+    if (_fillWindow != fillWindow) {
+        _fillWindow = fillWindow;
+        
+        if (!self.isPlaying && _currentImage) {
+            [self displayImage:_currentImage];
+        }
     }
 }
 

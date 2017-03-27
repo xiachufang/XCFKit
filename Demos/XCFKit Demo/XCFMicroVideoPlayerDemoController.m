@@ -36,6 +36,7 @@ XCFAVPlayerControllerDelegate
     _playerView = [[XCFMicroVideoPlayerView alloc] initWithFrame:self.videoPlayerContainerView.bounds
                                                        videoPath:nil
                                                     previewImage:previewImage];
+    _playerView.fillWindow = YES;
     _playerView.loopCount = 0;
     _playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.videoPlayerContainerView addSubview:_playerView];
