@@ -93,6 +93,15 @@
                   previewImage:nil];
 }
 
+- (void) setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    _glView.frame = self.bounds;
+    if (_currentImage) {
+        [self displayImage:_currentImage];
+    }
+}
+
 - (NSString *) videoPath
 {
     return _decoder.videoURL.path;
