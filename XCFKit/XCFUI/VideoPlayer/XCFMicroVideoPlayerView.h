@@ -9,22 +9,23 @@
 #import <UIKit/UIKit.h>
 #import "XCFMicroVideoDecoder.h"
 #import "XCFVideoPlayerControlProtocol.h"
+#import <GLKit/GLKView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class XCFMicroVideoPlayerView;
+@class XCFMicroVideoPlayerView,CIImage,CIFilter;
 
 @protocol XCFMicroVideoPlayerViewDelegate <NSObject>
 
 @optional
 
 - (void) microVideoPlayerStatusChanged:(XCFMicroVideoPlayerView *)playerView;
-- (CGImageRef) microVideoPlayer:(XCFMicroVideoPlayerView *)playerView
+- (CIImage *) microVideoPlayer:(XCFMicroVideoPlayerView *)playerView
         willDisplaySampleBuffer:(nullable CMSampleBufferRef)sampleBuffer;
 
 @end
 
-@interface XCFMicroVideoPlayerView : UIView<XCFVideoPlayerControlProtocol>
+@interface XCFMicroVideoPlayerView : GLKView<XCFVideoPlayerControlProtocol>
 
 - (instancetype) initWithFrame:(CGRect)frame
                      videoPath:(nullable NSString *)path
@@ -35,11 +36,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL enableDebugMode;
 
-@property (nonatomic, weak) id<XCFMicroVideoPlayerViewDelegate> delegate;
+@property (nonatomic, weak) id<XCFMicroVideoPlayerViewDelegate,GLKViewDelegate> delegate;
 
-- (UIImage *) screenshot;
+@property (nonatomic, assign) BOOL fillWindow; // default is NO, fit mode;
+
+- (UIImage *) screenshot __deprecated_msg("use -snapshot instead");
 
 - (void) setPreviewImage:(UIImage *)previewImage;
+
+@property (nonatomic, strong) NSArray<CIFilter *> *filters;
+@property (nonatomic, assign) BOOL standardizationDrawRect; // default is NO
 
 // decoder
 @property (nonatomic, strong, readonly, nullable) XCFMicroVideoDecoder *decoder;

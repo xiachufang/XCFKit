@@ -36,6 +36,7 @@ XCFAVPlayerControllerDelegate
     _playerView = [[XCFMicroVideoPlayerView alloc] initWithFrame:self.videoPlayerContainerView.bounds
                                                        videoPath:nil
                                                     previewImage:previewImage];
+    _playerView.fillWindow = NO;
     _playerView.loopCount = 0;
     _playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.videoPlayerContainerView addSubview:_playerView];
@@ -72,7 +73,7 @@ XCFAVPlayerControllerDelegate
     if (self.playerView.progress >= 0) {
         [self.playerView pause];
         
-        UIImage *previewImage = [self.playerView screenshot];
+        UIImage *previewImage = [self.playerView snapshot];
         XCFAVPlayerController *controller =
         [[XCFAVPlayerController alloc] initWithVideoFilePath:self.playerView.videoPath
                                                 previewImage:previewImage
@@ -109,7 +110,9 @@ XCFAVPlayerControllerDelegate
         if (phAsset) {
             
             __weak typeof(self) weak_self = self;
-            [[PHImageManager defaultManager] requestAVAssetForVideo:phAsset options:nil resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+            PHVideoRequestOptions *options=[[PHVideoRequestOptions alloc]init];
+            options.version=PHVideoRequestOptionsVersionOriginal;
+            [[PHImageManager defaultManager] requestAVAssetForVideo:phAsset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
                 AVURLAsset *urlAsset = (AVURLAsset*)asset;
                 NSData *data = [NSData dataWithContentsOfURL:urlAsset.URL];
                 NSString *targetPath = [NSTemporaryDirectory() stringByAppendingPathComponent:urlAsset.URL.lastPathComponent];
