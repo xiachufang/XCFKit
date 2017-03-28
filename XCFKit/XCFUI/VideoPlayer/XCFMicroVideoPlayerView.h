@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface XCFMicroVideoPlayerView : UIView<XCFVideoPlayerControlProtocol>
+@interface XCFMicroVideoPlayerView : GLKView<XCFVideoPlayerControlProtocol>
 
 - (instancetype) initWithFrame:(CGRect)frame
                      videoPath:(nullable NSString *)path
@@ -36,16 +36,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL enableDebugMode;
 
-@property (nonatomic, weak) id<XCFMicroVideoPlayerViewDelegate> delegate;
+@property (nonatomic, weak) id<XCFMicroVideoPlayerViewDelegate,GLKViewDelegate> delegate;
 
 @property (nonatomic, assign) BOOL fillWindow; // default is NO, fit mode;
 
-- (UIImage *) screenshot;
+- (UIImage *) screenshot __deprecated_msg("use -snapshot instead");
 
 - (void) setPreviewImage:(UIImage *)previewImage;
 
 @property (nonatomic, strong) NSArray<CIFilter *> *filters;
-@property (nonatomic, assign) BOOL standardizationDrawRect; // default is YES
+@property (nonatomic, assign) BOOL standardizationDrawRect; // default is NO
 
 // decoder
 @property (nonatomic, strong, readonly, nullable) XCFMicroVideoDecoder *decoder;

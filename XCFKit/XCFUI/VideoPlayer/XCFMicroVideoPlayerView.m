@@ -12,11 +12,9 @@
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 
-@interface XCFMicroVideoPlayerView ()<XCFMicroVideoDecoderDelegate,GLKViewDelegate>
+@interface XCFMicroVideoPlayerView ()<XCFMicroVideoDecoderDelegate>
 
-@property (nonatomic, strong) GLKView *glView;
-@property (nonatomic, strong) CIContext *ciContext;
-@property (nonatomic, strong) EAGLContext *eaglContext;
+@property (nonatomic, strong) CIContext *coreImageContext;
 @property (nonatomic, strong) CIImage *previewCIImage;
 
 @end
@@ -27,12 +25,15 @@
     BOOL _running;
     
     CIImage *_currentImage;
+    CIImage *_renderImage;
     
     struct {
         unsigned int statusChanged : 1;
         unsigned int displayBuffer : 1;
     } _delegateFlag;
 }
+
+@dynamic delegate;
 
 - (void) dealloc
 {
@@ -42,29 +43,20 @@
     
     _previewCIImage = nil;
     _currentImage = nil;
-    _ciContext = nil;
-    _eaglContext = nil;
+    _renderImage = nil;
 }
 
 - (instancetype) initWithFrame:(CGRect)frame videoPath:(NSString *)path previewImage:(UIImage *)previewImage
 {
-    self = [super initWithFrame:frame];
+    EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    eaglContext.multiThreaded = YES;
+    
+    self = [super initWithFrame:frame context:eaglContext];
     if (self) {
-        _standardizationDrawRect = YES;
+        _coreImageContext = [CIContext contextWithEAGLContext:eaglContext
+                                                      options: @{kCIContextUseSoftwareRenderer: @NO}];
         
-        _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-        _eaglContext.multiThreaded = YES;
-        
-        _ciContext = [CIContext
-                      contextWithEAGLContext:_eaglContext
-                      options: @{kCIContextUseSoftwareRenderer: @NO}];
-        
-        _glView = [[GLKView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) context:_eaglContext];
-        _glView.enableSetNeedsDisplay = NO;
-        _glView.delegate = self;
-        _glView.drawableDepthFormat = GLKViewDrawableDepthFormat24;
-        _glView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self addSubview:_glView];
+        self.enableSetNeedsDisplay = NO;
         
         if (path) {
             _decoder = [[XCFMicroVideoDecoder alloc] initWithVideoFilePath:path];
@@ -78,8 +70,6 @@
         
         self.backgroundColor = [UIColor blackColor];
         self.layer.masksToBounds = YES;
-        
-        [EAGLContext setCurrentContext:_eaglContext];
     }
     
     return self;
@@ -92,14 +82,20 @@
                   previewImage:nil];
 }
 
+- (void) drawRect:(CGRect)rect
+{
+    if (_renderImage && self.drawableWidth > 0 && self.drawableHeight > 0) {
+        CGRect destRect = [self drawFrameWithImageSize:_renderImage.extent.size];
+        [_coreImageContext drawImage:_renderImage inRect:destRect fromRect:_renderImage.extent];
+    }
+}
+
 - (void) setFrame:(CGRect)frame
 {
     [super setFrame:frame];
-    _glView.frame = self.bounds;
-    if (_currentImage) {
-        [self displayImage:_currentImage];
-    }
+    [self display];
 }
+
 
 - (NSString *) videoPath
 {
@@ -118,9 +114,9 @@
 
 #pragma mark - delegate
 
-- (void) setDelegate:(id<XCFMicroVideoPlayerViewDelegate>)delegate
+- (void) setDelegate:(id<XCFMicroVideoPlayerViewDelegate,GLKViewDelegate>)delegate
 {
-    _delegate = delegate;
+    [super setDelegate:delegate];
     
     _delegateFlag.statusChanged = [delegate respondsToSelector:@selector(microVideoPlayerStatusChanged:)];
     _delegateFlag.displayBuffer = [delegate respondsToSelector:@selector(microVideoPlayer:willDisplaySampleBuffer:)];
@@ -168,52 +164,39 @@
 
 - (void) displayImage:(CIImage *)image
 {
-    [self displayImage:image transform:CGAffineTransformIdentity];
-}
-
-- (void) displayImage:(CIImage *)image transform:(CGAffineTransform)transform
-{
     if (image) {
         _currentImage = image;
-        
-        CIImage *renderImage = _currentImage;
+        _renderImage = _currentImage;
         
         // filters
         for (CIFilter *filter in self.filters) {
-            [filter setValue:renderImage forKey:kCIInputImageKey];
-            renderImage = filter.outputImage;
+            [filter setValue:_renderImage forKey:kCIInputImageKey];
+            _renderImage = filter.outputImage;
         }
         
         if (self.standardizationDrawRect) {
-            renderImage = [renderImage imageByCroppingToRect:_currentImage.extent];
+            _renderImage = [_renderImage imageByCroppingToRect:_currentImage.extent];
         }
         
-        [_glView bindDrawable];
+        [self bindDrawable];
         
-        if (_eaglContext != [EAGLContext currentContext]) {
-            [EAGLContext setCurrentContext:_eaglContext];
-        }
+        if (self.context != [EAGLContext currentContext])
+            [EAGLContext setCurrentContext:self.context];
         
-        glClearColor(0, 0, 0, 1);
+        glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
         
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         
-        CGSize imageSize = renderImage.extent.size;
-        CGRect drawFrame = [self drawFrameWithImageSize:imageSize];
-        [_ciContext drawImage:renderImage inRect:drawFrame fromRect:[renderImage extent]];
-        
-        [_glView display];
-        
-        _glView.layer.transform = CATransform3DMakeAffineTransform(transform);
+        [self display];
     }
 }
 
 - (CGRect) drawFrameWithImageSize:(CGSize)imageSize
 {
-    CGFloat drawableWidth = _glView.drawableWidth;
-    CGFloat drawableHeight = _glView.drawableHeight;
+    CGFloat drawableWidth = self.drawableWidth;
+    CGFloat drawableHeight = self.drawableHeight;
     CGRect drawFrame = CGRectMake(0, 0, drawableWidth, drawableHeight);
     
     CGFloat imageRatio = imageSize.width / imageSize.height;
@@ -237,6 +220,7 @@
     
     return CGRectInset(drawFrame, x_padding, y_padding);
 }
+
 
 - (void) setPreviewImage:(UIImage *)previewImage
 {
@@ -383,13 +367,6 @@
             [decoder requestNextSampleBuffer];
         }
     }
-}
-
-#pragma mark - GLKViewDelegate
-
-- (void) glkView:(GLKView *)view drawInRect:(CGRect)rect
-{
-    // do nothing
 }
 
 @end

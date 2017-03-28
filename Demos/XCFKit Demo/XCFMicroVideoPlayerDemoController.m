@@ -36,7 +36,7 @@ XCFAVPlayerControllerDelegate
     _playerView = [[XCFMicroVideoPlayerView alloc] initWithFrame:self.videoPlayerContainerView.bounds
                                                        videoPath:nil
                                                     previewImage:previewImage];
-    _playerView.fillWindow = YES;
+    _playerView.fillWindow = NO;
     _playerView.loopCount = 0;
     _playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.videoPlayerContainerView addSubview:_playerView];
@@ -73,7 +73,7 @@ XCFAVPlayerControllerDelegate
     if (self.playerView.progress >= 0) {
         [self.playerView pause];
         
-        UIImage *previewImage = [self.playerView screenshot];
+        UIImage *previewImage = [self.playerView snapshot];
         XCFAVPlayerController *controller =
         [[XCFAVPlayerController alloc] initWithVideoFilePath:self.playerView.videoPath
                                                 previewImage:previewImage
