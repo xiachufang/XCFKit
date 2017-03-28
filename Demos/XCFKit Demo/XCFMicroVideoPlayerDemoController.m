@@ -27,6 +27,11 @@ XCFAVPlayerControllerDelegate
 
 @implementation XCFMicroVideoPlayerDemoController
 
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -44,6 +49,16 @@ XCFAVPlayerControllerDelegate
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                           action:@selector(tapOnPlayerView:)];
     [_playerView addGestureRecognizer:tap];
+    
+    // notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appDidEnterBackground:)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appDidBecomeActive:)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
 }
 
 #pragma mark - actions
@@ -86,6 +101,18 @@ XCFAVPlayerControllerDelegate
                            animated:YES
                          completion:nil];
     }
+}
+
+#pragma mark - notifications
+
+- (void) appDidEnterBackground:(NSNotification *)notification
+{
+    [self.playerView pause];
+}
+
+- (void) appDidBecomeActive:(NSNotification *)notification
+{
+    [self.playerView play];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
