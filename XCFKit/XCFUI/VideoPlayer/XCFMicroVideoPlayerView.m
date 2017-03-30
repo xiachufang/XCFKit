@@ -31,6 +31,8 @@
         unsigned int statusChanged : 1;
         unsigned int displayBuffer : 1;
     } _delegateFlag;
+    
+    UIBackgroundTaskIdentifier _taskIdentifier;
 }
 
 @dynamic delegate;
@@ -70,6 +72,8 @@
         
         self.backgroundColor = [UIColor blackColor];
         self.layer.masksToBounds = YES;
+        
+        _taskIdentifier = UIBackgroundTaskInvalid;
     }
     
     return self;
@@ -85,6 +89,15 @@
 - (void) drawRect:(CGRect)rect
 {
     if (_renderImage && self.drawableWidth > 0 && self.drawableHeight > 0) {
+        
+        [EAGLContext setCurrentContext:self.context];
+        
+        glClearColor(0.0f, 0.0f, 0.1f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        
         CGRect destRect = [self drawFrameWithImageSize:_renderImage.extent.size];
         [_coreImageContext drawImage:_renderImage inRect:destRect fromRect:_renderImage.extent];
     }
@@ -177,17 +190,6 @@
         if (self.standardizationDrawRect) {
             _renderImage = [_renderImage imageByCroppingToRect:_currentImage.extent];
         }
-        
-        [self bindDrawable];
-        
-        if (self.context != [EAGLContext currentContext])
-            [EAGLContext setCurrentContext:self.context];
-        
-        glClearColor(0.0, 0.0, 0.0, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT);
-        
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         
         [self display];
     }
@@ -325,7 +327,9 @@
 
 - (void) microVideoDecoder:(XCFMicroVideoDecoder *)decoder decodeFailed:(NSError *)error
 {
-//    NSLog(@"%@ failed with error message : %@",decoder,error);
+    if (error) {
+        [self pause];
+    }
 }
 
 - (void) microVideoDecoderBePrepared:(XCFMicroVideoDecoder *)decoder
@@ -364,6 +368,23 @@
         }
         
         if (_running) {
+            UIApplication *application = [UIApplication sharedApplication];
+            
+            if (_taskIdentifier != UIBackgroundTaskInvalid) {
+                [application endBackgroundTask:_taskIdentifier];
+                _taskIdentifier = UIBackgroundTaskInvalid;
+            }
+            
+            if (application.applicationState != UIApplicationStateActive) {
+                __weak typeof(self) weak_self = self;
+                _taskIdentifier = [application beginBackgroundTaskWithExpirationHandler:^{
+                    __strong typeof(weak_self) strong_self = weak_self;
+                    if (strong_self) {
+                        [application endBackgroundTask:strong_self->_taskIdentifier];
+                        strong_self->_taskIdentifier = UIBackgroundTaskInvalid;
+                    }
+                }];
+            }
             [decoder requestNextSampleBuffer];
         }
     }
