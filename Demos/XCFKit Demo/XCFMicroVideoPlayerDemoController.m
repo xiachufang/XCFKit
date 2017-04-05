@@ -43,9 +43,28 @@ XCFAVPlayerControllerDelegate
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                           action:@selector(tapOnPlayerView:)];
     [_playerView addGestureRecognizer:tap];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appDidEnterBackground:)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appDidBecomeActive:)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
 }
 
 #pragma mark - actions
+
+- (void) appDidEnterBackground:(NSNotification *)notification
+{
+    [self.playerView pause];
+}
+
+- (void) appDidBecomeActive:(NSNotification *)notification
+{
+    [self.playerView play];
+}
 
 - (IBAction)selectMicroVideo:(id)sender {
     UIImagePickerController *videoPicker = [UIImagePickerController new];
@@ -109,10 +128,14 @@ XCFAVPlayerControllerDelegate
         if (phAsset) {
             
             __weak typeof(self) weak_self = self;
-            [[PHImageManager defaultManager] requestAVAssetForVideo:phAsset options:nil resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+            PHVideoRequestOptions *options=[[PHVideoRequestOptions alloc]init];
+            options.version=PHVideoRequestOptionsVersionOriginal;
+            [[PHImageManager defaultManager] requestAVAssetForVideo:phAsset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
                 AVURLAsset *urlAsset = (AVURLAsset*)asset;
                 NSData *data = [NSData dataWithContentsOfURL:urlAsset.URL];
-                NSString *targetPath = [NSTemporaryDirectory() stringByAppendingPathComponent:urlAsset.URL.lastPathComponent];
+                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+                NSString *cachePath = [paths objectAtIndex:0];
+                NSString *targetPath = [cachePath stringByAppendingPathComponent:urlAsset.URL.lastPathComponent];
                 if ([data writeToFile:targetPath atomically:YES]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [weak_self didSelectVideoAtPath:targetPath];
