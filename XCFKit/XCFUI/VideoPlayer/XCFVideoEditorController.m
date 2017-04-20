@@ -548,6 +548,13 @@
         AVAssetExportSessionStatus status = [exporter status];
         if (status == AVAssetExportSessionStatusCompleted) {
             AVAsset *outputAsset = [AVAsset assetWithURL:expertURL];
+            
+            CGSize outputSize = videoComposition.renderSize;
+            AVAssetTrack *outputVideoTrack = [outputAsset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+            if (outputVideoTrack) {
+                outputSize = outputVideoTrack.naturalSize;
+            }
+            
             AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:outputAsset];
             imageGenerator.appliesPreferredTrackTransform = YES;
             CGImageRef imageRef = [imageGenerator copyCGImageAtTime:kCMTimeZero
@@ -560,7 +567,7 @@
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [strong_self _expertDone:exporter.outputURL thumbnailImage:thumbnailImage videoSize:videoComposition.renderSize];
+                [strong_self _expertDone:exporter.outputURL thumbnailImage:thumbnailImage videoSize:outputSize];
             });
         } else if (status == AVAssetExportSessionStatusFailed) {
             dispatch_async(dispatch_get_main_queue(), ^{
