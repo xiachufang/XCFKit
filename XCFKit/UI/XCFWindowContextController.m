@@ -22,7 +22,7 @@
     
     XCFWindowContextController *root = [self new];
     
-    UIWindow *window = [UIWindow new];
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     window.backgroundColor = [UIColor clearColor];
     window.windowLevel = level;
     root.window = window;
@@ -33,7 +33,6 @@
     [root presentViewController:controller
                        animated:animated
                      completion:^{
-//                         window.backgroundColor = [UIColor blackColor];
                      }];
     
     return root;
@@ -47,7 +46,6 @@
 
 - (void) dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
 {
-//    self.window.backgroundColor = [UIColor clearColor];
     [super dismissViewControllerAnimated:flag completion:^{
         self.window.rootViewController = nil;
         self.window = nil;
@@ -56,6 +54,11 @@
             completion();
         }
     }];
+}
+
+- (BOOL) shouldAutorotate
+{
+    return NO;
 }
 
 @end
