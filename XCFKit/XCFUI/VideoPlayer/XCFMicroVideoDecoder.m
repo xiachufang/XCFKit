@@ -182,10 +182,15 @@
         case AVAssetReaderStatusFailed:
         case AVAssetReaderStatusCancelled: return XCFMicroDecoderInvalidProgress;
         case AVAssetReaderStatusReading: {
-            return CMTimeGetSeconds(_decodingFrameTime) / CMTimeGetSeconds(self.videoAsset.duration);
+            return CMTimeGetSeconds(_decodingFrameTime) / [self duration];
         }
         case AVAssetReaderStatusCompleted: return 1;
     }
+}
+
+- (CGFloat) duration
+{
+    return CMTimeGetSeconds(self.videoAsset.duration);
 }
 
 - (CGAffineTransform) preferredTransform

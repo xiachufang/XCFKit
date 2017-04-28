@@ -51,6 +51,8 @@ typedef enum : NSUInteger {
 // if decoder is not prepared or failed, progress will be -1, otherwise progress = [0,1]
 @property (nonatomic, assign, readonly) CGFloat progress;
 
+@property (nonatomic, assign, readonly) NSTimeInterval duration;
+
 /*
  *  `outputSize` 默认是 CGSizeZero，导出媒体文件原本的尺寸
  *   在 prepareToStartDecode 前设置生效

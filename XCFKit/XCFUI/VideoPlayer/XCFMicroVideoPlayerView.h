@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void) setPreviewImage:(UIImage *)previewImage;
 
+- (NSTimeInterval) playTime;
+
 // decoder
 @property (nonatomic, strong, readonly, nullable) XCFMicroVideoDecoder *decoder;
 

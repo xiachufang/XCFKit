@@ -224,6 +224,15 @@
     }
 }
 
+- (NSTimeInterval) playTime
+{
+    if (self.decoder.progress > 0) {
+        return self.decoder.progress * self.decoder.duration;
+    }
+    
+    return 0;
+}
+
 #pragma mark - decoder
 
 - (void) switchToVideoDecoder:(XCFMicroVideoDecoder *)decoder
