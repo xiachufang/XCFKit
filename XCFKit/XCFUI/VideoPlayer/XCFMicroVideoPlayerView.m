@@ -311,6 +311,10 @@
 #if DEBUG
     NSLog(@"%@ failed with error message : %@",decoder,error);
 #endif
+    if (decoder == _decoder && _running) {
+        _running = NO;
+        [decoder prepareToStartDecode];
+    }
 }
 
 - (void) microVideoDecoderBePrepared:(XCFMicroVideoDecoder *)decoder
