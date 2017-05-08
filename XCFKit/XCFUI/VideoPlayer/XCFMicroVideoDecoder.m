@@ -188,7 +188,7 @@
     }
 }
 
-- (CGFloat) duration
+- (NSTimeInterval) duration
 {
     return CMTimeGetSeconds(self.videoAsset.duration);
 }
