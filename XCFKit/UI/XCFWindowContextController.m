@@ -30,6 +30,7 @@
     
     [window makeKeyAndVisible];
     
+    controller.popoverPresentationController.sourceView = root.view;
     [root presentViewController:controller
                        animated:animated
                      completion:^{

@@ -224,6 +224,15 @@
     }
 }
 
+- (NSTimeInterval) playTime
+{
+    if (self.decoder.progress > 0) {
+        return self.decoder.progress * self.decoder.duration;
+    }
+    
+    return 0;
+}
+
 #pragma mark - decoder
 
 - (void) switchToVideoDecoder:(XCFMicroVideoDecoder *)decoder
@@ -302,6 +311,10 @@
 #if DEBUG
     NSLog(@"%@ failed with error message : %@",decoder,error);
 #endif
+    if (decoder == _decoder && _running) {
+        _running = NO;
+        [decoder prepareToStartDecode];
+    }
 }
 
 - (void) microVideoDecoderBePrepared:(XCFMicroVideoDecoder *)decoder
