@@ -18,4 +18,5 @@
 
 + (UIFont *) xcf_boldSystemFontWithSize:(CGFloat)size;
 
++ (UIFont *) xcf_heavySystemFontWithSize:(CGFloat)size;
 @end

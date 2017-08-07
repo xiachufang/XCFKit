@@ -58,6 +58,23 @@
     return mediumFontName;
 }
 
++ (NSString *) heavySystemFontName
+{
+    static NSString *heavySystemFontName = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        UIFont *systemFont = [UIFont systemFontOfSize:10];
+        NSString *fontName = systemFont.fontName;
+        NSArray *components = [fontName componentsSeparatedByString:@"-"];
+        if (components.count == 2) {
+            heavySystemFontName = [NSString stringWithFormat:@"%@-Heavy",components.firstObject];
+        }
+    });
+    
+    return heavySystemFontName;
+}
+
 + (UIFont *) xcf_mediumSystemFontWithSize:(CGFloat)size
 {
     if (&UIFontWeightMedium) { // >= iOS 8.2
@@ -107,4 +124,22 @@
     return [self boldSystemFontOfSize:size];
 }
 
++ (UIFont *) xcf_heavySystemFontWithSize:(CGFloat)size
+{
+    if (&UIFontWeightHeavy) {
+        return [self systemFontOfSize:size weight:UIFontWeightHeavy];
+    } else {
+        UIFont *heavyFont = nil;
+        NSString *fontName = [self heavySystemFontName];
+        if (fontName) {
+            heavyFont = [UIFont fontWithName:fontName size:size];
+        }
+        
+        if (!heavyFont) {
+            heavyFont = [UIFont systemFontOfSize:size];
+        }
+        
+        return heavyFont;
+    }
+}
 @end
