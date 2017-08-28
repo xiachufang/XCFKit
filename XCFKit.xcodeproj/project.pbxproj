@@ -28,6 +28,8 @@
 		E80B1DDB1E1CFFB400CFA27E /* XCFVideoRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B1DD91E1CFFB400CFA27E /* XCFVideoRangeSlider.m */; };
 		E80B57531DD0CA0100A32F14 /* UIBarButtonItem+View.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B57511DD0CA0100A32F14 /* UIBarButtonItem+View.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E80B57541DD0CA0100A32F14 /* UIBarButtonItem+View.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B57521DD0CA0100A32F14 /* UIBarButtonItem+View.m */; };
+		E8226B8F1F5408CE00AE7D67 /* XCFStringKeywordTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = E8226B8D1F5408CE00AE7D67 /* XCFStringKeywordTransformer.h */; };
+		E8226B901F5408CE00AE7D67 /* XCFStringKeywordTransformer.mm in Sources */ = {isa = PBXBuildFile; fileRef = E8226B8E1F5408CE00AE7D67 /* XCFStringKeywordTransformer.mm */; };
 		E82ADC931E28A48100599884 /* XCFVideoRange.h in Headers */ = {isa = PBXBuildFile; fileRef = E82ADC921E28A48100599884 /* XCFVideoRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8769A931E08D83100378EFF /* XCFAVPlayerController.h in Headers */ = {isa = PBXBuildFile; fileRef = E8769A8A1E08D83100378EFF /* XCFAVPlayerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8769A941E08D83100378EFF /* XCFAVPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8769A8B1E08D83100378EFF /* XCFAVPlayerController.m */; };
@@ -76,6 +78,8 @@
 		E80B1DD91E1CFFB400CFA27E /* XCFVideoRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoRangeSlider.m; sourceTree = "<group>"; };
 		E80B57511DD0CA0100A32F14 /* UIBarButtonItem+View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+View.h"; sourceTree = "<group>"; };
 		E80B57521DD0CA0100A32F14 /* UIBarButtonItem+View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+View.m"; sourceTree = "<group>"; };
+		E8226B8D1F5408CE00AE7D67 /* XCFStringKeywordTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFStringKeywordTransformer.h; sourceTree = "<group>"; };
+		E8226B8E1F5408CE00AE7D67 /* XCFStringKeywordTransformer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XCFStringKeywordTransformer.mm; sourceTree = "<group>"; };
 		E82ADC921E28A48100599884 /* XCFVideoRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoRange.h; sourceTree = "<group>"; };
 		E8769A8A1E08D83100378EFF /* XCFAVPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAVPlayerController.h; sourceTree = "<group>"; };
 		E8769A8B1E08D83100378EFF /* XCFAVPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAVPlayerController.m; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 		E84A19ED1DF5724200CA630E /* Foudation */ = {
 			isa = PBXGroup;
 			children = (
+				E8226B8D1F5408CE00AE7D67 /* XCFStringKeywordTransformer.h */,
+				E8226B8E1F5408CE00AE7D67 /* XCFStringKeywordTransformer.mm */,
 			);
 			path = Foudation;
 			sourceTree = "<group>";
@@ -225,6 +231,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8226B8F1F5408CE00AE7D67 /* XCFStringKeywordTransformer.h in Headers */,
 				E882296A1E2F0EE6007BA838 /* XCFVideoLoadProgressView.h in Headers */,
 				E8769A931E08D83100378EFF /* XCFAVPlayerController.h in Headers */,
 				E8769A951E08D83100378EFF /* XCFAVPlayerView.h in Headers */,
@@ -329,6 +336,7 @@
 				E881B8911DE6A2240055A817 /* UISearchBar+textField.m in Sources */,
 				E8003A581DC34C2A00103028 /* UIColor+Hex.m in Sources */,
 				E89E81801E0D24F000865246 /* UIView+XCFHeartbeat.m in Sources */,
+				E8226B901F5408CE00AE7D67 /* XCFStringKeywordTransformer.mm in Sources */,
 				E87EBD8B1DFF9CDF00027C05 /* UIFont+fontWeight.m in Sources */,
 				E8003A4F1DC33BAB00103028 /* XCFAppearanceButton.m in Sources */,
 				E8003A6A1DC3562100103028 /* UIImage+PureColor.m in Sources */,
