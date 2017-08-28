@@ -23,6 +23,9 @@ FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 // UI
 #if XCF_UIKIT
 
+#import <XCFKit/XCFStringKeywordTransformer.h>
+#import <XCFKit/XCFStringKeywordStandardCache.h>
+
 #import <XCFKit/XCFAppearanceButton.h>
 #import <XCFKit/UIFont+XCFAppearance.h>
 

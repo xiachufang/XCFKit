@@ -22,6 +22,8 @@
 		E8003A6A1DC3562100103028 /* UIImage+PureColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E8003A681DC3562100103028 /* UIImage+PureColor.m */; };
 		E80166FD1DD07D0400383326 /* XCFWindowContextController.h in Headers */ = {isa = PBXBuildFile; fileRef = E80166FB1DD07D0400383326 /* XCFWindowContextController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E80166FE1DD07D0400383326 /* XCFWindowContextController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80166FC1DD07D0400383326 /* XCFWindowContextController.m */; };
+		E80237841F54B01100E394AE /* XCFStringKeywordStandardCache.h in Headers */ = {isa = PBXBuildFile; fileRef = E80237821F54B01100E394AE /* XCFStringKeywordStandardCache.h */; };
+		E80237851F54B01100E394AE /* XCFStringKeywordStandardCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E80237831F54B01100E394AE /* XCFStringKeywordStandardCache.m */; };
 		E80B1DD61E1CCE3A00CFA27E /* XCFVideoEditorController.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B1DD41E1CCE3A00CFA27E /* XCFVideoEditorController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E80B1DD71E1CCE3A00CFA27E /* XCFVideoEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B1DD51E1CCE3A00CFA27E /* XCFVideoEditorController.m */; };
 		E80B1DDA1E1CFFB400CFA27E /* XCFVideoRangeSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B1DD81E1CFFB400CFA27E /* XCFVideoRangeSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -72,6 +74,8 @@
 		E8003A681DC3562100103028 /* UIImage+PureColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PureColor.m"; sourceTree = "<group>"; };
 		E80166FB1DD07D0400383326 /* XCFWindowContextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFWindowContextController.h; sourceTree = "<group>"; };
 		E80166FC1DD07D0400383326 /* XCFWindowContextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFWindowContextController.m; sourceTree = "<group>"; };
+		E80237821F54B01100E394AE /* XCFStringKeywordStandardCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCFStringKeywordStandardCache.h; sourceTree = "<group>"; };
+		E80237831F54B01100E394AE /* XCFStringKeywordStandardCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCFStringKeywordStandardCache.m; sourceTree = "<group>"; };
 		E80B1DD41E1CCE3A00CFA27E /* XCFVideoEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoEditorController.h; sourceTree = "<group>"; };
 		E80B1DD51E1CCE3A00CFA27E /* XCFVideoEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoEditorController.m; sourceTree = "<group>"; };
 		E80B1DD81E1CFFB400CFA27E /* XCFVideoRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoRangeSlider.h; sourceTree = "<group>"; };
@@ -185,6 +189,8 @@
 			children = (
 				E8226B8D1F5408CE00AE7D67 /* XCFStringKeywordTransformer.h */,
 				E8226B8E1F5408CE00AE7D67 /* XCFStringKeywordTransformer.mm */,
+				E80237821F54B01100E394AE /* XCFStringKeywordStandardCache.h */,
+				E80237831F54B01100E394AE /* XCFStringKeywordStandardCache.m */,
 			);
 			path = Foudation;
 			sourceTree = "<group>";
@@ -248,6 +254,7 @@
 				E8769A9B1E08D83100378EFF /* XCFVideoPlayerControlProtocol.h in Headers */,
 				E8003A521DC347E600103028 /* UIFont+XCFAppearance.h in Headers */,
 				E89E817F1E0D24F000865246 /* UIView+XCFHeartbeat.h in Headers */,
+				E80237841F54B01100E394AE /* XCFStringKeywordStandardCache.h in Headers */,
 				E87EBD8A1DFF9CDF00027C05 /* UIFont+fontWeight.h in Headers */,
 				E881B8901DE6A2240055A817 /* UISearchBar+textField.h in Headers */,
 				E8769A971E08D83100378EFF /* XCFMicroVideoDecoder.h in Headers */,
@@ -331,6 +338,7 @@
 				E8003A531DC347E600103028 /* UIFont+XCFAppearance.m in Sources */,
 				E80166FE1DD07D0400383326 /* XCFWindowContextController.m in Sources */,
 				E8769A941E08D83100378EFF /* XCFAVPlayerController.m in Sources */,
+				E80237851F54B01100E394AE /* XCFStringKeywordStandardCache.m in Sources */,
 				E80B1DD71E1CCE3A00CFA27E /* XCFVideoEditorController.m in Sources */,
 				E882296B1E2F0EE6007BA838 /* XCFVideoLoadProgressView.m in Sources */,
 				E881B8911DE6A2240055A817 /* UISearchBar+textField.m in Sources */,

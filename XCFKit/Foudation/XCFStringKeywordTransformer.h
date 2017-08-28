@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XCFStringKeywordStandardCache.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,20 +18,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@protocol XCFStringKeywordDataCache <NSObject>
-
-- (nullable NSString *) valueForKeyword:(NSString *)keyword;
-- (void) cacheValue:(NSString *)value forKeyword:(NSString *)keyword;
-
-@end
-
 @interface XCFStringKeywordTransformer : NSObject
 
-- (instancetype) initWithDataProviders:(NSArray<id<XCFStringKeywordDataProvider>> *)dataProviders;
+- (instancetype) initWithDataProviders:(NSArray<id<XCFStringKeywordDataProvider>> *)dataProviders NS_DESIGNATED_INITIALIZER;
 
 + (instancetype) transformerWithDataProviders:(NSArray<id<XCFStringKeywordDataProvider>> *)dataProviders;
 
 @property (nonatomic, assign) BOOL matchCase; // default is YES;
+@property (nonatomic, copy) NSString *fallbackValue; // default is ewmpty string
 
 @end
 
