@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7E09EF3800A9625872F771C2 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3F5768F18AF841609E052B /* Pods_Tests.framework */; };
+		E80237871F54B3FF00E394AE /* keywordTransformerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E80237861F54B3FF00E394AE /* keywordTransformerSpec.m */; };
+		E802378B1F54B5D100E394AE /* XCFTestKeyordProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E802378A1F54B5D100E394AE /* XCFTestKeyordProvider.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +18,9 @@
 		8F3F5768F18AF841609E052B /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8003A301DC3310800103028 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8003A351DC3310800103028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E80237861F54B3FF00E394AE /* keywordTransformerSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keywordTransformerSpec.m; sourceTree = "<group>"; };
+		E80237891F54B5D100E394AE /* XCFTestKeyordProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCFTestKeyordProvider.h; sourceTree = "<group>"; };
+		E802378A1F54B5D100E394AE /* XCFTestKeyordProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCFTestKeyordProvider.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +74,9 @@
 			isa = PBXGroup;
 			children = (
 				E8003A351DC3310800103028 /* Info.plist */,
+				E80237861F54B3FF00E394AE /* keywordTransformerSpec.m */,
+				E80237891F54B5D100E394AE /* XCFTestKeyordProvider.h */,
+				E802378A1F54B5D100E394AE /* XCFTestKeyordProvider.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -197,6 +205,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E802378B1F54B5D100E394AE /* XCFTestKeyordProvider.m in Sources */,
+				E80237871F54B3FF00E394AE /* keywordTransformerSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

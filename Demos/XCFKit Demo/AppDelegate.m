@@ -7,6 +7,19 @@
 //
 
 #import "AppDelegate.h"
+#import <XCFKit/XCFStringKeywordTransformer.h>
+
+@interface XCFTestKeyordProvider : NSObject<XCFStringKeywordDataProvider>
+@property (nonatomic, strong) NSArray<NSString *> *keywords;
+@property (nonatomic, strong) NSString *value;
+@end
+
+@implementation XCFTestKeyordProvider
+- (NSString *) valueForKeyword:(NSString *)keyword
+{
+    return self.value;
+}
+@end
 
 @interface AppDelegate ()
 
@@ -17,6 +30,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    XCFTestKeyordProvider *provider_1 = [XCFTestKeyordProvider new];
+    provider_1.keywords = @[@"{IDFA}",@"{VERSION}"];
+    provider_1.value = @"provider_1";
+    XCFTestKeyordProvider *provider_2 = [XCFTestKeyordProvider new];
+    provider_2.keywords = @[@"{WIDTH}",@"{HEIGHT}"];
+    provider_2.value = @"provider_2";
+    XCFTestKeyordProvider *provider_3 = [XCFTestKeyordProvider new];
+    provider_3.keywords = @[@"{FLAG}",@"{NAME}"];
+    provider_3.value = @"provider_3";
+    XCFTestKeyordProvider *provider_4 = [XCFTestKeyordProvider new];
+    provider_4.keywords = @[@"{*}"];
+    provider_4.value = @"provider_4";
+    XCFStringKeywordTransformer *t = [XCFStringKeywordTransformer transformerWithDataProviders:@[provider_1,provider_2,provider_3,provider_4]];
+    
+    NSString *test = @"http://www.xiachufang.com?idfa={IDFA}&version={VERSION}&width={WIDTH}&height={HEIGHT}&flag={FLAG}&name={NAME}&query={OTHER}";
+    NSString *transformed = [t transformString:test];
+    NSLog(@"transformed : %@",transformed);
     return YES;
 }
 

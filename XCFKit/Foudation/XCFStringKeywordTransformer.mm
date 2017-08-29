@@ -11,8 +11,13 @@
 #import <string>
 
 struct _XCFKeywordTransformerTrieNode;
+struct _XCFkeywordDataProvider;
 typedef std::set<_XCFKeywordTransformerTrieNode *> _TrieNodes;
-typedef std::set<id<XCFStringKeywordDataProvider>> _DataProviders;
+typedef std::set<_XCFkeywordDataProvider *> _DataProviders;
+
+struct _XCFkeywordDataProvider {
+    id<XCFStringKeywordDataProvider> provider;
+};
 
 struct _XCFKeywordTransformerTrieNode {
     char value;
@@ -105,7 +110,7 @@ FOUNDATION_STATIC_INLINE BOOL _isTrieNodeUniversalMatch(_XCFKeywordTransformerTr
         const char value = c_keyword[i];
         
         _XCFKeywordTransformerTrieNode *sub_node = NULL;
-        for (_XCFKeywordTransformerTrieNode *__node : (*node->_childNodes)) {
+        for (_XCFKeywordTransformerTrieNode *__node : (*(node->_childNodes))) {
             if (value == __node->value) {
                 sub_node = __node;
                 break;
@@ -115,7 +120,7 @@ FOUNDATION_STATIC_INLINE BOOL _isTrieNodeUniversalMatch(_XCFKeywordTransformerTr
         if (!sub_node) {
             sub_node = new _XCFKeywordTransformerTrieNode();
             sub_node->value = value;
-            (*node->_childNodes).insert(sub_node);
+            (*(node->_childNodes)).insert(sub_node);
             
             _create_new_node = YES;
         }
@@ -124,28 +129,31 @@ FOUNDATION_STATIC_INLINE BOOL _isTrieNodeUniversalMatch(_XCFKeywordTransformerTr
     }
     
     node->isEnd = true;
-    if (provider) {
-        if (!node->_providers) {
-            node->_providers = new _DataProviders();
-        }
-        (*node->_providers).insert(provider);
-    }
+//    if (provider) {
+//        if (!node->_providers) {
+//            node->_providers = new _DataProviders();
+//        }
+//
+//        _XCFkeywordDataProvider dataProvider = {provider};
+//        (*(node->_providers)).insert(&dataProvider);
+//    }
 }
 
 - (NSString *) _queryValueForKeyword:(NSString *)keyword
                            providers:(_DataProviders *)providers
                                cache:(id<XCFStringKeywordDataCache>)cache
 {
-    NSParameterAssert(keyword && providers);
-    if (!keyword || !providers) return nil;
+//    NSParameterAssert(keyword && providers);
+//    if (!keyword || !providers) return nil;
     
     NSString *value = [cache valueForKeyword:keyword];
     if (value) return value;
     
-    for (id<XCFStringKeywordDataProvider> provider : *providers) {
-        value = [provider valueForKeyword:keyword];
-        if (value) break;
-    }
+//    for (_XCFkeywordDataProvider *provider : *providers) {
+//        id<XCFStringKeywordDataProvider> _p = provider->provider;
+//        value = [_p valueForKeyword:keyword];
+//        if (value) break;
+//    }
     
     if (value) {
         [cache cacheValue:value forKeyword:keyword];
