@@ -41,9 +41,8 @@
     provider_3.value = @"provider_3";
     XCFTestKeyordProvider *provider_4 = [XCFTestKeyordProvider new];
     provider_4.keywords = @[@"{*}"];
-    provider_4.value = @"provider_4";
+    provider_4.value = nil;
     XCFStringKeywordTransformer *t = [XCFStringKeywordTransformer transformerWithDataProviders:@[provider_1,provider_2,provider_3,provider_4]];
-    
     NSString *test = @"http://www.xiachufang.com?idfa={IDFA}&version={VERSION}&width={WIDTH}&height={HEIGHT}&flag={FLAG}&name={NAME}&query={OTHER}";
     NSString *transformed = [t transformString:test];
     NSLog(@"transformed : %@",transformed);

@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype) transformerWithDataProviders:(NSArray<id<XCFStringKeywordDataProvider>> *)dataProviders;
 
 @property (nonatomic, assign) BOOL matchCase; // default is YES;
-@property (nonatomic, copy) NSString *fallbackValue; // default is ewmpty string
+@property (nonatomic, copy, nullable) NSString *fallbackValue; // default is ewmpty string
 
 @end
 

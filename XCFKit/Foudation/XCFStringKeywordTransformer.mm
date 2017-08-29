@@ -7,59 +7,86 @@
 //
 
 #import "XCFStringKeywordTransformer.h"
-#import <set>
+#import <vector>
+#import <map>
+#import <list>
 #import <string>
 
-struct _XCFKeywordTransformerTrieNode;
-struct _XCFkeywordDataProvider;
-typedef std::set<_XCFKeywordTransformerTrieNode *> _TrieNodes;
-typedef std::set<_XCFkeywordDataProvider *> _DataProviders;
+using namespace std;
 
-struct _XCFkeywordDataProvider {
-    id<XCFStringKeywordDataProvider> provider;
-};
-
-struct _XCFKeywordTransformerTrieNode {
-    char value;
+struct _XCFKeywordTransformerNode {
+    char ch;
     bool isEnd;
-    _TrieNodes *_childNodes;
-    _DataProviders *_providers;
-    
-    bool operator == (const _XCFKeywordTransformerTrieNode &other) const {
-        return value == other.value;
-    }
-
-    bool operator < (const _XCFKeywordTransformerTrieNode &other) const {
-        return value < other.value;
-    }
-    
-    _XCFKeywordTransformerTrieNode() {
-        value = 0;
-        isEnd = false;
-        _childNodes = new _TrieNodes();
-    }
-    
-    ~_XCFKeywordTransformerTrieNode() {
-        delete _childNodes; _childNodes = NULL;
-        delete _providers; _providers = NULL;
-    }
+    map<char,_XCFKeywordTransformerNode *> sub_nodes;
 };
 
-FOUNDATION_STATIC_INLINE BOOL _isTrieNodeUniversalMatch(_XCFKeywordTransformerTrieNode *node) {
-    return node && node->value == '*';
+FOUNDATION_STATIC_INLINE BOOL _isTrieNodeUniversalMatch(_XCFKeywordTransformerNode *node) {
+    return node && node->ch == '*';
+}
+
+class _XCFKeywordTransformerTrie {
+public:
+    _XCFKeywordTransformerTrie() {
+        head.ch = -1;
+        head.isEnd = false;
+    }
+    ~_XCFKeywordTransformerTrie();
+    _XCFKeywordTransformerNode* insert(string word);
+    
+    _XCFKeywordTransformerNode head;
+    
+protected:
+    vector<_XCFKeywordTransformerNode *> all_nodes;
+};
+
+_XCFKeywordTransformerTrie::~_XCFKeywordTransformerTrie() {
+    for (int i=0; i < all_nodes.size(); i++) {
+        delete all_nodes[i];
+    }
+}
+
+_XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
+    if (word.length() == 0) return NULL;
+    
+    _XCFKeywordTransformerNode *leaf_node = &head;
+    map<char, _XCFKeywordTransformerNode*> *current_tree = &leaf_node->sub_nodes;
+    map<char, _XCFKeywordTransformerNode*>::iterator it;
+    
+    for (int i=0; i<word.length(); ++i) {
+        char ch = word[i];
+        
+        if ((it = current_tree->find(ch)) != current_tree->end()) {
+            leaf_node = it->second;
+        } else {
+            _XCFKeywordTransformerNode* new_node = new _XCFKeywordTransformerNode();
+            new_node->ch = ch;
+            (*current_tree)[ch] = new_node;
+            leaf_node = new_node;
+            
+            all_nodes.push_back(new_node);
+        }
+        
+        current_tree = &leaf_node->sub_nodes;
+    }
+    
+    leaf_node->isEnd = true;
+    return leaf_node;
 }
 
 @interface XCFStringKeywordTransformer ()
 
-@property (nonatomic, assign) _XCFKeywordTransformerTrieNode *rootNode;
-
 @end
 
 @implementation XCFStringKeywordTransformer
+{
+    _XCFKeywordTransformerTrie _trie;
+    NSArray<id<XCFStringKeywordDataProvider>> *_dataProviders;
+    map<_XCFKeywordTransformerNode*,list<NSUInteger>> _providerIndexMap;
+}
 
 - (void) dealloc
 {
-    delete _rootNode;
+    _providerIndexMap.clear();
 }
 
 + (instancetype) transformerWithDataProviders:(NSArray<id<XCFStringKeywordDataProvider>> *)dataProviders
@@ -72,17 +99,16 @@ FOUNDATION_STATIC_INLINE BOOL _isTrieNodeUniversalMatch(_XCFKeywordTransformerTr
     NSParameterAssert(dataProviders.count > 0);
     self = [super init];
     if (self) {
-        _rootNode = new _XCFKeywordTransformerTrieNode();
         _matchCase = YES;
         _fallbackValue = @"";
+        _dataProviders = [dataProviders copy];
         
-        for (id<XCFStringKeywordDataProvider> provider in dataProviders) {
-            NSArray<NSString *> *keywords = [provider keywords];
+        [_dataProviders enumerateObjectsUsingBlock:^(id<XCFStringKeywordDataProvider> obj, NSUInteger idx, BOOL *stop) {
+            NSArray *keywords = [obj keywords];
             for (NSString *keyword in keywords) {
-                [self _insertKeyword:keyword
-                            provider:provider];
+                [self _insertKeyword:keyword providerIndex:idx];
             }
-        }
+        }];
     }
     
     return self;
@@ -93,7 +119,7 @@ FOUNDATION_STATIC_INLINE BOOL _isTrieNodeUniversalMatch(_XCFKeywordTransformerTr
     return [self initWithDataProviders:@[]];
 }
 
-- (void) _insertKeyword:(NSString *)keyword provider:(id<XCFStringKeywordDataProvider>)provider
+- (void) _insertKeyword:(NSString *)keyword providerIndex:(NSUInteger)providerIndex
 {
     NSParameterAssert(keyword.length > 0);
     
@@ -103,57 +129,30 @@ FOUNDATION_STATIC_INLINE BOOL _isTrieNodeUniversalMatch(_XCFKeywordTransformerTr
         return;
     }
     
-    BOOL _create_new_node = NO;
-    
-    _XCFKeywordTransformerTrieNode *node = _rootNode;
-    for (size_t i = 1; i <= length; i++) {
-        const char value = c_keyword[i];
-        
-        _XCFKeywordTransformerTrieNode *sub_node = NULL;
-        for (_XCFKeywordTransformerTrieNode *__node : (*(node->_childNodes))) {
-            if (value == __node->value) {
-                sub_node = __node;
-                break;
-            }
-        }
-        
-        if (!sub_node) {
-            sub_node = new _XCFKeywordTransformerTrieNode();
-            sub_node->value = value;
-            (*(node->_childNodes)).insert(sub_node);
-            
-            _create_new_node = YES;
-        }
-        
-        node = sub_node;
+    _XCFKeywordTransformerNode *node = _trie.insert(string(c_keyword));
+    map<_XCFKeywordTransformerNode*,list<NSUInteger>>::iterator it;
+    if ((it = _providerIndexMap.find(node)) != _providerIndexMap.end()) {
+        it->second.push_back(providerIndex);
+    } else {
+        list<NSUInteger> list;
+        list.push_back(providerIndex);
+        _providerIndexMap[node] = list;
     }
-    
-    node->isEnd = true;
-//    if (provider) {
-//        if (!node->_providers) {
-//            node->_providers = new _DataProviders();
-//        }
-//
-//        _XCFkeywordDataProvider dataProvider = {provider};
-//        (*(node->_providers)).insert(&dataProvider);
-//    }
 }
 
 - (NSString *) _queryValueForKeyword:(NSString *)keyword
-                           providers:(_DataProviders *)providers
+                           providers:(NSArray<id<XCFStringKeywordDataProvider>> *)providers
                                cache:(id<XCFStringKeywordDataCache>)cache
 {
-//    NSParameterAssert(keyword && providers);
-//    if (!keyword || !providers) return nil;
+    NSParameterAssert(keyword && providers.count > 0);
     
     NSString *value = [cache valueForKeyword:keyword];
     if (value) return value;
     
-//    for (_XCFkeywordDataProvider *provider : *providers) {
-//        id<XCFStringKeywordDataProvider> _p = provider->provider;
-//        value = [_p valueForKeyword:keyword];
-//        if (value) break;
-//    }
+    for (id<XCFStringKeywordDataProvider> provider in providers) {
+        value = [provider valueForKeyword:keyword];
+        if (value) break;
+    }
     
     if (value) {
         [cache cacheValue:value forKeyword:keyword];
@@ -163,6 +162,53 @@ FOUNDATION_STATIC_INLINE BOOL _isTrieNodeUniversalMatch(_XCFKeywordTransformerTr
 }
 
 @end
+
+static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const std::string *string,size_t base,size_t *match_length,_XCFKeywordTransformerNode **node,const BOOL match_case) {
+    if (trie == NULL || string == NULL) return NO;
+    
+    const size_t string_length = string->length();
+    size_t pos = base;
+    
+    map<char,_XCFKeywordTransformerNode *> sub_nodes = trie->head.sub_nodes;
+    map<char,_XCFKeywordTransformerNode *>::iterator it;
+    BOOL match_universal = NO;
+    
+    while (pos < string_length) {
+        const char c = string->at(pos);
+        
+        it = sub_nodes.find(c);
+        if (it == sub_nodes.end()) {
+            it = sub_nodes.find('*');
+        }
+        if (it == sub_nodes.end() && !match_case) {
+            char c_case = c;
+            if (c_case >= 'a' && c_case <= 'z') c_case += ('A' - 'a');
+            else if (c_case >= 'A' && c_case <= 'Z') c_case += ('a' - 'A');
+            
+            it = sub_nodes.find(c_case);
+        }
+        
+        _XCFKeywordTransformerNode *match_node = it->second;
+        
+        if (it != sub_nodes.end() && match_node->isEnd) {
+            pos += 1;
+            if (match_length) *match_length = pos - base;
+            if (node) *node = match_node;
+            return YES;
+        } else if (it != sub_nodes.end()) {
+            match_universal = _isTrieNodeUniversalMatch(match_node);
+            sub_nodes = match_node->sub_nodes;
+            pos += 1;
+        } else if (match_universal) {
+            pos += 1;
+        } else {
+            break;
+        }
+    }
+    
+    if (match_length) *match_length = 0;
+    return NO;
+}
 
 @implementation XCFStringKeywordTransformer (Transform)
 
@@ -187,87 +233,35 @@ FOUNDATION_STATIC_INLINE BOOL _isTrieNodeUniversalMatch(_XCFKeywordTransformerTr
         mut_string.reserve(origin_length * 2);
     }
     
-    _XCFKeywordTransformerTrieNode *_base_node = self.rootNode;
-    _XCFKeywordTransformerTrieNode *_step_node = NULL;
-    
-    size_t _match_pos = 0;
-    size_t _match_length = 0;
-    
     const BOOL match_case = self.matchCase;
     
-    for (size_t idx = 0;;) {
-        if (idx > origin_length) {
-            if (_step_node) {
-                _step_node = NULL;
-                mut_string += origin_string[_match_pos];
-                idx = _match_pos + 1;
-                _match_pos = 0;
-                _match_length = 0;
-            } else {
-                break;
+    for (size_t pos = 0; pos < origin_length;) {
+        size_t match_length = 0;
+        _XCFKeywordTransformerNode *match_node;
+        if (_searchStringInTrie(&_trie, &origin_string, pos, &match_length,&match_node, match_case) && match_length > 0 && match_node) {
+            std::string match_string = origin_string.substr(pos,match_length);
+            NSString *keyword = [NSString stringWithUTF8String:match_string.c_str()];
+            NSMutableArray<id<XCFStringKeywordDataProvider>> *providers = [NSMutableArray new];
+            
+            list<NSUInteger> indexes = _providerIndexMap[match_node];
+            for (NSUInteger index : indexes) {
+                id<XCFStringKeywordDataProvider> provider = _dataProviders[index];
+                [providers addObject:provider];
             }
             
-            continue;
-        }
-        
-        const char c = origin_string[idx];
-        char c_case = c;
-        if (!match_case) {
-            if (c_case >= 'a' && c_case <= 'z') c_case += ('A' - 'a');
-            else if (c_case >= 'A' && c_case <= 'Z') c_case += ('a' - 'A');
-        }
-        
-        _XCFKeywordTransformerTrieNode *match_node = NULL;
-        _XCFKeywordTransformerTrieNode *query_node = _step_node ?: _base_node;
-        for (_XCFKeywordTransformerTrieNode *node : *(query_node->_childNodes)) {
-            if (_isTrieNodeUniversalMatch(node) || node->value == c || node->value == c_case) {
-                match_node = node;
-                break;
-            }
-        }
-        
-        if (_step_node) {
-            if (match_node) {
-                _step_node = match_node;
-                _match_length += 1;
-                idx += 1;
-                
-                if (_step_node->isEnd) {
-                    // bingo
-                    std::string result = origin_string.substr(_match_pos,_match_length);
-                    NSString *keyword = [NSString stringWithUTF8String:result.c_str()];
-                    NSString *value = [self _queryValueForKeyword:keyword
-                                                        providers:_step_node->_providers
-                                                            cache:cache];
-                    if (value) {
-                        mut_string += [value UTF8String];
-                    }
-                    
-                    _step_node = NULL;
-                    idx = _match_pos + _match_length;
-                    _match_pos = 0;
-                    _match_length = 0;
-                }
-            } else if (_isTrieNodeUniversalMatch(_step_node)) {
-                _match_length += 1;
-                idx += 1;
+            NSString *value = [self _queryValueForKeyword:keyword
+                                                providers:providers
+                                                    cache:cache];
+            if (value) {
+                mut_string.append([value UTF8String]);
             } else {
-                _step_node = NULL;
-                idx = _match_pos + 1;
-                mut_string += origin_string[_match_pos];
-                _match_pos = 0;
-                _match_length = 0;
+                mut_string.append(match_string);
             }
+            
+            pos += match_length;
         } else {
-            if (match_node) {
-                _step_node = match_node;
-                _match_pos = idx;
-                _match_length = 1;
-            } else {
-                mut_string += c;
-            }
-            
-            idx += 1;
+            mut_string.push_back(origin_string[pos]);
+            pos += 1;
         }
     }
     
