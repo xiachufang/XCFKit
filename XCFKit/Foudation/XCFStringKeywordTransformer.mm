@@ -99,7 +99,7 @@ _XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
     NSParameterAssert(dataProviders.count > 0);
     self = [super init];
     if (self) {
-        _matchCase = YES;
+        _matchCase = NO;
         _fallbackValue = @"";
         _dataProviders = [dataProviders copy];
         

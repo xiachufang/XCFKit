@@ -15,6 +15,7 @@
 		E80039F81DC325D100103028 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E80039F61DC325D100103028 /* LaunchScreen.storyboard */; };
 		E8003A441DC3358B00103028 /* XCFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8003A131DC326FC00103028 /* XCFKit.framework */; };
 		E8003A451DC3358B00103028 /* XCFKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E8003A131DC326FC00103028 /* XCFKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E8226B981F55816200AE7D67 /* XCFTrieTreeDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8226B971F55816200AE7D67 /* XCFTrieTreeDemoViewController.m */; };
 		E82ADC8C1E26475800599884 /* XCFVideoRangeSliderDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E82ADC8B1E26475800599884 /* XCFVideoRangeSliderDemoController.m */; };
 		E82ADC961E28D0C000599884 /* XCFVideoEditorDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E82ADC951E28D0C000599884 /* XCFVideoEditorDemoController.m */; };
 		E832F3751E5AC3B1006D8960 /* XCFAVPlayerViewControllerDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E832F3741E5AC3B1006D8960 /* XCFAVPlayerViewControllerDemoController.m */; };
@@ -74,6 +75,8 @@
 		E80039F71DC325D100103028 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E80039F91DC325D100103028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8003A0E1DC326FC00103028 /* XCFKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFKit.xcodeproj; path = ../XCFKit.xcodeproj; sourceTree = "<group>"; };
+		E8226B961F55816200AE7D67 /* XCFTrieTreeDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFTrieTreeDemoViewController.h; sourceTree = "<group>"; };
+		E8226B971F55816200AE7D67 /* XCFTrieTreeDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFTrieTreeDemoViewController.m; sourceTree = "<group>"; };
 		E82ADC8A1E26475800599884 /* XCFVideoRangeSliderDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoRangeSliderDemoController.h; sourceTree = "<group>"; };
 		E82ADC8B1E26475800599884 /* XCFVideoRangeSliderDemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoRangeSliderDemoController.m; sourceTree = "<group>"; };
 		E82ADC941E28D0C000599884 /* XCFVideoEditorDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoEditorDemoController.h; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 				E882296D1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.m */,
 				E832F3731E5AC3B1006D8960 /* XCFAVPlayerViewControllerDemoController.h */,
 				E832F3741E5AC3B1006D8960 /* XCFAVPlayerViewControllerDemoController.m */,
+				E8226B961F55816200AE7D67 /* XCFTrieTreeDemoViewController.h */,
+				E8226B971F55816200AE7D67 /* XCFTrieTreeDemoViewController.m */,
 				E80039F11DC325D100103028 /* Main.storyboard */,
 				E80039F41DC325D100103028 /* Assets.xcassets */,
 				E80039F61DC325D100103028 /* LaunchScreen.storyboard */,
@@ -264,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E83521451E07D6E500C921A1 /* XCFAVPlayerDemoController.m in Sources */,
+				E8226B981F55816200AE7D67 /* XCFTrieTreeDemoViewController.m in Sources */,
 				E80039F01DC325D100103028 /* ViewController.m in Sources */,
 				E80039ED1DC325D100103028 /* AppDelegate.m in Sources */,
 				E82ADC8C1E26475800599884 /* XCFVideoRangeSliderDemoController.m in Sources */,

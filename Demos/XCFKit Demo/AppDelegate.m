@@ -30,6 +30,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    XCFTestKeyordProvider *provider_0 = [XCFTestKeyordProvider new];
+    provider_0.keywords = @[@"WIDTH"];
+    provider_0.value = nil;
     XCFTestKeyordProvider *provider_1 = [XCFTestKeyordProvider new];
     provider_1.keywords = @[@"{IDFA}",@"{VERSION}"];
     provider_1.value = @"provider_1";
@@ -42,8 +45,9 @@
     XCFTestKeyordProvider *provider_4 = [XCFTestKeyordProvider new];
     provider_4.keywords = @[@"{*}"];
     provider_4.value = nil;
-    XCFStringKeywordTransformer *t = [XCFStringKeywordTransformer transformerWithDataProviders:@[provider_1,provider_2,provider_3,provider_4]];
-    NSString *test = @"http://www.xiachufang.com?idfa={IDFA}&version={VERSION}&width={WIDTH}&height={HEIGHT}&flag={FLAG}&name={NAME}&query={OTHER}";
+    XCFStringKeywordTransformer *t = [XCFStringKeywordTransformer transformerWithDataProviders:@[provider_0,provider_1,provider_2,provider_3,provider_4]];
+    t.matchCase = NO;
+    NSString *test = @"http://www.xiachufang.com?idfa={IDFa}&version={VERSION}&width={WIDTH}&height={HEIGHT}&flag={FLAG}&name={NAME}&query={OTHER}";
     NSString *transformed = [t transformString:test];
     NSLog(@"transformed : %@",transformed);
     return YES;
