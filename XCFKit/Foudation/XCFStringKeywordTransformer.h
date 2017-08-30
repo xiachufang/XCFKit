@@ -23,9 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype) initWithDataProviders:(NSArray<id<XCFStringKeywordDataProvider>> *)dataProviders NS_DESIGNATED_INITIALIZER;
 
 + (instancetype) transformerWithDataProviders:(NSArray<id<XCFStringKeywordDataProvider>> *)dataProviders;
++ (instancetype) transformerWithWeakDataProviders:(NSArray<id<XCFStringKeywordDataProvider>> *)dataProviders;
 
-@property (nonatomic, assign) BOOL matchCase; // default is NO;
-@property (nonatomic, copy, nullable) NSString *fallbackValue; // default is ewmpty string
+@property (nonatomic, assign) BOOL matchCase; // default is YES;
+@property (nonatomic, copy, nullable) NSString *fallbackValue; // default is empty string
 
 @end
 

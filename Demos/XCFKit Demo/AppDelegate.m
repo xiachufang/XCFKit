@@ -30,6 +30,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    NS_VALID_UNTIL_END_OF_SCOPE XCFTestKeyordProvider *provider_0 = [XCFTestKeyordProvider new];
+    provider_0.keywords = @[@"__IDFA__"];
+    provider_0.value = [[NSUUID UUID] UUIDString];
     XCFTestKeyordProvider *provider_1 = [XCFTestKeyordProvider new];
     provider_1.keywords = @[@"{IDFA}",@"{VERSION}"];
     provider_1.value = @"provider_1";
@@ -40,11 +43,12 @@
     provider_3.keywords = @[@"{FLAG}",@"{NAME}"];
     provider_3.value = @"provider_3";
     XCFTestKeyordProvider *provider_4 = [XCFTestKeyordProvider new];
-    provider_4.keywords = @[@"\\{*\\}"];
-    provider_4.value = nil;
-    XCFStringKeywordTransformer *t = [XCFStringKeywordTransformer transformerWithDataProviders:@[provider_1,provider_2,provider_3,provider_4]];
+//    provider_4.keywords = @[@"\\{[^}]*+\\}"];
+    provider_4.keywords = @[@"{*}"];
+    provider_4.value = @"YIPLEE";
+    XCFStringKeywordTransformer *t = [XCFStringKeywordTransformer transformerWithDataProviders:@[provider_0,provider_1,provider_2,provider_3]];
     t.matchCase = NO;
-    NSString *test = @"http://www.xiachufang.com?idfa={IDFa}&version={VERSION}&width={WIDTH}&height={HEIGHT}&flag={FLAG}&name={NAME}&query={OTHER}";
+    NSString *test = @"http://www.xiachufang.com?idfa={{IDFA}&version={VERSION}&width={WIDTH}&height={HEIGHT}&flag={FLAG}&name={NAME}&query={OTHER}{NAME}&idfa=__IDFA__hahahahah";
     NSString *transformed = [t transformString:test];
     NSLog(@"transformed : %@",transformed);
     return YES;

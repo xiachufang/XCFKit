@@ -33,7 +33,7 @@
     [self countChanged:self.slider];
     self.logTextView.text = nil;
     
-    _transformer = [XCFStringKeywordTransformer transformerWithDataProviders:@[self]];
+    _transformer = [XCFStringKeywordTransformer transformerWithWeakDataProviders:@[self]];
 }
 
 - (void)didReceiveMemoryWarning {
