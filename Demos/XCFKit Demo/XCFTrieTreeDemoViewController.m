@@ -55,9 +55,9 @@
     
     NSMutableString *log = [NSMutableString new];
     NSUInteger count = (NSUInteger)self.slider.value;
-    [log appendFormat:@"\nrun %tu times",count];
+    [log appendFormat:@"\nrun %tu times\n",count];
     
-    [log appendFormat:@"\nTrie Tree : "];
+//    [log appendFormat:@"\nTrie Tree \n"];
     
     NSDate *start = [NSDate date];
     for (int i  = 0;i < count;i++) {
@@ -66,9 +66,10 @@
         }
     }
     NSDate *end = [NSDate date];
-    [log appendFormat:@"%lf s",[end timeIntervalSinceDate:start]];
+    NSTimeInterval time1 = [end timeIntervalSinceDate:start];
+    [log appendFormat:@"%lf s\n",time1];
     
-    [log appendFormat:@"\nnormal : "];
+//    [log appendFormat:@"\nnormal \n"];
     
     start = [NSDate date];
     NSArray<NSString *> *keywords = [self keywords];
@@ -84,7 +85,9 @@
         }
     }
     end = [NSDate date];
-    [log appendFormat:@"%lf s",[end timeIntervalSinceDate:start]];
+    NSTimeInterval time2 = [end timeIntervalSinceDate:start];
+    [log appendFormat:@"%lf s\n",time2];
+    [log appendFormat:@"%.2lf%%",(time1 / time2 - 1) * 100];
     
     self.logTextView.text = log;
 }
