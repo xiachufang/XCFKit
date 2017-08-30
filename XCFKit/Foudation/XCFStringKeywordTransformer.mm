@@ -22,6 +22,7 @@ struct _XCFKeywordTransformerNode {
     bool isEnd;
     char ch;
     vector<_XCFKeywordTransformerNode *> sub_nodes;
+    _XCFKeywordTransformerNode *universal_sub_node;
 };
 
 FOUNDATION_STATIC_INLINE __unused BOOL _isTrieNodeUniversalMatch(_XCFKeywordTransformerNode *node)
@@ -52,6 +53,7 @@ _XCFKeywordTransformerTrie::~_XCFKeywordTransformerTrie() {
 
 _XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
     _XCFKeywordTransformerNode *leaf_node = NULL;
+    _XCFKeywordTransformerNode *current_node = &head;
     vector<_XCFKeywordTransformerNode *> *current_tree = &head.sub_nodes;
     
     for (int i=0; i<word.length(); ++i) {
@@ -79,9 +81,14 @@ _XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
             leaf_node = new_node;
             
             all_nodes.push_back(new_node);
+            
+            if (_isTrieNodeUniversalMatch(new_node)) {
+                current_node->universal_sub_node = new_node;
+            }
         }
         
         current_tree = &leaf_node->sub_nodes;
+        current_node = leaf_node;
     }
     
     if(leaf_node) leaf_node->isEnd = true;
@@ -279,13 +286,10 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
     
     vector<_XCFKeywordTransformerNode *> sub_nodes = trie->head.sub_nodes;
     _XCFKeywordTransformerNode *match_node = NULL;
-    _XCFKeywordTransformerNode *fallbackNode = NULL;
+    _XCFKeywordTransformerNode *fallbackNode = trie->head.universal_sub_node;
     
     while (pos < string_length) {
         const char c = string->at(pos);
-        
-        _XCFKeywordTransformerNode *regexNode = _findNode(&sub_nodes, '*');
-        if (regexNode) fallbackNode = regexNode;
         
         match_node = _findNode(&sub_nodes, c);
         if (!match_node && !match_case) {
@@ -298,8 +302,8 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
             }
         }
         
-        if (!match_node && regexNode) {
-            match_node = regexNode;
+        if (!match_node) {
+            match_node = fallbackNode;
         }
         
         if (match_node) {
@@ -311,10 +315,10 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
                 return YES;
             } else {
                 sub_nodes = match_node->sub_nodes;
+                if (match_node->universal_sub_node) {
+                    fallbackNode = match_node->universal_sub_node;
+                }
             }
-        } else if (fallbackNode) {
-            sub_nodes = fallbackNode->sub_nodes;
-            pos += 1;
         } else {
             if (pos == *base) {
                 pos += 1;

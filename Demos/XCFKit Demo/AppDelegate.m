@@ -46,7 +46,7 @@
 //    provider_4.keywords = @[@"\\{[^}]*+\\}"];
     provider_4.keywords = @[@"{*}"];
     provider_4.value = @"YIPLEE";
-    XCFStringKeywordTransformer *t = [XCFStringKeywordTransformer transformerWithDataProviders:@[provider_0,provider_1,provider_2,provider_3]];
+    XCFStringKeywordTransformer *t = [XCFStringKeywordTransformer transformerWithDataProviders:@[provider_0,provider_1,provider_2,provider_3,provider_4]];
     t.matchCase = NO;
     NSString *test = @"http://www.xiachufang.com?idfa={{IDFA}&version={VERSION}&width={WIDTH}&height={HEIGHT}&flag={FLAG}&name={NAME}&query={OTHER}{NAME}&idfa=__IDFA__hahahahah";
     NSString *transformed = [t transformString:test];
