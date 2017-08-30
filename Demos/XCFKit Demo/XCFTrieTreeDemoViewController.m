@@ -21,6 +21,11 @@
 
 @implementation XCFTrieTreeDemoViewController
 
+- (void) dealloc
+{
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -48,27 +53,34 @@
     
     NSString *text = [components componentsJoinedByString:@"&"];
     
-    NSMutableString *log = [NSMutableString stringWithString:text];
+    NSMutableString *log = [NSMutableString new];
     NSUInteger count = (NSUInteger)self.slider.value;
     [log appendFormat:@"\nrun %tu times",count];
     
-//    [log appendFormat:@"\nTrie Tree : "];
-//    
+    [log appendFormat:@"\nTrie Tree : "];
+    
     NSDate *start = [NSDate date];
-//    for (int i  = 0;i < count;i++) {
-//        [self.transformer transformString:text];
-//    }
+    for (int i  = 0;i < count;i++) {
+        @autoreleasepool {
+            [self.transformer transformString:text];
+        }
+    }
     NSDate *end = [NSDate date];
-//    [log appendFormat:@"%lf s",[end timeIntervalSinceDate:start]];
+    [log appendFormat:@"%lf s",[end timeIntervalSinceDate:start]];
     
     [log appendFormat:@"\nnormal : "];
     
     start = [NSDate date];
     NSArray<NSString *> *keywords = [self keywords];
     for (int i  = 0;i < count;i++) {
-        for (NSString *word in keywords) {
-            NSString *value = [self valueForKeyword:word];
-            [text stringByReplacingOccurrencesOfString:word withString:value];
+        @autoreleasepool {
+            NSString *operationText = [text copy];
+            for (NSString *word in keywords) {
+                NSString *value = [self valueForKeyword:word];
+                if (value) {
+                    operationText = [operationText stringByReplacingOccurrencesOfString:word withString:value];
+                }
+            }
         }
     }
     end = [NSDate date];

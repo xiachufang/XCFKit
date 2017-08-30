@@ -733,7 +733,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10000" minValue="10000" maxValue="50000" translatesAutoresizingMaskIntoConstraints="NO" id="uXB-sk-orJ">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="10" maxValue="10000" translatesAutoresizingMaskIntoConstraints="NO" id="uXB-sk-orJ">
                                 <rect key="frame" x="35" y="129" width="304" height="31"/>
                                 <color key="tintColor" red="0.97799330949999996" green="0.40080571170000001" blue="0.31164056060000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>

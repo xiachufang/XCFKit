@@ -6,7 +6,12 @@
 //  Copyright © 2017年 XiaChuFang. All rights reserved.
 //
 
+#define XCFStringKeywordTransformerUseTrie 0
+
 #import "XCFStringKeywordTransformer.h"
+
+#if XCFStringKeywordTransformerUseTrie
+
 #import <vector>
 #import <map>
 #import <list>
@@ -73,20 +78,73 @@ _XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
     return leaf_node;
 }
 
+#endif // XCFStringKeywordTransformerUseTrie
+
+@interface _XCFStringKeywordDataProviderWrapper : NSObject<XCFStringKeywordDataProvider>
+
++ (instancetype) wrapperDataProvider:(id<XCFStringKeywordDataProvider>)provider;
+- (instancetype) initWithDataProvider:(id<XCFStringKeywordDataProvider>)provider NS_DESIGNATED_INITIALIZER;
+
+@end
+
+@implementation _XCFStringKeywordDataProviderWrapper
+{
+    NSValue *_wrapper;
+}
+
++ (instancetype) wrapperDataProvider:(id<XCFStringKeywordDataProvider>)provider
+{
+    return [[self alloc] initWithDataProvider:provider];
+}
+
+- (instancetype) init
+{
+    return [self initWithDataProvider:nil];
+}
+
+- (instancetype) initWithDataProvider:(id<XCFStringKeywordDataProvider>)provider
+{
+    self = [super init];
+    if (self) {
+        _wrapper = [NSValue valueWithNonretainedObject:provider];
+    }
+    
+    return self;
+}
+
+- (NSArray<NSString *> *) keywords
+{
+    id<XCFStringKeywordDataProvider> provider = _wrapper.nonretainedObjectValue;
+    return [provider keywords] ?: @[];
+}
+
+- (NSString *) valueForKeyword:(NSString *)keyword
+{
+    id<XCFStringKeywordDataProvider> provider = _wrapper.nonretainedObjectValue;
+    return [provider valueForKeyword:keyword];
+}
+
+@end
+
 @interface XCFStringKeywordTransformer ()
 
 @end
 
 @implementation XCFStringKeywordTransformer
 {
+#if XCFStringKeywordTransformerUseTrie
     _XCFKeywordTransformerTrie _trie;
-    NSArray<id<XCFStringKeywordDataProvider>> *_dataProviders;
     map<_XCFKeywordTransformerNode*,list<NSUInteger>> _providerIndexMap;
+#endif // XCFStringKeywordTransformerUseTrie
+    
+    NSArray<id<XCFStringKeywordDataProvider>> *_dataProviders;
 }
 
 - (void) dealloc
 {
+#if XCFStringKeywordTransformerUseTrie
     _providerIndexMap.clear();
+#endif // XCFStringKeywordTransformerUseTrie
 }
 
 + (instancetype) transformerWithDataProviders:(NSArray<id<XCFStringKeywordDataProvider>> *)dataProviders
@@ -101,14 +159,21 @@ _XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
     if (self) {
         _matchCase = NO;
         _fallbackValue = @"";
-        _dataProviders = [dataProviders copy];
+        NSMutableArray<id<XCFStringKeywordDataProvider>> *_providers = [NSMutableArray arrayWithCapacity:dataProviders.count];
+        for (id<XCFStringKeywordDataProvider> provider in dataProviders) {
+            _XCFStringKeywordDataProviderWrapper *wrapper = [_XCFStringKeywordDataProviderWrapper wrapperDataProvider:provider];
+            [_providers addObject:wrapper];
+        }
+        _dataProviders = [_providers copy];
         
+#if XCFStringKeywordTransformerUseTrie
         [_dataProviders enumerateObjectsUsingBlock:^(id<XCFStringKeywordDataProvider> obj, NSUInteger idx, BOOL *stop) {
             NSArray *keywords = [obj keywords];
             for (NSString *keyword in keywords) {
                 [self _insertKeyword:keyword providerIndex:idx];
             }
         }];
+#endif // XCFStringKeywordTransformerUseTrie
     }
     
     return self;
@@ -118,6 +183,8 @@ _XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
 {
     return [self initWithDataProviders:@[]];
 }
+
+#if XCFStringKeywordTransformerUseTrie
 
 - (void) _insertKeyword:(NSString *)keyword providerIndex:(NSUInteger)providerIndex
 {
@@ -139,6 +206,8 @@ _XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
         _providerIndexMap[node] = list;
     }
 }
+
+#endif
 
 - (NSString *) _queryValueForKeyword:(NSString *)keyword
                            providers:(NSArray<id<XCFStringKeywordDataProvider>> *)providers
@@ -162,6 +231,8 @@ _XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
 }
 
 @end
+
+#if XCFStringKeywordTransformerUseTrie
 
 static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const std::string *string,size_t base,size_t *match_length,_XCFKeywordTransformerNode **node,const BOOL match_case) {
     if (trie == NULL || string == NULL) return NO;
@@ -210,12 +281,16 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const std
     return NO;
 }
 
+#endif // XCFStringKeywordTransformerUseTrie
+
 @implementation XCFStringKeywordTransformer (Transform)
 
 - (NSString *) transformString:(NSString *)string
 {
     return [self transformString:string dataCache:nil];
 }
+
+#if XCFStringKeywordTransformerUseTrie
 
 - (NSString *) transformString:(NSString *)string dataCache:(id<XCFStringKeywordDataCache>)cache
 {
@@ -267,5 +342,61 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const std
     
     return [NSString stringWithUTF8String:mut_string.c_str()];
 }
+
+#else
+
+- (NSString *) transformString:(NSString *)string dataCache:(id<XCFStringKeywordDataCache>)cache
+{
+    if (string.length == 0) return @"";
+    
+    const BOOL match_case = self.matchCase;
+    
+    NSMutableString *mutableString = [string mutableCopy];
+    NSCharacterSet *regexSet = [NSCharacterSet characterSetWithCharactersInString:@"*?|."];
+    for (id<XCFStringKeywordDataProvider> provider in _dataProviders) {
+        NSArray<NSString *> *keywords = [provider keywords];
+        for (NSString *keyword in keywords) {
+            if (keyword.length == 0) continue;
+                NSRange range = NSMakeRange(0, mutableString.length);
+                if ([keyword rangeOfCharacterFromSet:regexSet].location != NSNotFound) {
+                    NSString *pattern = [keyword stringByReplacingOccurrencesOfString:@"*" withString:@".*"];
+                    NSError *error = nil;
+                    NSRegularExpression *ex = [NSRegularExpression regularExpressionWithPattern:pattern
+                                                                                        options:!match_case ? NSRegularExpressionCaseInsensitive : 0
+                                                                                          error:&error];
+                    if (ex) {
+                        NSString *searchString = [mutableString copy];
+                        [ex enumerateMatchesInString:searchString options:0 range:range usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                            NSRange match_range = result.range;
+                            NSString *match = [searchString substringWithRange:match_range];
+                            NSString *value = [self _queryValueForKeyword:match
+                                                                providers:@[provider]
+                                                                    cache:cache];
+                            if (value) {
+                                [mutableString replaceOccurrencesOfString:match
+                                                               withString:value
+                                                                  options:!match_case ? NSCaseInsensitiveSearch : 0
+                                                                    range:NSMakeRange(0, mutableString.length)];
+                            }
+                        }];
+                    }
+                } else {
+                    NSString *value = [self _queryValueForKeyword:keyword
+                                                        providers:@[provider]
+                                                            cache:cache];
+                    if (value) {
+                        [mutableString replaceOccurrencesOfString:keyword
+                                                       withString:value
+                                                          options:!match_case ? NSCaseInsensitiveSearch : 0
+                                                            range:range];
+                }
+            }
+        }
+    }
+    
+    return [mutableString copy];
+}
+
+#endif //XCFStringKeywordTransformerUseTrie
 
 @end
