@@ -253,7 +253,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Trie Tree" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lc3-cI-gDz">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Trie Benchmark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lc3-cI-gDz">
                                                     <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -264,6 +264,26 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="MoL-Qj-Jby" kind="show" id="AI2-9A-UZs"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="RAr-kW-sBA" style="IBUITableViewCellStyleDefault" id="spQ-HF-ecH">
+                                        <rect key="frame" x="0.0" y="620" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="spQ-HF-ecH" id="rJk-zN-Im8">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Trie Match Test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RAr-kW-sBA">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="YpC-AX-x1Q" kind="show" id="WOe-zI-wv4"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -721,7 +741,94 @@
             </objects>
             <point key="canvasLocation" x="2665" y="92"/>
         </scene>
-        <!--前缀树算法-->
+        <!--Trie Match Test-->
+        <scene sceneID="gBs-fu-ByP">
+            <objects>
+                <viewController id="YpC-AX-x1Q" customClass="XCFTrieMatchTestDemoController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RYI-I2-aaZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="BJG-v5-9wk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="doI-j4-HrV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keywords" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thi-8w-hRq">
+                                <rect key="frame" x="16" y="72" width="71" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.2198290527" green="0.2191363871" blue="0.19081941250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="keywords" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="fM5-Ey-dEQ">
+                                <rect key="frame" x="16" y="99" width="343" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="mch-U4-lSv"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Match" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSi-j6-Ey6">
+                                <rect key="frame" x="16" y="151" width="45.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.2198290527" green="0.2191363871" blue="0.19081941250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aEO-mM-LoP">
+                                <rect key="frame" x="16" y="178.5" width="343" height="404.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEk-0b-Km8" customClass="XCFAppearanceButtonA">
+                                <rect key="frame" x="37" y="603" width="300" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="dT7-uZ-x9J"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <state key="normal" title="Match"/>
+                                <connections>
+                                    <action selector="searchAction:" destination="YpC-AX-x1Q" eventType="touchUpInside" id="z6X-rK-L8a"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BJG-v5-9wk" firstAttribute="top" secondItem="BEk-0b-Km8" secondAttribute="bottom" constant="20" id="CKU-Rc-bR7"/>
+                            <constraint firstItem="BEk-0b-Km8" firstAttribute="width" secondItem="doI-j4-HrV" secondAttribute="width" multiplier="0.8" id="EV9-kX-DBp"/>
+                            <constraint firstItem="aEO-mM-LoP" firstAttribute="leading" secondItem="doI-j4-HrV" secondAttribute="leadingMargin" id="ICd-pc-0oc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aEO-mM-LoP" secondAttribute="trailing" id="IaY-tb-D7Z"/>
+                            <constraint firstItem="MSi-j6-Ey6" firstAttribute="leading" secondItem="doI-j4-HrV" secondAttribute="leadingMargin" id="K6m-cS-qlx"/>
+                            <constraint firstItem="thi-8w-hRq" firstAttribute="leading" secondItem="doI-j4-HrV" secondAttribute="leadingMargin" id="UNs-nF-edb"/>
+                            <constraint firstItem="MSi-j6-Ey6" firstAttribute="top" secondItem="fM5-Ey-dEQ" secondAttribute="bottom" constant="20" id="XLA-Y9-AxF"/>
+                            <constraint firstItem="fM5-Ey-dEQ" firstAttribute="top" secondItem="thi-8w-hRq" secondAttribute="bottom" constant="8" id="YPO-DE-yjW"/>
+                            <constraint firstItem="BEk-0b-Km8" firstAttribute="centerX" secondItem="doI-j4-HrV" secondAttribute="centerX" id="aIi-5V-5Z0"/>
+                            <constraint firstItem="BEk-0b-Km8" firstAttribute="top" secondItem="aEO-mM-LoP" secondAttribute="bottom" constant="20" id="g5A-si-35F"/>
+                            <constraint firstItem="fM5-Ey-dEQ" firstAttribute="leading" secondItem="doI-j4-HrV" secondAttribute="leadingMargin" id="iDj-G2-I9n"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fM5-Ey-dEQ" secondAttribute="trailing" id="iE1-OD-Bys"/>
+                            <constraint firstItem="thi-8w-hRq" firstAttribute="top" secondItem="RYI-I2-aaZ" secondAttribute="bottom" constant="8" id="jHp-7I-bqc"/>
+                            <constraint firstItem="aEO-mM-LoP" firstAttribute="top" secondItem="MSi-j6-Ey6" secondAttribute="bottom" constant="8" id="pt6-mR-eZJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Trie Match Test" id="XRO-GW-DZT">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="kKg-Zc-eS4">
+                            <connections>
+                                <action selector="doneAction:" destination="YpC-AX-x1Q" id="CIr-v9-uGN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="keywordsTextField" destination="fM5-Ey-dEQ" id="fH9-sW-Dl7"/>
+                        <outlet property="matchButton" destination="BEk-0b-Km8" id="2SK-fr-GyK"/>
+                        <outlet property="matchTextView" destination="aEO-mM-LoP" id="Hdt-AN-vAd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pR1-KL-Xc9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-911" y="-223"/>
+        </scene>
+        <!--Trie Benchmark-->
         <scene sceneID="cvy-3i-ykP">
             <objects>
                 <viewController id="MoL-Qj-Jby" customClass="XCFTrieTreeDemoViewController" sceneMemberID="viewController">
@@ -766,7 +873,7 @@
                                 <rect key="frame" x="37" y="209" width="300" height="313"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -789,7 +896,7 @@
                             <constraint firstItem="BcJ-G5-7Nd" firstAttribute="leading" secondItem="mJ5-Jc-zZ0" secondAttribute="trailing" constant="40" id="uxT-Wp-oTk"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="前缀树算法" id="uCb-aj-s5G"/>
+                    <navigationItem key="navigationItem" title="Trie Benchmark" id="uCb-aj-s5G"/>
                     <connections>
                         <outlet property="countLabel" destination="BcJ-G5-7Nd" id="2rS-P5-AgJ"/>
                         <outlet property="logTextView" destination="saI-Jg-uo3" id="Fia-KP-qKv"/>

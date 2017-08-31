@@ -350,7 +350,7 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
     NSParameterAssert(string);
     
     const char* c_string = [string cStringUsingEncoding:NSUTF8StringEncoding];
-    if (!c_string) return nil;
+    if (!c_string) return @"";
     
     std::string origin_string = std::string(c_string);
     const size_t origin_length = origin_string.length();
@@ -396,6 +396,40 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
     }
     
     return [NSString stringWithUTF8String:mut_string.c_str()];
+}
+
+- (NSArray<NSTextCheckingResult *> *) searchResultsFromString:(NSString *)string
+{
+    NSParameterAssert(string);
+    
+    const char* c_string = [string cStringUsingEncoding:NSUTF8StringEncoding];
+    if (!c_string) return @[];
+    
+    std::string origin_string = std::string(c_string);
+    const size_t origin_length = origin_string.length();
+    
+    const BOOL match_case = self.matchCase;
+    
+    NSMutableArray<NSTextCheckingResult *> *results = [NSMutableArray new];
+    
+    for (size_t pos = 0; pos < origin_length;) {
+        size_t match_base = pos;
+        size_t match_length = 0;
+        _XCFKeywordTransformerNode *match_node;
+        if (_searchStringInTrie(&_trie, &origin_string, &match_base, &match_length,&match_node, match_case) && match_length > 0 && match_node) {
+            std::string match_string = origin_string.substr(match_base,match_length);
+            NSString *keyword = [NSString stringWithUTF8String:match_string.c_str()];
+            NSRange range = NSMakeRange(match_base, match_length);
+            NSTextCheckingResult *result = [NSTextCheckingResult replacementCheckingResultWithRange:range replacementString:keyword];
+            [results addObject:result];
+            
+            pos = match_base + match_length;
+        } else {
+            pos = match_base;
+        }
+    }
+
+    return [results copy];
 }
 
 #else
@@ -450,6 +484,48 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
     }
     
     return [mutableString copy];
+}
+
+- (NSArray<NSTextCheckingResult *> *) searchResultsFromString:(NSString *)string
+{
+    if (string.length == 0) return @[];
+    const BOOL match_case = self.matchCase;
+    
+    NSCharacterSet *regexSet = [NSCharacterSet characterSetWithCharactersInString:@"*?|.^$"];
+    NSRegularExpressionOptions regexOption = NSRegularExpressionDotMatchesLineSeparators | NSRegularExpressionAnchorsMatchLines;
+    if (!match_case) regexOption |= NSRegularExpressionCaseInsensitive;
+    
+    NSMutableArray<NSTextCheckingResult *> *finalResults = [NSMutableArray new];
+    for (id<XCFStringKeywordDataProvider> provider in _dataProviders) {
+        NSArray<NSString *> *keywords = [provider keywords];
+        for (NSString *keyword in keywords) {
+            if (keyword.length == 0) continue;
+            NSRange range = NSMakeRange(0, string.length);
+            NSRegularExpression *ex = nil;
+            if ([keyword rangeOfCharacterFromSet:regexSet].location != NSNotFound) {
+                ex = [NSRegularExpression regularExpressionWithPattern:keyword
+                                                                options:regexOption
+                                                                 error:nil];
+            }
+            
+            if (!ex) {
+                ex = [NSRegularExpression regularExpressionWithPattern:keyword
+                                                               options:regexOption | NSRegularExpressionIgnoreMetacharacters
+                                                                 error:nil];
+            }
+            
+            NSArray<NSTextCheckingResult *> *results = [ex matchesInString:string options:0 range:range];
+            for (NSTextCheckingResult *result in results) {
+                NSRange match_range = result.range;
+                NSString *match = [string substringWithRange:match_range];
+                
+                NSTextCheckingResult *__result = [NSTextCheckingResult replacementCheckingResultWithRange:match_range replacementString:match];
+                [finalResults addObject:__result];
+            }
+        }
+    }
+    
+    return [finalResults copy];
 }
 
 #endif //XCFStringKeywordTransformerUseTrie

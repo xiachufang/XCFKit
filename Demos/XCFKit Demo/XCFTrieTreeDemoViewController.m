@@ -9,6 +9,8 @@
 #import "XCFTrieTreeDemoViewController.h"
 #import <XCFKit/XCFStringKeywordTransformer.h>
 
+extern uint64_t dispatch_benchmark(size_t count, void (^block)(void));
+
 @interface XCFTrieTreeDemoViewController ()<XCFStringKeywordDataProvider>
 
 @property (strong, nonatomic) IBOutlet UILabel *countLabel;
@@ -55,39 +57,24 @@
     
     NSMutableString *log = [NSMutableString new];
     NSUInteger count = (NSUInteger)self.slider.value;
-    [log appendFormat:@"\nrun %tu times\n",count];
+    [log appendFormat:@"benchmark\nrun %tu times\n",count];
     
-//    [log appendFormat:@"\nTrie Tree \n"];
+    uint64_t time1 = dispatch_benchmark(count, ^{
+        [self.transformer transformString:text];
+    });
+    [log appendFormat:@"[Trie] %llu ns\n",time1];
     
-    NSDate *start = [NSDate date];
-    for (int i  = 0;i < count;i++) {
-        @autoreleasepool {
-            [self.transformer transformString:text];
-        }
-    }
-    NSDate *end = [NSDate date];
-    NSTimeInterval time1 = [end timeIntervalSinceDate:start];
-    [log appendFormat:@"%lf s\n",time1];
-    
-//    [log appendFormat:@"\nnormal \n"];
-    
-    start = [NSDate date];
     NSArray<NSString *> *keywords = [self keywords];
-    for (int i  = 0;i < count;i++) {
-        @autoreleasepool {
-            NSString *operationText = [text copy];
-            for (NSString *word in keywords) {
-                NSString *value = [self valueForKeyword:word];
-                if (value) {
-                    operationText = [operationText stringByReplacingOccurrencesOfString:word withString:value];
-                }
+    uint64_t time2 = dispatch_benchmark(count, ^{
+        NSString *operationText = [text copy];
+        for (NSString *word in keywords) {
+            NSString *value = [self valueForKeyword:word];
+            if (value) {
+                operationText = [operationText stringByReplacingOccurrencesOfString:word withString:value];
             }
         }
-    }
-    end = [NSDate date];
-    NSTimeInterval time2 = [end timeIntervalSinceDate:start];
-    [log appendFormat:@"%lf s\n",time2];
-    [log appendFormat:@"%.2lf%%",(time1 / time2 - 1) * 100];
+    });
+    [log appendFormat:@"[Objc] %llu ns\n",time2];
     
     self.logTextView.text = log;
 }
@@ -114,7 +101,8 @@
              @"{LONGTITUTE}",
              @"{DEVICE_BRAND}",
              @"{DEVICE_MODEL}",
-             @"{UA}"];
+             @"{UA}"
+             ];
 }
 
 - (NSString *) valueForKeyword:(NSString *)keyword

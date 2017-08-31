@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *) transformString:(NSString *)string;
 - (NSString *) transformString:(NSString *)string dataCache:(nullable id<XCFStringKeywordDataCache>)cache;
 
+- (NSArray<NSTextCheckingResult *> *) searchResultsFromString:(NSString *)string;
+
 @end
 
 NS_ASSUME_NONNULL_END
