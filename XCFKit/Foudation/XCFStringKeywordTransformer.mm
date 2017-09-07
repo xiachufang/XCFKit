@@ -470,19 +470,20 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
                 (ex = [NSRegularExpression regularExpressionWithPattern:keyword
                                                                 options:regexOption
                                                                   error:nil])) {
-                NSString *searchString = [mutableString copy];
-                NSArray<NSTextCheckingResult *> *results = [ex matchesInString:searchString options:0 range:range];
+                
+                NSArray<NSTextCheckingResult *> *results = [ex matchesInString:mutableString options:0 range:range];
+                NSInteger range_offset = 0;
                 for (NSTextCheckingResult *result in results) {
                     NSRange match_range = result.range;
-                    NSString *match = [searchString substringWithRange:match_range];
+                    match_range.location += range_offset;
+                    
+                    NSString *match = [mutableString substringWithRange:match_range];
                     NSString *value = [self _queryValueForKeyword:match
                                                         providers:@[provider]
                                                             cache:cache];
                     if (value) {
-                        [mutableString replaceOccurrencesOfString:match
-                                                       withString:value
-                                                          options:!match_case ? NSCaseInsensitiveSearch : 0
-                                                            range:NSMakeRange(0, mutableString.length)];
+                        [mutableString replaceCharactersInRange:match_range withString:value];
+                        range_offset += (value.length - match.length);
                     }
                 }
             } else {

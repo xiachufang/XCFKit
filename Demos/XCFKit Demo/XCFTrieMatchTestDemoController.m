@@ -25,8 +25,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.keywordsTextField.text = @"{*}";
-    self.matchTextView.text = @"http://www.xiachufang.com?idfa={{IDFA}&version={VERSION}&width={WIDTH}&height={HEIGHT}&flag={FLAG}&name={NAME}&query={OTHER}{NAME}&idfa=__IDFA__hahahahah";
+    self.keywordsTextField.text = @"__\\w*?__";
+    self.matchTextView.text = @"http://www.xiachufang.com?idfa=__IDFA__&version=__VERSION__&width=__WIDTH__&height=__DEVICE_HEIGHT__&flag=__FLAG__&name=__NAME__&query=__OTHER__&idfa=__IDFA__hahahahah";
     self.matchTextView.allowsEditingTextAttributes = YES;
     self.matchTextView.backgroundColor = [UIColor xcf_mainBackgroundColor];
     self.view.backgroundColor = [UIColor whiteColor];
