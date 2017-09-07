@@ -6,7 +6,7 @@
 //  Copyright © 2017年 XiaChuFang. All rights reserved.
 //
 
-#define XCFStringKeywordTransformerUseTrie 1
+#define XCFStringKeywordTransformerUseTrie 0
 
 #import "XCFStringKeywordTransformer.h"
 
