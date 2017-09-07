@@ -141,6 +141,12 @@ _XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
     return [provider valueForKeyword:keyword];
 }
 
+- (BOOL) shouldHandleString:(NSString *)string
+{
+    id<XCFStringKeywordDataProvider> provider = _wrapper.nonretainedObjectValue;
+    return [provider shouldHandleString:string];
+}
+
 @end
 
 @interface XCFStringKeywordTransformer ()
@@ -349,6 +355,14 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
 {
     NSParameterAssert(string);
     
+    BOOL shouldHandle = NO;
+    for (id<XCFStringKeywordDataProvider> provider in _dataProviders) {
+        shouldHandle = [provider shouldHandleString:string];
+        if (shouldHandle) break;
+    }
+    
+    if (!shouldHandle) return [string copy];
+    
     const char* c_string = [string cStringUsingEncoding:NSUTF8StringEncoding];
     if (!c_string) return @"";
     
@@ -445,6 +459,8 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
     NSRegularExpressionOptions regexOption = NSRegularExpressionDotMatchesLineSeparators | NSRegularExpressionAnchorsMatchLines;
     if (!match_case) regexOption |= NSRegularExpressionCaseInsensitive;
     for (id<XCFStringKeywordDataProvider> provider in _dataProviders) {
+        if (![provider shouldHandleString:mutableString]) continue;
+        
         NSArray<NSString *> *keywords = [provider keywords];
         for (NSString *keyword in keywords) {
             if (keyword.length == 0) continue;
@@ -497,6 +513,8 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
     
     NSMutableArray<NSTextCheckingResult *> *finalResults = [NSMutableArray new];
     for (id<XCFStringKeywordDataProvider> provider in _dataProviders) {
+        if (![provider shouldHandleString:string]) continue;
+        
         NSArray<NSString *> *keywords = [provider keywords];
         for (NSString *keyword in keywords) {
             if (keyword.length == 0) continue;
