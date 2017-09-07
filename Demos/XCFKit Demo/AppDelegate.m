@@ -54,7 +54,7 @@ extern uint64_t dispatch_benchmark(size_t count, void (^block)(void));
     XCFStringKeywordTransformer *t = [XCFStringKeywordTransformer transformerWithDataProviders:@[provider_0]];
     t.matchCase = NO;
     
-    NSString *test = @"http://www.xiachufang.com?idfa=__IDFA__&version=__VERSION__&width=__WIDTH__&height=__DEVICE_HEIGHT__&flag=__FLAG__&name=__NAME__&query=__OTHER__&idfa=__IDFA__hahahahah";
+    NSString *test = @"http://www.xiachufang.com?idfa=__IDFA__&version=__VERSION__&width=__WIDTH__&height=__DEVICE_HEIGHT__&flag=__FLAG__";
     __block NSString *transformed = nil;
     uint64_t time = dispatch_benchmark(1000, ^{
         transformed = [t transformString:test];
