@@ -106,4 +106,9 @@
     return nil;
 }
 
+- (BOOL) shouldHandleString:(NSString *)string
+{
+    return YES;
+}
+
 @end

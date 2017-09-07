@@ -19,6 +19,11 @@
 {
     return self.value;
 }
+
+- (BOOL) shouldHandleString:(NSString *)string
+{
+    return YES;
+}
 @end
 
 @interface AppDelegate ()

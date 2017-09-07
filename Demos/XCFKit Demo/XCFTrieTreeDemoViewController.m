@@ -110,4 +110,9 @@ extern uint64_t dispatch_benchmark(size_t count, void (^block)(void));
     return [keyword stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"{}"]];
 }
 
+- (BOOL) shouldHandleString:(NSString *)string
+{
+    return YES;
+}
+
 @end
