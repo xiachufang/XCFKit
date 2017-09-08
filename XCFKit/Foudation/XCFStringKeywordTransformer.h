@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray<NSString *> *) keywords;
 - (nullable NSString *) valueForKeyword:(NSString *)keyword;
-
 - (BOOL) shouldHandleString:(NSString *)string;
 
 @end

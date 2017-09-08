@@ -7,6 +7,13 @@
 //
 
 #define XCFStringKeywordTransformerUseTrie 0
+#define XCFStringKeywordTransformBenchmark 1
+
+#if XCFStringKeywordTransformBenchmark
+#define XCFStringKeywordTransformCheckHandle 0
+#else
+#define XCFStringKeywordTransformCheckHandle 1
+#endif
 
 #import "XCFStringKeywordTransformer.h"
 
@@ -149,15 +156,17 @@ _XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
 
 @end
 
-@interface XCFStringKeywordTransformer ()
-
-@end
+NS_INLINE  NSString * _cacheExpressionKeyForKeyword(NSString *keyword,BOOL matchCase) {
+    return [(matchCase ? @"1-" : @"0-") stringByAppendingString:keyword];
+}
 
 @implementation XCFStringKeywordTransformer
 {
 #if XCFStringKeywordTransformerUseTrie
     _XCFKeywordTransformerTrie _trie;
     map<_XCFKeywordTransformerNode*,vector<NSUInteger>> _providerIndexMap;
+#else
+    NSMapTable<NSString*,NSRegularExpression*> *_cachedExpressions;
 #endif // XCFStringKeywordTransformerUseTrie
     
     NSArray<id<XCFStringKeywordDataProvider>> *_dataProviders;
@@ -202,6 +211,8 @@ _XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
                 [self _insertKeyword:keyword providerIndex:idx];
             }
         }];
+#else
+        _cachedExpressions = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsCopyIn valueOptions:NSPointerFunctionsStrongMemory];
 #endif // XCFStringKeywordTransformerUseTrie
     }
     
@@ -247,6 +258,10 @@ _XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
                            providers:(NSArray<id<XCFStringKeywordDataProvider>> *)providers
                                cache:(id<XCFStringKeywordDataCache>)cache
 {
+#if XCFStringKeywordTransformBenchmark
+    id<XCFStringKeywordDataProvider> provider = _dataProviders.firstObject;
+    return [provider valueForKeyword:keyword];
+#else
     NSParameterAssert(keyword && providers.count > 0);
     
     NSString *value = [cache valueForKeyword:keyword];
@@ -262,6 +277,7 @@ _XCFKeywordTransformerNode *_XCFKeywordTransformerTrie::insert(string word) {
     }
     
     return value ?: self.fallbackValue;
+#endif
 }
 
 @end
@@ -344,10 +360,50 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
 
 @implementation XCFStringKeywordTransformer (Transform)
 
+#if XCFStringKeywordTransformBenchmark
+
+- (NSString *) transformString:(NSString *)string
+{
+    id<XCFStringKeywordDataProvider> provider = _dataProviders.firstObject;
+    NSString *keyword = [provider keywords].firstObject;
+    
+    NSRegularExpression *ex = [_cachedExpressions objectForKey:keyword];
+    if (!ex) {
+        ex = [[NSRegularExpression alloc] initWithPattern:keyword
+                                                  options:0
+                                                    error:nil];
+        [_cachedExpressions setObject:ex forKey:keyword];
+    }
+    
+    NSMutableString *mutableString = [string mutableCopy];
+    NSRange range = NSMakeRange(0, mutableString.length);
+    NSArray<NSTextCheckingResult *> *results = [ex matchesInString:mutableString options:0 range:range];
+    NSInteger range_offset = 0;
+    for (NSTextCheckingResult *result in results) {
+        NSRange match_range = result.range;
+        match_range.location += range_offset;
+        
+        NSString *match = [mutableString substringWithRange:match_range];
+        NSString *value = [self _queryValueForKeyword:match
+                                            providers:@[provider]
+                                                cache:nil];
+        if (value) {
+            [mutableString replaceCharactersInRange:match_range withString:value];
+            range_offset += (value.length - match.length);
+        }
+    }
+
+    return mutableString;
+}
+
+#else
+
 - (NSString *) transformString:(NSString *)string
 {
     return [self transformString:string dataCache:nil];
 }
+
+#endif
 
 #if XCFStringKeywordTransformerUseTrie
 
@@ -355,6 +411,7 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
 {
     NSParameterAssert(string);
     
+#if XCFStringKeywordTransformCheckHandle
     BOOL shouldHandle = NO;
     for (id<XCFStringKeywordDataProvider> provider in _dataProviders) {
         shouldHandle = [provider shouldHandleString:string];
@@ -362,6 +419,7 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
     }
     
     if (!shouldHandle) return [string copy];
+#endif
     
     const char* c_string = [string cStringUsingEncoding:NSUTF8StringEncoding];
     if (!c_string) return @"";
@@ -452,49 +510,51 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
 {
     if (string.length == 0) return @"";
     
-    const BOOL match_case = self.matchCase;
+    const BOOL match_case = _matchCase;
     
     NSMutableString *mutableString = [string mutableCopy];
-    NSCharacterSet *regexSet = [NSCharacterSet characterSetWithCharactersInString:@"*?|.^$"];
-    NSRegularExpressionOptions regexOption = NSRegularExpressionDotMatchesLineSeparators | NSRegularExpressionAnchorsMatchLines;
-    if (!match_case) regexOption |= NSRegularExpressionCaseInsensitive;
+    NSRegularExpressionOptions regexOption = match_case ? 0 : NSRegularExpressionCaseInsensitive;
     for (id<XCFStringKeywordDataProvider> provider in _dataProviders) {
+#if XCFStringKeywordTransformCheckHandle
         if (![provider shouldHandleString:mutableString]) continue;
+#endif
         
         NSArray<NSString *> *keywords = [provider keywords];
         for (NSString *keyword in keywords) {
             if (keyword.length == 0) continue;
             NSRange range = NSMakeRange(0, mutableString.length);
-            NSRegularExpression *ex = nil;
-            if ([keyword rangeOfCharacterFromSet:regexSet].location != NSNotFound &&
-                (ex = [NSRegularExpression regularExpressionWithPattern:keyword
-                                                                options:regexOption
-                                                                  error:nil])) {
+            
+            NSString *cacheKey = _cacheExpressionKeyForKeyword(keyword,match_case);
+            NSRegularExpression *ex = [_cachedExpressions objectForKey:cacheKey];
+            
+            if (!ex) {
+                ex = [NSRegularExpression regularExpressionWithPattern:keyword
+                                                               options:regexOption
+                                                                 error:nil];
                 
-                NSArray<NSTextCheckingResult *> *results = [ex matchesInString:mutableString options:0 range:range];
-                NSInteger range_offset = 0;
-                for (NSTextCheckingResult *result in results) {
-                    NSRange match_range = result.range;
-                    match_range.location += range_offset;
-                    
-                    NSString *match = [mutableString substringWithRange:match_range];
-                    NSString *value = [self _queryValueForKeyword:match
-                                                        providers:@[provider]
-                                                            cache:cache];
-                    if (value) {
-                        [mutableString replaceCharactersInRange:match_range withString:value];
-                        range_offset += (value.length - match.length);
-                    }
+                if (!ex) {
+                    ex = [NSRegularExpression regularExpressionWithPattern:keyword
+                                                                   options:regexOption | NSRegularExpressionIgnoreMetacharacters
+                                                                     error:nil];
                 }
-            } else {
-                NSString *value = [self _queryValueForKeyword:keyword
+                
+                [_cachedExpressions setObject:ex forKey:cacheKey];
+            }
+            
+            NSParameterAssert(ex); if (!ex) continue;
+            NSArray<NSTextCheckingResult *> *results = [ex matchesInString:mutableString options:0 range:range];
+            NSInteger range_offset = 0;
+            for (NSTextCheckingResult *result in results) {
+                NSRange match_range = result.range;
+                match_range.location += range_offset;
+
+                NSString *match = [mutableString substringWithRange:match_range];
+                NSString *value = [self _queryValueForKeyword:match
                                                     providers:@[provider]
                                                         cache:cache];
                 if (value) {
-                    [mutableString replaceOccurrencesOfString:keyword
-                                                   withString:value
-                                                      options:!match_case ? NSCaseInsensitiveSearch : 0
-                                                        range:range];
+                    [mutableString replaceCharactersInRange:match_range withString:value];
+                    range_offset += (value.length - match.length);
                 }
             }
         }
@@ -508,30 +568,37 @@ static BOOL _searchStringInTrie(const _XCFKeywordTransformerTrie *trie,const str
     if (string.length == 0) return @[];
     const BOOL match_case = self.matchCase;
     
-    NSCharacterSet *regexSet = [NSCharacterSet characterSetWithCharactersInString:@"*?|.^$"];
-    NSRegularExpressionOptions regexOption = NSRegularExpressionDotMatchesLineSeparators | NSRegularExpressionAnchorsMatchLines;
-    if (!match_case) regexOption |= NSRegularExpressionCaseInsensitive;
+    NSRegularExpressionOptions regexOption = match_case ? 0 : NSRegularExpressionCaseInsensitive;
     
     NSMutableArray<NSTextCheckingResult *> *finalResults = [NSMutableArray new];
     for (id<XCFStringKeywordDataProvider> provider in _dataProviders) {
+#if XCFStringKeywordTransformCheckHandle
         if (![provider shouldHandleString:string]) continue;
+#endif
         
         NSArray<NSString *> *keywords = [provider keywords];
         for (NSString *keyword in keywords) {
             if (keyword.length == 0) continue;
             NSRange range = NSMakeRange(0, string.length);
-            NSRegularExpression *ex = nil;
-            if ([keyword rangeOfCharacterFromSet:regexSet].location != NSNotFound) {
-                ex = [NSRegularExpression regularExpressionWithPattern:keyword
-                                                                options:regexOption
-                                                                 error:nil];
-            }
+            
+            NSString *cacheKey = _cacheExpressionKeyForKeyword(keyword,match_case);
+            NSRegularExpression *ex = [_cachedExpressions objectForKey:cacheKey];
             
             if (!ex) {
                 ex = [NSRegularExpression regularExpressionWithPattern:keyword
-                                                               options:regexOption | NSRegularExpressionIgnoreMetacharacters
+                                                               options:regexOption
                                                                  error:nil];
+                
+                if (!ex) {
+                    ex = [NSRegularExpression regularExpressionWithPattern:keyword
+                                                                   options:regexOption | NSRegularExpressionIgnoreMetacharacters
+                                                                     error:nil];
+                }
+                
+                [_cachedExpressions setObject:ex forKey:cacheKey];
             }
+            
+            NSParameterAssert(ex); if (!ex) continue;
             
             NSArray<NSTextCheckingResult *> *results = [ex matchesInString:string options:0 range:range];
             for (NSTextCheckingResult *result in results) {
