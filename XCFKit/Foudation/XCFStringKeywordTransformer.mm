@@ -7,7 +7,7 @@
 //
 
 #define XCFStringKeywordTransformerUseTrie 0
-#define XCFStringKeywordTransformBenchmark 1
+#define XCFStringKeywordTransformBenchmark 0
 
 #if XCFStringKeywordTransformBenchmark
 #define XCFStringKeywordTransformCheckHandle 0
