@@ -10,9 +10,14 @@
 
 @implementation UIImage (PureColor)
 
-+ (UIImage *)xcf_imageWithColor:(UIColor *)color
++ (UIImage *) xcf_imageWithColor:(UIColor *)color
 {
-    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    return [self xcf_imageWithColor:color size:CGSizeMake(1, 1)];
+}
+
++ (UIImage *) xcf_imageWithColor:(UIColor *)color size:(CGSize)size
+{
+    CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     

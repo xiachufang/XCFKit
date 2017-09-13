@@ -10,6 +10,8 @@
 
 @interface UIImage (PureColor)
 
-+ (UIImage *)xcf_imageWithColor:(UIColor *)color;
++ (UIImage *) xcf_imageWithColor:(UIColor *)color;
+
++ (UIImage *) xcf_imageWithColor:(UIColor *)color size:(CGSize)size;
 
 @end
