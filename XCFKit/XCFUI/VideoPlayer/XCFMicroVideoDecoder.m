@@ -104,7 +104,7 @@
     _delegateFlag.newBuffer = [delegate respondsToSelector:@selector(microVideoDecoder:decodeNewSampleBuffer:)];
 }
 
-- (void) safelyNotificateDelegateWithBlock:(void (^)())block
+- (void) safelyNotificateDelegateWithBlock:(void (^)(void))block
 {
     if (!block) return;
     
@@ -118,7 +118,7 @@
 - (void) detectError:(NSError *)error
 {
     __weak typeof(self) weak_self = self;
-    void (^block)() = ^{
+    void (^block)(void) = ^{
         __strong typeof(weak_self) strong_self = weak_self;
         if (!strong_self) return;
         
@@ -133,7 +133,7 @@
 - (void) prepareDone
 {
     __weak typeof(self) weak_self = self;
-    void (^block)() = ^{
+    void (^block)(void) = ^{
         __strong typeof(weak_self) strong_self = weak_self;
         if (!strong_self) return;
         
@@ -152,7 +152,7 @@
 - (void) decodeComplete
 {
     __weak typeof(self) weak_self = self;
-    void (^block)() = ^{
+    void (^block)(void) = ^{
         __strong typeof(weak_self) strong_self = weak_self;
         if (!strong_self) return;
         
