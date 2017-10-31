@@ -33,6 +33,8 @@ typedef enum : NSUInteger {
 
 extern CGRect XCFGetFrameForSizeInRect(CGSize size,CGRect rect,CGPoint offset,XCFRectPosition offsetPosition);
 
+extern CGRect XCFCreateRectWithCenter(CGPoint center,CGSize size);
+
 
 
 

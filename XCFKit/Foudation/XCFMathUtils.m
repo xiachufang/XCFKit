@@ -36,3 +36,11 @@ CGRect XCFGetFrameForSizeInRect(CGSize size,CGRect rect,CGPoint offset,XCFRectPo
     origin.y = rect.origin.y + position_y.a * rect.size.height + position_y.b * offset.y + position_y.c * size.height;
     return (CGRect){origin,size};
 }
+
+CGRect XCFCreateRectWithCenter(CGPoint center,CGSize size)
+{
+    CGPoint origin;
+    origin.x = center.x - size.width / 2;
+    origin.y = center.y - size.height / 2;
+    return (CGRect){origin,size};
+}
