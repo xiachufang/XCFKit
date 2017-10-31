@@ -52,6 +52,8 @@
 		E890CC571E09370500F4F803 /* XCFAVPlayerControllerAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E890CC551E09370500F4F803 /* XCFAVPlayerControllerAnimator.m */; };
 		E89E817F1E0D24F000865246 /* UIView+XCFHeartbeat.h in Headers */ = {isa = PBXBuildFile; fileRef = E89E817D1E0D24F000865246 /* UIView+XCFHeartbeat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E89E81801E0D24F000865246 /* UIView+XCFHeartbeat.m in Sources */ = {isa = PBXBuildFile; fileRef = E89E817E1E0D24F000865246 /* UIView+XCFHeartbeat.m */; };
+		E8A717D31FA8267900D70435 /* XCFImageContentMaskLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = E8A717D11FA8267900D70435 /* XCFImageContentMaskLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8A717D41FA8267900D70435 /* XCFImageContentMaskLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A717D21FA8267900D70435 /* XCFImageContentMaskLayer.m */; };
 		E8AD735B1DC72AE300E63306 /* UIView+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8AD735C1DC72AE300E63306 /* UIView+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */; };
 /* End PBXBuildFile section */
@@ -104,6 +106,8 @@
 		E890CC551E09370500F4F803 /* XCFAVPlayerControllerAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAVPlayerControllerAnimator.m; sourceTree = "<group>"; };
 		E89E817D1E0D24F000865246 /* UIView+XCFHeartbeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFHeartbeat.h"; sourceTree = "<group>"; };
 		E89E817E1E0D24F000865246 /* UIView+XCFHeartbeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFHeartbeat.m"; sourceTree = "<group>"; };
+		E8A717D11FA8267900D70435 /* XCFImageContentMaskLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFImageContentMaskLayer.h; sourceTree = "<group>"; };
+		E8A717D21FA8267900D70435 /* XCFImageContentMaskLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFImageContentMaskLayer.m; sourceTree = "<group>"; };
 		E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFAppearance.h"; sourceTree = "<group>"; };
 		E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFAppearance.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,6 +184,8 @@
 				E80B57521DD0CA0100A32F14 /* UIBarButtonItem+View.m */,
 				E881B88E1DE6A2240055A817 /* UISearchBar+textField.h */,
 				E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */,
+				E8A717D11FA8267900D70435 /* XCFImageContentMaskLayer.h */,
+				E8A717D21FA8267900D70435 /* XCFImageContentMaskLayer.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -251,6 +257,7 @@
 				E80166FD1DD07D0400383326 /* XCFWindowContextController.h in Headers */,
 				E8769A991E08D83100378EFF /* XCFMicroVideoPlayerView.h in Headers */,
 				E80B1DDA1E1CFFB400CFA27E /* XCFVideoRangeSlider.h in Headers */,
+				E8A717D31FA8267900D70435 /* XCFImageContentMaskLayer.h in Headers */,
 				E8769A9B1E08D83100378EFF /* XCFVideoPlayerControlProtocol.h in Headers */,
 				E8003A521DC347E600103028 /* UIFont+XCFAppearance.h in Headers */,
 				E89E817F1E0D24F000865246 /* UIView+XCFHeartbeat.h in Headers */,
@@ -335,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E80B57541DD0CA0100A32F14 /* UIBarButtonItem+View.m in Sources */,
+				E8A717D41FA8267900D70435 /* XCFImageContentMaskLayer.m in Sources */,
 				E8003A531DC347E600103028 /* UIFont+XCFAppearance.m in Sources */,
 				E80166FE1DD07D0400383326 /* XCFWindowContextController.m in Sources */,
 				E8769A941E08D83100378EFF /* XCFAVPlayerController.m in Sources */,

@@ -41,8 +41,9 @@ FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 #import <XCFKit/XCFWindowContextController.h>
 
 #import <XCFKit/UIFont+fontWeight.h>
-
 #import <XCFKit/UIView+XCFHeartbeat.h>
+
+#import <XCFKit/XCFImageContentMaskLayer.h>
 
 // video
 #import <XCFKit/XCFVideoRange.h>
