@@ -6,22 +6,17 @@
 //  Copyright © 2017年 XiaChuFang. All rights reserved.
 //
 
+#ifndef XCFMathUtils_h
+#define XCFMathUtils_h
+
 #import <CoreGraphics/CoreGraphics.h>
 #import <CoreFoundation/CoreFoundation.h>
 
 #pragma mark - CGRect
 
-extern inline CGPoint XCFGetRectCenterWithOffset(CGRect rect,CGPoint offset) {
-    return
-    (CGPoint){
-        CGRectGetMidX(rect) + offset.x,
-        CGRectGetMidY(rect) + offset.y
-    };
-}
+extern CGPoint XCFGetRectCenterWithOffset(CGRect rect,CGPoint offset);
 
-extern inline CGPoint XCFGetRectCenter(CGRect rect) {
-    return XCFGetRectCenterWithOffset(rect, CGPointZero);
-}
+extern CGPoint XCFGetRectCenter(CGRect rect);
 
 typedef enum : NSUInteger {
     XCFRectPositionTopLeft = 0,
@@ -35,6 +30,6 @@ extern CGRect XCFGetFrameForSizeInRect(CGSize size,CGRect rect,CGPoint offset,XC
 
 extern CGRect XCFCreateRectWithCenter(CGPoint center,CGSize size);
 
-
+#endif //XCFMathUtils.h
 
 
