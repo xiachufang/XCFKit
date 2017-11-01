@@ -129,17 +129,7 @@
     if (&UIFontWeightHeavy) {
         return [self systemFontOfSize:size weight:UIFontWeightHeavy];
     } else {
-        UIFont *heavyFont = nil;
-        NSString *fontName = [self heavySystemFontName];
-        if (fontName) {
-            heavyFont = [UIFont fontWithName:fontName size:size];
-        }
-        
-        if (!heavyFont) {
-            heavyFont = [UIFont systemFontOfSize:size];
-        }
-        
-        return heavyFont;
+        return [UIFont boldSystemFontOfSize:size];
     }
 }
 @end
