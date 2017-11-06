@@ -9,9 +9,9 @@
 #import "XCFMathUtils.h"
 
 typedef struct {
-    int a;
-    int b;
-    int c;
+    CGFloat a;
+    CGFloat b;
+    CGFloat c;
 } _XCFOffsetPosition;
 
 static _XCFOffsetPosition _offsetPositions[] = {

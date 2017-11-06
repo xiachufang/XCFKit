@@ -12,4 +12,4 @@
 
 @end
 
-extern CAGradientLayer* XCFCreateImageContentMaskLayer();
+extern CAGradientLayer* XCFCreateImageContentMaskLayer(void);

@@ -20,10 +20,10 @@ extern CGPoint XCFGetRectCenter(CGRect rect);
 
 typedef enum : NSUInteger {
     XCFRectPositionTopLeft = 0,
-    XCFRectPositionTopRight,
-    XCFRectPositionBottomLeft,
-    XCFRectPositionBottomRight,
-    XCFRectPositionCenter
+    XCFRectPositionTopRight = 1,
+    XCFRectPositionBottomLeft = 2,
+    XCFRectPositionBottomRight = 3,
+    XCFRectPositionCenter = 4,
 } XCFRectPosition;
 
 extern CGRect XCFGetFrameForSizeInRect(CGSize size,CGRect rect,CGPoint offset,XCFRectPosition offsetPosition);

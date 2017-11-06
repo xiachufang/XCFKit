@@ -7,7 +7,7 @@
 //
 
 #import "XCFImageContentMaskLayer.h"
-#import <UIKit/UIColor.h>
+#import <UIKit/UIKit.h>
 
 @implementation XCFImageContentMaskLayer
 
@@ -18,8 +18,8 @@
         CGColorRef startColor = [UIColor colorWithWhite:0 alpha:0].CGColor;
         CGColorRef endColor = [UIColor colorWithWhite:0 alpha:0.08].CGColor;
         self.colors = @[(__bridge id)startColor,(__bridge id)endColor];
-        self.startPoint = CGPointMake(0.5,1);
-        self.endPoint = CGPointMake(0.5, 0);
+        self.startPoint = CGPointMake(0.5,0);
+        self.endPoint = CGPointMake(0.5, 1);
     }
     
     return self;
@@ -33,8 +33,17 @@ CAGradientLayer* XCFCreateImageContentMaskLayer()
     CGColorRef startColor = [UIColor colorWithWhite:0 alpha:0].CGColor;
     CGColorRef endColor = [UIColor colorWithWhite:0 alpha:0.08].CGColor;
     layer.colors = @[(__bridge id)startColor,(__bridge id)endColor];
-    layer.startPoint = CGPointMake(0.5,1);
-    layer.endPoint = CGPointMake(0.5, 0);
+    layer.startPoint = CGPointMake(0.5,0);
+    layer.endPoint = CGPointMake(0.5, 1);
+//    layer.drawsAsynchronously = YES;
+    layer.actions = @{@"bounds":[NSNull null],
+                      @"frame" :[NSNull null],
+                      @"position" : [NSNull null],
+                      @"hidden" : [NSNull null]
+                    };
+    
+    layer.shouldRasterize = YES;
+    layer.rasterizationScale = [UIScreen mainScreen].scale;
     
     return layer;
 }
