@@ -37,6 +37,7 @@ FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 
 #import <XCFKit/UIBarButtonItem+View.h>
 #import <XCFKit/UISearchBar+textField.h>
+#import <XCFKit/UIScrollView+XCFKit.h>
 
 #import <XCFKit/XCFWindowContextController.h>
 

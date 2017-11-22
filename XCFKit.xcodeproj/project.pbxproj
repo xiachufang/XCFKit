@@ -44,6 +44,8 @@
 		E8769A9B1E08D83100378EFF /* XCFVideoPlayerControlProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = E8769A921E08D83100378EFF /* XCFVideoPlayerControlProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E87EBD8A1DFF9CDF00027C05 /* UIFont+fontWeight.h in Headers */ = {isa = PBXBuildFile; fileRef = E87EBD881DFF9CDF00027C05 /* UIFont+fontWeight.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E87EBD8B1DFF9CDF00027C05 /* UIFont+fontWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = E87EBD891DFF9CDF00027C05 /* UIFont+fontWeight.m */; };
+		E87F66631FC561BD002C84C9 /* UIScrollView+XCFKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E87F66611FC561BD002C84C9 /* UIScrollView+XCFKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E87F66641FC561BD002C84C9 /* UIScrollView+XCFKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E87F66621FC561BD002C84C9 /* UIScrollView+XCFKit.m */; };
 		E881B8901DE6A2240055A817 /* UISearchBar+textField.h in Headers */ = {isa = PBXBuildFile; fileRef = E881B88E1DE6A2240055A817 /* UISearchBar+textField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E881B8911DE6A2240055A817 /* UISearchBar+textField.m in Sources */ = {isa = PBXBuildFile; fileRef = E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */; };
 		E882296A1E2F0EE6007BA838 /* XCFVideoLoadProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = E88229681E2F0EE6007BA838 /* XCFVideoLoadProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -100,6 +102,8 @@
 		E8769A921E08D83100378EFF /* XCFVideoPlayerControlProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoPlayerControlProtocol.h; sourceTree = "<group>"; };
 		E87EBD881DFF9CDF00027C05 /* UIFont+fontWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+fontWeight.h"; sourceTree = "<group>"; };
 		E87EBD891DFF9CDF00027C05 /* UIFont+fontWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+fontWeight.m"; sourceTree = "<group>"; };
+		E87F66611FC561BD002C84C9 /* UIScrollView+XCFKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+XCFKit.h"; sourceTree = "<group>"; };
+		E87F66621FC561BD002C84C9 /* UIScrollView+XCFKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+XCFKit.m"; sourceTree = "<group>"; };
 		E881B88E1DE6A2240055A817 /* UISearchBar+textField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+textField.h"; sourceTree = "<group>"; };
 		E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+textField.m"; sourceTree = "<group>"; };
 		E88229681E2F0EE6007BA838 /* XCFVideoLoadProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoLoadProgressView.h; sourceTree = "<group>"; };
@@ -190,6 +194,8 @@
 				E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */,
 				E8A717D11FA8267900D70435 /* XCFImageContentMaskLayer.h */,
 				E8A717D21FA8267900D70435 /* XCFImageContentMaskLayer.m */,
+				E87F66611FC561BD002C84C9 /* UIScrollView+XCFKit.h */,
+				E87F66621FC561BD002C84C9 /* UIScrollView+XCFKit.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -268,6 +274,7 @@
 				E8769A9B1E08D83100378EFF /* XCFVideoPlayerControlProtocol.h in Headers */,
 				E8003A521DC347E600103028 /* UIFont+XCFAppearance.h in Headers */,
 				E89E817F1E0D24F000865246 /* UIView+XCFHeartbeat.h in Headers */,
+				E87F66631FC561BD002C84C9 /* UIScrollView+XCFKit.h in Headers */,
 				E80237841F54B01100E394AE /* XCFStringKeywordStandardCache.h in Headers */,
 				E87EBD8A1DFF9CDF00027C05 /* UIFont+fontWeight.h in Headers */,
 				E881B8901DE6A2240055A817 /* UISearchBar+textField.h in Headers */,
@@ -351,6 +358,7 @@
 				E80B57541DD0CA0100A32F14 /* UIBarButtonItem+View.m in Sources */,
 				E8A717D41FA8267900D70435 /* XCFImageContentMaskLayer.m in Sources */,
 				E8003A531DC347E600103028 /* UIFont+XCFAppearance.m in Sources */,
+				E87F66641FC561BD002C84C9 /* UIScrollView+XCFKit.m in Sources */,
 				E80166FE1DD07D0400383326 /* XCFWindowContextController.m in Sources */,
 				E8769A941E08D83100378EFF /* XCFAVPlayerController.m in Sources */,
 				E80237851F54B01100E394AE /* XCFStringKeywordStandardCache.m in Sources */,
