@@ -224,6 +224,12 @@
     }
 }
 
+- (void) renderImage:(UIImage *)image
+{
+    CGImageRef ref = [image CGImage];
+    [self displayImageRef:ref transform:CGAffineTransformIdentity];
+}
+
 - (NSTimeInterval) playTime
 {
     if (self.decoder.progress > 0) {

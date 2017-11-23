@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIImage *) screenshot;
 
 - (void) setPreviewImage:(UIImage *)previewImage;
+- (void) renderImage:(UIImage *)image;
 
 - (NSTimeInterval) playTime;
 
