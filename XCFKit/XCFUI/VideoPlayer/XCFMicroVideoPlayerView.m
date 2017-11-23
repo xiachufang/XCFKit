@@ -11,16 +11,12 @@
 
 @interface XCFMicroVideoPlayerView ()<XCFMicroVideoDecoderDelegate>
 
-@property (nonatomic, assign) CGImageRef previewImageRef;
-
 @end
 
 @implementation XCFMicroVideoPlayerView
 {
     NSInteger _actualLoopCount;
     BOOL _running;
-    
-    CGImageRef _currentImageRef;
     
     struct {
         unsigned int statusChanged : 1;
@@ -34,23 +30,13 @@
         _decoder.delegate = nil;
     }
     
-    _previewImageRef = nil;
-    _currentImageRef = nil;
     self.layer.contents = nil;
 }
 
-- (instancetype) initWithFrame:(CGRect)frame videoPath:(NSString *)path previewImage:(UIImage *)image
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        if (path) {
-            _decoder = [[XCFMicroVideoDecoder alloc] initWithVideoFilePath:path];
-            _decoder.delegate = self;
-        }
-        
-        _currentImageRef = NULL;
-        _previewImageRef = image.CGImage;
-//        [self displayImageRef:_previewImageRef];
         self.backgroundColor = [UIColor blackColor];
         
         self.layer.contentsGravity = kCAGravityResizeAspectFill;
@@ -60,13 +46,6 @@
     return self;
 }
 
-- (instancetype) initWithFrame:(CGRect)frame
-{
-    return [self initWithFrame:frame
-                     videoPath:nil
-                  previewImage:nil];
-}
-
 - (NSString *) videoPath
 {
     return _decoder.videoURL.path;
@@ -74,7 +53,7 @@
 
 - (UIImage *) screenshot
 {
-    CGImageRef ref = _currentImageRef ?: _previewImageRef;
+    CGImageRef ref = (__bridge CGImageRef)self.layer.contents;
     if (ref) {
         return [[UIImage alloc] initWithCGImage:ref];
     } else {
@@ -199,34 +178,14 @@
 
 - (void) displayImageRef:(CGImageRef)imageRef transform:(CGAffineTransform)transform
 {
-    if (imageRef) {
-        if (_currentImageRef && _currentImageRef != _previewImageRef) {
-            CFRelease(_currentImageRef);
-        }
-        
-        _currentImageRef = imageRef;
-        [self.layer setContents:(__bridge id)(imageRef)];
-        
-        self.layer.transform = CATransform3DMakeAffineTransform(transform);
-    }
-}
-
-- (void) setPreviewImage:(UIImage *)previewImage
-{
-    if (_previewImageRef) {
-        CGImageRelease(_previewImageRef);
-    }
-    
-    _previewImageRef = [previewImage CGImage];
-    
-    if (!_currentImageRef) {
-        [self displayImageRef:_previewImageRef];
-    }
+    [self.layer setContents:(__bridge id)(imageRef)];
+    self.layer.transform = CATransform3DMakeAffineTransform(transform);
 }
 
 - (void) renderImage:(UIImage *)image
 {
     CGImageRef ref = [image CGImage];
+//    CGImageRetain(ref);
     [self displayImageRef:ref transform:CGAffineTransformIdentity];
 }
 
@@ -252,8 +211,11 @@
         _decoder.delegate = self;
         
         if (_decoder) {
-            _previewImageRef = [_decoder extractThumbnailImage];
-            [self displayImageRef:_previewImageRef];
+            CGImageRef ref = [_decoder extractThumbnailImage];
+            [self displayImageRef:ref];
+            CGImageRelease(ref);
+        } else {
+            [self displayImageRef:nil];
         }
     }
 }
@@ -289,13 +251,6 @@
     [_decoder cleanup];
     _running = NO;
     _actualLoopCount = 0;
-    
-    if (_previewImageRef) {
-        [self displayImageRef:_previewImageRef];
-    } else {
-        _currentImageRef = NULL;
-        self.layer.contents = nil;
-    }
     
     [self statusChanged];
 }
@@ -343,24 +298,24 @@
 
 - (void) microVideoDecoder:(XCFMicroVideoDecoder *)decoder decodeNewSampleBuffer:(CMSampleBufferRef)buffer
 {
-    if (decoder == _decoder) {
+    if (decoder == _decoder && buffer) {
         CGImageRef ref = NULL;
-        if (_delegateFlag.displayBuffer) {
+
+        if (!_delegateFlag.displayBuffer) {
+            ref = [self.class extractImageRefFromSampleBuffer:buffer
+                                             frameOrientation:decoder.frameOrientation];
+        } else {
             ref = [self.delegate microVideoPlayer:self
                           willDisplaySampleBuffer:buffer];
-        } else if (buffer) {
-            ref = [self.class extractImageRefFromSampleBuffer:buffer
-                                            frameOrientation:decoder.frameOrientation];
         }
         
-        if (ref) {
-            [self displayImageRef:ref];
-            [self statusChanged];
-        }
-        
-        if (_running) {
-            [decoder requestNextSampleBuffer];
-        }
+        [self displayImageRef:ref];
+        CGImageRelease(ref);
+        [self statusChanged];
+    }
+    
+    if (_running) {
+        [decoder requestNextSampleBuffer];
     }
 }
 

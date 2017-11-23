@@ -26,10 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XCFMicroVideoPlayerView : UIView<XCFVideoPlayerControlProtocol>
 
-- (instancetype) initWithFrame:(CGRect)frame
-                     videoPath:(nullable NSString *)path
-                  previewImage:(nullable UIImage *)image;
-
 @property (nonatomic, assign) NSInteger loopCount; // loopCount <= 0 表示无限循环播放
 @property (nonatomic, copy, readonly) NSString *videoPath;
 
@@ -39,7 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIImage *) screenshot;
 
-- (void) setPreviewImage:(UIImage *)previewImage;
 - (void) renderImage:(UIImage *)image;
 
 - (NSTimeInterval) playTime;
