@@ -39,6 +39,7 @@
 {
     self.opaque = NO;
     _animationLayerLineWidth = 6;
+    self.userInteractionEnabled = NO;
 }
 
 - (void)drawRect:(CGRect)rect {
