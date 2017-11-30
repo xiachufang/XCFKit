@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void) prepareToPlayVideoAtPath:(NSString *)videoPath;
 - (void) prepareToPlayVideoAtAsset:(AVAsset *)asset;
-- (void) prepareToPlayVideoWithURL:(NSURL *)videoURL;
+- (void) prepareToPlayVideoWithURL:(nullable NSURL *)videoURL;
 
 @property (nonatomic, assign) BOOL fillPlayerWindow; // default is YES
 

@@ -239,11 +239,11 @@
 
 - (void) prepareToPlayVideoWithURL:(NSURL *)videoURL
 {
-    NSParameterAssert(videoURL);
-    
-    if (!videoURL) return;
-    
-    if ([videoURL isFileURL]) {
+    if (!videoURL) {
+        self.playerLayer.player = nil;
+        [self removeObserverOnPlayerItem];
+        self.playerItem = nil;
+    } else if ([videoURL isFileURL]) {
         [self prepareToPlayVideoAtPath:videoURL.path];
     } else {
         self.videoPath = videoURL.absoluteString;
