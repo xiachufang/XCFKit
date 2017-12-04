@@ -40,6 +40,10 @@
 {
     [self cleanup];
     [self removeObservePlayerLayerReadyToDisplay];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:AVPlayerItemDidPlayToEndTimeNotification
+                                                  object:nil];
 }
 
 + (Class) layerClass
@@ -157,10 +161,6 @@
 
 - (void) cleanup
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:AVPlayerItemDidPlayToEndTimeNotification
-                                                  object:nil];
-    
     if (_playerTimeObserver) {
         [self.playerLayer.player removeTimeObserver:_playerTimeObserver];
         _playerTimeObserver = nil;
@@ -240,9 +240,7 @@
 - (void) prepareToPlayVideoWithURL:(NSURL *)videoURL
 {
     if (!videoURL) {
-        self.playerLayer.player = nil;
-        [self removeObserverOnPlayerItem];
-        self.playerItem = nil;
+        [self cleanup];
     } else if ([videoURL isFileURL]) {
         [self prepareToPlayVideoAtPath:videoURL.path];
     } else {
