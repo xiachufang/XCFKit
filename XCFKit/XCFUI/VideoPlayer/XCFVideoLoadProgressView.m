@@ -80,6 +80,7 @@
     [super layoutSubviews];
     
     _loadingAnimationLayer.frame = self.bounds;
+    _loadingAnimationLayer.path = [self loadingAnimationLayerPath];
 }
 
 - (void) setProgress:(CGFloat)progress
@@ -118,11 +119,27 @@
 
 #pragma mark - loading && progress
 
+- (CGPathRef) loadingAnimationLayerPath
+{
+    CGRect rect = self.bounds;
+    CGFloat diameter = MIN(rect.size.width, rect.size.height);
+    CGRect displayRect = (CGRect){rect.origin,CGSizeMake(diameter, diameter)};
+    displayRect = CGRectOffset(displayRect, (rect.size.width - diameter) / 2, (rect.size.height - diameter)/2);
+    CGPoint displayCenter = CGPointMake(displayRect.origin.x + diameter / 2, displayRect.origin.y + diameter / 2);
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:displayCenter
+                                                        radius:diameter / 2 - _animationLayerLineWidth / 2
+                                                    startAngle:M_PI_2 * 3
+                                                      endAngle:M_PI_2 * 3 + M_PI * 2
+                                                     clockwise:YES];
+    return path.CGPath;
+}
+
 - (CAShapeLayer *) loadingAnimationLayer
 {
     if (!_loadingAnimationLayer) {
         _loadingAnimationLayer = [CAShapeLayer layer];
         _loadingAnimationLayer.frame = self.bounds;
+        _loadingAnimationLayer.actions = @{@"path" : [NSNull null]};
         
         _loadingAnimationLayer.fillColor = [UIColor clearColor].CGColor;
         
@@ -131,18 +148,7 @@
         
         _loadingAnimationLayer.lineCap = kCALineCapRound;
         
-        // path
-        CGRect rect = self.bounds;
-        CGFloat diameter = MIN(rect.size.width, rect.size.height);
-        CGRect displayRect = (CGRect){rect.origin,CGSizeMake(diameter, diameter)};
-        displayRect = CGRectOffset(displayRect, (rect.size.width - diameter) / 2, (rect.size.height - diameter)/2);
-        CGPoint displayCenter = CGPointMake(displayRect.origin.x + diameter / 2, displayRect.origin.y + diameter / 2);
-        UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:displayCenter
-                                                            radius:diameter / 2 - _animationLayerLineWidth / 2
-                                                        startAngle:M_PI_2 * 3
-                                                          endAngle:M_PI_2 * 3 + M_PI * 2
-                                                         clockwise:YES];
-        _loadingAnimationLayer.path = path.CGPath;
+        _loadingAnimationLayer.path = [self loadingAnimationLayerPath];
         
         [self.layer addSublayer:_loadingAnimationLayer];
     }
