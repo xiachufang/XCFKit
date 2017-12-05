@@ -11,8 +11,6 @@
 
 @interface XCFAVPlayerView ()
 
-@property (nonatomic, copy) NSString *videoPath;
-
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
 @property (nonatomic, strong) AVPlayerItemVideoOutput *playerItemOutput;
@@ -170,7 +168,6 @@
     [self.playerLayer.player replaceCurrentItemWithPlayerItem:nil];
     [self removeObserverOnPlayerItem];
     self.playerItem = nil;
-    self.playerLayer.player = nil;
 }
 
 - (void) prepareToPlayVideoAtPath:(NSString *)videoPath
@@ -187,7 +184,6 @@
     [self stop];
     
     self.videoAsset = asset;
-    self.videoPath = nil;
     
     NSArray *loadKeys = @[@"playable"];
     __weak AVAsset *weak_asset = asset;
@@ -216,13 +212,15 @@
                                                              name:AVPlayerItemDidPlayToEndTimeNotification
                                                            object:strong_self.playerItem];
                 
-                if (!strong_self.playerLayer.player) {
-                    AVPlayer *player = [AVPlayer playerWithPlayerItem:strong_self.playerItem];
-                    player.volume = strong_self.volume;
+                AVPlayer *player = strong_self.playerLayer.player;
+                if (!player) {
+                    player = [AVPlayer playerWithPlayerItem:strong_self.playerItem];
                     strong_self.playerLayer.player = player;
                 } else {
-                    [strong_self.playerLayer.player replaceCurrentItemWithPlayerItem:strong_self.playerItem];
+                    [player replaceCurrentItemWithPlayerItem:strong_self.playerItem];
                 }
+                
+                player.volume = strong_self.volume;
                 
                 [strong_self observePlayerItemStatus];
             });
@@ -244,27 +242,8 @@
     } else if ([videoURL isFileURL]) {
         [self prepareToPlayVideoAtPath:videoURL.path];
     } else {
-        self.videoPath = videoURL.absoluteString;
-        self.videoAsset = nil;
-        
-        if (self.playerItem) {
-            [self removeObserverOnPlayerItem];
-        }
-        self.playerItem = [[AVPlayerItem alloc] initWithURL:videoURL];
-        NSDictionary* settings = @{ (id)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
-        self.playerItemOutput = [[AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:settings];
-        [self.playerItem addOutput:self.playerItemOutput];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(didPlayToEndNotification:)
-                                                     name:AVPlayerItemDidPlayToEndTimeNotification
-                                                   object:self.playerItem];
-        
-        AVPlayer *player = [AVPlayer playerWithPlayerItem:self.playerItem];
-        player.volume = self.volume;
-        self.playerLayer.player = player;
-        
-        [self observePlayerItemStatus];
+        AVURLAsset *asset = [AVURLAsset assetWithURL:videoURL];
+        [self prepareToPlayVideoAtAsset:asset];
     }
 }
 
