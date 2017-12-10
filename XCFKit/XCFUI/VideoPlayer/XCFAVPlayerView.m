@@ -403,7 +403,11 @@ static void const *_observeStatusContext = (void*)&_observeStatusContext;
 - (BOOL) isPlaying
 {
     AVPlayer *player = self.playerLayer.player;
-    return player && (!player.error) && player.rate != 0;
+    if (@available(iOS 10,*)) {
+        return player.timeControlStatus == AVPlayerTimeControlStatusPlaying;
+    } else {
+        return player.rate != 0;
+    }
 }
 
 - (CGFloat) progress

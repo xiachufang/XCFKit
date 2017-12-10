@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class XCFAVPlayerView,AVAsset;
+@class XCFAVPlayerView,AVAsset,AVPlayerLayer;
 
 @protocol XCFAVPlayerViewDelegate <NSObject>
 
@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<XCFAVPlayerViewDelegate> delegate;
 
 @property (nonatomic, assign) float volume; // 音量
+
+- (AVPlayerLayer *) playerLayer;
 
 - (NSTimeInterval) duration;
 - (NSTimeInterval) currentTime;
