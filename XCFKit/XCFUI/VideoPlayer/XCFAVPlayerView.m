@@ -403,10 +403,12 @@ static void const *_observeStatusContext = (void*)&_observeStatusContext;
 - (BOOL) isPlaying
 {
     AVPlayer *player = self.playerLayer.player;
-    if (@available(iOS 10,*)) {
-        return player.timeControlStatus == AVPlayerTimeControlStatusPlaying;
+    CMTimebaseRef rate = player.currentItem.timebase;
+    
+    if (rate) {
+        return CMTimebaseGetRate(rate) != 0;
     } else {
-        return player.rate != 0;
+        return NO;
     }
 }
 
