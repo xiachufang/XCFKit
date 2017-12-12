@@ -133,6 +133,7 @@
     // player
     _playerScrollView = [[UIScrollView alloc] initWithFrame:[self _playerContainerFrame]];
     _playerScrollView.scrollsToTop = NO;
+    _playerScrollView.bounces = NO;
     _playerScrollView.showsVerticalScrollIndicator = NO;
     _playerScrollView.showsHorizontalScrollIndicator = NO;
     _playerScrollView.decelerationRate = UIScrollViewDecelerationRateFast;
