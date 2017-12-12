@@ -24,6 +24,8 @@
 		E839BB931E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E839BB921E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.m */; };
 		E84FD29C1E03BB19007A09C4 /* microVideoPlayerPreviewImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E84FD29B1E03BB19007A09C4 /* microVideoPlayerPreviewImage.jpg */; };
 		E882296E1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E882296D1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.m */; };
+		E8B9A4531FDF8AD900CD9BC6 /* XCFAppearanceColorsDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B9A4521FDF8AD900CD9BC6 /* XCFAppearanceColorsDemoController.m */; };
+		E8B9A4561FDF8B0D00CD9BC6 /* XCFAppearanceColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B9A4551FDF8B0D00CD9BC6 /* XCFAppearanceColorCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +95,10 @@
 		E84FD29B1E03BB19007A09C4 /* microVideoPlayerPreviewImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = microVideoPlayerPreviewImage.jpg; sourceTree = "<group>"; };
 		E882296C1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoLoadProgressViewDemoController.h; sourceTree = "<group>"; };
 		E882296D1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoLoadProgressViewDemoController.m; sourceTree = "<group>"; };
+		E8B9A4511FDF8AD900CD9BC6 /* XCFAppearanceColorsDemoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCFAppearanceColorsDemoController.h; sourceTree = "<group>"; };
+		E8B9A4521FDF8AD900CD9BC6 /* XCFAppearanceColorsDemoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCFAppearanceColorsDemoController.m; sourceTree = "<group>"; };
+		E8B9A4541FDF8B0D00CD9BC6 /* XCFAppearanceColorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCFAppearanceColorCell.h; sourceTree = "<group>"; };
+		E8B9A4551FDF8B0D00CD9BC6 /* XCFAppearanceColorCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCFAppearanceColorCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +137,10 @@
 				E80039EC1DC325D100103028 /* AppDelegate.m */,
 				E80039EE1DC325D100103028 /* ViewController.h */,
 				E80039EF1DC325D100103028 /* ViewController.m */,
+				E8B9A4541FDF8B0D00CD9BC6 /* XCFAppearanceColorCell.h */,
+				E8B9A4551FDF8B0D00CD9BC6 /* XCFAppearanceColorCell.m */,
+				E8B9A4511FDF8AD900CD9BC6 /* XCFAppearanceColorsDemoController.h */,
+				E8B9A4521FDF8AD900CD9BC6 /* XCFAppearanceColorsDemoController.m */,
 				E839BB911E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.h */,
 				E839BB921E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.m */,
 				E83521431E07D6E500C921A1 /* XCFAVPlayerDemoController.h */,
@@ -283,6 +293,8 @@
 				E882296E1E2F1874007BA838 /* XCFVideoLoadProgressViewDemoController.m in Sources */,
 				E839BB931E039E19009B7B31 /* XCFMicroVideoPlayerDemoController.m in Sources */,
 				E80039EA1DC325D100103028 /* main.m in Sources */,
+				E8B9A4531FDF8AD900CD9BC6 /* XCFAppearanceColorsDemoController.m in Sources */,
+				E8B9A4561FDF8B0D00CD9BC6 /* XCFAppearanceColorCell.m in Sources */,
 				E82ADC961E28D0C000599884 /* XCFVideoEditorDemoController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
