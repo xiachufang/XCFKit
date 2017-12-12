@@ -88,7 +88,7 @@ UICollectionViewDataSource
     
     cell.colorNameLabel.text = color.name;
     cell.colorNameLabel.textColor = [UIColor xcf_contrastColorWithColor:color.color];
-    cell.colorHexValueLabel.text = [UIColor xcf_hexStringWithColor:color.color];
+    cell.colorHexValueLabel.text = [[UIColor xcf_hexStringWithColor:color.color] uppercaseString];
     cell.colorHexValueLabel.textColor = cell.colorNameLabel.textColor;
     cell.contentView.backgroundColor = color.color;
     
