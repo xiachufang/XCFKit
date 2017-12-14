@@ -319,6 +319,25 @@ static void const *_observeStatusContext = (void*)&_observeStatusContext;
 
 #pragma mark - time
 
+- (CGFloat) timeBaseRate
+{
+    CGFloat rate = 0;
+    
+    AVPlayer *player = self.playerLayer.player;
+    CMTimebaseRef rateRef = player.currentItem.timebase;
+    
+    if (rateRef) {
+        rate = (CGFloat)CMTimebaseGetRate(rateRef);
+    }
+    
+    return rate;
+}
+
+- (CGFloat) rate
+{
+    return self.playerLayer.player.rate;
+}
+
 - (NSTimeInterval) currentTime
 {
     return CMTimeGetSeconds(self.playerLayer.player.currentTime);
@@ -402,14 +421,7 @@ static void const *_observeStatusContext = (void*)&_observeStatusContext;
 
 - (BOOL) isPlaying
 {
-    AVPlayer *player = self.playerLayer.player;
-    CMTimebaseRef rate = player.currentItem.timebase;
-    
-    if (rate) {
-        return CMTimebaseGetRate(rate) != 0;
-    } else {
-        return NO;
-    }
+    return [self timeBaseRate] != 0;
 }
 
 - (CGFloat) progress

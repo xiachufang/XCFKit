@@ -43,6 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSTimeInterval) duration;
 - (NSTimeInterval) currentTime;
 
+- (CGFloat) rate;
+- (CGFloat) timeBaseRate;
+
 - (nullable UIImage *) snapshotOfCurrentFrame;
 
 - (BOOL) seekToSecond:(NSTimeInterval)second;
