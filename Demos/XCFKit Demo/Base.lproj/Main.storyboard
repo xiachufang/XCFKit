@@ -978,9 +978,10 @@
         <scene sceneID="6GZ-It-V4y">
             <objects>
                 <navigationController id="jme-Eh-Lsq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="o5e-lp-fTM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="o5e-lp-fTM">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
                         <segue destination="dI7-gp-T4U" kind="relationship" relationship="rootViewController" id="Aym-zp-9AD"/>
