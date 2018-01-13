@@ -11,6 +11,11 @@
 
 @implementation UIColor (XCFAppearance)
 
++ (instancetype)xcf_navigationBarBlackTintColor
+{
+    return [UIColor xcf_colorWithHexString:@"#38382F"];
+}
+
 + (instancetype)xcf_mainBackgroundColor
 {
     return [UIColor xcf_colorWithHexString:@"#FAFAF8"];

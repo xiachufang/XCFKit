@@ -10,6 +10,7 @@
 
 @interface UIColor (XCFAppearance)
 
++ (instancetype)xcf_navigationBarBlackTintColor;
 + (instancetype)xcf_mainBackgroundColor;
 + (instancetype)xcf_subBackgroundColor;
 + (instancetype)xcf_grayBackgroundColor;
