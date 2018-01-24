@@ -3,125 +3,125 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E80039D61DC325A200103028 /* XCFKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E80039D41DC325A200103028 /* XCFKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8003A4E1DC33BAB00103028 /* XCFAppearanceButton.h in Headers */ = {isa = PBXBuildFile; fileRef = E8003A4C1DC33BAB00103028 /* XCFAppearanceButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8003A4F1DC33BAB00103028 /* XCFAppearanceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E8003A4D1DC33BAB00103028 /* XCFAppearanceButton.m */; };
-		E8003A521DC347E600103028 /* UIFont+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8003A501DC347E600103028 /* UIFont+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8003A531DC347E600103028 /* UIFont+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8003A511DC347E600103028 /* UIFont+XCFAppearance.m */; };
-		E8003A561DC34C2A00103028 /* UIColor+Hex.h in Headers */ = {isa = PBXBuildFile; fileRef = E8003A541DC34C2A00103028 /* UIColor+Hex.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8003A581DC34C2A00103028 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = E8003A551DC34C2A00103028 /* UIColor+Hex.m */; };
-		E8003A5C1DC34D6F00103028 /* UIColor+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8003A5A1DC34D6F00103028 /* UIColor+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8003A5E1DC34D6F00103028 /* UIColor+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8003A5B1DC34D6F00103028 /* UIColor+XCFAppearance.m */; };
-		E8003A631DC351EA00103028 /* XCFKitCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = E8003A611DC351EA00103028 /* XCFKitCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8003A651DC351EA00103028 /* XCFKitCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = E8003A621DC351EA00103028 /* XCFKitCompat.m */; };
-		E8003A691DC3562100103028 /* UIImage+PureColor.h in Headers */ = {isa = PBXBuildFile; fileRef = E8003A671DC3562100103028 /* UIImage+PureColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8003A6A1DC3562100103028 /* UIImage+PureColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E8003A681DC3562100103028 /* UIImage+PureColor.m */; };
-		E80166FD1DD07D0400383326 /* XCFWindowContextController.h in Headers */ = {isa = PBXBuildFile; fileRef = E80166FB1DD07D0400383326 /* XCFWindowContextController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E80166FE1DD07D0400383326 /* XCFWindowContextController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80166FC1DD07D0400383326 /* XCFWindowContextController.m */; };
-		E80237841F54B01100E394AE /* XCFStringKeywordStandardCache.h in Headers */ = {isa = PBXBuildFile; fileRef = E80237821F54B01100E394AE /* XCFStringKeywordStandardCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E80237851F54B01100E394AE /* XCFStringKeywordStandardCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E80237831F54B01100E394AE /* XCFStringKeywordStandardCache.m */; };
-		E80B1DD61E1CCE3A00CFA27E /* XCFVideoEditorController.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B1DD41E1CCE3A00CFA27E /* XCFVideoEditorController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E80B1DD71E1CCE3A00CFA27E /* XCFVideoEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B1DD51E1CCE3A00CFA27E /* XCFVideoEditorController.m */; };
-		E80B1DDA1E1CFFB400CFA27E /* XCFVideoRangeSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B1DD81E1CFFB400CFA27E /* XCFVideoRangeSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E80B1DDB1E1CFFB400CFA27E /* XCFVideoRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B1DD91E1CFFB400CFA27E /* XCFVideoRangeSlider.m */; };
-		E80B57531DD0CA0100A32F14 /* UIBarButtonItem+View.h in Headers */ = {isa = PBXBuildFile; fileRef = E80B57511DD0CA0100A32F14 /* UIBarButtonItem+View.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E80B57541DD0CA0100A32F14 /* UIBarButtonItem+View.m in Sources */ = {isa = PBXBuildFile; fileRef = E80B57521DD0CA0100A32F14 /* UIBarButtonItem+View.m */; };
-		E8226B8F1F5408CE00AE7D67 /* XCFStringKeywordTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = E8226B8D1F5408CE00AE7D67 /* XCFStringKeywordTransformer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8226B901F5408CE00AE7D67 /* XCFStringKeywordTransformer.mm in Sources */ = {isa = PBXBuildFile; fileRef = E8226B8E1F5408CE00AE7D67 /* XCFStringKeywordTransformer.mm */; };
-		E82ADC931E28A48100599884 /* XCFVideoRange.h in Headers */ = {isa = PBXBuildFile; fileRef = E82ADC921E28A48100599884 /* XCFVideoRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8769A931E08D83100378EFF /* XCFAVPlayerController.h in Headers */ = {isa = PBXBuildFile; fileRef = E8769A8A1E08D83100378EFF /* XCFAVPlayerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8769A941E08D83100378EFF /* XCFAVPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8769A8B1E08D83100378EFF /* XCFAVPlayerController.m */; };
-		E8769A951E08D83100378EFF /* XCFAVPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = E8769A8C1E08D83100378EFF /* XCFAVPlayerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8769A961E08D83100378EFF /* XCFAVPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8769A8D1E08D83100378EFF /* XCFAVPlayerView.m */; };
-		E8769A971E08D83100378EFF /* XCFMicroVideoDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = E8769A8E1E08D83100378EFF /* XCFMicroVideoDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8769A981E08D83100378EFF /* XCFMicroVideoDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = E8769A8F1E08D83100378EFF /* XCFMicroVideoDecoder.m */; };
-		E8769A991E08D83100378EFF /* XCFMicroVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = E8769A901E08D83100378EFF /* XCFMicroVideoPlayerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8769A9A1E08D83100378EFF /* XCFMicroVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8769A911E08D83100378EFF /* XCFMicroVideoPlayerView.m */; };
-		E8769A9B1E08D83100378EFF /* XCFVideoPlayerControlProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = E8769A921E08D83100378EFF /* XCFVideoPlayerControlProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E87EBD8A1DFF9CDF00027C05 /* UIFont+fontWeight.h in Headers */ = {isa = PBXBuildFile; fileRef = E87EBD881DFF9CDF00027C05 /* UIFont+fontWeight.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E87EBD8B1DFF9CDF00027C05 /* UIFont+fontWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = E87EBD891DFF9CDF00027C05 /* UIFont+fontWeight.m */; };
-		E87F66631FC561BD002C84C9 /* UIScrollView+XCFKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E87F66611FC561BD002C84C9 /* UIScrollView+XCFKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E87F66641FC561BD002C84C9 /* UIScrollView+XCFKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E87F66621FC561BD002C84C9 /* UIScrollView+XCFKit.m */; };
-		E881B8901DE6A2240055A817 /* UISearchBar+textField.h in Headers */ = {isa = PBXBuildFile; fileRef = E881B88E1DE6A2240055A817 /* UISearchBar+textField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E881B8911DE6A2240055A817 /* UISearchBar+textField.m in Sources */ = {isa = PBXBuildFile; fileRef = E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */; };
-		E882296A1E2F0EE6007BA838 /* XCFVideoLoadProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = E88229681E2F0EE6007BA838 /* XCFVideoLoadProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E882296B1E2F0EE6007BA838 /* XCFVideoLoadProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E88229691E2F0EE6007BA838 /* XCFVideoLoadProgressView.m */; };
-		E890CC561E09370500F4F803 /* XCFAVPlayerControllerAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = E890CC541E09370500F4F803 /* XCFAVPlayerControllerAnimator.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		E890CC571E09370500F4F803 /* XCFAVPlayerControllerAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E890CC551E09370500F4F803 /* XCFAVPlayerControllerAnimator.m */; };
-		E89E817F1E0D24F000865246 /* UIView+XCFHeartbeat.h in Headers */ = {isa = PBXBuildFile; fileRef = E89E817D1E0D24F000865246 /* UIView+XCFHeartbeat.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E89E81801E0D24F000865246 /* UIView+XCFHeartbeat.m in Sources */ = {isa = PBXBuildFile; fileRef = E89E817E1E0D24F000865246 /* UIView+XCFHeartbeat.m */; };
-		E8A717D31FA8267900D70435 /* XCFImageContentMaskLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = E8A717D11FA8267900D70435 /* XCFImageContentMaskLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8A717D41FA8267900D70435 /* XCFImageContentMaskLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A717D21FA8267900D70435 /* XCFImageContentMaskLayer.m */; };
-		E8A717D71FA82AA400D70435 /* XCFRect.h in Headers */ = {isa = PBXBuildFile; fileRef = E8A717D51FA82AA400D70435 /* XCFRect.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8A717D81FA82AA400D70435 /* XCFRect.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A717D61FA82AA400D70435 /* XCFRect.m */; };
-		E8AD735B1DC72AE300E63306 /* UIView+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8AD735C1DC72AE300E63306 /* UIView+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */; };
+		E8BEE7D820187CBE00587F7F /* XCFKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7D620187CBE00587F7F /* XCFKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE81520187D6D00587F7F /* XCFKitCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7DE20187D6D00587F7F /* XCFKitCompat.m */; };
+		E8BEE81620187D6D00587F7F /* UIImage+PureColor.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E020187D6D00587F7F /* UIImage+PureColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE81720187D6D00587F7F /* UIView+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E120187D6D00587F7F /* UIView+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE81820187D6D00587F7F /* UIFont+fontWeight.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E220187D6D00587F7F /* UIFont+fontWeight.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE81920187D6D00587F7F /* XCFAppearanceButton.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E320187D6D00587F7F /* XCFAppearanceButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE81A20187D6D00587F7F /* UIView+XCFHeartbeat.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7E420187D6D00587F7F /* UIView+XCFHeartbeat.m */; };
+		E8BEE81B20187D6D00587F7F /* UIScrollView+XCFKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E520187D6D00587F7F /* UIScrollView+XCFKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE81C20187D6D00587F7F /* UIColor+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7E620187D6D00587F7F /* UIColor+hex.m */; };
+		E8BEE81D20187D6D00587F7F /* UIFont+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E720187D6D00587F7F /* UIFont+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE81E20187D6D00587F7F /* UIColor+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E820187D6D00587F7F /* UIColor+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE81F20187D6D00587F7F /* XCFWindowContextController.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E920187D6D00587F7F /* XCFWindowContextController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE82020187D6D00587F7F /* UIBarButtonItem+View.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7EA20187D6D00587F7F /* UIBarButtonItem+View.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE82120187D6D00587F7F /* XCFImageContentMaskLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7EB20187D6D00587F7F /* XCFImageContentMaskLayer.m */; };
+		E8BEE82220187D6D00587F7F /* UISearchBar+textField.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7EC20187D6D00587F7F /* UISearchBar+textField.m */; };
+		E8BEE82320187D6D00587F7F /* UIFont+fontWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7ED20187D6D00587F7F /* UIFont+fontWeight.m */; };
+		E8BEE82420187D6D00587F7F /* UIView+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7EE20187D6D00587F7F /* UIView+XCFAppearance.m */; };
+		E8BEE82520187D6D00587F7F /* UIImage+PureColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7EF20187D6D00587F7F /* UIImage+PureColor.m */; };
+		E8BEE82620187D6D00587F7F /* UIColor+Hex.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7F020187D6D00587F7F /* UIColor+Hex.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE82720187D6D00587F7F /* UIScrollView+XCFKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7F120187D6D00587F7F /* UIScrollView+XCFKit.m */; };
+		E8BEE82820187D6D00587F7F /* UIView+XCFHeartbeat.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7F220187D6D00587F7F /* UIView+XCFHeartbeat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE82920187D6D00587F7F /* XCFAppearanceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7F320187D6D00587F7F /* XCFAppearanceButton.m */; };
+		E8BEE82A20187D6D00587F7F /* XCFWindowContextController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7F420187D6D00587F7F /* XCFWindowContextController.m */; };
+		E8BEE82B20187D6D00587F7F /* UIColor+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7F520187D6D00587F7F /* UIColor+XCFAppearance.m */; };
+		E8BEE82C20187D6D00587F7F /* UIFont+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7F620187D6D00587F7F /* UIFont+XCFAppearance.m */; };
+		E8BEE82D20187D6D00587F7F /* UISearchBar+textField.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7F720187D6D00587F7F /* UISearchBar+textField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE82E20187D6D00587F7F /* XCFImageContentMaskLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7F820187D6D00587F7F /* XCFImageContentMaskLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE82F20187D6D00587F7F /* UIBarButtonItem+View.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7F920187D6D00587F7F /* UIBarButtonItem+View.m */; };
+		E8BEE83020187D6D00587F7F /* XCFRect.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7FB20187D6D00587F7F /* XCFRect.m */; };
+		E8BEE83120187D6D00587F7F /* XCFStringKeywordStandardCache.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7FC20187D6D00587F7F /* XCFStringKeywordStandardCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE83220187D6D00587F7F /* XCFStringKeywordTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7FD20187D6D00587F7F /* XCFStringKeywordTransformer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE83320187D6D00587F7F /* XCFRect.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7FE20187D6D00587F7F /* XCFRect.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE83420187D6D00587F7F /* XCFStringKeywordStandardCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7FF20187D6D00587F7F /* XCFStringKeywordStandardCache.m */; };
+		E8BEE83520187D6D00587F7F /* XCFStringKeywordTransformer.mm in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE80020187D6D00587F7F /* XCFStringKeywordTransformer.mm */; };
+		E8BEE83620187D6D00587F7F /* XCFVideoRange.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE80220187D6D00587F7F /* XCFVideoRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE83720187D6D00587F7F /* XCFMicroVideoDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE80320187D6D00587F7F /* XCFMicroVideoDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE83820187D6D00587F7F /* XCFVideoEditorController.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE80420187D6D00587F7F /* XCFVideoEditorController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE83920187D6D00587F7F /* XCFAVPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE80520187D6D00587F7F /* XCFAVPlayerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE83A20187D6D00587F7F /* XCFVideoLoadProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE80620187D6D00587F7F /* XCFVideoLoadProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE83B20187D6D00587F7F /* XCFAVPlayerControllerAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE80720187D6D00587F7F /* XCFAVPlayerControllerAnimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE83C20187D6D00587F7F /* XCFMicroVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE80820187D6D00587F7F /* XCFMicroVideoPlayerView.m */; };
+		E8BEE83D20187D6D00587F7F /* XCFAVPlayerController.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE80920187D6D00587F7F /* XCFAVPlayerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE83E20187D6D00587F7F /* XCFVideoRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE80A20187D6D00587F7F /* XCFVideoRangeSlider.m */; };
+		E8BEE83F20187D6D00587F7F /* XCFMicroVideoDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE80B20187D6D00587F7F /* XCFMicroVideoDecoder.m */; };
+		E8BEE84020187D6D00587F7F /* XCFAVPlayerControllerAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE80C20187D6D00587F7F /* XCFAVPlayerControllerAnimator.m */; };
+		E8BEE84120187D6D00587F7F /* XCFVideoPlayerControlProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE80D20187D6D00587F7F /* XCFVideoPlayerControlProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE84220187D6D00587F7F /* XCFVideoLoadProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE80E20187D6D00587F7F /* XCFVideoLoadProgressView.m */; };
+		E8BEE84320187D6D00587F7F /* XCFVideoEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE80F20187D6D00587F7F /* XCFVideoEditorController.m */; };
+		E8BEE84420187D6D00587F7F /* XCFAVPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE81020187D6D00587F7F /* XCFAVPlayerView.m */; };
+		E8BEE84520187D6D00587F7F /* XCFVideoRangeSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE81120187D6D00587F7F /* XCFVideoRangeSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE84620187D6D00587F7F /* XCFAVPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE81220187D6D00587F7F /* XCFAVPlayerController.m */; };
+		E8BEE84720187D6D00587F7F /* XCFMicroVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE81320187D6D00587F7F /* XCFMicroVideoPlayerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8BEE84820187D6D00587F7F /* XCFKitCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE81420187D6D00587F7F /* XCFKitCompat.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E80039D11DC325A200103028 /* XCFKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCFKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E80039D41DC325A200103028 /* XCFKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCFKit.h; sourceTree = "<group>"; };
-		E80039D51DC325A200103028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E8003A4C1DC33BAB00103028 /* XCFAppearanceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAppearanceButton.h; sourceTree = "<group>"; };
-		E8003A4D1DC33BAB00103028 /* XCFAppearanceButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAppearanceButton.m; sourceTree = "<group>"; };
-		E8003A501DC347E600103028 /* UIFont+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+XCFAppearance.h"; sourceTree = "<group>"; };
-		E8003A511DC347E600103028 /* UIFont+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+XCFAppearance.m"; sourceTree = "<group>"; };
-		E8003A541DC34C2A00103028 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
-		E8003A551DC34C2A00103028 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
-		E8003A5A1DC34D6F00103028 /* UIColor+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+XCFAppearance.h"; sourceTree = "<group>"; };
-		E8003A5B1DC34D6F00103028 /* UIColor+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+XCFAppearance.m"; sourceTree = "<group>"; };
-		E8003A611DC351EA00103028 /* XCFKitCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFKitCompat.h; sourceTree = "<group>"; };
-		E8003A621DC351EA00103028 /* XCFKitCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFKitCompat.m; sourceTree = "<group>"; };
-		E8003A671DC3562100103028 /* UIImage+PureColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PureColor.h"; sourceTree = "<group>"; };
-		E8003A681DC3562100103028 /* UIImage+PureColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PureColor.m"; sourceTree = "<group>"; };
-		E80166FB1DD07D0400383326 /* XCFWindowContextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFWindowContextController.h; sourceTree = "<group>"; };
-		E80166FC1DD07D0400383326 /* XCFWindowContextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFWindowContextController.m; sourceTree = "<group>"; };
-		E80237821F54B01100E394AE /* XCFStringKeywordStandardCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCFStringKeywordStandardCache.h; sourceTree = "<group>"; };
-		E80237831F54B01100E394AE /* XCFStringKeywordStandardCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCFStringKeywordStandardCache.m; sourceTree = "<group>"; };
-		E80B1DD41E1CCE3A00CFA27E /* XCFVideoEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoEditorController.h; sourceTree = "<group>"; };
-		E80B1DD51E1CCE3A00CFA27E /* XCFVideoEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoEditorController.m; sourceTree = "<group>"; };
-		E80B1DD81E1CFFB400CFA27E /* XCFVideoRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoRangeSlider.h; sourceTree = "<group>"; };
-		E80B1DD91E1CFFB400CFA27E /* XCFVideoRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoRangeSlider.m; sourceTree = "<group>"; };
-		E80B57511DD0CA0100A32F14 /* UIBarButtonItem+View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+View.h"; sourceTree = "<group>"; };
-		E80B57521DD0CA0100A32F14 /* UIBarButtonItem+View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+View.m"; sourceTree = "<group>"; };
-		E8226B8D1F5408CE00AE7D67 /* XCFStringKeywordTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFStringKeywordTransformer.h; sourceTree = "<group>"; };
-		E8226B8E1F5408CE00AE7D67 /* XCFStringKeywordTransformer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XCFStringKeywordTransformer.mm; sourceTree = "<group>"; };
-		E82ADC921E28A48100599884 /* XCFVideoRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoRange.h; sourceTree = "<group>"; };
-		E8769A8A1E08D83100378EFF /* XCFAVPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAVPlayerController.h; sourceTree = "<group>"; };
-		E8769A8B1E08D83100378EFF /* XCFAVPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAVPlayerController.m; sourceTree = "<group>"; };
-		E8769A8C1E08D83100378EFF /* XCFAVPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAVPlayerView.h; sourceTree = "<group>"; };
-		E8769A8D1E08D83100378EFF /* XCFAVPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAVPlayerView.m; sourceTree = "<group>"; };
-		E8769A8E1E08D83100378EFF /* XCFMicroVideoDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFMicroVideoDecoder.h; sourceTree = "<group>"; };
-		E8769A8F1E08D83100378EFF /* XCFMicroVideoDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFMicroVideoDecoder.m; sourceTree = "<group>"; };
-		E8769A901E08D83100378EFF /* XCFMicroVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFMicroVideoPlayerView.h; sourceTree = "<group>"; };
-		E8769A911E08D83100378EFF /* XCFMicroVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFMicroVideoPlayerView.m; sourceTree = "<group>"; };
-		E8769A921E08D83100378EFF /* XCFVideoPlayerControlProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoPlayerControlProtocol.h; sourceTree = "<group>"; };
-		E87EBD881DFF9CDF00027C05 /* UIFont+fontWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+fontWeight.h"; sourceTree = "<group>"; };
-		E87EBD891DFF9CDF00027C05 /* UIFont+fontWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+fontWeight.m"; sourceTree = "<group>"; };
-		E87F66611FC561BD002C84C9 /* UIScrollView+XCFKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+XCFKit.h"; sourceTree = "<group>"; };
-		E87F66621FC561BD002C84C9 /* UIScrollView+XCFKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+XCFKit.m"; sourceTree = "<group>"; };
-		E881B88E1DE6A2240055A817 /* UISearchBar+textField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+textField.h"; sourceTree = "<group>"; };
-		E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+textField.m"; sourceTree = "<group>"; };
-		E88229681E2F0EE6007BA838 /* XCFVideoLoadProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoLoadProgressView.h; sourceTree = "<group>"; };
-		E88229691E2F0EE6007BA838 /* XCFVideoLoadProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoLoadProgressView.m; sourceTree = "<group>"; };
-		E890CC541E09370500F4F803 /* XCFAVPlayerControllerAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAVPlayerControllerAnimator.h; sourceTree = "<group>"; };
-		E890CC551E09370500F4F803 /* XCFAVPlayerControllerAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAVPlayerControllerAnimator.m; sourceTree = "<group>"; };
-		E89E817D1E0D24F000865246 /* UIView+XCFHeartbeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFHeartbeat.h"; sourceTree = "<group>"; };
-		E89E817E1E0D24F000865246 /* UIView+XCFHeartbeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFHeartbeat.m"; sourceTree = "<group>"; };
-		E8A717D11FA8267900D70435 /* XCFImageContentMaskLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFImageContentMaskLayer.h; sourceTree = "<group>"; };
-		E8A717D21FA8267900D70435 /* XCFImageContentMaskLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFImageContentMaskLayer.m; sourceTree = "<group>"; };
-		E8A717D51FA82AA400D70435 /* XCFRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFRect.h; sourceTree = "<group>"; };
-		E8A717D61FA82AA400D70435 /* XCFRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFRect.m; sourceTree = "<group>"; };
-		E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFAppearance.h"; sourceTree = "<group>"; };
-		E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFAppearance.m"; sourceTree = "<group>"; };
+		E8BEE7D320187CBE00587F7F /* XCFKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCFKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8BEE7D620187CBE00587F7F /* XCFKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCFKit.h; sourceTree = "<group>"; };
+		E8BEE7D720187CBE00587F7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8BEE7DE20187D6D00587F7F /* XCFKitCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFKitCompat.m; sourceTree = "<group>"; };
+		E8BEE7E020187D6D00587F7F /* UIImage+PureColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PureColor.h"; sourceTree = "<group>"; };
+		E8BEE7E120187D6D00587F7F /* UIView+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFAppearance.h"; sourceTree = "<group>"; };
+		E8BEE7E220187D6D00587F7F /* UIFont+fontWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+fontWeight.h"; sourceTree = "<group>"; };
+		E8BEE7E320187D6D00587F7F /* XCFAppearanceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAppearanceButton.h; sourceTree = "<group>"; };
+		E8BEE7E420187D6D00587F7F /* UIView+XCFHeartbeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFHeartbeat.m"; sourceTree = "<group>"; };
+		E8BEE7E520187D6D00587F7F /* UIScrollView+XCFKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+XCFKit.h"; sourceTree = "<group>"; };
+		E8BEE7E620187D6D00587F7F /* UIColor+hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+hex.m"; sourceTree = "<group>"; };
+		E8BEE7E720187D6D00587F7F /* UIFont+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+XCFAppearance.h"; sourceTree = "<group>"; };
+		E8BEE7E820187D6D00587F7F /* UIColor+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+XCFAppearance.h"; sourceTree = "<group>"; };
+		E8BEE7E920187D6D00587F7F /* XCFWindowContextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFWindowContextController.h; sourceTree = "<group>"; };
+		E8BEE7EA20187D6D00587F7F /* UIBarButtonItem+View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+View.h"; sourceTree = "<group>"; };
+		E8BEE7EB20187D6D00587F7F /* XCFImageContentMaskLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFImageContentMaskLayer.m; sourceTree = "<group>"; };
+		E8BEE7EC20187D6D00587F7F /* UISearchBar+textField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+textField.m"; sourceTree = "<group>"; };
+		E8BEE7ED20187D6D00587F7F /* UIFont+fontWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+fontWeight.m"; sourceTree = "<group>"; };
+		E8BEE7EE20187D6D00587F7F /* UIView+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFAppearance.m"; sourceTree = "<group>"; };
+		E8BEE7EF20187D6D00587F7F /* UIImage+PureColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PureColor.m"; sourceTree = "<group>"; };
+		E8BEE7F020187D6D00587F7F /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		E8BEE7F120187D6D00587F7F /* UIScrollView+XCFKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+XCFKit.m"; sourceTree = "<group>"; };
+		E8BEE7F220187D6D00587F7F /* UIView+XCFHeartbeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFHeartbeat.h"; sourceTree = "<group>"; };
+		E8BEE7F320187D6D00587F7F /* XCFAppearanceButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAppearanceButton.m; sourceTree = "<group>"; };
+		E8BEE7F420187D6D00587F7F /* XCFWindowContextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFWindowContextController.m; sourceTree = "<group>"; };
+		E8BEE7F520187D6D00587F7F /* UIColor+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+XCFAppearance.m"; sourceTree = "<group>"; };
+		E8BEE7F620187D6D00587F7F /* UIFont+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+XCFAppearance.m"; sourceTree = "<group>"; };
+		E8BEE7F720187D6D00587F7F /* UISearchBar+textField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+textField.h"; sourceTree = "<group>"; };
+		E8BEE7F820187D6D00587F7F /* XCFImageContentMaskLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFImageContentMaskLayer.h; sourceTree = "<group>"; };
+		E8BEE7F920187D6D00587F7F /* UIBarButtonItem+View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+View.m"; sourceTree = "<group>"; };
+		E8BEE7FB20187D6D00587F7F /* XCFRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFRect.m; sourceTree = "<group>"; };
+		E8BEE7FC20187D6D00587F7F /* XCFStringKeywordStandardCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFStringKeywordStandardCache.h; sourceTree = "<group>"; };
+		E8BEE7FD20187D6D00587F7F /* XCFStringKeywordTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFStringKeywordTransformer.h; sourceTree = "<group>"; };
+		E8BEE7FE20187D6D00587F7F /* XCFRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFRect.h; sourceTree = "<group>"; };
+		E8BEE7FF20187D6D00587F7F /* XCFStringKeywordStandardCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFStringKeywordStandardCache.m; sourceTree = "<group>"; };
+		E8BEE80020187D6D00587F7F /* XCFStringKeywordTransformer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XCFStringKeywordTransformer.mm; sourceTree = "<group>"; };
+		E8BEE80220187D6D00587F7F /* XCFVideoRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoRange.h; sourceTree = "<group>"; };
+		E8BEE80320187D6D00587F7F /* XCFMicroVideoDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFMicroVideoDecoder.h; sourceTree = "<group>"; };
+		E8BEE80420187D6D00587F7F /* XCFVideoEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoEditorController.h; sourceTree = "<group>"; };
+		E8BEE80520187D6D00587F7F /* XCFAVPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAVPlayerView.h; sourceTree = "<group>"; };
+		E8BEE80620187D6D00587F7F /* XCFVideoLoadProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoLoadProgressView.h; sourceTree = "<group>"; };
+		E8BEE80720187D6D00587F7F /* XCFAVPlayerControllerAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAVPlayerControllerAnimator.h; sourceTree = "<group>"; };
+		E8BEE80820187D6D00587F7F /* XCFMicroVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFMicroVideoPlayerView.m; sourceTree = "<group>"; };
+		E8BEE80920187D6D00587F7F /* XCFAVPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAVPlayerController.h; sourceTree = "<group>"; };
+		E8BEE80A20187D6D00587F7F /* XCFVideoRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoRangeSlider.m; sourceTree = "<group>"; };
+		E8BEE80B20187D6D00587F7F /* XCFMicroVideoDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFMicroVideoDecoder.m; sourceTree = "<group>"; };
+		E8BEE80C20187D6D00587F7F /* XCFAVPlayerControllerAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAVPlayerControllerAnimator.m; sourceTree = "<group>"; };
+		E8BEE80D20187D6D00587F7F /* XCFVideoPlayerControlProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoPlayerControlProtocol.h; sourceTree = "<group>"; };
+		E8BEE80E20187D6D00587F7F /* XCFVideoLoadProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoLoadProgressView.m; sourceTree = "<group>"; };
+		E8BEE80F20187D6D00587F7F /* XCFVideoEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFVideoEditorController.m; sourceTree = "<group>"; };
+		E8BEE81020187D6D00587F7F /* XCFAVPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAVPlayerView.m; sourceTree = "<group>"; };
+		E8BEE81120187D6D00587F7F /* XCFVideoRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFVideoRangeSlider.h; sourceTree = "<group>"; };
+		E8BEE81220187D6D00587F7F /* XCFAVPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAVPlayerController.m; sourceTree = "<group>"; };
+		E8BEE81320187D6D00587F7F /* XCFMicroVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFMicroVideoPlayerView.h; sourceTree = "<group>"; };
+		E8BEE81420187D6D00587F7F /* XCFKitCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFKitCompat.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E80039CD1DC325A200103028 /* Frameworks */ = {
+		E8BEE7CF20187CBE00587F7F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -131,111 +131,103 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E80039C71DC325A200103028 = {
+		E8BEE7C920187CBE00587F7F = {
 			isa = PBXGroup;
 			children = (
-				E80039D31DC325A200103028 /* XCFKit */,
-				E80039D21DC325A200103028 /* Products */,
+				E8BEE7D520187CBE00587F7F /* XCFKit */,
+				E8BEE7D420187CBE00587F7F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		E80039D21DC325A200103028 /* Products */ = {
+		E8BEE7D420187CBE00587F7F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E80039D11DC325A200103028 /* XCFKit.framework */,
+				E8BEE7D320187CBE00587F7F /* XCFKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E80039D31DC325A200103028 /* XCFKit */ = {
+		E8BEE7D520187CBE00587F7F /* XCFKit */ = {
 			isa = PBXGroup;
 			children = (
-				E8003A611DC351EA00103028 /* XCFKitCompat.h */,
-				E8003A621DC351EA00103028 /* XCFKitCompat.m */,
-				E80039D41DC325A200103028 /* XCFKit.h */,
-				E8003A3C1DC333CA00103028 /* UIKit */,
-				E84A19ED1DF5724200CA630E /* Foudation */,
-				E8769A891E08D83100378EFF /* VideoPlayer */,
-				E8003A231DC32F5A00103028 /* Supporting Files */,
+				E8BEE7FA20187D6D00587F7F /* Foudation */,
+				E8BEE7DF20187D6D00587F7F /* UIKit */,
+				E8BEE80120187D6D00587F7F /* VideoPlayer */,
+				E8BEE7D620187CBE00587F7F /* XCFKit.h */,
+				E8BEE81420187D6D00587F7F /* XCFKitCompat.h */,
+				E8BEE7DE20187D6D00587F7F /* XCFKitCompat.m */,
+				E8BEE7D720187CBE00587F7F /* Info.plist */,
 			);
 			path = XCFKit;
 			sourceTree = "<group>";
 		};
-		E8003A231DC32F5A00103028 /* Supporting Files */ = {
+		E8BEE7DF20187D6D00587F7F /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				E80039D51DC325A200103028 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E8003A3C1DC333CA00103028 /* UIKit */ = {
-			isa = PBXGroup;
-			children = (
-				E87EBD881DFF9CDF00027C05 /* UIFont+fontWeight.h */,
-				E87EBD891DFF9CDF00027C05 /* UIFont+fontWeight.m */,
-				E8003A4C1DC33BAB00103028 /* XCFAppearanceButton.h */,
-				E8003A4D1DC33BAB00103028 /* XCFAppearanceButton.m */,
-				E8003A501DC347E600103028 /* UIFont+XCFAppearance.h */,
-				E8003A511DC347E600103028 /* UIFont+XCFAppearance.m */,
-				E8003A541DC34C2A00103028 /* UIColor+Hex.h */,
-				E8003A551DC34C2A00103028 /* UIColor+Hex.m */,
-				E8003A5A1DC34D6F00103028 /* UIColor+XCFAppearance.h */,
-				E8003A5B1DC34D6F00103028 /* UIColor+XCFAppearance.m */,
-				E8003A671DC3562100103028 /* UIImage+PureColor.h */,
-				E8003A681DC3562100103028 /* UIImage+PureColor.m */,
-				E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */,
-				E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */,
-				E80166FB1DD07D0400383326 /* XCFWindowContextController.h */,
-				E80166FC1DD07D0400383326 /* XCFWindowContextController.m */,
-				E80B57511DD0CA0100A32F14 /* UIBarButtonItem+View.h */,
-				E80B57521DD0CA0100A32F14 /* UIBarButtonItem+View.m */,
-				E881B88E1DE6A2240055A817 /* UISearchBar+textField.h */,
-				E881B88F1DE6A2240055A817 /* UISearchBar+textField.m */,
-				E8A717D11FA8267900D70435 /* XCFImageContentMaskLayer.h */,
-				E8A717D21FA8267900D70435 /* XCFImageContentMaskLayer.m */,
-				E87F66611FC561BD002C84C9 /* UIScrollView+XCFKit.h */,
-				E87F66621FC561BD002C84C9 /* UIScrollView+XCFKit.m */,
-				E89E817D1E0D24F000865246 /* UIView+XCFHeartbeat.h */,
-				E89E817E1E0D24F000865246 /* UIView+XCFHeartbeat.m */,
+				E8BEE7EA20187D6D00587F7F /* UIBarButtonItem+View.h */,
+				E8BEE7F920187D6D00587F7F /* UIBarButtonItem+View.m */,
+				E8BEE7F020187D6D00587F7F /* UIColor+Hex.h */,
+				E8BEE7E620187D6D00587F7F /* UIColor+hex.m */,
+				E8BEE7E820187D6D00587F7F /* UIColor+XCFAppearance.h */,
+				E8BEE7F520187D6D00587F7F /* UIColor+XCFAppearance.m */,
+				E8BEE7E220187D6D00587F7F /* UIFont+fontWeight.h */,
+				E8BEE7ED20187D6D00587F7F /* UIFont+fontWeight.m */,
+				E8BEE7E720187D6D00587F7F /* UIFont+XCFAppearance.h */,
+				E8BEE7F620187D6D00587F7F /* UIFont+XCFAppearance.m */,
+				E8BEE7E020187D6D00587F7F /* UIImage+PureColor.h */,
+				E8BEE7EF20187D6D00587F7F /* UIImage+PureColor.m */,
+				E8BEE7E520187D6D00587F7F /* UIScrollView+XCFKit.h */,
+				E8BEE7F120187D6D00587F7F /* UIScrollView+XCFKit.m */,
+				E8BEE7F720187D6D00587F7F /* UISearchBar+textField.h */,
+				E8BEE7EC20187D6D00587F7F /* UISearchBar+textField.m */,
+				E8BEE7E120187D6D00587F7F /* UIView+XCFAppearance.h */,
+				E8BEE7EE20187D6D00587F7F /* UIView+XCFAppearance.m */,
+				E8BEE7F220187D6D00587F7F /* UIView+XCFHeartbeat.h */,
+				E8BEE7E420187D6D00587F7F /* UIView+XCFHeartbeat.m */,
+				E8BEE7E320187D6D00587F7F /* XCFAppearanceButton.h */,
+				E8BEE7F320187D6D00587F7F /* XCFAppearanceButton.m */,
+				E8BEE7F820187D6D00587F7F /* XCFImageContentMaskLayer.h */,
+				E8BEE7EB20187D6D00587F7F /* XCFImageContentMaskLayer.m */,
+				E8BEE7E920187D6D00587F7F /* XCFWindowContextController.h */,
+				E8BEE7F420187D6D00587F7F /* XCFWindowContextController.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
 		};
-		E84A19ED1DF5724200CA630E /* Foudation */ = {
+		E8BEE7FA20187D6D00587F7F /* Foudation */ = {
 			isa = PBXGroup;
 			children = (
-				E8226B8D1F5408CE00AE7D67 /* XCFStringKeywordTransformer.h */,
-				E8226B8E1F5408CE00AE7D67 /* XCFStringKeywordTransformer.mm */,
-				E80237821F54B01100E394AE /* XCFStringKeywordStandardCache.h */,
-				E80237831F54B01100E394AE /* XCFStringKeywordStandardCache.m */,
-				E8A717D51FA82AA400D70435 /* XCFRect.h */,
-				E8A717D61FA82AA400D70435 /* XCFRect.m */,
+				E8BEE7FE20187D6D00587F7F /* XCFRect.h */,
+				E8BEE7FB20187D6D00587F7F /* XCFRect.m */,
+				E8BEE7FC20187D6D00587F7F /* XCFStringKeywordStandardCache.h */,
+				E8BEE7FF20187D6D00587F7F /* XCFStringKeywordStandardCache.m */,
+				E8BEE7FD20187D6D00587F7F /* XCFStringKeywordTransformer.h */,
+				E8BEE80020187D6D00587F7F /* XCFStringKeywordTransformer.mm */,
 			);
 			path = Foudation;
 			sourceTree = "<group>";
 		};
-		E8769A891E08D83100378EFF /* VideoPlayer */ = {
+		E8BEE80120187D6D00587F7F /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				E82ADC921E28A48100599884 /* XCFVideoRange.h */,
-				E8769A8A1E08D83100378EFF /* XCFAVPlayerController.h */,
-				E8769A8B1E08D83100378EFF /* XCFAVPlayerController.m */,
-				E890CC541E09370500F4F803 /* XCFAVPlayerControllerAnimator.h */,
-				E890CC551E09370500F4F803 /* XCFAVPlayerControllerAnimator.m */,
-				E8769A8C1E08D83100378EFF /* XCFAVPlayerView.h */,
-				E8769A8D1E08D83100378EFF /* XCFAVPlayerView.m */,
-				E8769A8E1E08D83100378EFF /* XCFMicroVideoDecoder.h */,
-				E8769A8F1E08D83100378EFF /* XCFMicroVideoDecoder.m */,
-				E8769A901E08D83100378EFF /* XCFMicroVideoPlayerView.h */,
-				E8769A911E08D83100378EFF /* XCFMicroVideoPlayerView.m */,
-				E8769A921E08D83100378EFF /* XCFVideoPlayerControlProtocol.h */,
-				E80B1DD41E1CCE3A00CFA27E /* XCFVideoEditorController.h */,
-				E80B1DD51E1CCE3A00CFA27E /* XCFVideoEditorController.m */,
-				E80B1DD81E1CFFB400CFA27E /* XCFVideoRangeSlider.h */,
-				E80B1DD91E1CFFB400CFA27E /* XCFVideoRangeSlider.m */,
-				E88229681E2F0EE6007BA838 /* XCFVideoLoadProgressView.h */,
-				E88229691E2F0EE6007BA838 /* XCFVideoLoadProgressView.m */,
+				E8BEE80920187D6D00587F7F /* XCFAVPlayerController.h */,
+				E8BEE81220187D6D00587F7F /* XCFAVPlayerController.m */,
+				E8BEE80720187D6D00587F7F /* XCFAVPlayerControllerAnimator.h */,
+				E8BEE80C20187D6D00587F7F /* XCFAVPlayerControllerAnimator.m */,
+				E8BEE80520187D6D00587F7F /* XCFAVPlayerView.h */,
+				E8BEE81020187D6D00587F7F /* XCFAVPlayerView.m */,
+				E8BEE80320187D6D00587F7F /* XCFMicroVideoDecoder.h */,
+				E8BEE80B20187D6D00587F7F /* XCFMicroVideoDecoder.m */,
+				E8BEE81320187D6D00587F7F /* XCFMicroVideoPlayerView.h */,
+				E8BEE80820187D6D00587F7F /* XCFMicroVideoPlayerView.m */,
+				E8BEE80420187D6D00587F7F /* XCFVideoEditorController.h */,
+				E8BEE80F20187D6D00587F7F /* XCFVideoEditorController.m */,
+				E8BEE80620187D6D00587F7F /* XCFVideoLoadProgressView.h */,
+				E8BEE80E20187D6D00587F7F /* XCFVideoLoadProgressView.m */,
+				E8BEE80D20187D6D00587F7F /* XCFVideoPlayerControlProtocol.h */,
+				E8BEE80220187D6D00587F7F /* XCFVideoRange.h */,
+				E8BEE81120187D6D00587F7F /* XCFVideoRangeSlider.h */,
+				E8BEE80A20187D6D00587F7F /* XCFVideoRangeSlider.m */,
 			);
 			path = VideoPlayer;
 			sourceTree = "<group>";
@@ -243,97 +235,96 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		E80039CE1DC325A200103028 /* Headers */ = {
+		E8BEE7D020187CBE00587F7F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8A717D71FA82AA400D70435 /* XCFRect.h in Headers */,
-				E8226B8F1F5408CE00AE7D67 /* XCFStringKeywordTransformer.h in Headers */,
-				E882296A1E2F0EE6007BA838 /* XCFVideoLoadProgressView.h in Headers */,
-				E8769A931E08D83100378EFF /* XCFAVPlayerController.h in Headers */,
-				E8769A951E08D83100378EFF /* XCFAVPlayerView.h in Headers */,
-				E8003A561DC34C2A00103028 /* UIColor+Hex.h in Headers */,
-				E8AD735B1DC72AE300E63306 /* UIView+XCFAppearance.h in Headers */,
-				E8003A631DC351EA00103028 /* XCFKitCompat.h in Headers */,
-				E890CC561E09370500F4F803 /* XCFAVPlayerControllerAnimator.h in Headers */,
-				E8003A5C1DC34D6F00103028 /* UIColor+XCFAppearance.h in Headers */,
-				E8003A4E1DC33BAB00103028 /* XCFAppearanceButton.h in Headers */,
-				E80039D61DC325A200103028 /* XCFKit.h in Headers */,
-				E80166FD1DD07D0400383326 /* XCFWindowContextController.h in Headers */,
-				E8769A991E08D83100378EFF /* XCFMicroVideoPlayerView.h in Headers */,
-				E80B1DDA1E1CFFB400CFA27E /* XCFVideoRangeSlider.h in Headers */,
-				E8A717D31FA8267900D70435 /* XCFImageContentMaskLayer.h in Headers */,
-				E8769A9B1E08D83100378EFF /* XCFVideoPlayerControlProtocol.h in Headers */,
-				E8003A521DC347E600103028 /* UIFont+XCFAppearance.h in Headers */,
-				E89E817F1E0D24F000865246 /* UIView+XCFHeartbeat.h in Headers */,
-				E87F66631FC561BD002C84C9 /* UIScrollView+XCFKit.h in Headers */,
-				E80237841F54B01100E394AE /* XCFStringKeywordStandardCache.h in Headers */,
-				E87EBD8A1DFF9CDF00027C05 /* UIFont+fontWeight.h in Headers */,
-				E881B8901DE6A2240055A817 /* UISearchBar+textField.h in Headers */,
-				E8769A971E08D83100378EFF /* XCFMicroVideoDecoder.h in Headers */,
-				E82ADC931E28A48100599884 /* XCFVideoRange.h in Headers */,
-				E80B57531DD0CA0100A32F14 /* UIBarButtonItem+View.h in Headers */,
-				E8003A691DC3562100103028 /* UIImage+PureColor.h in Headers */,
-				E80B1DD61E1CCE3A00CFA27E /* XCFVideoEditorController.h in Headers */,
+				E8BEE83A20187D6D00587F7F /* XCFVideoLoadProgressView.h in Headers */,
+				E8BEE81820187D6D00587F7F /* UIFont+fontWeight.h in Headers */,
+				E8BEE83720187D6D00587F7F /* XCFMicroVideoDecoder.h in Headers */,
+				E8BEE84720187D6D00587F7F /* XCFMicroVideoPlayerView.h in Headers */,
+				E8BEE81920187D6D00587F7F /* XCFAppearanceButton.h in Headers */,
+				E8BEE83B20187D6D00587F7F /* XCFAVPlayerControllerAnimator.h in Headers */,
+				E8BEE81620187D6D00587F7F /* UIImage+PureColor.h in Headers */,
+				E8BEE83D20187D6D00587F7F /* XCFAVPlayerController.h in Headers */,
+				E8BEE83220187D6D00587F7F /* XCFStringKeywordTransformer.h in Headers */,
+				E8BEE81720187D6D00587F7F /* UIView+XCFAppearance.h in Headers */,
+				E8BEE82E20187D6D00587F7F /* XCFImageContentMaskLayer.h in Headers */,
+				E8BEE81D20187D6D00587F7F /* UIFont+XCFAppearance.h in Headers */,
+				E8BEE83920187D6D00587F7F /* XCFAVPlayerView.h in Headers */,
+				E8BEE7D820187CBE00587F7F /* XCFKit.h in Headers */,
+				E8BEE83620187D6D00587F7F /* XCFVideoRange.h in Headers */,
+				E8BEE81F20187D6D00587F7F /* XCFWindowContextController.h in Headers */,
+				E8BEE82620187D6D00587F7F /* UIColor+Hex.h in Headers */,
+				E8BEE83320187D6D00587F7F /* XCFRect.h in Headers */,
+				E8BEE82D20187D6D00587F7F /* UISearchBar+textField.h in Headers */,
+				E8BEE82820187D6D00587F7F /* UIView+XCFHeartbeat.h in Headers */,
+				E8BEE84520187D6D00587F7F /* XCFVideoRangeSlider.h in Headers */,
+				E8BEE81E20187D6D00587F7F /* UIColor+XCFAppearance.h in Headers */,
+				E8BEE83120187D6D00587F7F /* XCFStringKeywordStandardCache.h in Headers */,
+				E8BEE82020187D6D00587F7F /* UIBarButtonItem+View.h in Headers */,
+				E8BEE81B20187D6D00587F7F /* UIScrollView+XCFKit.h in Headers */,
+				E8BEE84820187D6D00587F7F /* XCFKitCompat.h in Headers */,
+				E8BEE84120187D6D00587F7F /* XCFVideoPlayerControlProtocol.h in Headers */,
+				E8BEE83820187D6D00587F7F /* XCFVideoEditorController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		E80039D01DC325A200103028 /* XCFKit iOS */ = {
+		E8BEE7D220187CBE00587F7F /* XCFKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E80039D91DC325A200103028 /* Build configuration list for PBXNativeTarget "XCFKit iOS" */;
+			buildConfigurationList = E8BEE7DB20187CBE00587F7F /* Build configuration list for PBXNativeTarget "XCFKit" */;
 			buildPhases = (
-				E80039CC1DC325A200103028 /* Sources */,
-				E80039CD1DC325A200103028 /* Frameworks */,
-				E80039CE1DC325A200103028 /* Headers */,
-				E80039CF1DC325A200103028 /* Resources */,
+				E8BEE7CE20187CBE00587F7F /* Sources */,
+				E8BEE7CF20187CBE00587F7F /* Frameworks */,
+				E8BEE7D020187CBE00587F7F /* Headers */,
+				E8BEE7D120187CBE00587F7F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "XCFKit iOS";
+			name = XCFKit;
 			productName = XCFKit;
-			productReference = E80039D11DC325A200103028 /* XCFKit.framework */;
+			productReference = E8BEE7D320187CBE00587F7F /* XCFKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		E80039C81DC325A200103028 /* Project object */ = {
+		E8BEE7CA20187CBE00587F7F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
-				ORGANIZATIONNAME = XiaChuFang;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = xiachufang;
 				TargetAttributes = {
-					E80039D01DC325A200103028 = {
-						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = BV897Y9BD9;
+					E8BEE7D220187CBE00587F7F = {
+						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = E80039CB1DC325A200103028 /* Build configuration list for PBXProject "XCFKit" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			buildConfigurationList = E8BEE7CD20187CBE00587F7F /* Build configuration list for PBXProject "XCFKit" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = E80039C71DC325A200103028;
-			productRefGroup = E80039D21DC325A200103028 /* Products */;
+			mainGroup = E8BEE7C920187CBE00587F7F;
+			productRefGroup = E8BEE7D420187CBE00587F7F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E80039D01DC325A200103028 /* XCFKit iOS */,
+				E8BEE7D220187CBE00587F7F /* XCFKit */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E80039CF1DC325A200103028 /* Resources */ = {
+		E8BEE7D120187CBE00587F7F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -343,47 +334,48 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		E80039CC1DC325A200103028 /* Sources */ = {
+		E8BEE7CE20187CBE00587F7F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E80B57541DD0CA0100A32F14 /* UIBarButtonItem+View.m in Sources */,
-				E8A717D41FA8267900D70435 /* XCFImageContentMaskLayer.m in Sources */,
-				E8003A531DC347E600103028 /* UIFont+XCFAppearance.m in Sources */,
-				E87F66641FC561BD002C84C9 /* UIScrollView+XCFKit.m in Sources */,
-				E80166FE1DD07D0400383326 /* XCFWindowContextController.m in Sources */,
-				E8769A941E08D83100378EFF /* XCFAVPlayerController.m in Sources */,
-				E80237851F54B01100E394AE /* XCFStringKeywordStandardCache.m in Sources */,
-				E80B1DD71E1CCE3A00CFA27E /* XCFVideoEditorController.m in Sources */,
-				E882296B1E2F0EE6007BA838 /* XCFVideoLoadProgressView.m in Sources */,
-				E881B8911DE6A2240055A817 /* UISearchBar+textField.m in Sources */,
-				E8003A581DC34C2A00103028 /* UIColor+Hex.m in Sources */,
-				E89E81801E0D24F000865246 /* UIView+XCFHeartbeat.m in Sources */,
-				E8226B901F5408CE00AE7D67 /* XCFStringKeywordTransformer.mm in Sources */,
-				E87EBD8B1DFF9CDF00027C05 /* UIFont+fontWeight.m in Sources */,
-				E8A717D81FA82AA400D70435 /* XCFRect.m in Sources */,
-				E8003A4F1DC33BAB00103028 /* XCFAppearanceButton.m in Sources */,
-				E8003A6A1DC3562100103028 /* UIImage+PureColor.m in Sources */,
-				E80B1DDB1E1CFFB400CFA27E /* XCFVideoRangeSlider.m in Sources */,
-				E8769A9A1E08D83100378EFF /* XCFMicroVideoPlayerView.m in Sources */,
-				E8769A961E08D83100378EFF /* XCFAVPlayerView.m in Sources */,
-				E8AD735C1DC72AE300E63306 /* UIView+XCFAppearance.m in Sources */,
-				E8769A981E08D83100378EFF /* XCFMicroVideoDecoder.m in Sources */,
-				E8003A5E1DC34D6F00103028 /* UIColor+XCFAppearance.m in Sources */,
-				E890CC571E09370500F4F803 /* XCFAVPlayerControllerAnimator.m in Sources */,
-				E8003A651DC351EA00103028 /* XCFKitCompat.m in Sources */,
+				E8BEE83C20187D6D00587F7F /* XCFMicroVideoPlayerView.m in Sources */,
+				E8BEE84320187D6D00587F7F /* XCFVideoEditorController.m in Sources */,
+				E8BEE81520187D6D00587F7F /* XCFKitCompat.m in Sources */,
+				E8BEE84020187D6D00587F7F /* XCFAVPlayerControllerAnimator.m in Sources */,
+				E8BEE82920187D6D00587F7F /* XCFAppearanceButton.m in Sources */,
+				E8BEE82120187D6D00587F7F /* XCFImageContentMaskLayer.m in Sources */,
+				E8BEE82B20187D6D00587F7F /* UIColor+XCFAppearance.m in Sources */,
+				E8BEE81C20187D6D00587F7F /* UIColor+hex.m in Sources */,
+				E8BEE82C20187D6D00587F7F /* UIFont+XCFAppearance.m in Sources */,
+				E8BEE82220187D6D00587F7F /* UISearchBar+textField.m in Sources */,
+				E8BEE82420187D6D00587F7F /* UIView+XCFAppearance.m in Sources */,
+				E8BEE82520187D6D00587F7F /* UIImage+PureColor.m in Sources */,
+				E8BEE83520187D6D00587F7F /* XCFStringKeywordTransformer.mm in Sources */,
+				E8BEE82F20187D6D00587F7F /* UIBarButtonItem+View.m in Sources */,
+				E8BEE81A20187D6D00587F7F /* UIView+XCFHeartbeat.m in Sources */,
+				E8BEE82A20187D6D00587F7F /* XCFWindowContextController.m in Sources */,
+				E8BEE83420187D6D00587F7F /* XCFStringKeywordStandardCache.m in Sources */,
+				E8BEE82320187D6D00587F7F /* UIFont+fontWeight.m in Sources */,
+				E8BEE84220187D6D00587F7F /* XCFVideoLoadProgressView.m in Sources */,
+				E8BEE83E20187D6D00587F7F /* XCFVideoRangeSlider.m in Sources */,
+				E8BEE84420187D6D00587F7F /* XCFAVPlayerView.m in Sources */,
+				E8BEE83F20187D6D00587F7F /* XCFMicroVideoDecoder.m in Sources */,
+				E8BEE82720187D6D00587F7F /* UIScrollView+XCFKit.m in Sources */,
+				E8BEE84620187D6D00587F7F /* XCFAVPlayerController.m in Sources */,
+				E8BEE83020187D6D00587F7F /* XCFRect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		E80039D71DC325A200103028 /* Debug */ = {
+		E8BEE7D920187CBE00587F7F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -403,16 +395,16 @@
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -426,22 +418,22 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		E80039D81DC325A200103028 /* Release */ = {
+		E8BEE7DA20187CBE00587F7F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -461,16 +453,16 @@
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -478,22 +470,22 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		E80039DA1DC325A200103028 /* Debug */ = {
+		E8BEE7DC20187CBE00587F7F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = BV897Y9BD9;
+				DEVELOPMENT_TEAM = KZX9YZ3397;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -501,18 +493,20 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiachufang.XCFKit.ios;
-				PRODUCT_NAME = XCFKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiachufang.XCFKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		E80039DB1DC325A200103028 /* Release */ = {
+		E8BEE7DD20187CBE00587F7F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = BV897Y9BD9;
+				DEVELOPMENT_TEAM = KZX9YZ3397;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -520,34 +514,35 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiachufang.XCFKit.ios;
-				PRODUCT_NAME = XCFKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiachufang.XCFKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E80039CB1DC325A200103028 /* Build configuration list for PBXProject "XCFKit" */ = {
+		E8BEE7CD20187CBE00587F7F /* Build configuration list for PBXProject "XCFKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E80039D71DC325A200103028 /* Debug */,
-				E80039D81DC325A200103028 /* Release */,
+				E8BEE7D920187CBE00587F7F /* Debug */,
+				E8BEE7DA20187CBE00587F7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E80039D91DC325A200103028 /* Build configuration list for PBXNativeTarget "XCFKit iOS" */ = {
+		E8BEE7DB20187CBE00587F7F /* Build configuration list for PBXNativeTarget "XCFKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E80039DA1DC325A200103028 /* Debug */,
-				E80039DB1DC325A200103028 /* Release */,
+				E8BEE7DC20187CBE00587F7F /* Debug */,
+				E8BEE7DD20187CBE00587F7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = E80039C81DC325A200103028 /* Project object */;
+	rootObject = E8BEE7CA20187CBE00587F7F /* Project object */;
 }
