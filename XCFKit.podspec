@@ -7,9 +7,10 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.license      = "MIT"
 
-  s.source       = { :git => "git@github.com:xiachufang/XCFKit.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/xiachufang/XCFKit.git", :tag => s.version.to_s }
   s.platform     = :ios, "8.0"
+
+  s.source_files = 'XCFKit/**/*.{h,m,mm}'
   s.frameworks       = [ 'Foundation', 'UIKit' ]
-  
-  s.source_files = "XCFKit" , "XCFKit/UI"
+
 end
