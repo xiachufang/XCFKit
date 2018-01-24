@@ -41,7 +41,7 @@ FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 // Foundation
 #import <XCFKit/XCFStringKeywordTransformer.h>
 #import <XCFKit/XCFStringKeywordStandardCache.h>
-#import <XCFKit/XCFMathUtils.h>
+#import <XCFKit/XCFRect.h>
 
 // video
 #import <XCFKit/XCFVideoRange.h>

@@ -56,8 +56,8 @@
 		E89E81801E0D24F000865246 /* UIView+XCFHeartbeat.m in Sources */ = {isa = PBXBuildFile; fileRef = E89E817E1E0D24F000865246 /* UIView+XCFHeartbeat.m */; };
 		E8A717D31FA8267900D70435 /* XCFImageContentMaskLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = E8A717D11FA8267900D70435 /* XCFImageContentMaskLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8A717D41FA8267900D70435 /* XCFImageContentMaskLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A717D21FA8267900D70435 /* XCFImageContentMaskLayer.m */; };
-		E8A717D71FA82AA400D70435 /* XCFMathUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = E8A717D51FA82AA400D70435 /* XCFMathUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8A717D81FA82AA400D70435 /* XCFMathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A717D61FA82AA400D70435 /* XCFMathUtils.m */; };
+		E8A717D71FA82AA400D70435 /* XCFRect.h in Headers */ = {isa = PBXBuildFile; fileRef = E8A717D51FA82AA400D70435 /* XCFRect.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8A717D81FA82AA400D70435 /* XCFRect.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A717D61FA82AA400D70435 /* XCFRect.m */; };
 		E8AD735B1DC72AE300E63306 /* UIView+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8AD735C1DC72AE300E63306 /* UIView+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */; };
 /* End PBXBuildFile section */
@@ -114,8 +114,8 @@
 		E89E817E1E0D24F000865246 /* UIView+XCFHeartbeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFHeartbeat.m"; sourceTree = "<group>"; };
 		E8A717D11FA8267900D70435 /* XCFImageContentMaskLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFImageContentMaskLayer.h; sourceTree = "<group>"; };
 		E8A717D21FA8267900D70435 /* XCFImageContentMaskLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFImageContentMaskLayer.m; sourceTree = "<group>"; };
-		E8A717D51FA82AA400D70435 /* XCFMathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFMathUtils.h; sourceTree = "<group>"; };
-		E8A717D61FA82AA400D70435 /* XCFMathUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFMathUtils.m; sourceTree = "<group>"; };
+		E8A717D51FA82AA400D70435 /* XCFRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFRect.h; sourceTree = "<group>"; };
+		E8A717D61FA82AA400D70435 /* XCFRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFRect.m; sourceTree = "<group>"; };
 		E8AD73591DC72AE300E63306 /* UIView+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFAppearance.h"; sourceTree = "<group>"; };
 		E8AD735A1DC72AE300E63306 /* UIView+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFAppearance.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -209,8 +209,8 @@
 				E8226B8E1F5408CE00AE7D67 /* XCFStringKeywordTransformer.mm */,
 				E80237821F54B01100E394AE /* XCFStringKeywordStandardCache.h */,
 				E80237831F54B01100E394AE /* XCFStringKeywordStandardCache.m */,
-				E8A717D51FA82AA400D70435 /* XCFMathUtils.h */,
-				E8A717D61FA82AA400D70435 /* XCFMathUtils.m */,
+				E8A717D51FA82AA400D70435 /* XCFRect.h */,
+				E8A717D61FA82AA400D70435 /* XCFRect.m */,
 			);
 			path = Foudation;
 			sourceTree = "<group>";
@@ -247,7 +247,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8A717D71FA82AA400D70435 /* XCFMathUtils.h in Headers */,
+				E8A717D71FA82AA400D70435 /* XCFRect.h in Headers */,
 				E8226B8F1F5408CE00AE7D67 /* XCFStringKeywordTransformer.h in Headers */,
 				E882296A1E2F0EE6007BA838 /* XCFVideoLoadProgressView.h in Headers */,
 				E8769A931E08D83100378EFF /* XCFAVPlayerController.h in Headers */,
@@ -361,7 +361,7 @@
 				E89E81801E0D24F000865246 /* UIView+XCFHeartbeat.m in Sources */,
 				E8226B901F5408CE00AE7D67 /* XCFStringKeywordTransformer.mm in Sources */,
 				E87EBD8B1DFF9CDF00027C05 /* UIFont+fontWeight.m in Sources */,
-				E8A717D81FA82AA400D70435 /* XCFMathUtils.m in Sources */,
+				E8A717D81FA82AA400D70435 /* XCFRect.m in Sources */,
 				E8003A4F1DC33BAB00103028 /* XCFAppearanceButton.m in Sources */,
 				E8003A6A1DC3562100103028 /* UIImage+PureColor.m in Sources */,
 				E80B1DDB1E1CFFB400CFA27E /* XCFVideoRangeSlider.m in Sources */,
