@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F743BFA711C5E54C29238BB /* Pods_XCFKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8554C2206439C5D53833E781 /* Pods_XCFKitTests.framework */; };
 		E8BEE7D820187CBE00587F7F /* XCFKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7D620187CBE00587F7F /* XCFKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8BEE81520187D6D00587F7F /* XCFKitCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7DE20187D6D00587F7F /* XCFKitCompat.m */; };
 		E8BEE81620187D6D00587F7F /* UIImage+PureColor.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E020187D6D00587F7F /* UIImage+PureColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -60,9 +61,28 @@
 		E8BEE84620187D6D00587F7F /* XCFAVPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE81220187D6D00587F7F /* XCFAVPlayerController.m */; };
 		E8BEE84720187D6D00587F7F /* XCFMicroVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE81320187D6D00587F7F /* XCFMicroVideoPlayerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8BEE84820187D6D00587F7F /* XCFKitCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE81420187D6D00587F7F /* XCFKitCompat.h */; };
+		E8BEE85E2018809500587F7F /* XCFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8BEE7D320187CBE00587F7F /* XCFKit.framework */; };
+		E8BEE8652018818400587F7F /* XCFRectSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE8642018818400587F7F /* XCFRectSpec.m */; };
+		F568331988E2FEB1C0B02DF9 /* Pods_XCFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F7271C2831BBDFB3CE9E8F /* Pods_XCFKit.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E8BEE85F2018809500587F7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E8BEE7CA20187CBE00587F7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E8BEE7D220187CBE00587F7F;
+			remoteInfo = XCFKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		2CF8359518B89B2F83DF6716 /* Pods-XCFKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XCFKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-XCFKit/Pods-XCFKit.release.xcconfig"; sourceTree = "<group>"; };
+		40F7271C2831BBDFB3CE9E8F /* Pods_XCFKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XCFKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		520AFD2B3F50F273DFBFB573 /* Pods-XCFKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XCFKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XCFKitTests/Pods-XCFKitTests.release.xcconfig"; sourceTree = "<group>"; };
+		6A89D7FBCC7E165D2FB5052A /* Pods-XCFKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XCFKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XCFKit/Pods-XCFKit.debug.xcconfig"; sourceTree = "<group>"; };
+		8554C2206439C5D53833E781 /* Pods_XCFKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XCFKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9A6756EC765AA809ED4F385 /* Pods-XCFKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XCFKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XCFKitTests/Pods-XCFKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E8BEE7D320187CBE00587F7F /* XCFKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCFKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8BEE7D620187CBE00587F7F /* XCFKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCFKit.h; sourceTree = "<group>"; };
 		E8BEE7D720187CBE00587F7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,6 +138,9 @@
 		E8BEE81220187D6D00587F7F /* XCFAVPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAVPlayerController.m; sourceTree = "<group>"; };
 		E8BEE81320187D6D00587F7F /* XCFMicroVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFMicroVideoPlayerView.h; sourceTree = "<group>"; };
 		E8BEE81420187D6D00587F7F /* XCFKitCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFKitCompat.h; sourceTree = "<group>"; };
+		E8BEE8592018809500587F7F /* XCFKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCFKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8BEE85D2018809500587F7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8BEE8642018818400587F7F /* XCFRectSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCFRectSpec.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,17 +148,50 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F568331988E2FEB1C0B02DF9 /* Pods_XCFKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8BEE8562018809500587F7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8BEE85E2018809500587F7F /* XCFKit.framework in Frameworks */,
+				4F743BFA711C5E54C29238BB /* Pods_XCFKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08B6477EAE2AA8729E69B81F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6A89D7FBCC7E165D2FB5052A /* Pods-XCFKit.debug.xcconfig */,
+				2CF8359518B89B2F83DF6716 /* Pods-XCFKit.release.xcconfig */,
+				B9A6756EC765AA809ED4F385 /* Pods-XCFKitTests.debug.xcconfig */,
+				520AFD2B3F50F273DFBFB573 /* Pods-XCFKitTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6CD4DE9CB21FB102F1F2E2EC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				40F7271C2831BBDFB3CE9E8F /* Pods_XCFKit.framework */,
+				8554C2206439C5D53833E781 /* Pods_XCFKitTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E8BEE7C920187CBE00587F7F = {
 			isa = PBXGroup;
 			children = (
 				E8BEE7D520187CBE00587F7F /* XCFKit */,
+				E8BEE85A2018809500587F7F /* XCFKitTests */,
 				E8BEE7D420187CBE00587F7F /* Products */,
+				08B6477EAE2AA8729E69B81F /* Pods */,
+				6CD4DE9CB21FB102F1F2E2EC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				E8BEE7D320187CBE00587F7F /* XCFKit.framework */,
+				E8BEE8592018809500587F7F /* XCFKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -232,6 +289,15 @@
 			path = VideoPlayer;
 			sourceTree = "<group>";
 		};
+		E8BEE85A2018809500587F7F /* XCFKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				E8BEE85D2018809500587F7F /* Info.plist */,
+				E8BEE8642018818400587F7F /* XCFRectSpec.m */,
+			);
+			path = XCFKitTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -277,10 +343,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E8BEE7DB20187CBE00587F7F /* Build configuration list for PBXNativeTarget "XCFKit" */;
 			buildPhases = (
+				1B06186A5DE4D6CAF8EA8398 /* [CP] Check Pods Manifest.lock */,
 				E8BEE7CE20187CBE00587F7F /* Sources */,
 				E8BEE7CF20187CBE00587F7F /* Frameworks */,
 				E8BEE7D020187CBE00587F7F /* Headers */,
 				E8BEE7D120187CBE00587F7F /* Resources */,
+				489D5CDB6539AB7130792AA8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -290,6 +358,27 @@
 			productName = XCFKit;
 			productReference = E8BEE7D320187CBE00587F7F /* XCFKit.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		E8BEE8582018809500587F7F /* XCFKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E8BEE8612018809500587F7F /* Build configuration list for PBXNativeTarget "XCFKitTests" */;
+			buildPhases = (
+				4A6ECE84979B984DB7FA082E /* [CP] Check Pods Manifest.lock */,
+				E8BEE8552018809500587F7F /* Sources */,
+				E8BEE8562018809500587F7F /* Frameworks */,
+				E8BEE8572018809500587F7F /* Resources */,
+				8A2ECA0B4EA5F531C08557E1 /* [CP] Embed Pods Frameworks */,
+				DB213BDFD1F97C0D1A7CBD79 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E8BEE8602018809500587F7F /* PBXTargetDependency */,
+			);
+			name = XCFKitTests;
+			productName = XCFKitTests;
+			productReference = E8BEE8592018809500587F7F /* XCFKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -301,6 +390,10 @@
 				ORGANIZATIONNAME = xiachufang;
 				TargetAttributes = {
 					E8BEE7D220187CBE00587F7F = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					E8BEE8582018809500587F7F = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
@@ -319,6 +412,7 @@
 			projectRoot = "";
 			targets = (
 				E8BEE7D220187CBE00587F7F /* XCFKit */,
+				E8BEE8582018809500587F7F /* XCFKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -331,7 +425,101 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E8BEE8572018809500587F7F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B06186A5DE4D6CAF8EA8398 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-XCFKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		489D5CDB6539AB7130792AA8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCFKit/Pods-XCFKit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4A6ECE84979B984DB7FA082E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-XCFKitTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8A2ECA0B4EA5F531C08557E1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-XCFKitTests/Pods-XCFKitTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kiwi/Kiwi.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kiwi.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCFKitTests/Pods-XCFKitTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB213BDFD1F97C0D1A7CBD79 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCFKitTests/Pods-XCFKitTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E8BEE7CE20187CBE00587F7F /* Sources */ = {
@@ -366,7 +554,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E8BEE8552018809500587F7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8BEE8652018818400587F7F /* XCFRectSpec.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E8BEE8602018809500587F7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E8BEE7D220187CBE00587F7F /* XCFKit */;
+			targetProxy = E8BEE85F2018809500587F7F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E8BEE7D920187CBE00587F7F /* Debug */ = {
@@ -481,6 +685,7 @@
 		};
 		E8BEE7DC20187CBE00587F7F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A89D7FBCC7E165D2FB5052A /* Pods-XCFKit.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -502,6 +707,7 @@
 		};
 		E8BEE7DD20187CBE00587F7F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2CF8359518B89B2F83DF6716 /* Pods-XCFKit.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -517,6 +723,34 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiachufang.XCFKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E8BEE8622018809500587F7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9A6756EC765AA809ED4F385 /* Pods-XCFKitTests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KZX9YZ3397;
+				INFOPLIST_FILE = XCFKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiachufang.XCFKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E8BEE8632018809500587F7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 520AFD2B3F50F273DFBFB573 /* Pods-XCFKitTests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KZX9YZ3397;
+				INFOPLIST_FILE = XCFKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiachufang.XCFKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -538,6 +772,15 @@
 			buildConfigurations = (
 				E8BEE7DC20187CBE00587F7F /* Debug */,
 				E8BEE7DD20187CBE00587F7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E8BEE8612018809500587F7F /* Build configuration list for PBXNativeTarget "XCFKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E8BEE8622018809500587F7F /* Debug */,
+				E8BEE8632018809500587F7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
