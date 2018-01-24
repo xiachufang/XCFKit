@@ -11,6 +11,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "8.0"
 
   s.source_files = 'XCFKit/**/*.{h,m,mm}'
+  s.library = 'c++'
   s.frameworks       = [ 'Foundation', 'UIKit' ]
 
 end
