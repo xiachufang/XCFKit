@@ -153,9 +153,9 @@
 				E8003A611DC351EA00103028 /* XCFKitCompat.h */,
 				E8003A621DC351EA00103028 /* XCFKitCompat.m */,
 				E80039D41DC325A200103028 /* XCFKit.h */,
-				E8003A3C1DC333CA00103028 /* UI */,
+				E8003A3C1DC333CA00103028 /* UIKit */,
 				E84A19ED1DF5724200CA630E /* Foudation */,
-				E84A19EE1DF5724200CA630E /* XCFUI */,
+				E8769A891E08D83100378EFF /* VideoPlayer */,
 				E8003A231DC32F5A00103028 /* Supporting Files */,
 			);
 			path = XCFKit;
@@ -169,7 +169,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E8003A3C1DC333CA00103028 /* UI */ = {
+		E8003A3C1DC333CA00103028 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
 				E87EBD881DFF9CDF00027C05 /* UIFont+fontWeight.h */,
@@ -196,8 +196,10 @@
 				E8A717D21FA8267900D70435 /* XCFImageContentMaskLayer.m */,
 				E87F66611FC561BD002C84C9 /* UIScrollView+XCFKit.h */,
 				E87F66621FC561BD002C84C9 /* UIScrollView+XCFKit.m */,
+				E89E817D1E0D24F000865246 /* UIView+XCFHeartbeat.h */,
+				E89E817E1E0D24F000865246 /* UIView+XCFHeartbeat.m */,
 			);
-			path = UI;
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		E84A19ED1DF5724200CA630E /* Foudation */ = {
@@ -211,16 +213,6 @@
 				E8A717D61FA82AA400D70435 /* XCFMathUtils.m */,
 			);
 			path = Foudation;
-			sourceTree = "<group>";
-		};
-		E84A19EE1DF5724200CA630E /* XCFUI */ = {
-			isa = PBXGroup;
-			children = (
-				E89E817D1E0D24F000865246 /* UIView+XCFHeartbeat.h */,
-				E89E817E1E0D24F000865246 /* UIView+XCFHeartbeat.m */,
-				E8769A891E08D83100378EFF /* VideoPlayer */,
-			);
-			path = XCFUI;
 			sourceTree = "<group>";
 		};
 		E8769A891E08D83100378EFF /* VideoPlayer */ = {

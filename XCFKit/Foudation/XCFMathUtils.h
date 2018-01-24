@@ -12,7 +12,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <CoreFoundation/CoreFoundation.h>
 
-#pragma mark - CGRect
+
 
 extern CGPoint XCFGetRectCenterWithOffset(CGRect rect,CGPoint offset);
 
@@ -27,7 +27,6 @@ typedef enum : NSUInteger {
 } XCFRectPosition;
 
 extern CGRect XCFGetFrameForSizeInRect(CGSize size,CGRect rect,CGPoint offset,XCFRectPosition offsetPosition);
-
 extern CGRect XCFCreateRectWithCenter(CGPoint center,CGSize size);
 
 #endif //XCFMathUtils.h
