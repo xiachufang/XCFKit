@@ -18,8 +18,6 @@ FOUNDATION_EXPORT double XCFKitVersionNumber;
 //! Project version string for XCFKit.
 FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <XCFKit/PublicHeader.h>
-
 // UI
 #if XCF_UIKIT
 
