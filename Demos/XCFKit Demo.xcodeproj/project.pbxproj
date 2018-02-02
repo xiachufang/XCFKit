@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89D6E5DBDCEE1AF2966C5002 /* libPods-XCFKit iOS Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB8A21010FFB191C241645B /* libPods-XCFKit iOS Demo.a */; };
 		E80039EA1DC325D100103028 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E80039E91DC325D100103028 /* main.m */; };
 		E80039ED1DC325D100103028 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E80039EC1DC325D100103028 /* AppDelegate.m */; };
 		E80039F01DC325D100103028 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80039EF1DC325D100103028 /* ViewController.m */; };
 		E80039F31DC325D100103028 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E80039F11DC325D100103028 /* Main.storyboard */; };
 		E80039F51DC325D100103028 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E80039F41DC325D100103028 /* Assets.xcassets */; };
 		E80039F81DC325D100103028 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E80039F61DC325D100103028 /* LaunchScreen.storyboard */; };
-		E8003A441DC3358B00103028 /* XCFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8003A131DC326FC00103028 /* XCFKit.framework */; };
-		E8003A451DC3358B00103028 /* XCFKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E8003A131DC326FC00103028 /* XCFKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E8226B981F55816200AE7D67 /* XCFTrieTreeDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8226B971F55816200AE7D67 /* XCFTrieTreeDemoViewController.m */; };
 		E8226BA01F57BB7C00AE7D67 /* XCFTrieMatchTestDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8226B9F1F57BB7C00AE7D67 /* XCFTrieMatchTestDemoController.m */; };
 		E82ADC8C1E26475800599884 /* XCFVideoRangeSliderDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E82ADC8B1E26475800599884 /* XCFVideoRangeSliderDemoController.m */; };
@@ -28,30 +27,6 @@
 		E8B9A4561FDF8B0D00CD9BC6 /* XCFAppearanceColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B9A4551FDF8B0D00CD9BC6 /* XCFAppearanceColorCell.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E8003A121DC326FC00103028 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E8003A0E1DC326FC00103028 /* XCFKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E80039D11DC325A200103028;
-			remoteInfo = XCFKit;
-		};
-		E8003A3D1DC3343400103028 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E8003A0E1DC326FC00103028 /* XCFKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = E80039D01DC325A200103028;
-			remoteInfo = "XCFKit iOS";
-		};
-		E8003A461DC3358B00103028 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E8003A0E1DC326FC00103028 /* XCFKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = E80039D01DC325A200103028;
-			remoteInfo = "XCFKit iOS";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		E8003A481DC3358B00103028 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -59,7 +34,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E8003A451DC3358B00103028 /* XCFKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -67,6 +41,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3AB8A21010FFB191C241645B /* libPods-XCFKit iOS Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XCFKit iOS Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F6C17B69DA2667D646C606E /* Pods-XCFKit iOS Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XCFKit iOS Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XCFKit iOS Demo/Pods-XCFKit iOS Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		CDB2FEF9ED70F85DD34B26D5 /* Pods-XCFKit iOS Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XCFKit iOS Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-XCFKit iOS Demo/Pods-XCFKit iOS Demo.release.xcconfig"; sourceTree = "<group>"; };
 		E80039E51DC325D100103028 /* XCFKit iOS Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "XCFKit iOS Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80039E91DC325D100103028 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E80039EB1DC325D100103028 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -77,7 +54,6 @@
 		E80039F41DC325D100103028 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E80039F71DC325D100103028 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E80039F91DC325D100103028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E8003A0E1DC326FC00103028 /* XCFKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFKit.xcodeproj; path = ../XCFKit.xcodeproj; sourceTree = "<group>"; };
 		E8226B961F55816200AE7D67 /* XCFTrieTreeDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFTrieTreeDemoViewController.h; sourceTree = "<group>"; };
 		E8226B971F55816200AE7D67 /* XCFTrieTreeDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFTrieTreeDemoViewController.m; sourceTree = "<group>"; };
 		E8226B9E1F57BB7C00AE7D67 /* XCFTrieMatchTestDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFTrieMatchTestDemoController.h; sourceTree = "<group>"; };
@@ -106,19 +82,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8003A441DC3358B00103028 /* XCFKit.framework in Frameworks */,
+				89D6E5DBDCEE1AF2966C5002 /* libPods-XCFKit iOS Demo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2439B563FBC4B751BC99A0AC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8F6C17B69DA2667D646C606E /* Pods-XCFKit iOS Demo.debug.xcconfig */,
+				CDB2FEF9ED70F85DD34B26D5 /* Pods-XCFKit iOS Demo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		37046058A385E60AAE1A44C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3AB8A21010FFB191C241645B /* libPods-XCFKit iOS Demo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E80039DC1DC325D100103028 = {
 			isa = PBXGroup;
 			children = (
-				E8003A0E1DC326FC00103028 /* XCFKit.xcodeproj */,
 				E80039E71DC325D100103028 /* XCFKit Demo */,
 				E80039E61DC325D100103028 /* Products */,
+				2439B563FBC4B751BC99A0AC /* Pods */,
+				37046058A385E60AAE1A44C6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,14 +169,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E8003A0F1DC326FC00103028 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E8003A131DC326FC00103028 /* XCFKit.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		E84FD29A1E03BB08007A09C4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,16 +184,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E8003A071DC325D100103028 /* Build configuration list for PBXNativeTarget "XCFKit iOS Demo" */;
 			buildPhases = (
+				9515BA140B5658E48A397943 /* [CP] Check Pods Manifest.lock */,
 				E80039E11DC325D100103028 /* Sources */,
 				E80039E21DC325D100103028 /* Frameworks */,
 				E80039E31DC325D100103028 /* Resources */,
 				E8003A481DC3358B00103028 /* Embed Frameworks */,
+				118341CE3167A9F3A23867AC /* [CP] Embed Pods Frameworks */,
+				939842E2BD7A90218FC86CE1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E8003A3E1DC3343400103028 /* PBXTargetDependency */,
-				E8003A471DC3358B00103028 /* PBXTargetDependency */,
 			);
 			name = "XCFKit iOS Demo";
 			productName = "XCFKit Demo";
@@ -241,28 +228,12 @@
 			mainGroup = E80039DC1DC325D100103028;
 			productRefGroup = E80039E61DC325D100103028 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = E8003A0F1DC326FC00103028 /* Products */;
-					ProjectRef = E8003A0E1DC326FC00103028 /* XCFKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				E80039E41DC325D100103028 /* XCFKit iOS Demo */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		E8003A131DC326FC00103028 /* XCFKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = XCFKit.framework;
-			remoteRef = E8003A121DC326FC00103028 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E80039E31DC325D100103028 /* Resources */ = {
@@ -277,6 +248,57 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		118341CE3167A9F3A23867AC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCFKit iOS Demo/Pods-XCFKit iOS Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		939842E2BD7A90218FC86CE1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCFKit iOS Demo/Pods-XCFKit iOS Demo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9515BA140B5658E48A397943 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-XCFKit iOS Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E80039E11DC325D100103028 /* Sources */ = {
@@ -300,19 +322,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E8003A3E1DC3343400103028 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "XCFKit iOS";
-			targetProxy = E8003A3D1DC3343400103028 /* PBXContainerItemProxy */;
-		};
-		E8003A471DC3358B00103028 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "XCFKit iOS";
-			targetProxy = E8003A461DC3358B00103028 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E80039F11DC325D100103028 /* Main.storyboard */ = {
@@ -428,6 +437,7 @@
 		};
 		E8003A081DC325D100103028 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F6C17B69DA2667D646C606E /* Pods-XCFKit iOS Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = BV897Y9BD9;
@@ -441,6 +451,7 @@
 		};
 		E8003A091DC325D100103028 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CDB2FEF9ED70F85DD34B26D5 /* Pods-XCFKit iOS Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = BV897Y9BD9;

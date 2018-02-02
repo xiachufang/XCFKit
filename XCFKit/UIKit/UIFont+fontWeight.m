@@ -77,7 +77,7 @@
 
 + (UIFont *) xcf_mediumSystemFontWithSize:(CGFloat)size
 {
-    if (&UIFontWeightMedium) { // >= iOS 8.2
+    if (@available(iOS 8.2,*)) { // >= iOS 8.2
         return [self systemFontOfSize:size weight:UIFontWeightMedium];
     } else {
         UIFont *mediumFont = nil;
@@ -96,7 +96,7 @@
 
 + (UIFont *) xcf_lightSystemFontWithSize:(CGFloat)size
 {
-    if (&UIFontWeightLight) {
+    if (@available(iOS 8.2,*)) {
         return [self systemFontOfSize:size weight:UIFontWeightLight];
     } else {
         UIFont *lightFont = nil;
@@ -126,7 +126,7 @@
 
 + (UIFont *) xcf_heavySystemFontWithSize:(CGFloat)size
 {
-    if (&UIFontWeightHeavy) {
+    if (@available(iOS 8.2,*)) {
         return [self systemFontOfSize:size weight:UIFontWeightHeavy];
     } else {
         return [UIFont boldSystemFontOfSize:size];

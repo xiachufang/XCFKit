@@ -18,35 +18,28 @@ FOUNDATION_EXPORT double XCFKitVersionNumber;
 //! Project version string for XCFKit.
 FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <XCFKit/PublicHeader.h>
-
 // UI
 #if XCF_UIKIT
 
-#import <XCFKit/XCFStringKeywordTransformer.h>
-#import <XCFKit/XCFStringKeywordStandardCache.h>
-
+// UIKit
 #import <XCFKit/XCFAppearanceButton.h>
 #import <XCFKit/UIFont+XCFAppearance.h>
-
 #import <XCFKit/UIColor+Hex.h>
 #import <XCFKit/UIColor+XCFAppearance.h>
-
 #import <XCFKit/UIImage+PureColor.h>
 #import <XCFKit/UIView+XCFAppearance.h>
-
 #import <XCFKit/UIBarButtonItem+View.h>
 #import <XCFKit/UISearchBar+textField.h>
 #import <XCFKit/UIScrollView+XCFKit.h>
-
-#import <XCFKit/XCFWindowContextController.h>
-
 #import <XCFKit/UIFont+fontWeight.h>
 #import <XCFKit/UIView+XCFHeartbeat.h>
-
+#import <XCFKit/XCFWindowContextController.h>
 #import <XCFKit/XCFImageContentMaskLayer.h>
 
-#import <XCFKit/XCFMathUtils.h>
+// Foundation
+#import <XCFKit/XCFStringKeywordTransformer.h>
+#import <XCFKit/XCFStringKeywordStandardCache.h>
+#import <XCFKit/XCFRect.h>
 
 // video
 #import <XCFKit/XCFVideoRange.h>
@@ -55,10 +48,7 @@ FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 #import <XCFKit/XCFMicroVideoPlayerView.h>
 #import <XCFKit/XCFAVPlayerView.h>
 #import <XCFKit/XCFAVPlayerController.h>
-
 #import <XCFKit/XCFVideoLoadProgressView.h>
-
-// video editor
 #import <XCFKit/XCFVideoEditorController.h>
 #import <XCFKit/XCFVideoRangeSlider.h>
 
