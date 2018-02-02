@@ -30,6 +30,7 @@
     NSInteger _actualLoopCount;
     
     id _playerTimeObserver;
+    __weak AVPlayerItem* _didDisplayItem;
 }
 
 #pragma mark - life cycle
@@ -287,14 +288,14 @@ static void const *_observeStatusContext = (void*)&_observeStatusContext;
     if (object == self.playerItem && context == _observeStatusContext) {
         AVPlayerItemStatus status = self.playerItem.status;
         
-        if (status == AVPlayerItemStatusReadyToPlay) {
-            // do nothing
-        } else if (status == AVPlayerItemStatusFailed) {
+        if (status == AVPlayerItemStatusFailed) {
             [self preparedFailed:self.playerItem.error];
         }
     } else if (object == self.playerLayer && context == _observeStatusContext) {
-        if (self.playerLayer.isReadyForDisplay) {
+        AVPlayerItem *item = [(AVPlayerLayer*)object player].currentItem;
+        if (item != _didDisplayItem && self.playerLayer.isReadyForDisplay) {
             [self readyToPlay];
+            _didDisplayItem = item;
         }
     }
 }
