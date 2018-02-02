@@ -60,7 +60,7 @@
 		E8BEE84520187D6D00587F7F /* XCFVideoRangeSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE81120187D6D00587F7F /* XCFVideoRangeSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8BEE84620187D6D00587F7F /* XCFAVPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE81220187D6D00587F7F /* XCFAVPlayerController.m */; };
 		E8BEE84720187D6D00587F7F /* XCFMicroVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE81320187D6D00587F7F /* XCFMicroVideoPlayerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8BEE84820187D6D00587F7F /* XCFKitCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE81420187D6D00587F7F /* XCFKitCompat.h */; };
+		E8BEE84820187D6D00587F7F /* XCFKitCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE81420187D6D00587F7F /* XCFKitCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8BEE85E2018809500587F7F /* XCFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8BEE7D320187CBE00587F7F /* XCFKit.framework */; };
 		E8BEE8652018818400587F7F /* XCFRectSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE8642018818400587F7F /* XCFRectSpec.m */; };
 /* End PBXBuildFile section */
