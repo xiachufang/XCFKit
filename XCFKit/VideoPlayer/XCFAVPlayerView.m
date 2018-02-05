@@ -387,6 +387,9 @@ static void const *_observeStatusContext = (void*)&_observeStatusContext;
 - (void) play
 {
     if (self.isPlayable) {
+        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback
+                                               error: nil];
+        
         [self.playerLayer.player play];
         
         if (!_playerTimeObserver) {
