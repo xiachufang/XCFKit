@@ -346,7 +346,7 @@ static void const *_observeStatusContext = (void*)&_observeStatusContext;
 
 - (NSTimeInterval) duration
 {
-    if (self.playerItem && self.playerItem.status == AVPlayerItemStatusReadyToPlay) {
+    if (self.playerItem && self.playerItem.status != AVPlayerItemStatusFailed) {
         return CMTimeGetSeconds(self.playerItem.duration);
     } else {
         return -1;
