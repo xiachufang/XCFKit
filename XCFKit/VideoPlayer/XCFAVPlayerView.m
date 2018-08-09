@@ -25,6 +25,7 @@
         unsigned int failed    : 1;
         unsigned int playToEnd : 1;
         unsigned int progress  : 1;
+        unsigned int pause     : 1;
     } _delegateFlag;
     
     NSInteger _actualLoopCount;
@@ -88,6 +89,7 @@
     _delegateFlag.failed    = [delegate respondsToSelector:@selector(avPlayerView:failedToPlayWithError:)];
     _delegateFlag.playToEnd = [delegate respondsToSelector:@selector(avPlayerViewDidPlayToEnd:)];
     _delegateFlag.progress = [delegate respondsToSelector:@selector(avPlayerViewDidUpgradeProgress:)];
+    _delegateFlag.pause = [delegate respondsToSelector:@selector(avPlayerViewDidPause:)];
 }
 
 #pragma mark - logic
@@ -410,6 +412,9 @@ static void const *_observeStatusContext = (void*)&_observeStatusContext;
 {
     if (self.isPlayable) {
         [self.playerLayer.player pause];
+        if (_delegateFlag.pause) {
+            [self.delegate avPlayerViewDidPause:self];
+        }
     }
 }
 
