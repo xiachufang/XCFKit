@@ -27,11 +27,9 @@
 
 @end
 
-CAGradientLayer* XCFCreateImageContentMaskLayer()
+CAGradientLayer* XCFCreateImageContentMaskLayerWithColors(CGColorRef startColor, CGColorRef endColor)
 {
     CAGradientLayer *layer = [CAGradientLayer new];
-    CGColorRef startColor = [UIColor colorWithWhite:0 alpha:0].CGColor;
-    CGColorRef endColor = [UIColor colorWithWhite:0 alpha:0.08].CGColor;
     layer.colors = @[(__bridge id)startColor,(__bridge id)endColor];
     layer.startPoint = CGPointMake(0.5,0);
     layer.endPoint = CGPointMake(0.5, 1);
@@ -40,10 +38,19 @@ CAGradientLayer* XCFCreateImageContentMaskLayer()
                       @"frame" :[NSNull null],
                       @"position" : [NSNull null],
                       @"hidden" : [NSNull null]
-                    };
+                      };
     
     layer.shouldRasterize = YES;
     layer.rasterizationScale = [UIScreen mainScreen].scale;
-    
     return layer;
 }
+
+CAGradientLayer* XCFCreateImageContentMaskLayer()
+{
+    
+    CGColorRef startColor = [UIColor colorWithWhite:0 alpha:0].CGColor;
+    CGColorRef endColor = [UIColor colorWithWhite:0 alpha:0.08].CGColor;
+    CAGradientLayer *layer = XCFCreateImageContentMaskLayerWithColors(startColor, endColor);
+    return layer;
+}
+
