@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) avPlayerView:(XCFAVPlayerView *)playerView failedToPlayWithError:(NSError *)error;
 - (void) avPlayerViewDidPlayToEnd:(XCFAVPlayerView *)playerView;
 - (void) avPlayerViewDidUpgradeProgress:(XCFAVPlayerView *)playerView;
+- (void) avPlayerViewDidPause:(XCFAVPlayerView *)playerView;
 
 @end
 
