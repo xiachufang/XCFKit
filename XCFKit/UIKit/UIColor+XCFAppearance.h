@@ -33,5 +33,6 @@
 + (instancetype)xcf_yellowBackgroundColor;
 + (instancetype)xcf_selectedButtonColor;
 + (instancetype)xcf_wechatGreenColor;
++ (instancetype)xcf_followGaryColor;
 
 @end

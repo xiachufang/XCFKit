@@ -123,4 +123,8 @@
     return [UIColor xcf_colorWithHexString:@"#6fbd53"];
 }
 
++ (instancetype)xcf_followGaryColor
+{
+    return [UIColor xcf_colorWithHexString:@"#dddddd"];
+}
 @end
