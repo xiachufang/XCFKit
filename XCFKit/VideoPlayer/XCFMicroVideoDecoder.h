@@ -6,8 +6,8 @@
 //  Copyright © 2016年 Xiachufang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,10 +22,10 @@ enum {
 
 @optional
 
-- (void) microVideoDecoder:(XCFMicroVideoDecoder *)decoder decodeFailed:(NSError *)error;
-- (void) microVideoDecoderBePrepared:(XCFMicroVideoDecoder *)decoder;
-- (void) microVideoDecoderDidFinishDecode:(XCFMicroVideoDecoder *)decoder;
-- (void) microVideoDecoder:(XCFMicroVideoDecoder *)decoder decodeNewSampleBuffer:(nullable CMSampleBufferRef)buffer;
+- (void)microVideoDecoder:(XCFMicroVideoDecoder *)decoder decodeFailed:(NSError *)error;
+- (void)microVideoDecoderBePrepared:(XCFMicroVideoDecoder *)decoder;
+- (void)microVideoDecoderDidFinishDecode:(XCFMicroVideoDecoder *)decoder;
+- (void)microVideoDecoder:(XCFMicroVideoDecoder *)decoder decodeNewSampleBuffer:(nullable CMSampleBufferRef)buffer;
 
 @end
 
@@ -38,9 +38,9 @@ typedef enum : NSUInteger {
 
 @interface XCFMicroVideoDecoder : NSObject
 
-- (instancetype) init NS_UNAVAILABLE;
-- (instancetype) initWithVideoAsset:(AVURLAsset *)asset NS_DESIGNATED_INITIALIZER;
-- (instancetype) initWithVideoFilePath:(NSString *)videoFilePath;
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithVideoAsset:(AVURLAsset *)asset NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithVideoFilePath:(NSString *)videoFilePath;
 
 @property (nonatomic, weak, nullable) id<XCFMicroVideoDecoderDelegate> delegate;
 
@@ -62,14 +62,11 @@ typedef enum : NSUInteger {
 @property (nonatomic, readonly) XCFVideoFrameOrientation frameOrientation;
 @property (nonatomic, readonly) CGAffineTransform preferredTransform;
 
-- (void) prepareToStartDecode;
-
-- (BOOL) nextSampleBufferAvaliable;
-- (void) requestNextSampleBuffer;
-
-- (void) cleanup;
-
-- (nullable CGImageRef) extractThumbnailImage;
+- (void)prepareToStartDecode;
+- (BOOL)nextSampleBufferAvaliable;
+- (void)requestNextSampleBuffer;
+- (void)cleanup;
+- (nullable CGImageRef)extractThumbnailImage;
 
 @end
 

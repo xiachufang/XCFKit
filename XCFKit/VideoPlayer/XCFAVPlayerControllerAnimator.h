@@ -6,10 +6,10 @@
 //  Copyright © 2016年 XiaChuFang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "XCFAVPlayerController.h"
+#import <Foundation/Foundation.h>
 
-@interface XCFAVPlayerControllerAnimator : NSObject<UIViewControllerAnimatedTransitioning>
+@interface XCFAVPlayerControllerAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 
 @property (nonatomic, weak) XCFAVPlayerController *avPlayerController;
 @property (nonatomic, weak) UIViewController *presentingController;

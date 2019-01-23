@@ -13,23 +13,23 @@
 @class AVAsset;
 
 typedef NS_ENUM(NSInteger, XCFVideoEditorVideoQualityType) {
-    XCFVideoEditorVideoQualityTypeLow    = 1 << 0,
+    XCFVideoEditorVideoQualityTypeLow = 1 << 0,
     XCFVideoEditorVideoQualityTypeMedium = 1 << 1,
-    XCFVideoEditorVideoQualityTypeHigh   = 1 << 2,
-    
-    XCFVideoEditorVideoQualityType1x1    = 0 << 4,
-    XCFVideoEditorVideoQualityType4x3    = 1 << 4,
-    XCFVideoEditorVideoQualityType5x4    = 2 << 5,
+    XCFVideoEditorVideoQualityTypeHigh = 1 << 2,
+
+    XCFVideoEditorVideoQualityType1x1 = 0 << 4,
+    XCFVideoEditorVideoQualityType4x3 = 1 << 4,
+    XCFVideoEditorVideoQualityType5x4 = 2 << 5,
 };
 
 @interface XCFVideoEditorController : UIViewController
 
-+ (BOOL) canEditVideoAtPath:(NSString *)videoPath;
-+ (void) loadVideoAssetAtPath:(NSString *)videoPath
-                   completion:(void (^)(AVAsset *asset,NSError *error))completion;
++ (BOOL)canEditVideoAtPath:(NSString *)videoPath;
++ (void)loadVideoAssetAtPath:(NSString *)videoPath
+                  completion:(void (^)(AVAsset *asset, NSError *error))completion;
 
-- (instancetype) initWithVideoPath:(NSString *)videoPath;
-- (instancetype) initWithVideoAsset:(AVAsset *)asset;
+- (instancetype)initWithVideoPath:(NSString *)videoPath;
+- (instancetype)initWithVideoAsset:(AVAsset *)asset;
 
 @property (nonatomic, weak) id<XCFVideoEditorControllerDelegate> delegate;
 
@@ -48,8 +48,8 @@ typedef NS_ENUM(NSInteger, XCFVideoEditorVideoQualityType) {
 
 @optional
 
-- (void) videoEditorDidStartExport:(XCFVideoEditorController *)editor;
-- (void) videoEditorDidCancelEdit:(XCFVideoEditorController *)editor;
+- (void)videoEditorDidStartExport:(XCFVideoEditorController *)editor;
+- (void)videoEditorDidCancelEdit:(XCFVideoEditorController *)editor;
 
 // videoInfo 包含的值有 XCFVideoEditorVideoInfoWidth XCFVideoEditorVideoInfoHeight
 // XCFVideoEditorVideoInfoDuration ， 正常情况下有 XCFVideoEditorVideoInfoThumbnail 但不保证
@@ -70,20 +70,20 @@ extern NSString *const XCFVideoEditorVideoInfoThumbnail;
 @interface XCFVideoEditorController (block)
 
 // 注意，采用 block 回调的形式就不要再设置 delegate
-+ (instancetype) videoEditorWithVideoFilePath:(NSString *)filePath
-                                  startExport:(void (^)(XCFVideoEditorController *editor))startExportBlock
-                                       output:(void (^)(XCFVideoEditorController *editor, NSString *editedFilePath, NSDictionary *info,NSError *error))outputBlock;
++ (instancetype)videoEditorWithVideoFilePath:(NSString *)filePath
+                                 startExport:(void (^)(XCFVideoEditorController *editor))startExportBlock
+                                      output:(void (^)(XCFVideoEditorController *editor, NSString *editedFilePath, NSDictionary *info, NSError *error))outputBlock;
 
-+ (instancetype) videoEditorWithVideoAsset:(AVAsset *)asset
-                               startExport:(void (^)(XCFVideoEditorController *editor))startExportBlock
-                                    output:(void (^)(XCFVideoEditorController *editor, NSString *editedFilePath, NSDictionary *info,NSError *error))outputBlock;
++ (instancetype)videoEditorWithVideoAsset:(AVAsset *)asset
+                              startExport:(void (^)(XCFVideoEditorController *editor))startExportBlock
+                                   output:(void (^)(XCFVideoEditorController *editor, NSString *editedFilePath, NSDictionary *info, NSError *error))outputBlock;
 
 @end
 
 // 暂时为了满足下厨房那边的业务逻辑而添加的方法
 @interface XCFVideoEditorController (XCF)
 
-- (void) lockBarButtonItems;
-- (void) unlockBarButtonItems;
+- (void)lockBarButtonItems;
+- (void)unlockBarButtonItems;
 
 @end

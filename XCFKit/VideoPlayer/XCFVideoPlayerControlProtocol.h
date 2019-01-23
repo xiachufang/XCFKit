@@ -6,15 +6,15 @@
 //  Copyright © 2016年 Xiachufang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @protocol XCFVideoPlayerControlProtocol <NSObject>
 
-- (void) play;
-- (void) pause;
-- (void) stop;
+- (void)play;
+- (void)pause;
+- (void)stop;
 
-- (BOOL) isPlaying;
-- (CGFloat) progress;
+- (BOOL)isPlaying;
+- (CGFloat)progress;
 
 @end

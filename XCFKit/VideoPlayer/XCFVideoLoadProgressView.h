@@ -17,7 +17,6 @@ typedef enum : NSUInteger {
 @interface XCFVideoLoadProgressView : UIView
 
 @property (nonatomic, assign) XCFVideoLoadStatus status;
-
 @property (nonatomic, assign) CGFloat progress; // progress is [0..1]
 
 @end

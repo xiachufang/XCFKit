@@ -7,15 +7,13 @@
 //
 
 #import "XCFAVPlayerController.h"
-#import "XCFAVPlayerView.h"
 #import "XCFAVPlayerControllerAnimator.h"
+#import "XCFAVPlayerView.h"
 #import "XCFVideoLoadProgressView.h"
 
-@interface XCFAVPlayerController ()
-<
-XCFAVPlayerViewDelegate,
-UIViewControllerTransitioningDelegate
->
+@interface XCFAVPlayerController () <
+    XCFAVPlayerViewDelegate,
+    UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) NSString *actualVideoPath;
 @property (nonatomic, strong) NSURL *remoteVideoURL;
@@ -27,67 +25,61 @@ UIViewControllerTransitioningDelegate
 // control interface
 @property (nonatomic, strong) UIButton *closeButton;
 @property (nonatomic, strong) UIButton *playButton; // play or pause
-@property (nonatomic, strong) UILabel  *currentTimeLabel;
-@property (nonatomic, strong) UILabel  *durationLabel;
+@property (nonatomic, strong) UILabel *currentTimeLabel;
+@property (nonatomic, strong) UILabel *durationLabel;
 @property (nonatomic, strong) UISlider *progressSlider;
 
 @end
 
-@implementation XCFAVPlayerController
-{
+@implementation XCFAVPlayerController {
     BOOL _isVideoAtLocal;
     BOOL _isVideoLoaded;
     BOOL _allowPlaybackControls;
     BOOL _playbackControlsVisible;
-    
+
     UIImage *_previewImage;
-    
+
     struct {
-        unsigned int didCancel   : 1;
-        unsigned int playToEnd   : 1;
+        unsigned int didCancel : 1;
+        unsigned int playToEnd : 1;
     } _delegateFlag;
-    
+
     BOOL _isLoading;
 }
 
 #pragma mark - life cycle
 
-- (void) dealloc
-{
+- (void)dealloc {
     _playerView = nil;
 }
 
-- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     return [self initWithVideoFilePath:nil
                           previewImage:nil
                  allowPlaybackControls:NO];
 }
 
-- (instancetype) initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     return [self initWithVideoFilePath:nil
                           previewImage:nil
                  allowPlaybackControls:NO];
 }
 
-- (instancetype) initWithVideoFilePath:(NSString *)videoPath
-                          previewImage:(UIImage *)previewImage
-                 allowPlaybackControls:(BOOL)allowPlaybackControls
-{
+- (instancetype)initWithVideoFilePath:(NSString *)videoPath
+                         previewImage:(UIImage *)previewImage
+                allowPlaybackControls:(BOOL)allowPlaybackControls {
     NSParameterAssert(videoPath);
-    
+
     return [self initWithVideoURL:[NSURL fileURLWithPath:videoPath]
                      previewImage:previewImage
             allowPlaybackControls:allowPlaybackControls];
 }
 
-- (instancetype) initWithVideoURL:(NSURL *)videoURL
-                     previewImage:(UIImage *)previewImage
-            allowPlaybackControls:(BOOL)allowPlaybackControls
-{
+- (instancetype)initWithVideoURL:(NSURL *)videoURL
+                    previewImage:(UIImage *)previewImage
+           allowPlaybackControls:(BOOL)allowPlaybackControls {
     NSParameterAssert(videoURL);
-    
+
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         if (videoURL.isFileURL) {
@@ -97,22 +89,22 @@ UIViewControllerTransitioningDelegate
             _remoteVideoURL = [videoURL copy];
             _isVideoAtLocal = NO;
         }
-        
+
         _allowPlaybackControls = allowPlaybackControls;
         _previewImage = previewImage;
         _sourceImageContentMode = UIViewContentModeScaleAspectFit;
-        
+
         self.modalPresentationStyle = UIModalPresentationCustom;
         self.transitioningDelegate = self;
     }
-    
+
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
-    
+
     _playerView = [[XCFAVPlayerView alloc] initWithFrame:self.view.bounds];
     _playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _playerView.delegate = self;
@@ -120,11 +112,11 @@ UIViewControllerTransitioningDelegate
     _playerView.loopCount = 0;
     _playerView.volume = 1;
     [self.view addSubview:_playerView];
-    
+
     _loadingView = [[XCFVideoLoadProgressView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     _loadingView.hidden = YES;
     [self.view addSubview:_loadingView];
-    
+
     if (_previewImage) {
         _previewImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
         _previewImageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -133,14 +125,14 @@ UIViewControllerTransitioningDelegate
         _previewImageView.userInteractionEnabled = NO;
         [self.view insertSubview:_previewImageView aboveSubview:_playerView];
     }
-    
+
     // add touch action
     UITapGestureRecognizer *tap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(tapOnVideoPlayer:)];
+        [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                action:@selector(tapOnVideoPlayer:)];
     self.playerView.userInteractionEnabled = YES;
     [self.playerView addGestureRecognizer:tap];
-    
+
     // prepareToPlay
     if (!_isVideoLoaded && _actualVideoPath) {
         [self.playerView prepareToPlayVideoAtPath:_actualVideoPath];
@@ -149,7 +141,7 @@ UIViewControllerTransitioningDelegate
         [self.playerView prepareToPlayVideoWithURL:_remoteVideoURL];
         _isLoading = YES;
     }
-    
+
     // notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(pause)
@@ -165,63 +157,55 @@ UIViewControllerTransitioningDelegate
                                                object:nil];
 }
 
-- (void) viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+
     [self.playerView play];
-    
+
     if (_isLoading) {
         _loadingView.hidden = NO;
         _loadingView.status = XCFVideoLoadStatusLoading;
     }
 }
 
-- (void) viewDidDisappear:(BOOL)animated
-{
+- (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    
+
     [self.playerView pause];
 }
 
-- (BOOL) prefersStatusBarHidden
-{
+- (BOOL)prefersStatusBarHidden {
     return YES;
 }
 
 #pragma mark - delegate
 
-- (void) setDelegate:(id<XCFAVPlayerControllerDelegate>)delegate
-{
+- (void)setDelegate:(id<XCFAVPlayerControllerDelegate>)delegate {
     _delegate = delegate;
-    
+
     _delegateFlag.didCancel = [delegate respondsToSelector:@selector(avPlayerControllerDidCancel:)];
     _delegateFlag.playToEnd = [delegate respondsToSelector:@selector(avPlayerControllerDidPlayToEnd:)];
 }
 
 #pragma mark - layout
 
-- (void) createControlInterface
-{
+- (void)createControlInterface {
     // todo
 }
 
-- (void) viewDidLayoutSubviews
-{
+- (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    
+
     _loadingView.center = _playerView.center;
 }
 
-- (CGRect) videoRect
-{
+- (CGRect)videoRect {
     return self.playerView.videoRect;
 }
 
 #pragma mark - action
 
-- (void) _presentError:(NSError *)error
-{
+- (void)_presentError:(NSError *)error {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:error.domain
                                                                              message:error.localizedDescription
                                                                       preferredStyle:UIAlertControllerStyleAlert];
@@ -230,37 +214,34 @@ UIViewControllerTransitioningDelegate
                                                    handler:nil];
     [alertController addAction:action];
     [self presentViewController:alertController animated:YES completion:nil];
-    
+
     _isLoading = NO;
     [_loadingView removeFromSuperview];
     _loadingView.status = XCFVideoLoadStatusPlay;
     _loadingView = nil;
 }
 
-- (void) _videoDidLoaded
-{
+- (void)_videoDidLoaded {
     self->_isVideoLoaded = YES;
     [_previewImageView removeFromSuperview];
     _previewImageView = nil;
-    
+
     _isLoading = NO;
-    
+
     [_loadingView removeFromSuperview];
     _loadingView.status = XCFVideoLoadStatusPlay;
     _loadingView = nil;
-    
+
     if (!self.isBeingPresented && [UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
         [self play];
     }
 }
 
-- (void) _togglePlaybackControlsVisibility
-{
+- (void)_togglePlaybackControlsVisibility {
     // todo
 }
 
-- (void) tapOnVideoPlayer:(id)sender
-{
+- (void)tapOnVideoPlayer:(id)sender {
     if (_allowPlaybackControls) {
         [self _togglePlaybackControlsVisibility];
     } else {
@@ -268,8 +249,7 @@ UIViewControllerTransitioningDelegate
     }
 }
 
-- (void) closeDisplayAction:(id)sender
-{
+- (void)closeDisplayAction:(id)sender {
     if (_delegateFlag.didCancel) {
         [self.delegate avPlayerControllerDidCancel:self];
     }
@@ -277,122 +257,108 @@ UIViewControllerTransitioningDelegate
 
 #pragma mark - XCFAVPlayerViewDelegate
 
-- (void) avPlayerViewDidPlayToEnd:(XCFAVPlayerView *)playerView
-{
+- (void)avPlayerViewDidPlayToEnd:(XCFAVPlayerView *)playerView {
     if (playerView == self.playerView && _delegateFlag.playToEnd) {
         [self.delegate avPlayerControllerDidPlayToEnd:self];
     }
 }
 
-- (void) avPlayerViewDidReadyToPlay:(XCFAVPlayerView *)playerView
-{
+- (void)avPlayerViewDidReadyToPlay:(XCFAVPlayerView *)playerView {
     [self _videoDidLoaded];
 }
 
-- (void) avPlayerView:(XCFAVPlayerView *)playerView failedToPlayWithError:(NSError *)error
-{
+- (void)avPlayerView:(XCFAVPlayerView *)playerView failedToPlayWithError:(NSError *)error {
     [self _presentError:error];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
 
-- (void) beginPresentAnimation
-{
+- (void)beginPresentAnimation {
     self.playerView.hidden = YES;
     self.previewImageView.hidden = YES;
     self.loadingView.hidden = YES;
 }
 
-- (void) endPresentAnimation
-{
+- (void)endPresentAnimation {
     self.playerView.hidden = NO;
     self.previewImageView.hidden = NO;
     self.loadingView.hidden = NO;
 }
 
-- (void) beginDismissAnimation
-{
+- (void)beginDismissAnimation {
     self.playerView.hidden = YES;
     self.previewImageView.hidden = YES;
     self.loadingView.hidden = YES;
 }
 
-- (void) endDismissAnimation
-{
+- (void)endDismissAnimation {
     // do nothing
 }
 
-- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
-{
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
     if (self.sourceController && self.sourceView && self.sourceImage) {
         XCFAVPlayerControllerAnimator *animator = [XCFAVPlayerControllerAnimator new];
         animator.avPlayerController = self;
         animator.presentingController = self.sourceController;
-        
+
         UIImageView *animateImageView = [UIImageView new];
         animateImageView.clipsToBounds = YES;
         animateImageView.backgroundColor = [UIColor blackColor];
         animateImageView.image = self.sourceImage;
         animateImageView.contentMode = self.sourceImageContentMode;
-        
+
         animator.animateImageView = animateImageView;
         animator.sourceFrame = [self.sourceController.view convertRect:self.sourceView.bounds
                                                               fromView:self.sourceView];
         animator.isPresenting = YES;
         return animator;
     }
-    
+
     return nil;
 }
 
-- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
-{
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     if (self.sourceController && self.sourceView && self.sourceImage) {
         XCFAVPlayerControllerAnimator *animator = [XCFAVPlayerControllerAnimator new];
         animator.avPlayerController = self;
         animator.presentingController = self.sourceController;
-        
+
         UIImageView *animateImageView = [UIImageView new];
         animateImageView.clipsToBounds = YES;
         animateImageView.backgroundColor = [UIColor blackColor];
         animateImageView.image = self.sourceImage;
         animateImageView.contentMode = self.sourceImageContentMode;
-        
+
         animator.animateImageView = animateImageView;
         animator.sourceFrame = [self videoRect];
         animator.destinationFrame = [self.sourceController.view convertRect:self.sourceView.bounds
-                                                              fromView:self.sourceView];
+                                                                   fromView:self.sourceView];
         animator.isPresenting = NO;
         return animator;
     }
-    
+
     return nil;
 }
 
 #pragma mark - XCFVideoPlayerControlProtocol
 
-- (void) play
-{
+- (void)play {
     [self.playerView play];
 }
 
-- (void) pause
-{
+- (void)pause {
     [self.playerView pause];
 }
 
-- (void) stop
-{
+- (void)stop {
     [self.playerView stop];
 }
 
-- (BOOL) isPlaying
-{
+- (BOOL)isPlaying {
     return [self.playerView isPlaying];
 }
 
-- (CGFloat) progress
-{
+- (CGFloat)progress {
     return [self.playerView progress];
 }
 

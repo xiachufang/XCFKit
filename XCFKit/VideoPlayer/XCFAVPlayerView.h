@@ -6,30 +6,30 @@
 //  Copyright © 2016年 XiaChuFang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "XCFVideoPlayerControlProtocol.h"
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class XCFAVPlayerView,AVAsset,AVPlayerLayer;
+@class XCFAVPlayerView, AVAsset, AVPlayerLayer;
 
 @protocol XCFAVPlayerViewDelegate <NSObject>
 
 @optional
 
-- (void) avPlayerViewDidReadyToPlay:(XCFAVPlayerView *)playerView;
-- (void) avPlayerView:(XCFAVPlayerView *)playerView failedToPlayWithError:(NSError *)error;
-- (void) avPlayerViewDidPlayToEnd:(XCFAVPlayerView *)playerView;
-- (void) avPlayerViewDidUpgradeProgress:(XCFAVPlayerView *)playerView;
-- (void) avPlayerViewDidPause:(XCFAVPlayerView *)playerView;
+- (void)avPlayerViewDidReadyToPlay:(XCFAVPlayerView *)playerView;
+- (void)avPlayerView:(XCFAVPlayerView *)playerView failedToPlayWithError:(NSError *)error;
+- (void)avPlayerViewDidPlayToEnd:(XCFAVPlayerView *)playerView;
+- (void)avPlayerViewDidUpgradeProgress:(XCFAVPlayerView *)playerView;
+- (void)avPlayerViewDidPause:(XCFAVPlayerView *)playerView;
 
 @end
 
-@interface XCFAVPlayerView : UIView<XCFVideoPlayerControlProtocol>
+@interface XCFAVPlayerView : UIView <XCFVideoPlayerControlProtocol>
 
-- (void) prepareToPlayVideoAtPath:(NSString *)videoPath;
-- (void) prepareToPlayVideoAtAsset:(AVAsset *)asset;
-- (void) prepareToPlayVideoWithURL:(nullable NSURL *)videoURL;
+- (void)prepareToPlayVideoAtPath:(NSString *)videoPath;
+- (void)prepareToPlayVideoAtAsset:(AVAsset *)asset;
+- (void)prepareToPlayVideoWithURL:(nullable NSURL *)videoURL;
 
 @property (nonatomic, assign) BOOL fillPlayerWindow; // default is YES
 
@@ -39,20 +39,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) float volume; // 音量
 
-- (AVPlayerLayer *) playerLayer;
+- (AVPlayerLayer *)playerLayer;
 
-- (NSTimeInterval) duration;
-- (NSTimeInterval) currentTime;
+- (NSTimeInterval)duration;
+- (NSTimeInterval)currentTime;
 
-- (CGFloat) rate;
-- (CGFloat) timeBaseRate;
+- (CGFloat)rate;
+- (CGFloat)timeBaseRate;
 
-- (nullable UIImage *) snapshotOfCurrentFrame;
+- (nullable UIImage *)snapshotOfCurrentFrame;
 
-- (BOOL) seekToSecond:(NSTimeInterval)second;
-- (void) asyncSeekToSecond:(NSTimeInterval)second completion:(void (^)(BOOL finish))completion;
+- (BOOL)seekToSecond:(NSTimeInterval)second;
+- (void)asyncSeekToSecond:(NSTimeInterval)second completion:(void (^)(BOOL finish))completion;
 
-- (CGRect) videoRect;
+- (CGRect)videoRect;
 
 @end
 

@@ -14,29 +14,25 @@
 
 @end
 
-@implementation XCFVideoLoadProgressView
-{
+@implementation XCFVideoLoadProgressView {
     CGFloat _animationLayerLineWidth;
 }
 
-- (instancetype) initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self initialization];
     }
-    
+
     return self;
 }
 
-- (void) awakeFromNib
-{
+- (void)awakeFromNib {
     [super awakeFromNib];
     [self initialization];
 }
 
-- (void) initialization
-{
+- (void)initialization {
     self.opaque = NO;
     _animationLayerLineWidth = 6;
     self.userInteractionEnabled = NO;
@@ -44,9 +40,9 @@
 
 - (void)drawRect:(CGRect)rect {
     CGFloat diameter = MIN(rect.size.width, rect.size.height);
-    CGRect displayRect = (CGRect){rect.origin,CGSizeMake(diameter, diameter)};
-    displayRect = CGRectOffset(displayRect, (rect.size.width - diameter) / 2, (rect.size.height - diameter)/2);
-    
+    CGRect displayRect = (CGRect){rect.origin, CGSizeMake(diameter, diameter)};
+    displayRect = CGRectOffset(displayRect, (rect.size.width - diameter) / 2, (rect.size.height - diameter) / 2);
+
     // fill background
     CGFloat backgroundAlpha = self.status == XCFVideoLoadStatusPlay ? 0.8 : 0;
     CGContextRef ctx = UIGraphicsGetCurrentContext();
@@ -55,7 +51,7 @@
     CGContextSetRGBFillColor(ctx, 1, 1, 1, backgroundAlpha);
     CGContextFillPath(ctx);
 
-    CGPoint center = CGPointMake(displayRect.origin.x + diameter/2, displayRect.origin.y + diameter/2);
+    CGPoint center = CGPointMake(displayRect.origin.x + diameter / 2, displayRect.origin.y + diameter / 2);
     if (self.status == XCFVideoLoadStatusPlay) {
         // drwa play button
         CGContextBeginPath(ctx);
@@ -63,7 +59,7 @@
         CGContextAddLineToPoint(ctx, center.x - diameter / 8, center.y + diameter / 8 * 1.732);
         CGContextAddLineToPoint(ctx, center.x + diameter / 4, center.y);
         CGContextClosePath(ctx);
-        
+
         CGContextSetRGBFillColor(ctx, 0, 0, 0, 0.8);
         CGContextFillPath(ctx);
     } else {
@@ -75,34 +71,31 @@
     }
 }
 
-- (void) layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     _loadingAnimationLayer.frame = self.bounds;
     _loadingAnimationLayer.path = [self loadingAnimationLayerPath];
 }
 
-- (void) setProgress:(CGFloat)progress
-{
+- (void)setProgress:(CGFloat)progress {
     CGFloat p = MIN(MAX(0, progress), 1);
     if (p != _progress) {
         _progress = p;
-        
+
         if (self.status == XCFVideoLoadStatusProgress) {
             [self updateLoadingLayer];
         }
     }
 }
 
-- (void) setStatus:(XCFVideoLoadStatus)status
-{
+- (void)setStatus:(XCFVideoLoadStatus)status {
     if (_status != status) {
         _status = status;
         [self setNeedsDisplay];
-        
+
         [self updateLoadingLayer];
-        
+
         if (_status == XCFVideoLoadStatusLoading) {
             [self animateLoadingLayer];
         } else {
@@ -111,20 +104,18 @@
     }
 }
 
-- (void) tintColorDidChange
-{
+- (void)tintColorDidChange {
     [super tintColorDidChange];
     [self setNeedsDisplay];
 }
 
 #pragma mark - loading && progress
 
-- (CGPathRef) loadingAnimationLayerPath
-{
+- (CGPathRef)loadingAnimationLayerPath {
     CGRect rect = self.bounds;
     CGFloat diameter = MIN(rect.size.width, rect.size.height);
-    CGRect displayRect = (CGRect){rect.origin,CGSizeMake(diameter, diameter)};
-    displayRect = CGRectOffset(displayRect, (rect.size.width - diameter) / 2, (rect.size.height - diameter)/2);
+    CGRect displayRect = (CGRect){rect.origin, CGSizeMake(diameter, diameter)};
+    displayRect = CGRectOffset(displayRect, (rect.size.width - diameter) / 2, (rect.size.height - diameter) / 2);
     CGPoint displayCenter = CGPointMake(displayRect.origin.x + diameter / 2, displayRect.origin.y + diameter / 2);
     UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:displayCenter
                                                         radius:diameter / 2 - _animationLayerLineWidth / 2
@@ -134,30 +125,28 @@
     return path.CGPath;
 }
 
-- (CAShapeLayer *) loadingAnimationLayer
-{
+- (CAShapeLayer *)loadingAnimationLayer {
     if (!_loadingAnimationLayer) {
         _loadingAnimationLayer = [CAShapeLayer layer];
         _loadingAnimationLayer.frame = self.bounds;
-        _loadingAnimationLayer.actions = @{@"path" : [NSNull null]};
-        
+        _loadingAnimationLayer.actions = @{@"path": [NSNull null]};
+
         _loadingAnimationLayer.fillColor = [UIColor clearColor].CGColor;
-        
+
         _loadingAnimationLayer.lineWidth = _animationLayerLineWidth;
         _loadingAnimationLayer.strokeColor = [UIColor whiteColor].CGColor;
-        
+
         _loadingAnimationLayer.lineCap = kCALineCapRound;
-        
+
         _loadingAnimationLayer.path = [self loadingAnimationLayerPath];
-        
+
         [self.layer addSublayer:_loadingAnimationLayer];
     }
-    
+
     return _loadingAnimationLayer;
 }
 
-- (void) updateLoadingLayer
-{
+- (void)updateLoadingLayer {
     switch (self.status) {
         case XCFVideoLoadStatusPlay:
             _loadingAnimationLayer.hidden = YES;
@@ -183,35 +172,31 @@
     }
 }
 
-- (void) animateLoadingLayer
-{
-    CABasicAnimation* rotationAnimation;
+- (void)animateLoadingLayer {
+    CABasicAnimation *rotationAnimation;
     rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotationAnimation.fromValue = [NSNumber numberWithFloat:0];
-    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0];
+    rotationAnimation.toValue = [NSNumber numberWithFloat:M_PI * 2.0];
     rotationAnimation.duration = 0.68;
     rotationAnimation.cumulative = YES;
     rotationAnimation.repeatCount = CGFLOAT_MAX;
-    
+
     [self endAnimateLoadingLayer];
     [self.loadingAnimationLayer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
 
-- (void) endAnimateLoadingLayer
-{
+- (void)endAnimateLoadingLayer {
     [_loadingAnimationLayer removeAnimationForKey:@"rotationAnimation"];
 }
 
 #pragma mark - size
 
-- (CGSize) sizeThatFits:(CGSize)size
-{
+- (CGSize)sizeThatFits:(CGSize)size {
     CGFloat width = MIN(size.width, size.height);
     return CGSizeMake(width, width);
 }
 
-- (CGSize) intrinsicContentSize
-{
+- (CGSize)intrinsicContentSize {
     return CGSizeMake(40, 40);
 }
 

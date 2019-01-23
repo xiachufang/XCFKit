@@ -6,9 +6,8 @@
 //  Copyright © 2017年 XiaChuFang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 #import "XCFVideoRange.h"
+#import <Foundation/Foundation.h>
 
 @class AVAsset;
 
@@ -25,7 +24,7 @@
 
 // 在 load 之前，`videoPath` 为 nil，`videoLength` 为 0
 // asset 在初始化的时候需要设置 AVURLAssetPreferPreciseDurationAndTimingKey 为 1 不然取不到准确的时间
-- (void) loadVideoFramesWithVideoAsset:(AVAsset *)asset;
+- (void)loadVideoFramesWithVideoAsset:(AVAsset *)asset;
 
 @property (nonatomic, assign) NSTimeInterval maximumTrimLength; // default is 15s, must be positive
 @property (nonatomic, assign) NSTimeInterval minimumTrimLength; // default is 03s, must be positive
