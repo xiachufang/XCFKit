@@ -12,6 +12,5 @@
 
 @end
 
-extern CAGradientLayer* XCFCreateImageContentMaskLayerWithColors(CGColorRef startColor, CGColorRef endColor);
-extern CAGradientLayer* XCFCreateImageContentMaskLayer(void);
-
+extern CAGradientLayer *XCFCreateImageContentMaskLayerWithColors(CGColorRef startColor, CGColorRef endColor);
+extern CAGradientLayer *XCFCreateImageContentMaskLayer(void);

@@ -10,10 +10,9 @@
 
 @implementation UIScrollView (XCFKit)
 
-- (UIEdgeInsets) xcf_contentInset
-{
+- (UIEdgeInsets)xcf_contentInset {
 #ifdef __IPHONE_11_0
-    if (@available(iOS 11,*)) {
+    if (@available(iOS 11, *)) {
         return self.adjustedContentInset;
     } else {
         return self.contentInset;

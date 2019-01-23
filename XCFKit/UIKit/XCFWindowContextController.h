@@ -16,8 +16,8 @@
 
 @property (nonatomic, weak, readonly) UIWindow *window;
 
-+ (instancetype) presentController:(UIViewController *)controller
-                       windowLevel:(UIWindowLevel)level
-                          animated:(BOOL)animated;
++ (instancetype)presentController:(UIViewController *)controller
+                      windowLevel:(UIWindowLevel)level
+                         animated:(BOOL)animated;
 
 @end

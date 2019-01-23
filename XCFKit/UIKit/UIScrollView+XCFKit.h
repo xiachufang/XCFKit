@@ -10,6 +10,6 @@
 
 @interface UIScrollView (XCFKit)
 
-- (UIEdgeInsets) xcf_contentInset;
+- (UIEdgeInsets)xcf_contentInset;
 
 @end

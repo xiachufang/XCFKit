@@ -10,6 +10,6 @@
 
 @interface UIBarButtonItem (View)
 
-- (UIView *) xcf_getView;
+- (UIView *)xcf_getView;
 
 @end

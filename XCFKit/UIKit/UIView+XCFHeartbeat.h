@@ -10,6 +10,6 @@
 
 @interface UIView (XCFHeartbeat)
 
-- (void) xcf_appleHeartbeatAnimation;
+- (void)xcf_appleHeartbeatAnimation;
 
 @end

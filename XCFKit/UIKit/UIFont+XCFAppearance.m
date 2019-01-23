@@ -10,8 +10,7 @@
 
 @implementation UIFont (XCFAppearance)
 
-+ (instancetype)xcf_buttonFont
-{
++ (instancetype)xcf_buttonFont {
     return [UIFont systemFontOfSize:16];
 }
 

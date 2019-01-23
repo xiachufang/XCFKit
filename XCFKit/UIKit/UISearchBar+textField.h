@@ -10,6 +10,6 @@
 
 @interface UISearchBar (textField)
 
-- (UITextField *) xcf_textField;
+- (UITextField *)xcf_textField;
 
 @end

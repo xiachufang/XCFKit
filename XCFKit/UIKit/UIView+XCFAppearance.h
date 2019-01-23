@@ -10,8 +10,8 @@
 
 @interface UIView (XCFAppearance)
 
-@property (assign,nonatomic) CGFloat xcf_cornerRadius UI_APPEARANCE_SELECTOR;
-@property (assign,nonatomic) CGFloat xcf_borderWidth UI_APPEARANCE_SELECTOR;
-@property (assign,nonatomic) UIColor *xcf_borderColor UI_APPEARANCE_SELECTOR;
+@property (assign, nonatomic) CGFloat xcf_cornerRadius UI_APPEARANCE_SELECTOR;
+@property (assign, nonatomic) CGFloat xcf_borderWidth UI_APPEARANCE_SELECTOR;
+@property (assign, nonatomic) UIColor *xcf_borderColor UI_APPEARANCE_SELECTOR;
 
 @end

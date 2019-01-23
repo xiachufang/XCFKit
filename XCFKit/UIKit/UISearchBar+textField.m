@@ -10,13 +10,11 @@
 
 @implementation UISearchBar (textField)
 
-- (UITextField *) xcf_textField
-{
+- (UITextField *)xcf_textField {
     id textfield = [self valueForKey:@"_searchField"];
     if ([textfield isKindOfClass:[UITextField class]]) {
-        return (UITextField*)textfield;
+        return (UITextField *)textfield;
     }
-    
     return nil;
 }
 

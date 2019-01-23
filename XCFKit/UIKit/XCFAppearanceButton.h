@@ -23,7 +23,7 @@ typedef enum : NSUInteger {
 
 @interface UIButton (XCFAppearance)
 
-- (void) xcf_applyStyle:(XCFAppearanceButtonStyle)style;
+- (void)xcf_applyStyle:(XCFAppearanceButtonStyle)style;
 
 @end
 
@@ -42,7 +42,6 @@ typedef enum : NSUInteger {
 + (instancetype)xcf_buttonJHighlightedBackgroundImage;
 
 @end
-
 
 IB_DESIGNABLE
 @interface XCFAppearanceButtonA : UIButton
@@ -86,23 +85,30 @@ IB_DESIGNABLE
 
 #pragma mark - compatibility
 
-__attribute__ ((deprecated))
-@interface XcfAppearanceButtonA : XCFAppearanceButtonA{} @end
-__attribute__ ((deprecated))
-@interface XcfAppearanceButtonB : XCFAppearanceButtonB{} @end
-__attribute__ ((deprecated))
-@interface XcfAppearanceButtonC : XCFAppearanceButtonC{} @end
-__attribute__ ((deprecated))
-@interface XcfAppearanceButtonD : XCFAppearanceButtonD{} @end
-__attribute__ ((deprecated))
-@interface XcfAppearanceButtonE : XCFAppearanceButtonE{} @end
-__attribute__ ((deprecated))
-@interface XcfAppearanceButtonF : XCFAppearanceButtonF{} @end
-__attribute__ ((deprecated))
-@interface XcfAppearanceButtonG : XCFAppearanceButtonG{} @end
-__attribute__ ((deprecated))
-@interface XcfAppearanceButtonH : XCFAppearanceButtonH{} @end
-__attribute__ ((deprecated))
-@interface XcfAppearanceButtonI : XCFAppearanceButtonI{} @end
-
-
+__attribute__((deprecated))
+@interface XcfAppearanceButtonA : XCFAppearanceButtonA {}
+@end
+__attribute__((deprecated))
+@interface XcfAppearanceButtonB : XCFAppearanceButtonB {}
+@end
+__attribute__((deprecated))
+@interface XcfAppearanceButtonC : XCFAppearanceButtonC {}
+@end
+__attribute__((deprecated))
+@interface XcfAppearanceButtonD : XCFAppearanceButtonD {}
+@end
+__attribute__((deprecated))
+@interface XcfAppearanceButtonE : XCFAppearanceButtonE {}
+@end
+__attribute__((deprecated))
+@interface XcfAppearanceButtonF : XCFAppearanceButtonF {}
+@end
+__attribute__((deprecated))
+@interface XcfAppearanceButtonG : XCFAppearanceButtonG {}
+@end
+__attribute__((deprecated))
+@interface XcfAppearanceButtonH : XCFAppearanceButtonH {}
+@end
+__attribute__((deprecated))
+@interface XcfAppearanceButtonI : XCFAppearanceButtonI {}
+@end

@@ -10,10 +10,8 @@
 
 @interface UIColor (Hex)
 
-+ (UIColor *) xcf_colorWithHexString:(NSString *)stringWithHex;
-
-+ (NSString *) xcf_hexStringWithColor:(UIColor *)color;
-
-+ (UIColor *) xcf_contrastColorWithColor:(UIColor *)color;
++ (UIColor *)xcf_colorWithHexString:(NSString *)stringWithHex;
++ (NSString *)xcf_hexStringWithColor:(UIColor *)color;
++ (UIColor *)xcf_contrastColorWithColor:(UIColor *)color;
 
 @end

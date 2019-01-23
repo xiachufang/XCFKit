@@ -10,13 +10,10 @@
 
 @interface UIFont (fontWeight)
 
-+ (UIFont *) xcf_mediumSystemFontWithSize:(CGFloat)size;
++ (UIFont *)xcf_mediumSystemFontWithSize:(CGFloat)size;
++ (UIFont *)xcf_lightSystemFontWithSize:(CGFloat)size;
++ (UIFont *)xcf_regularSystemFontWithSize:(CGFloat)size;
++ (UIFont *)xcf_boldSystemFontWithSize:(CGFloat)size;
++ (UIFont *)xcf_heavySystemFontWithSize:(CGFloat)size;
 
-+ (UIFont *) xcf_lightSystemFontWithSize:(CGFloat)size;
-
-+ (UIFont *) xcf_regularSystemFontWithSize:(CGFloat)size;
-
-+ (UIFont *) xcf_boldSystemFontWithSize:(CGFloat)size;
-
-+ (UIFont *) xcf_heavySystemFontWithSize:(CGFloat)size;
 @end
