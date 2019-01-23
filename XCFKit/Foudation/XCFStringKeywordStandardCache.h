@@ -12,12 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol XCFStringKeywordDataCache <NSObject>
 
-- (nullable NSString *) valueForKeyword:(NSString *)keyword;
-- (void) cacheValue:(NSString *)value forKeyword:(NSString *)keyword;
+- (nullable NSString *)valueForKeyword:(NSString *)keyword;
+- (void)cacheValue:(NSString *)value forKeyword:(NSString *)keyword;
 
 @end
 
-@interface XCFStringKeywordStandardCache : NSObject<XCFStringKeywordDataCache>
+@interface XCFStringKeywordStandardCache : NSObject <XCFStringKeywordDataCache>
 
 @end
 

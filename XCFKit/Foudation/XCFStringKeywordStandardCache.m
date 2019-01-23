@@ -8,29 +8,25 @@
 
 #import "XCFStringKeywordStandardCache.h"
 
-@implementation XCFStringKeywordStandardCache
-{
+@implementation XCFStringKeywordStandardCache {
     NSCache *_cache;
 }
 
-- (instancetype) init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         _cache = [NSCache new];
-        _cache.name = [NSString stringWithFormat:@"%@-%@",NSStringFromClass(self.class),[[NSUUID UUID] UUIDString]];
+        _cache.name = [NSString stringWithFormat:@"%@-%@", NSStringFromClass(self.class), [[NSUUID UUID] UUIDString]];
     }
-    
+
     return self;
 }
 
-- (NSString *) valueForKeyword:(NSString *)keyword
-{
+- (NSString *)valueForKeyword:(NSString *)keyword {
     return [_cache objectForKey:keyword];
 }
 
-- (void) cacheValue:(NSString *)value forKeyword:(NSString *)keyword
-{
+- (void)cacheValue:(NSString *)value forKeyword:(NSString *)keyword {
     [_cache setObject:value forKey:keyword];
 }
 
