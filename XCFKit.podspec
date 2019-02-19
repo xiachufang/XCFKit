@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
     s.source       = { :git => "https://github.com/xiachufang/XCFKit.git", :tag => s.version.to_s }
     s.platform     = :ios, "8.0"
 
-    s.source_files = 'XCFKit/XCFKit.h'
+    s.source_files = 'XCFKit/XCFKit.h', 'XCFKit/XCFKitCompat.{h,m}'
     s.library      = 'c++'
     s.framework    = 'UIKit'
 
