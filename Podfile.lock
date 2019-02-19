@@ -1,12 +1,30 @@
 PODS:
   - Kiwi (2.4.0)
+  - XCFKit (1.0.2):
+    - XCFKit/Foundation (= 1.0.2)
+    - XCFKit/UIKit (= 1.0.2)
+    - XCFKit/VideoPlayer (= 1.0.2)
+  - XCFKit/Foundation (1.0.2)
+  - XCFKit/UIKit (1.0.2)
+  - XCFKit/VideoPlayer (1.0.2):
+    - XCFKit/UIKit
 
 DEPENDENCIES:
   - Kiwi
+  - XCFKit (from `./`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Kiwi
+
+EXTERNAL SOURCES:
+  XCFKit:
+    :path: "./"
 
 SPEC CHECKSUMS:
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
+  XCFKit: 9059b132fd56c3af9f633f810083353dcdee77f5
 
-PODFILE CHECKSUM: 5cc98fc00298262def310d5ab130eb566070b3ca
+PODFILE CHECKSUM: d6c944e226dd5def524b5f82da3e8d1f22bf80fd
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.3
