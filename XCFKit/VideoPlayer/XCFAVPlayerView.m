@@ -196,6 +196,12 @@
                                      NSDictionary *settings = @{(id)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_32BGRA)};
                                      strong_self.playerItemOutput = [[AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:settings];
                                      [strong_self.playerItem addOutput:strong_self.playerItemOutput];
+                                     if ([self.delegate respondsToSelector:@selector(avPlayerViewPreferredForwardBufferDuration)]) {
+                                         if (@available(iOS 10.0, *)) {
+                                             strong_self.playerItem.preferredForwardBufferDuration = [self.delegate avPlayerViewPreferredForwardBufferDuration];
+                                         } 
+                                     }
+                                     
                                      [[NSNotificationCenter defaultCenter] addObserver:strong_self
                                                                               selector:@selector(didPlayToEndNotification:)
                                                                                   name:AVPlayerItemDidPlayToEndTimeNotification

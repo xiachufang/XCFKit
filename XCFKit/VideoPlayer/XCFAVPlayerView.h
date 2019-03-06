@@ -22,7 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)avPlayerViewDidPlayToEnd:(XCFAVPlayerView *)playerView;
 - (void)avPlayerViewDidUpgradeProgress:(XCFAVPlayerView *)playerView;
 - (void)avPlayerViewDidPause:(XCFAVPlayerView *)playerView;
-
+// playitem.preferredForwardBufferDuration iOS10 以后有效
+- (NSTimeInterval)avPlayerViewPreferredForwardBufferDuration;
 @end
 
 @interface XCFAVPlayerView : UIView <XCFVideoPlayerControlProtocol>

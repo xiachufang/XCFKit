@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "XCFKit"
-    s.version      = "1.0.2"
+    s.version      = "1.0.3"
     s.summary      = "Standard toolset classes & categories used by xiachufang iOS Projects"
     s.homepage     = "https://github.com/xiachufang/XCFKit"
     s.author       = { "yiplee" => "guoyinl@gmail.com" }
