@@ -29,9 +29,6 @@ XCFAVPlayerControllerDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSString *previewImagePath = [[NSBundle mainBundle] pathForResource:@"microVideoPlayerPreviewImage"
-                                                                 ofType:@"jpg"];
     _playerView = [[XCFMicroVideoPlayerView alloc] initWithFrame:self.videoPlayerContainerView.bounds];
     _playerView.loopCount = 0;
     _playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

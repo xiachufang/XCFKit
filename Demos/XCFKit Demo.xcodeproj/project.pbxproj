@@ -189,8 +189,7 @@
 				E80039E21DC325D100103028 /* Frameworks */,
 				E80039E31DC325D100103028 /* Resources */,
 				E8003A481DC3358B00103028 /* Embed Frameworks */,
-				118341CE3167A9F3A23867AC /* [CP] Embed Pods Frameworks */,
-				939842E2BD7A90218FC86CE1 /* [CP] Copy Pods Resources */,
+				398B0B99616D35BD9F62D23E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -250,34 +249,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		118341CE3167A9F3A23867AC /* [CP] Embed Pods Frameworks */ = {
+		398B0B99616D35BD9F62D23E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCFKit iOS Demo/Pods-XCFKit iOS Demo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		939842E2BD7A90218FC86CE1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-XCFKit iOS Demo/Pods-XCFKit iOS Demo-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/XCFKit/Video.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Video.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCFKit iOS Demo/Pods-XCFKit iOS Demo-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-XCFKit iOS Demo/Pods-XCFKit iOS Demo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9515BA140B5658E48A397943 /* [CP] Check Pods Manifest.lock */ = {

@@ -45,7 +45,7 @@
     return _decoder.videoURL.path;
 }
 
-- (UIImage *)screenshot {
+- (nullable UIImage *)screenshot {
     CGImageRef ref = (__bridge CGImageRef)self.layer.contents;
     if (ref) {
         return [[UIImage alloc] initWithCGImage:ref];
@@ -160,10 +160,10 @@
     CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
     CGColorSpaceRelease(colorSpace);
     CGContextRelease(cgContext);
+    CGImageRelease(imageRef);
     if (rotatedBuffer) {
         CFRelease(rotatedBuffer);
     }
-
     return imageRef;
 }
 
@@ -204,7 +204,6 @@
         if (_decoder) {
             CGImageRef ref = [_decoder extractThumbnailImage];
             [self displayImageRef:ref];
-            CGImageRelease(ref);
         } else {
             [self displayImageRef:nil];
         }
@@ -288,7 +287,6 @@
                           willDisplaySampleBuffer:buffer];
         }
         [self displayImageRef:ref];
-        CGImageRelease(ref);
         [self statusChanged];
     }
 

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "XCFKit"
-    s.version      = "1.0.3"
+    s.version      = "1.1.0"
     s.summary      = "Standard toolset classes & categories used by xiachufang iOS Projects"
     s.homepage     = "https://github.com/xiachufang/XCFKit"
     s.author       = { "yiplee" => "guoyinl@gmail.com" }
@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
     s.source_files = 'XCFKit/XCFKit.h', 'XCFKit/XCFKitCompat.{h,m}'
     s.library      = 'c++'
     s.framework    = 'UIKit'
+    s.resource_bundles = {"Video" => 'XCFKit/Resource/*.png'}
 
     s.subspec 'Foundation' do |f|
         f.ios.deployment_target = '7.0'

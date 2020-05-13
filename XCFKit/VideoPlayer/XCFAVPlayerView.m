@@ -120,8 +120,9 @@
                                      CVPixelBufferGetHeight(buffer));
             CGImageRef cgImage = [context createCGImage:ciImage fromRect:rect];
             CVBufferRelease(buffer);
-
-            return [UIImage imageWithCGImage:cgImage];
+            UIImage *image = [UIImage imageWithCGImage:cgImage];
+            CGImageRelease(cgImage);
+            return image;
         }
     }
 

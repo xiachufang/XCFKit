@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL enableDebugMode;
 @property (nonatomic, weak) id<XCFMicroVideoPlayerViewDelegate> delegate;
 
-- (UIImage *)screenshot;
+- (nullable UIImage *)screenshot;
 - (void)renderImage:(UIImage *)image;
 - (NSTimeInterval)playTime;
 // decoder

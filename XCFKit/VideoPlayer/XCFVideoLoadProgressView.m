@@ -16,6 +16,9 @@
 
 @implementation XCFVideoLoadProgressView {
     CGFloat _animationLayerLineWidth;
+    
+    
+    
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -42,26 +45,15 @@
     CGFloat diameter = MIN(rect.size.width, rect.size.height);
     CGRect displayRect = (CGRect){rect.origin, CGSizeMake(diameter, diameter)};
     displayRect = CGRectOffset(displayRect, (rect.size.width - diameter) / 2, (rect.size.height - diameter) / 2);
-
-    // fill background
-    CGFloat backgroundAlpha = self.status == XCFVideoLoadStatusPlay ? 0.8 : 0;
+    
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextClearRect(ctx, rect);
-    CGContextAddEllipseInRect(ctx, displayRect);
-    CGContextSetRGBFillColor(ctx, 1, 1, 1, backgroundAlpha);
-    CGContextFillPath(ctx);
-
-    CGPoint center = CGPointMake(displayRect.origin.x + diameter / 2, displayRect.origin.y + diameter / 2);
     if (self.status == XCFVideoLoadStatusPlay) {
         // drwa play button
-        CGContextBeginPath(ctx);
-        CGContextMoveToPoint(ctx, center.x - diameter / 8, center.y - diameter / 8 * 1.732);
-        CGContextAddLineToPoint(ctx, center.x - diameter / 8, center.y + diameter / 8 * 1.732);
-        CGContextAddLineToPoint(ctx, center.x + diameter / 4, center.y);
-        CGContextClosePath(ctx);
-
-        CGContextSetRGBFillColor(ctx, 0, 0, 0, 0.8);
-        CGContextFillPath(ctx);
+        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+        UIImage *image  = [UIImage imageNamed:@"Video.bundle/playButtonLarge" inBundle: bundle compatibleWithTraitCollection:nil];
+        CGImageRef reft = image.CGImage;
+        CGContextDrawImage(ctx, displayRect, reft);
     } else {
         CGFloat borderWidth = _animationLayerLineWidth;
         CGContextAddEllipseInRect(ctx, CGRectInset(displayRect, borderWidth / 2, borderWidth / 2));
