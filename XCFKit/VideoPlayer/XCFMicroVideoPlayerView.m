@@ -160,7 +160,6 @@
     CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
     CGColorSpaceRelease(colorSpace);
     CGContextRelease(cgContext);
-    CGImageRelease(imageRef);
     if (rotatedBuffer) {
         CFRelease(rotatedBuffer);
     }
@@ -173,6 +172,7 @@
 
 - (void)displayImageRef:(CGImageRef)imageRef transform:(CGAffineTransform)transform {
     [self.layer setContents:(__bridge id)(imageRef)];
+    CGImageRelease(imageRef);
     self.layer.transform = CATransform3DMakeAffineTransform(transform);
 }
 

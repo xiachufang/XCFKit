@@ -382,7 +382,6 @@
     CGImageRef imageRef = [_imageGenerator copyCGImageAtTime:kCMTimeZero
                                                   actualTime:NULL
                                                        error:NULL];
-    CGImageRelease(imageRef);
     return imageRef;
 }
 
