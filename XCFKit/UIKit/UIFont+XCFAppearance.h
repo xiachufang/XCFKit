@@ -10,6 +10,6 @@
 
 @interface UIFont (XCFAppearance)
 
-+ (instancetype)xcf_buttonFont;
+//+ (instancetype)xcf_buttonFont;
 
 @end
