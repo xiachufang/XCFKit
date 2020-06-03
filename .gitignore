@@ -11,3 +11,4 @@ Pods
 *.xccheckout
 Podfile.local
 Demos/XCFKit Demo.xcworkspace/xcshareddata/
+Demos/XCFKit Demo.xcodeproj/xcshareddata/
