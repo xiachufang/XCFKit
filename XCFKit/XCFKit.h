@@ -22,16 +22,10 @@ FOUNDATION_EXPORT const unsigned char XCFKitVersionString[];
 #if XCF_UIKIT
 
 // UIKit
-#import <XCFKit/XCFAppearanceButton.h>
-#import <XCFKit/UIFont+XCFAppearance.h>
-#import <XCFKit/UIColor+Hex.h>
-#import <XCFKit/UIColor+XCFAppearance.h>
 #import <XCFKit/UIImage+PureColor.h>
-#import <XCFKit/UIView+XCFAppearance.h>
 #import <XCFKit/UIBarButtonItem+View.h>
 #import <XCFKit/UISearchBar+textField.h>
 #import <XCFKit/UIScrollView+XCFKit.h>
-#import <XCFKit/UIFont+fontWeight.h>
 #import <XCFKit/UIView+XCFHeartbeat.h>
 #import <XCFKit/XCFWindowContextController.h>
 #import <XCFKit/XCFImageContentMaskLayer.h>
