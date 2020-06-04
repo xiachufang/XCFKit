@@ -25,13 +25,7 @@
 
 @property (nonatomic, strong) XCFAVPlayerView *playerView;
 @property (nonatomic, strong) UIScrollView *playerScrollView;
-
-@property (nonatomic, strong) XCFVideoRangeSlider *videoRangeSlider;     //_videoRangeSlider.tintColor = [UIColor xcf_linkColor];
-
 @property (nonatomic, assign) XCFVideoRange currentRange;
-
-@property (nonatomic, strong) UIView *playerContainerBackgroundView; //    _playerContainerBackgroundView.backgroundColor = [UIColor xcf_colorWithHexString:@"4A4A4A"];
-
 
 @end
 

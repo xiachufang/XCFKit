@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class XCFVideoRangeSlider;
 @protocol XCFVideoEditorControllerDelegate;
 
 @class AVAsset;
@@ -35,6 +35,8 @@ typedef NS_ENUM(NSInteger, XCFVideoEditorVideoQualityType) {
 
 @property (nonatomic, assign) NSTimeInterval videoMaximumDuration; // default is 10 s
 @property (nonatomic, assign) NSTimeInterval videoMinimumDuration; // default is 3 s
+@property (nonatomic, strong) XCFVideoRangeSlider *videoRangeSlider;
+@property (nonatomic, strong) UIView *playerContainerBackgroundView;
 
 // video quality , default is XCFVideoEditorVideoQualityTypeMedium | XCFVideoEditorVideoQualityType1x1
 @property (nonatomic, assign) XCFVideoEditorVideoQualityType videoQuality;
