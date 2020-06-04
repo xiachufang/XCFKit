@@ -12,9 +12,6 @@
 #import "XCFAVPlayerView.h"
 #import "XCFVideoRangeSlider.h"
 
-#import "UIColor+Hex.h"
-#import "UIColor+XCFAppearance.h"
-
 #if DEBUG
 #define SHOW_DEBUG_INFO 1
 #else
@@ -29,10 +26,12 @@
 @property (nonatomic, strong) XCFAVPlayerView *playerView;
 @property (nonatomic, strong) UIScrollView *playerScrollView;
 
-@property (nonatomic, strong) XCFVideoRangeSlider *videoRangeSlider;
+@property (nonatomic, strong) XCFVideoRangeSlider *videoRangeSlider;     //_videoRangeSlider.tintColor = [UIColor xcf_linkColor];
+
 @property (nonatomic, assign) XCFVideoRange currentRange;
 
-@property (nonatomic, strong) UIView *playerContainerBackgroundView;
+@property (nonatomic, strong) UIView *playerContainerBackgroundView; //    _playerContainerBackgroundView.backgroundColor = [UIColor xcf_colorWithHexString:@"4A4A4A"];
+
 
 @end
 
@@ -122,7 +121,6 @@
 
     // player background view
     _playerContainerBackgroundView = [[UIView alloc] initWithFrame:[self _playerBackgroundViewFrame]];
-    _playerContainerBackgroundView.backgroundColor = [UIColor xcf_colorWithHexString:@"4A4A4A"];
     [self.view addSubview:_playerContainerBackgroundView];
 
     // player
@@ -279,7 +277,6 @@
     [_playerView prepareToPlayVideoAtAsset:self.videoAsset];
 
     _videoRangeSlider = [[XCFVideoRangeSlider alloc] initWithFrame:[self _videoRangeSliderFrame]];
-    _videoRangeSlider.tintColor = [UIColor xcf_linkColor];
     _videoRangeSlider.minimumTrimLength = self.videoMinimumDuration;
     _videoRangeSlider.maximumTrimLength = self.videoMaximumDuration;
     [self.view addSubview:_videoRangeSlider];
@@ -295,7 +292,7 @@
         _currentRangeLabel.textAlignment = NSTextAlignmentLeft;
         _currentRangeLabel.numberOfLines = 1;
         _currentRangeLabel.font = [UIFont fontWithName:@"Menlo-Regular" size:16];
-        _currentRangeLabel.textColor = [UIColor xcf_yellowTextColor];
+        _currentRangeLabel.textColor = [UIColor yellowColor];
         [self.view addSubview:_currentRangeLabel];
 
         _currentRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -322,7 +319,7 @@
         _currentProgressLabel.textAlignment = NSTextAlignmentLeft;
         _currentProgressLabel.numberOfLines = 1;
         _currentProgressLabel.font = [UIFont fontWithName:@"Menlo-Regular" size:16];
-        _currentProgressLabel.textColor = [UIColor xcf_yellowTextColor];
+        _currentProgressLabel.textColor = [UIColor yellowColor];
         [self.view addSubview:_currentProgressLabel];
 
         _currentProgressLabel.translatesAutoresizingMaskIntoConstraints = NO;

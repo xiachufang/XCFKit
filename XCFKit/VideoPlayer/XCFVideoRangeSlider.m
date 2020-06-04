@@ -9,8 +9,6 @@
 #import "XCFVideoRangeSlider.h"
 #import <AVFoundation/AVFoundation.h>
 
-#import "UIColor+XCFAppearance.h"
-
 #define ADJUST_FRAME_SIZE_BY_TRACK 0
 #define ASYNC_GENERATE_IMAGE 1
 
@@ -51,11 +49,6 @@
 
 @end
 
-@interface _XCFVideoRangerSliderHandler : UIView
-
-@property (nonatomic, strong) UIView *indicator;
-
-@end
 
 @implementation _XCFVideoRangerSliderHandler
 
@@ -97,7 +90,6 @@ static const CGFloat XCFVideoRangeSliderFrameMaxWidth = 40.0f;
 @property (nonatomic, strong) AVAsset *asset;
 @property (nonatomic, strong) AVAssetImageGenerator *imageGenerator;
 
-@property (nonatomic, strong) UICollectionView *frameCollectionView;
 @property (nonatomic, strong) NSMutableDictionary<NSNumber *, UIImage *> *cachedFrames;
 
 @property (nonatomic, strong) _XCFVideoRangerSliderHandler *slider;
@@ -152,7 +144,6 @@ static const CGFloat XCFVideoRangeSliderFrameMaxWidth = 40.0f;
     layout.sectionInset = UIEdgeInsetsZero;
     _frameCollectionView = [[UICollectionView alloc] initWithFrame:self.bounds
                                               collectionViewLayout:layout];
-    _frameCollectionView.backgroundColor = [UIColor xcf_subBackgroundColor];
     _frameCollectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _frameCollectionView.delegate = self;
     _frameCollectionView.dataSource = self;
@@ -190,7 +181,6 @@ static const CGFloat XCFVideoRangeSliderFrameMaxWidth = 40.0f;
     // slider
     _slider = [_XCFVideoRangerSliderHandler new];
     _slider.tintColor = [UIColor whiteColor];
-    _slider.backgroundColor = [UIColor xcf_linkColor];
     _slider.userInteractionEnabled = NO;
     [self addSubview:_slider];
 

@@ -16,8 +16,16 @@
  *
  */
 
-@interface XCFVideoRangeSlider : UIControl
 
+@interface _XCFVideoRangerSliderHandler : UIView
+
+@property (nonatomic, strong) UIView *indicator;     //_slider.backgroundColor = [UIColor xcf_linkColor];
+
+
+@end
+
+@interface XCFVideoRangeSlider : UIControl
+@property (nonatomic, strong) UICollectionView *frameCollectionView; //    _frameCollectionView.backgroundColor = [UIColor xcf_subBackgroundColor];
 @property (nonatomic, assign) XCFVideoRange currentRange; // default is XCFVideoRangeEmpty , set 方法暂不可用
 
 @property (nonatomic, assign, readonly) NSTimeInterval videoLength;

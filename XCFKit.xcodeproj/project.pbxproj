@@ -12,27 +12,17 @@
 		E8BEE81520187D6D00587F7F /* XCFKitCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7DE20187D6D00587F7F /* XCFKitCompat.m */; };
 		E8BEE81620187D6D00587F7F /* UIImage+PureColor.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E020187D6D00587F7F /* UIImage+PureColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8BEE81720187D6D00587F7F /* UIView+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E120187D6D00587F7F /* UIView+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8BEE81820187D6D00587F7F /* UIFont+fontWeight.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E220187D6D00587F7F /* UIFont+fontWeight.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8BEE81920187D6D00587F7F /* XCFAppearanceButton.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E320187D6D00587F7F /* XCFAppearanceButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8BEE81A20187D6D00587F7F /* UIView+XCFHeartbeat.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7E420187D6D00587F7F /* UIView+XCFHeartbeat.m */; };
 		E8BEE81B20187D6D00587F7F /* UIScrollView+XCFKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E520187D6D00587F7F /* UIScrollView+XCFKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8BEE81C20187D6D00587F7F /* UIColor+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7E620187D6D00587F7F /* UIColor+hex.m */; };
-		E8BEE81D20187D6D00587F7F /* UIFont+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E720187D6D00587F7F /* UIFont+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8BEE81E20187D6D00587F7F /* UIColor+XCFAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E820187D6D00587F7F /* UIColor+XCFAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8BEE81F20187D6D00587F7F /* XCFWindowContextController.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7E920187D6D00587F7F /* XCFWindowContextController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8BEE82020187D6D00587F7F /* UIBarButtonItem+View.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7EA20187D6D00587F7F /* UIBarButtonItem+View.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8BEE82120187D6D00587F7F /* XCFImageContentMaskLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7EB20187D6D00587F7F /* XCFImageContentMaskLayer.m */; };
 		E8BEE82220187D6D00587F7F /* UISearchBar+textField.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7EC20187D6D00587F7F /* UISearchBar+textField.m */; };
-		E8BEE82320187D6D00587F7F /* UIFont+fontWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7ED20187D6D00587F7F /* UIFont+fontWeight.m */; };
 		E8BEE82420187D6D00587F7F /* UIView+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7EE20187D6D00587F7F /* UIView+XCFAppearance.m */; };
 		E8BEE82520187D6D00587F7F /* UIImage+PureColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7EF20187D6D00587F7F /* UIImage+PureColor.m */; };
-		E8BEE82620187D6D00587F7F /* UIColor+Hex.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7F020187D6D00587F7F /* UIColor+Hex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8BEE82720187D6D00587F7F /* UIScrollView+XCFKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7F120187D6D00587F7F /* UIScrollView+XCFKit.m */; };
 		E8BEE82820187D6D00587F7F /* UIView+XCFHeartbeat.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7F220187D6D00587F7F /* UIView+XCFHeartbeat.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8BEE82920187D6D00587F7F /* XCFAppearanceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7F320187D6D00587F7F /* XCFAppearanceButton.m */; };
 		E8BEE82A20187D6D00587F7F /* XCFWindowContextController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7F420187D6D00587F7F /* XCFWindowContextController.m */; };
-		E8BEE82B20187D6D00587F7F /* UIColor+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7F520187D6D00587F7F /* UIColor+XCFAppearance.m */; };
-		E8BEE82C20187D6D00587F7F /* UIFont+XCFAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7F620187D6D00587F7F /* UIFont+XCFAppearance.m */; };
 		E8BEE82D20187D6D00587F7F /* UISearchBar+textField.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7F720187D6D00587F7F /* UISearchBar+textField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8BEE82E20187D6D00587F7F /* XCFImageContentMaskLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = E8BEE7F820187D6D00587F7F /* XCFImageContentMaskLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8BEE82F20187D6D00587F7F /* UIBarButtonItem+View.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BEE7F920187D6D00587F7F /* UIBarButtonItem+View.m */; };
@@ -86,27 +76,17 @@
 		E8BEE7DE20187D6D00587F7F /* XCFKitCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFKitCompat.m; sourceTree = "<group>"; };
 		E8BEE7E020187D6D00587F7F /* UIImage+PureColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PureColor.h"; sourceTree = "<group>"; };
 		E8BEE7E120187D6D00587F7F /* UIView+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFAppearance.h"; sourceTree = "<group>"; };
-		E8BEE7E220187D6D00587F7F /* UIFont+fontWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+fontWeight.h"; sourceTree = "<group>"; };
-		E8BEE7E320187D6D00587F7F /* XCFAppearanceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFAppearanceButton.h; sourceTree = "<group>"; };
 		E8BEE7E420187D6D00587F7F /* UIView+XCFHeartbeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFHeartbeat.m"; sourceTree = "<group>"; };
 		E8BEE7E520187D6D00587F7F /* UIScrollView+XCFKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+XCFKit.h"; sourceTree = "<group>"; };
-		E8BEE7E620187D6D00587F7F /* UIColor+hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+hex.m"; sourceTree = "<group>"; };
-		E8BEE7E720187D6D00587F7F /* UIFont+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+XCFAppearance.h"; sourceTree = "<group>"; };
-		E8BEE7E820187D6D00587F7F /* UIColor+XCFAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+XCFAppearance.h"; sourceTree = "<group>"; };
 		E8BEE7E920187D6D00587F7F /* XCFWindowContextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFWindowContextController.h; sourceTree = "<group>"; };
 		E8BEE7EA20187D6D00587F7F /* UIBarButtonItem+View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+View.h"; sourceTree = "<group>"; };
 		E8BEE7EB20187D6D00587F7F /* XCFImageContentMaskLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFImageContentMaskLayer.m; sourceTree = "<group>"; };
 		E8BEE7EC20187D6D00587F7F /* UISearchBar+textField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+textField.m"; sourceTree = "<group>"; };
-		E8BEE7ED20187D6D00587F7F /* UIFont+fontWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+fontWeight.m"; sourceTree = "<group>"; };
 		E8BEE7EE20187D6D00587F7F /* UIView+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XCFAppearance.m"; sourceTree = "<group>"; };
 		E8BEE7EF20187D6D00587F7F /* UIImage+PureColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PureColor.m"; sourceTree = "<group>"; };
-		E8BEE7F020187D6D00587F7F /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		E8BEE7F120187D6D00587F7F /* UIScrollView+XCFKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+XCFKit.m"; sourceTree = "<group>"; };
 		E8BEE7F220187D6D00587F7F /* UIView+XCFHeartbeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XCFHeartbeat.h"; sourceTree = "<group>"; };
-		E8BEE7F320187D6D00587F7F /* XCFAppearanceButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFAppearanceButton.m; sourceTree = "<group>"; };
 		E8BEE7F420187D6D00587F7F /* XCFWindowContextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFWindowContextController.m; sourceTree = "<group>"; };
-		E8BEE7F520187D6D00587F7F /* UIColor+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+XCFAppearance.m"; sourceTree = "<group>"; };
-		E8BEE7F620187D6D00587F7F /* UIFont+XCFAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+XCFAppearance.m"; sourceTree = "<group>"; };
 		E8BEE7F720187D6D00587F7F /* UISearchBar+textField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+textField.h"; sourceTree = "<group>"; };
 		E8BEE7F820187D6D00587F7F /* XCFImageContentMaskLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFImageContentMaskLayer.h; sourceTree = "<group>"; };
 		E8BEE7F920187D6D00587F7F /* UIBarButtonItem+View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+View.m"; sourceTree = "<group>"; };
@@ -217,14 +197,6 @@
 			children = (
 				E8BEE7EA20187D6D00587F7F /* UIBarButtonItem+View.h */,
 				E8BEE7F920187D6D00587F7F /* UIBarButtonItem+View.m */,
-				E8BEE7F020187D6D00587F7F /* UIColor+Hex.h */,
-				E8BEE7E620187D6D00587F7F /* UIColor+hex.m */,
-				E8BEE7E820187D6D00587F7F /* UIColor+XCFAppearance.h */,
-				E8BEE7F520187D6D00587F7F /* UIColor+XCFAppearance.m */,
-				E8BEE7E220187D6D00587F7F /* UIFont+fontWeight.h */,
-				E8BEE7ED20187D6D00587F7F /* UIFont+fontWeight.m */,
-				E8BEE7E720187D6D00587F7F /* UIFont+XCFAppearance.h */,
-				E8BEE7F620187D6D00587F7F /* UIFont+XCFAppearance.m */,
 				E8BEE7E020187D6D00587F7F /* UIImage+PureColor.h */,
 				E8BEE7EF20187D6D00587F7F /* UIImage+PureColor.m */,
 				E8BEE7E520187D6D00587F7F /* UIScrollView+XCFKit.h */,
@@ -235,8 +207,6 @@
 				E8BEE7EE20187D6D00587F7F /* UIView+XCFAppearance.m */,
 				E8BEE7F220187D6D00587F7F /* UIView+XCFHeartbeat.h */,
 				E8BEE7E420187D6D00587F7F /* UIView+XCFHeartbeat.m */,
-				E8BEE7E320187D6D00587F7F /* XCFAppearanceButton.h */,
-				E8BEE7F320187D6D00587F7F /* XCFAppearanceButton.m */,
 				E8BEE7F820187D6D00587F7F /* XCFImageContentMaskLayer.h */,
 				E8BEE7EB20187D6D00587F7F /* XCFImageContentMaskLayer.m */,
 				E8BEE7E920187D6D00587F7F /* XCFWindowContextController.h */,
@@ -300,27 +270,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8BEE83A20187D6D00587F7F /* XCFVideoLoadProgressView.h in Headers */,
-				E8BEE81820187D6D00587F7F /* UIFont+fontWeight.h in Headers */,
 				E8BEE83720187D6D00587F7F /* XCFMicroVideoDecoder.h in Headers */,
 				E8BEE84720187D6D00587F7F /* XCFMicroVideoPlayerView.h in Headers */,
-				E8BEE81920187D6D00587F7F /* XCFAppearanceButton.h in Headers */,
 				E8BEE83B20187D6D00587F7F /* XCFAVPlayerControllerAnimator.h in Headers */,
 				E8BEE81620187D6D00587F7F /* UIImage+PureColor.h in Headers */,
 				E8BEE83D20187D6D00587F7F /* XCFAVPlayerController.h in Headers */,
 				E8BEE83220187D6D00587F7F /* XCFStringKeywordTransformer.h in Headers */,
 				E8BEE81720187D6D00587F7F /* UIView+XCFAppearance.h in Headers */,
 				E8BEE82E20187D6D00587F7F /* XCFImageContentMaskLayer.h in Headers */,
-				E8BEE81D20187D6D00587F7F /* UIFont+XCFAppearance.h in Headers */,
 				E8BEE83920187D6D00587F7F /* XCFAVPlayerView.h in Headers */,
 				E8BEE7D820187CBE00587F7F /* XCFKit.h in Headers */,
 				E8BEE83620187D6D00587F7F /* XCFVideoRange.h in Headers */,
 				E8BEE81F20187D6D00587F7F /* XCFWindowContextController.h in Headers */,
-				E8BEE82620187D6D00587F7F /* UIColor+Hex.h in Headers */,
 				E8BEE83320187D6D00587F7F /* XCFRect.h in Headers */,
 				E8BEE82D20187D6D00587F7F /* UISearchBar+textField.h in Headers */,
 				E8BEE82820187D6D00587F7F /* UIView+XCFHeartbeat.h in Headers */,
 				E8BEE84520187D6D00587F7F /* XCFVideoRangeSlider.h in Headers */,
-				E8BEE81E20187D6D00587F7F /* UIColor+XCFAppearance.h in Headers */,
 				E8BEE83120187D6D00587F7F /* XCFStringKeywordStandardCache.h in Headers */,
 				E8BEE82020187D6D00587F7F /* UIBarButtonItem+View.h in Headers */,
 				E8BEE81B20187D6D00587F7F /* UIScrollView+XCFKit.h in Headers */,
@@ -454,11 +419,7 @@
 				E8BEE84320187D6D00587F7F /* XCFVideoEditorController.m in Sources */,
 				E8BEE81520187D6D00587F7F /* XCFKitCompat.m in Sources */,
 				E8BEE84020187D6D00587F7F /* XCFAVPlayerControllerAnimator.m in Sources */,
-				E8BEE82920187D6D00587F7F /* XCFAppearanceButton.m in Sources */,
 				E8BEE82120187D6D00587F7F /* XCFImageContentMaskLayer.m in Sources */,
-				E8BEE82B20187D6D00587F7F /* UIColor+XCFAppearance.m in Sources */,
-				E8BEE81C20187D6D00587F7F /* UIColor+hex.m in Sources */,
-				E8BEE82C20187D6D00587F7F /* UIFont+XCFAppearance.m in Sources */,
 				E8BEE82220187D6D00587F7F /* UISearchBar+textField.m in Sources */,
 				E8BEE82420187D6D00587F7F /* UIView+XCFAppearance.m in Sources */,
 				E8BEE82520187D6D00587F7F /* UIImage+PureColor.m in Sources */,
@@ -467,7 +428,6 @@
 				E8BEE81A20187D6D00587F7F /* UIView+XCFHeartbeat.m in Sources */,
 				E8BEE82A20187D6D00587F7F /* XCFWindowContextController.m in Sources */,
 				E8BEE83420187D6D00587F7F /* XCFStringKeywordStandardCache.m in Sources */,
-				E8BEE82320187D6D00587F7F /* UIFont+fontWeight.m in Sources */,
 				E8BEE84220187D6D00587F7F /* XCFVideoLoadProgressView.m in Sources */,
 				E8BEE83E20187D6D00587F7F /* XCFVideoRangeSlider.m in Sources */,
 				E8BEE84420187D6D00587F7F /* XCFAVPlayerView.m in Sources */,
