@@ -67,7 +67,7 @@ GEM
       nokogiri (>= 1.6, < 1.7)
       xcodeproj (~> 1.4)
     thread_safe (0.3.6)
-    tzinfo (1.2.4)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     xcodeproj (1.5.4)
       CFPropertyList (~> 2.3.3)
